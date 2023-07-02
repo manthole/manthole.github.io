@@ -1,0 +1,63 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Manthole</title>
+        <link>https://manthole.github.io/posts/</link>
+        <description>Recent content in Posts on Manthole</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate>
+        <atom:link href="https://manthole.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Cryto-Exercices</title>
+            <link>https://manthole.github.io/posts/crytp/</link>
+            <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+            
+            <guid>https://manthole.github.io/posts/crytp/</guid>
+            <description>In this section, I will present you some exercices of cryptography I made in 3rd year of engineering school.
+Exercice 1 : In this exercice we have to find the flag on this message.
+DSSDUX FHQW DQV DYDQW MF, MH VXLV OH SUHPLHU IODJ M&amp;#39;DL GRQQH PRQ QRP D FH FKLIIUH, PDLV F&amp;#39;HVW XQH ULJRODGH To proceed, I seach on the website dcode, and the caesar cipher came out of it.</description>
+            <content type="html"><![CDATA[<blockquote>
+<p>In this section, I will present you some exercices of cryptography I made in 3rd year of engineering school.</p>
+</blockquote>
+<h1 id="exercice-1-">Exercice 1 :</h1>
+<p>In this exercice we have to find the flag on this message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>DSSDUX FHQW DQV DYDQW MF, MH VXLV OH SUHPLHU IODJ
+</span></span><span style="display:flex;"><span>M&#39;DL GRQQH PRQ QRP D FH FKLIIUH, PDLV F&#39;HVW XQH ULJRODGH
+</span></span></code></pre></div><p>To proceed, I seach on the website <a href="https://www.dcode.fr/chiffre-cesar">dcode</a>, and the caesar cipher came out of it.</p>
+<p>The solution of this exercice after decryption is :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>APPARU CENT ANS AVANT JC, JE SUIS LE PREMIER FLAG
+</span></span><span style="display:flex;"><span>J&#39;AI DONNE MON NOM A CE CHIFFRE, MAIS C&#39;EST UNE RIGOLADE
+</span></span></code></pre></div><h1 id="exercice-2-">Exercice 2 :</h1>
+<p>In this exercice we have to find the flag on this message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>YD CKJC HD PHOG WDEBDWEBD
+</span></span><span style="display:flex;"><span>YD QNRRD ZNR RNZ O KRD ENHHJRD DT OKCCJ O KR AOHOJC
+</span></span><span style="display:flex;"><span>E&#39;DCT O EDT DRQWNJT LK&#39;KRD GWORQD QDEHOWOTJNR PKT OQNATDD
+</span></span><span style="display:flex;"><span>UNKC DR TWNKUDWDI Q&#39;OJHHDKWC EJ-OAWDC KR DFTWOJT :
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>AWDOZSKHD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LKD HO WDENRROJCCORED QD HO QJGRJTD JRBDWDRTD O TNKC HDC ZDZSWDC QD HO POZJHHD BKZOJRD DT QD HDKWC QWNJTC DGOKF DT JROHJDROSHDC ENRCTJTKD HD PNRQDZDRT QD HO HJSDWTD, QD HO YKCTJED DT QD HO AOJF QORC HD ZNRQD.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LKD HO ZDENRROJCCORED DT HD ZDAWJC QDC QWNJTC QD H&#39;BNZZD NRT ENRQKJT O QDC OETDC QD SOWSOWJD LKJ WDUNHTDRT HO ENRCEJDRED QD H&#39;BKZORJTD DT LKD H&#39;OUDRDZDRT Q&#39;KR ZNRQD NK HDC DTWDC BKZOJRC CDWNRT HJSWDC QD AOWHDW DT QD EWNJWD, HJSDWDC QD HO TDWWDKW DT QD HO ZJCDWD, O DTD AWNEHOZD ENZZD HO AHKC BOKTD OCAJWOTJNR QD H&#39;BNZZD.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LK&#39;JH DCT DCCDRTJDH LKD HDC QWNJTC QD H&#39;BNZZD CNJDRT AWNTDGDC AOW KR WDGJZD QD QWNJT ANKW LKD H&#39;BNZZD RD CNJT AOC ENRTWOJRT, DR CKAWDZD WDENKWC, O HO WDUNHTD ENRTWD HO TMWORRJD DT H&#39;NAAWDCCJNR.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LK&#39;JH DCT DCCDRTJDH Q&#39;DRENKWOGDW HD QDUDHNAADZDRT QD WDHOTJNRC OZJEOHDC DRTWD ROTJNRC.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LKD QORC HO EBOWTD HDC ADKAHDC QDC ROTJNRC KRJDC NRT AWNEHOZD O RNKUDOK HDKW PNJ QORC HDC QWNJTC PNRQOZDRTOKF QD H&#39;BNZZD, QORC HO QJGRJTD DT HO UOHDKW QD HO ADWCNRRD BKZOJRD, QORC H&#39;DGOHJTD QDC QWNJTC QDC BNZZDC DT QDC PDZZDC, DT LK&#39;JHC CD CNRT QDEHOWDC WDCNHKC O POUNWJCDW HD AWNGWDC CNEJOH DT O JRCTOKWDW QD ZDJHHDKWDC ENRQJTJNRC QD UJD QORC KRD HJSDWTD AHKC GWORQD.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LKD HDC DTOTC ZDZSWDC CD CNRT DRGOGDC O OCCKWDW, DR ENNADWOTJNR OUDE H&#39;NWGORJCOTJNR QDC ROTJNRC KRJDC, HD WDCADET KRJUDWCDH DT DPPDETJP QDC QWNJTC QD H&#39;BNZZD DT QDC HJSDWTDC PNRQOZDRTOHDC.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENRCJQDWORT LK&#39;KRD ENREDATJNR ENZZKRD QD EDC QWNJTC DT HJSDWTDC DCT QD HO AHKC BOKTD JZANWTORED ANKW WDZAHJW AHDJRDZDRT EDT DRGOGDZDRT.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>H&#39;OCCDZSHDD GDRDWOHD AWNEHOZD HO AWDCDRTD QDEHOWOTJNR KRJUDWCDHHD QDC QWNJTC QD H&#39;BNZZD ENZZD H&#39;JQDOH ENZZKR O OTTDJRQWD AOW TNKC HDC ADKAHDC DT TNKTDC HDC ROTJNRC OPJR LKD TNKC HDC JRQJUJQKC DT TNKC HDC NWGORDC QD HO CNEJDTD, OMORT EDTTD QDEHOWOTJNR ENRCTOZZDRT O H&#39;DCAWJT, C&#39;DPPNWEDRT, AOW H&#39;DRCDJGRDZDRT DT H&#39;DQKEOTJNR, QD QDUDHNAADW HD WDCADET QD EDC QWNJTC DT HJSDWTDC DT Q&#39;DR OCCKWDW, AOW QDC ZDCKWDC AWNGWDCCJUDC Q&#39;NWQWD ROTJNROH DT JRTDWROTJNROH, HO WDENRROJCCORED DT H&#39;OAAHJEOTJNR KRJUDWCDHHDC DT DPPDETJUDC, TORT AOWZJ HDC ANAKHOTJNRC QDC DTOTC ZDZSWDC DKF-ZDZDC LKD AOWZJ EDHHDC QDC TDWWJTNJWDC AHOEDC CNKC HDKW YKWJQJETJNR.
+</span></span></code></pre></div><p>I went to this site to find out what the nature of the text was, <a href="https://www.boxentriq.com/code-breaking/cipher-identifier">boxentriq</a>.</p>
+<p>Then, I decrypt on <a href="https://www.dcode.fr/substitution-monoalphabetique">Dcode</a></p>
+<p>Finaly, after googling the name of the hill and the palce is : CAPITOL</p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>

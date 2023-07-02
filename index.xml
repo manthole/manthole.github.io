@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manthole</title>
+    <link>https://manthole.github.io/</link>
+    <description>Recent content on Manthole</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://manthole.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://manthole.github.io/about/</link>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://manthole.github.io/about/</guid>
+      <description>Here you are on my site where I showcase my various works and assistance in cybersecurity.
+I am a student at ESIEA and I am passionate about computer security. I take on a few challenges in my spare time.
+Feel free to contact me ! Email : aboulant@et.esiea.fr
+Enjoy your visit!</description>
+    </item>
+    
+    <item>
+      <title>Cryto-Exercices</title>
+      <link>https://manthole.github.io/posts/crytp/</link>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://manthole.github.io/posts/crytp/</guid>
+      <description>In this section, I will present you some exercices of cryptography I made in 3rd year of engineering school.
+Exercice 1 : In this exercice we have to find the flag on this message.
+DSSDUX FHQW DQV DYDQW MF, MH VXLV OH SUHPLHU IODJ M&amp;#39;DL GRQQH PRQ QRP D FH FKLIIUH, PDLV F&amp;#39;HVW XQH ULJRODGH To proceed, I seach on the website dcode, and the caesar cipher came out of it.</description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>https://manthole.github.io/resume/</link>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://manthole.github.io/resume/</guid>
+      <description>Anthony BOULANT Coordinates Email: (aboulant@et.esiea.fr) Phone: +33 6 51 11 00 City: Villejuif, France LinkedIn: anthonyboulant Profil Currently in M1 at ESIEA, I am studying in cybersecurity.
+Expriences Apprenticeship in cybersecurity, CEA France | November 2020 - August 2023
+Creating a SIEM infrastructure (configuring Rsyslog and Nsyslog servers and the Splunk Client. Creation of custom dashboards for tracking real-time security events)
+Creation of a fault demonstrator infrastructure (demonstration of vulnerabilities on Windows computer and Windows Server.</description>
+    </item>
+    
+  </channel>
+</rss>
