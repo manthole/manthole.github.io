@@ -33,7 +33,10 @@
   --accent-dim: rgba(56, 189, 248, 0.1);
   --glow: 0 0 18px rgba(56, 189, 248, 0.35);
   --ok: #3fb950;
-  --title: #3fb950;
+  --title-1: #bae6fd;
+  --title-2: #38bdf8;
+  --title-3: #60a5fa;
+  --title-4: #93c5fd;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: dark;
   scrollbar-color: var(--border-strong) var(--bg);
@@ -63,9 +66,10 @@
   background: rgba(56, 189, 248, 0.3);
   color: var(--text-strong);
 }
-:root h1, :root h2, :root h3, :root h4 {
-  color: var(--title);
-}
+:root h1 { color: var(--title-1); }
+:root h2 { color: var(--title-2); }
+:root h3 { color: var(--title-3); }
+:root h4 { color: var(--title-4); }
 /* le thème met em/i/strong en noir quand le système est en mode clair */
 :root em, :root i, :root strong {
   color: var(--text-strong);
@@ -309,7 +313,7 @@
   margin-right: 0.5ch;
   color: var(--accent);
 }
-:root .post-title a { color: var(--title); }
+:root .post-title a { color: var(--title-1); }
 :root .post-title a:hover { color: var(--accent); }
 
 :root .post-content h1,
