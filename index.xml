@@ -15,8 +15,8 @@
       
       <guid>https://manthole.github.io/about/</guid>
       <description>Here you are on my site where I showcase my various works and assistance in cybersecurity.
-I am a student at ESIEA and I am passionate about computer security. I take on a few challenges in my spare time.
-Feel free to contact me ! Email : [supprimé]
+I am a SOC/MDR analyst and I am passionate about computer security. I take on a few challenges in my spare time.
+Feel free to contact me on LinkedIn!
 Enjoy your visit!</description>
     </item>
     
@@ -37,10 +37,9 @@ DSSDUX FHQW DQV DYDQW MF, MH VXLV OH SUHPLHU IODJ M&amp;#39;DL GRQQH PRQ QRP D F
       <pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate>
       
       <guid>https://manthole.github.io/resume/</guid>
-      <description>[supprimé] Coordinates Email: ([supprimé]) City: Toulouse, France LinkedIn: [supprimé] Profil Currently in M1 at ESIEA, I am studying in cybersecurity.
-Expriences Apprenticeship in cybersecurity, CEA France | November 2020 - August 2023
-Creating a SIEM infrastructure (configuring Rsyslog and Nsyslog servers and the Splunk Client. Creation of custom dashboards for tracking real-time security events)
-Creation of a fault demonstrator infrastructure (demonstration of vulnerabilities on Windows computer and Windows Server.</description>
+      <description>Anthony B. Contact City: Toulouse, France LinkedIn: Anthony B. Profile Currently a SOC analyst, I am passionate about cybersecurity.
+Experience SOC/MDR analyst, SopraSteria Toulouse | March 2026 - Today
+Design, fine-tuning, and deployment of detection rules within the SIEM across MITRE ATT&amp;CK and DETECT use cases, employing CI/CD practices.</description>
     </item>
     
   </channel>
