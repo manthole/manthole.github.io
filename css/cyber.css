@@ -33,6 +33,7 @@
   --accent-dim: rgba(56, 189, 248, 0.1);
   --glow: 0 0 18px rgba(56, 189, 248, 0.35);
   --ok: #3fb950;
+  --title: #3fb950;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: dark;
   scrollbar-color: var(--border-strong) var(--bg);
@@ -63,7 +64,14 @@
   color: var(--text-strong);
 }
 :root h1, :root h2, :root h3, :root h4 {
+  color: var(--title);
+}
+/* le thème met em/i/strong en noir quand le système est en mode clair */
+:root em, :root i, :root strong {
   color: var(--text-strong);
+}
+:root :is(h1, h2, h3, h4) :is(em, i, strong) {
+  color: inherit;
 }
 :root a:focus-visible {
   outline: 2px solid var(--accent);
@@ -126,6 +134,41 @@
 :root .menu-trigger { color: var(--muted); }
 :root .menu-trigger:hover { color: var(--accent); }
 
+/* ---------- Langue FR / EN (voir js/lang.js) ---------- */
+:root[lang="fr"] [lang="en"],
+:root[lang="en"] [lang="fr"] {
+  display: none !important;
+}
+:root .lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  margin: 0 0 0 20px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+:root .lang-switch:hover {
+  border-color: var(--accent);
+  color: var(--text-strong);
+}
+:root .lang-switch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+:root[lang="fr"] .lang-switch [data-l="fr"],
+:root[lang="en"] .lang-switch [data-l="en"] {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 @media (max-width: 684px) {
   :root .menu {
     top: calc(100% + 8px);
@@ -145,6 +188,8 @@
   }
   :root .menu a::after { display: none; }
   :root .menu a:hover { background: var(--accent-dim); }
+  /* .header__right passe en row-reverse : order 1 place le bouton à gauche du ☰ */
+  :root .lang-switch { order: 1; margin-left: 0; }
 }
 
 /* ---------- Accueil (seule page avec main[aria-role="main"]) ---------- */
@@ -264,7 +309,7 @@
   margin-right: 0.5ch;
   color: var(--accent);
 }
-:root .post-title a { color: var(--text-strong); }
+:root .post-title a { color: var(--title); }
 :root .post-title a:hover { color: var(--accent); }
 
 :root .post-content h1,
@@ -511,6 +556,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root .menu a::after { transition: transform 0.2s ease; }
   :root .menu a,
+  :root .lang-switch,
   :root .post-title a,
   :root .post-content a,
   :root .footer a,
