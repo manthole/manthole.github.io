@@ -75,6 +75,14 @@ EXCLUDE = re.compile(
     r"\bweek(?:ly)? (?:recap|in review)\b|\brecap\b|\bthreatsday\b|in other news|\bwebinar\b|\bsponsored\b|"
     r"\bpodcast\b|\bbulletin d'actualit|livre blanc|\bhow to\b|\bguide\b", re.I)
 CVE = re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.I)
+# rapports de synthèse du CERT-FR : utiles, mais ce ne sont pas des attaques
+CTI_REPORT = re.compile(r"panorama|overview|landscape|état de la menace|retour d'expérience|point de situation|"
+                        r"intelligence artificielle", re.I)
+# éditeurs omniprésents dans l'actualité : leur nom seul ne suffit pas à relier deux articles
+BIG_VENDORS = set("""
+apple microsoft google chrome android ios iphone windows macos linux amazon aws meta facebook whatsapp
+cisco oracle ibm adobe samsung intel amd nvidia openai github gitlab wordpress php java npm pypi
+""".split())
 
 STOPWORDS = set("""
 a an the of to in on at for from by with and or but as is are was were be been has have had it its this that these those
@@ -172,6 +180,8 @@ def classify(source_id, title, summary, url):
     if source_id == "certfr":
         zero = zero or "/alerte/" in url
     if source_id == "certfr-cti":
+        if CTI_REPORT.search(title):
+            return None
         attack = True
     if not (zero or attack):
         return None
@@ -201,7 +211,9 @@ def valid_item(x):
 
 
 def merge(archive, fresh, now):
-    by_id = {x["id"]: x for x in archive if valid_item(x)}
+    # les filtres s'appliquent aussi à l'archive : une règle ajoutée nettoie l'historique
+    by_id = {x["id"]: x for x in archive if valid_item(x) and not EXCLUDE.search(x["title"])
+             and not (x["source"] == "certfr-cti" and CTI_REPORT.search(x["title"]))}
     for x in fresh:
         by_id[x["id"]] = x
     limit = now - dt.timedelta(days=KEEP_DAYS)
@@ -220,7 +232,9 @@ def tokens(title):
         w = w.strip("-")
         if w in STOPWORDS or w.isdigit() or len(w) < 3:
             continue
-        if len(w) > 4 and w.endswith("s") and not w.endswith("ss"):
+        if len(w) > 5 and w.endswith(("ches", "shes", "sses", "xes")):
+            w = w[:-2]  # switches = switch
+        elif len(w) > 4 and w.endswith("s") and not w.endswith("ss"):
             w = w[:-1]  # pluriel simple : airlines = airline
         if w not in STOPWORDS:
             out.add(w)
@@ -296,10 +310,13 @@ def cluster(items, max_gap_days=7):
                 i, j = members[a], members[b]
                 if not close(i, j) or find(i) == find(j):
                     continue
-                # même CVE ; ou même nom propre ET un second mot commun (« Apple » seul relierait
-                # des sujets sans rapport) ; entre deux langues, le nom propre seul suffit
+                # même CVE ; ou même nom propre peu fréquent (Zyxel, Amadeus…). Pour un grand éditeur
+                # (« Apple » seul relierait des sujets sans rapport), il faut un second mot commun.
                 shared = toks[i] & toks[j]
-                if kind == "c" or (key in known_entities and (len(shared) >= 2 or langs[i] != langs[j])):
+                entity = key in known_entities
+                if key in BIG_VENDORS:
+                    entity = entity and (len(shared) >= 2 or langs[i] != langs[j])
+                if kind == "c" or entity:
                     parent[find(i)] = find(j)
     groups = {}
     for i in range(n):

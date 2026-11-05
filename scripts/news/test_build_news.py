@@ -117,6 +117,20 @@ class Clustering(unittest.TestCase):
         same_lang = [item("Apple fixes WebKit bug in Safari", "securityweek", 4), item("Apple pays record bug bounty", "record", 4)]
         self.assertEqual(len(bn.cluster(same_lang)), 2)
 
+    def test_real_titles_from_first_run(self):
+        # titres réels du 5 novembre 2026 : un titre en phrase suffit à reconnaître le nom propre
+        items = [item("Zyxel Switch Hacks Blamed on Patched Flaw Actually Exploited a Zero-Day", "securityweek", 5, zero=True),
+                 item("Zyxel GS1900 Patch Fails to Block Zero-Day Exploit Allowing Root Command Execution", "thn", 5, zero=True),
+                 item("Zyxel fixes zero-day exploited to hack nearly 1,000 network switches", "bleeping", 4, zero=True),
+                 item("Siemens IoT2050 flaw exploited to plant backdoors", "thn", 3)]
+        self.assertEqual(sorted(len(c["sources"]) for c in bn.cluster(items)), [1, 3])
+
+    def test_cti_reports_skipped(self):
+        self.assertIsNone(bn.classify("certfr-cti", "Panorama de la cybermenace 2025 (11 mars 2026)", "", "https://x/cti/1"))
+        self.assertIsNotNone(bn.classify("certfr-cti", "Ciblage d'entités françaises par Turla", "", "https://x/cti/2"))
+        old = item("Panorama de la cybermenace 2025", "certfr-cti", 2)
+        self.assertEqual(bn.merge([old], [], NOW), [], "règle appliquée aussi à l'archive")
+
     def test_zero_day_alone_does_not_merge(self):
         items = [item("Apple fixes zero-day exploited in attacks", "bleeping", 4, zero=True),
                  item("Chrome zero-day exploited in the wild", "record", 4, zero=True)]
