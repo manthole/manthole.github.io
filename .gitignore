@@ -1,3 +1,4 @@
 .continue/
 # produit à chaque déploiement par scripts/news/build_news.py, jamais versionné
 data/news-archive.json
+__pycache__/
