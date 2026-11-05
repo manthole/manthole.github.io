@@ -735,7 +735,7 @@
         pre.className = "tool-output";
         if (g[2] === "ip") {
           pre.innerHTML = g[1].map(function (ip, i) {
-            return esc(items[i]) + (isPrivate(ip) ? '  <small style="color:var(--muted)">' + L("(privée/réservée)", "(private/reserved)") + "</small>" : "");
+            return esc(items[i]) + (isPrivate(ip) ? '  <small class="tool-muted">' + L("(privée/réservée)", "(private/reserved)") + "</small>" : "");
           }).join("\n");
         } else {
           pre.textContent = text;

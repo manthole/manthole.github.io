@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.pwnedpasswords.com; manifest-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Manthole ">
@@ -21,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
     <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
-    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="#38bdf8">
     <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
 <link rel="stylesheet" href="/css/tools.css">
 <script src="/js/tools.js" defer></script>
@@ -29,7 +30,12 @@
 <meta property="og:description" content="Test a password&#x27;s strength and check whether it has leaked, without ever sending it." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://manthole.github.io/tools/password-checker/" />
-<meta name="twitter:card" content="summary"/>
+<meta property="og:image" content="https://manthole.github.io/img/og-tools.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Outils de cybersécurité gratuits qui tournent dans le navigateur"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://manthole.github.io/img/og-tools.png"/>
 <meta name="twitter:title" content="Password checker"/>
 <meta name="twitter:description" content="Test a password&#x27;s strength and check whether it has leaked, without ever sending it."/>
     </head>
@@ -37,16 +43,13 @@
         <div class="container">
             <header class="header">
     <span class="header__inner">
-        <a href="https://manthole.github.io/" style="text-decoration: none;">
+        <a class="logo-link" href="https://manthole.github.io/">
     <div class="logo">
         
             <span class="logo__mark">&gt;</span>
             <span class="logo__text ">
                  $ Manthole/</span>
-            <span class="logo__cursor" style=
-                  "
-                   
-                   ">
+            <span class="logo__cursor">
             </span>
         
     </div>
@@ -89,14 +92,14 @@
     <label class="tool-check"><input type="checkbox" id="pc-show"> <span lang="fr">afficher</span><span lang="en">show</span></label>
   </div>
   <div class="meter"><div class="meter__bar" id="pc-bar"></div></div>
-  <p id="pc-verdict" style="margin:0 0 14px"></p>
+  <p class="tool-verdict" id="pc-verdict"></p>
   <div class="tool-stats" id="pc-stats"></div>
   <div class="tool-msg" id="pc-notes"></div>
   <div class="tool-row">
     <button class="btn" type="button" id="pc-hibp" disabled><span lang="fr">Vérifier dans les fuites de données</span><span lang="en">Check data breaches</span></button>
   </div>
   <div class="tool-msg" id="pc-leak" aria-live="polite"></div>
-  <p style="margin:0;font-size:.78rem;color:var(--muted)"><span lang="fr">* Temps moyen pour une attaque hors ligne à 10 milliards d'essais par seconde (hash rapide, GPU). C'est une estimation simplifiée, pas une garantie.</span><span lang="en">* Average time for an offline attack at 10 billion guesses per second (fast hash, GPU). This is a simplified estimate, not a guarantee.</span></p>
+  <p class="tool-footnote"><span lang="fr">* Temps moyen pour une attaque hors ligne à 10 milliards d'essais par seconde (hash rapide, GPU). C'est une estimation simplifiée, pas une garantie.</span><span lang="en">* Average time for an offline attack at 10 billion guesses per second (fast hash, GPU). This is a simplified estimate, not a guarantee.</span></p>
 </div>
 <div lang="fr">
 <h3>Comment ça marche ?</h3>

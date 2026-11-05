@@ -317,3 +317,13 @@
   :root .hash-list { grid-template-columns: 1fr auto; }
   :root .hash-list .hash-name { grid-column: 1 / -1; }
 }
+
+/* ---------- Classes utilitaires (remplacent les attributs style="", CSP) ---------- */
+:root .tool-hint { font-size: 0.85rem; color: var(--muted); }
+:root .tool-hint--mono { font-family: var(--mono); font-size: 0.8rem; }
+:root .tool-footnote { margin: 0; font-size: 0.78rem; color: var(--muted); }
+:root .tool-verdict { margin: 0 0 14px; }
+:root .tool textarea.textarea-tall { min-height: 160px; }
+:root .tool .m-0 { margin: 0; }
+:root .tool .tool-row--split { justify-content: space-between; margin-bottom: 6px; }
+:root .tool-muted { color: var(--muted); }

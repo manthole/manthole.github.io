@@ -1,0 +1,5 @@
+# Configuration lue par Jekyll lors du déploiement GitHub Pages (.github/workflows/jekyll-gh-pages.yml).
+# Le site est déjà généré par Hugo : Jekyll se contente de copier les fichiers.
+# Jekyll ignore par défaut les dossiers commençant par un point : on inclut .well-known (security.txt).
+include:
+  - .well-known

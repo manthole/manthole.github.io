@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.pwnedpasswords.com; manifest-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Manthole ">
@@ -21,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
     <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
-    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="#38bdf8">
     <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
 <link rel="stylesheet" href="/css/tools.css">
 <script src="/js/tools.js" defer></script>
@@ -29,7 +30,12 @@
 <meta property="og:description" content="Generate strong random passwords, entirely in your browser." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://manthole.github.io/tools/password-generator/" />
-<meta name="twitter:card" content="summary"/>
+<meta property="og:image" content="https://manthole.github.io/img/og-tools.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Outils de cybersécurité gratuits qui tournent dans le navigateur"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://manthole.github.io/img/og-tools.png"/>
 <meta name="twitter:title" content="Password generator"/>
 <meta name="twitter:description" content="Generate strong random passwords, entirely in your browser."/>
     </head>
@@ -37,16 +43,13 @@
         <div class="container">
             <header class="header">
     <span class="header__inner">
-        <a href="https://manthole.github.io/" style="text-decoration: none;">
+        <a class="logo-link" href="https://manthole.github.io/">
     <div class="logo">
         
             <span class="logo__mark">&gt;</span>
             <span class="logo__text ">
                  $ Manthole/</span>
-            <span class="logo__cursor" style=
-                  "
-                   
-                   ">
+            <span class="logo__cursor">
             </span>
         
     </div>
@@ -86,7 +89,7 @@
   <div class="tool-row">
     <button class="btn" type="button" id="pg-generate">↻ <span lang="fr">Générer</span><span lang="en">Generate</span></button>
     <span id="pg-copy-slot"></span>
-    <span id="pg-info" style="font-size:.85rem;color:var(--muted)"></span>
+    <span class="tool-hint" id="pg-info"></span>
   </div>
   <label for="pg-length"><span lang="fr">longueur</span><span lang="en">length</span></label>
   <div class="tool-row">
