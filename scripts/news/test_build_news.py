@@ -179,5 +179,104 @@ class Page(unittest.TestCase):
             self.assertEqual(archive["items"], [])
 
 
+class Fiches(unittest.TestCase):
+    def test_playbooks_complete_and_techniques_real(self):
+        techs = bn.fx.ref()["techniques"]
+        for kind in bn.fx.KINDS:
+            pb = bn.fx.PLAYBOOKS[kind]
+            self.assertTrue(all(pb["label"]) and all(pb["phrase"]) and all(pb["def"]), kind)
+            self.assertGreaterEqual(len(pb["phases"]), 4, kind)
+            self.assertEqual(len(pb["protect"]), 3, kind)
+            for tfr, ten, xfr, xen, ids in pb["phases"]:
+                self.assertTrue(tfr and ten and xfr and xen, kind)
+                for t in ids:
+                    self.assertIn(t, techs, f"{kind} : {t} absent du référentiel MITRE ATT&CK")
+
+    def test_kind_detection(self):
+        cases = {
+            "Synology NAS Devices Targeted in Ransomware Attacks Exploiting Patched DSM Flaw": "ransomware",
+            "Russian state-linked hackers target iPhone, Android devices in zero-click espionage campaign": "espionage",
+            "Cyberattaque contre les frigos de l'EFS : le plasma visé": "ot",
+            "NIKKE PC game launcher hacked to spread remote access, data-stealing malware": "supply_chain",
+            "Pro-Russian hacktivists claim DDoS attacks on French city websites": "ddos",
+            "Microsoft 365 phishing kit bypasses MFA with adversary-in-the-middle proxy": "phishing",
+            "DigiCert data breach exposes customer information, identity documents": "breach",
+            "Zyxel fixes zero-day exploited to hack nearly 1,000 network switches": "exploit",
+            "Lazarus hackers steal $40 million from crypto exchange": "crypto",
+            "Acme confirms incident": "intrusion",
+            "Attackers Exploit Critical Siemens IoT2050 Flaw to Plant Remote Command Backdoors": "exploit",
+        }
+        for title, kind in cases.items():
+            self.assertEqual(bn.fx.rank_kinds(bn.fx.kind_scores(title))[0], kind, title)
+        # le résumé compte moins que le titre, mais apparaît en type secondaire
+        self.assertEqual(bn.fx.rank_kinds(bn.fx.kind_scores("Acme patches flaw", "used by ransomware gangs")), ["exploit", "ransomware"])
+
+    def test_actor_sets_kind(self):
+        x = bn.normalise(item("Ciblage et compromission d'entités françaises au moyen du mode opératoire d'attaque Turla", "certfr-cti", 4))
+        self.assertEqual(bn.cluster([x])[0]["kinds"][0], "espionage")
+        y = bn.normalise(item("Hôpital régional : Qilin revendique l'attaque", "zataz", 4))
+        self.assertEqual(bn.cluster([y])[0]["kinds"][0], "ransomware")
+
+    def test_actors(self):
+        found = lambda t: [a["name"] for _, a in bn.fx.find_actors([t])]
+        self.assertIn("APT29", found("APT29-Linked Hackers Hijack Web Analytics Script"))
+        self.assertIn("Turla", found("Ciblage d'entités françaises par Turla"))
+        self.assertEqual(found("Google removes apps from Play Store after Snake game scam"), [], "mots courants ignorés")
+        self.assertEqual(found("turla in lowercase is not a match"), [])
+
+    def _fiche(self, title, kev=None):
+        x = item(title, "thn", 4, zero=True)
+        x["cves"] = ["CVE-2026-0001"]
+        x["actors"] = ["G0016"]
+        c = bn.cluster([bn.normalise(x)])[0]
+        return bn.render_fiche("f-" + x["id"], c, bn.kev_index(kev))
+
+    def test_render_fiche(self):
+        kev = {"vulnerabilities": [{"cveID": "CVE-2026-0001", "vendorProject": "Acme<script>", "product": "Gate",
+                                    "vulnerabilityName": "x", "dateAdded": "2026-11-03", "knownRansomwareCampaignUse": "Known",
+                                    "shortDescription": "<img src=x onerror=alert(1)>", "requiredAction": "patch", "dueDate": "2026-11-24"}]}
+        html = self._fiche('<img src=x onerror=alert(1)> Ransomware hits "Acme"', kev)
+        self.assertNotIn("<img", html)
+        self.assertNotIn("<script", html)
+        self.assertNotIn("style=", html)
+        self.assertIn('class="fiche fiche--ransomware"', html)
+        self.assertEqual(html.count('class="chain__step"'), 6)
+        self.assertIn("attack.mitre.org/techniques/T1486", html)
+        self.assertIn("APT29", html, "groupe retrouvé par son identifiant")
+        self.assertIn("y compris par des rançongiciels", html)
+        self.assertNotIn('<h3 class="fiche__title" id="f-', html.split("lang=")[0] + "x", "titre sans attribut lang")
+        kev_html = bn.render_kev_fiche("k-cve-2026-0001", kev["vulnerabilities"][0], [])
+        self.assertNotIn("<img", kev_html)
+        self.assertIn("24/11/2026", kev_html)
+
+    def test_names_skip_sentence_start(self):
+        x = item("Hôpital régional : le rançongiciel Qilin revendique l'attaque", "zataz", 4)
+        c = bn.cluster([bn.normalise(x)])[0]
+        html = bn.render_fiche("f-x", c, {})
+        self.assertNotIn("Hôpital", html.split("Noms cités")[-1].split("</dd>")[0] if "Noms cités" in html else "")
+        self.assertIn("Qilin", html)
+
+    def test_normalise_cleans_archive(self):
+        x = item("Acme ransomware", "thn", 4)
+        x.update({"kinds": {"evil": 9}, "cves": ["<b>"], "actors": ["<script>"]})
+        y = bn.normalise(x)
+        self.assertEqual(y["kinds"], {"ransomware": 3})
+        self.assertEqual(y["cves"], [])
+        self.assertEqual(y["actors"], [])
+
+    def test_page_with_fiches(self):
+        now = NOW
+        items = [bn.normalise(item("Zyxel fixes zero-day exploited to hack switches", "bleeping", 4, zero=True))]
+        fiches = {}
+        body = bn.build_body(items, None, [], {}, now, fiches)
+        self.assertEqual(len(fiches), 1)
+        fid = next(iter(fiches))
+        self.assertIn(f'href="#{fid}"', body)
+        page = bn.retarget((ROOT / "about" / "index.html").read_text(encoding="utf-8"), body, bn.render_fiches(fiches, None, items))
+        self.assertIn(f'id="{fid}"', page)
+        self.assertIn('<script src="/js/news.js" defer></script>', page)
+        self.assertNotIn("style=", page)
+
+
 if __name__ == "__main__":
     unittest.main()
