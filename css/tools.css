@@ -327,3 +327,37 @@
 :root .tool .m-0 { margin: 0; }
 :root .tool .tool-row--split { justify-content: space-between; margin-bottom: 6px; }
 :root .tool-muted { color: var(--muted); }
+
+/* ---------- Accueil des outils : thèmes ---------- */
+:root .tools-theme { margin: 0 0 30px; }
+:root .post-content .tools-theme h3 { margin: 0 0 4px; }
+:root .tools-theme__desc { margin: 0 0 12px; font-size: 0.9rem; color: var(--muted); }
+
+/* ---------- Désobfuscateur ---------- */
+:root .post-content ol.deob-steps { margin: 0 0 18px; padding-left: 1.6em; }
+:root .post-content ol.deob-steps > li { margin: 0 0 8px; }
+:root .deob-steps details { margin: 4px 0 0; }
+:root .deob-steps summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+:root .deob-steps details .tool-output { margin: 6px 0 0; max-height: 260px; overflow: auto; }
+:root .tool .deob-output { max-height: 480px; overflow: auto; }
+:root .post-content ul.deob-behaviors { margin: 0 0 18px; padding: 0; list-style: none; }
+:root .post-content ul.deob-behaviors > li { margin: 0 0 6px; }
+:root .post-content ul.deob-behaviors > li::marker,
+:root .post-content ul.deob-behaviors > li::before { content: none; }
+:root .post-content a.deob-technique {
+  display: inline-block;
+  min-width: 5.6em;
+  padding: 1px 7px;
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  background: var(--accent-dim);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-align: center;
+  text-decoration: none;
+}

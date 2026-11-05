@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.pwnedpasswords.com; manifest-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Manthole ">
+<meta name="description" content="Peel the obfuscation layers of a malicious PowerShell or JavaScript script, in your browser, without ever running it." />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0d1117" />
+<meta name="referrer" content="no-referrer" />
+<link rel="canonical" href="https://manthole.github.io/tools/deobfuscator/" />
+    <title data-fr="Désobfuscateur de scripts :: Manthole — Blog">Script deobfuscator :: Manthole — Blog</title>
+<link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
+<link rel="stylesheet" href="/css/cyber.css">
+<script src="/js/lang.js"></script>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manthole.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="#38bdf8">
+    <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
+<link rel="stylesheet" href="/css/tools.css">
+<script src="/js/tools.js" defer></script>
+<meta property="og:title" content="Script deobfuscator" />
+<meta property="og:description" content="Peel the obfuscation layers of a malicious PowerShell or JavaScript script, in your browser, without ever running it." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://manthole.github.io/tools/deobfuscator/" />
+<meta property="og:image" content="https://manthole.github.io/img/og-tools.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Outils de cybersécurité gratuits qui tournent dans le navigateur"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://manthole.github.io/img/og-tools.png"/>
+<meta name="twitter:title" content="Script deobfuscator"/>
+<meta name="twitter:description" content="Peel the obfuscation layers of a malicious PowerShell or JavaScript script, in your browser, without ever running it."/>
+    </head>
+        <body>
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a class="logo-link" href="https://manthole.github.io/">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                 $ Manthole/</span>
+            <span class="logo__cursor">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://manthole.github.io/about/"><span lang="fr">À propos</span><span lang="en">About</span></a></li><li><a href="https://manthole.github.io/posts/"><span lang="fr">Articles</span><span lang="en">Posts</span></a></li><li><a href="https://manthole.github.io/tools/"><span lang="fr">Outils</span><span lang="en">Tools</span></a></li><li><a href="https://manthole.github.io/projects/"><span lang="fr">Projets</span><span lang="en">Projects</span></a></li><li><a href="https://manthole.github.io/resume/"><span lang="fr">CV</span><span lang="en">Resume</span></a></li>
+    </ul>
+</nav>
+
+                <button class="lang-switch" type="button" title="Français / English" aria-label="Français / English"><span data-l="fr">FR</span><span>/</span><span data-l="en">EN</span></button>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+    <main class="post" data-tool="deob">
+        <article>
+            <h2 class="post-title"><a href="https://manthole.github.io/tools/deobfuscator/"><span lang="fr">Désobfuscateur de scripts</span><span lang="en">Script deobfuscator</span></a></h2>
+            <div class="post-content">
+<p class="tool-privacy"><span lang="fr">Le script n'est <strong>jamais exécuté</strong> : l'outil ne fait que des transformations de texte, dans ton navigateur. Rien n'est envoyé.</span><span lang="en">The script is <strong>never executed</strong>: the tool only transforms text, in your browser. Nothing is sent.</span></p>
+<div class="tool">
+  <label for="do-input"><span lang="fr">script ou ligne de commande suspecte</span><span lang="en">suspicious script or command line</span></label>
+  <div class="tool-field">
+    <textarea id="do-input" class="textarea-tall" spellcheck="false" autocomplete="off" data-ph-fr="Colle un script PowerShell ou JavaScript, ou une ligne de commande (powershell -enc …)" data-ph-en="Paste a PowerShell or JavaScript script, or a command line (powershell -enc …)"></textarea>
+  </div>
+  <div class="tool-row">
+    <button class="btn" type="button" id="do-run"><span lang="fr">Désobfusquer</span><span lang="en">Deobfuscate</span></button>
+    <button class="btn btn--ghost" type="button" id="do-sample"><span lang="fr">Charger un exemple</span><span lang="en">Load an example</span></button>
+    <label class="tool-check"><input type="checkbox" id="do-defang" checked> <span lang="fr">IOC défangés</span><span lang="en">defanged IOCs</span></label>
+  </div>
+  <div class="tool-msg" id="do-status" aria-live="polite"></div>
+  <div id="do-results" hidden>
+    <span class="tool-label"><span lang="fr">couches retirées</span><span lang="en">layers removed</span></span>
+    <ol class="deob-steps" id="do-steps"></ol>
+    <div class="tool-row tool-row--split">
+      <span class="tool-label m-0"><span lang="fr">résultat</span><span lang="en">result</span></span>
+      <span id="do-copy"></span>
+    </div>
+    <pre class="tool-output deob-output" id="do-output"></pre>
+    <span class="tool-label"><span lang="fr">comportements repérés (MITRE ATT&amp;CK)</span><span lang="en">spotted behaviours (MITRE ATT&amp;CK)</span></span>
+    <ul class="deob-behaviors" id="do-behaviors"></ul>
+    <span class="tool-label"><span lang="fr">indicateurs de compromission (toutes couches)</span><span lang="en">indicators of compromise (all layers)</span></span>
+    <div id="do-iocs"></div>
+  </div>
+</div>
+<div lang="fr">
+<h3>Comment ça marche ?</h3>
+<p>Un script malveillant est souvent empilé de couches : une ligne <code>powershell -enc</code> contient du Base64, qui contient un script compressé, qui contient lui-même du texte découpé en morceaux. L'outil applique des règles de transformation en boucle, en retirant une couche à chaque passage, jusqu'à ce que plus rien ne change. Chaque étape est affichée, pour comprendre le chemin.</p>
+<p>Couches reconnues : <code>-EncodedCommand</code> (y compris ses abréviations et les tirets typographiques), Base64 de <code>[Convert]::FromBase64String</code> et <code>atob</code>, compression Deflate et Gzip, codes <code>[char]</code> et <code>String.fromCharCode</code>, concaténations, opérateur de format <code>-f</code>, <code>.Replace</code> et <code>-replace</code>, chaînes inversées, tableaux joints, accents graves (<code>I`E`X</code>) et circonflexes de cmd (<code>p^o^w^e^r^s^h^e^l^l</code>), échappements <code>\x41</code> et <code>%u0041</code>, code passé à <code>IEX</code> ou <code>eval</code>, variables constantes.</p>
+<h3>Limites</h3>
+<p>Ce n'est pas un émulateur : les obfuscations calculées à l'exécution (XOR, boucles, tableaux de type <code>_0x4f2a[…]</code>) ne sont pas résolues. Pour aller plus loin, <a href="https://gchq.github.io/CyberChef/">CyberChef</a>, ou des outils qui exécutent le script de façon contrôlée, comme box-js, <strong>uniquement dans une machine virtuelle isolée</strong>. Le bon réflexe en SOC ne change pas : on ne lance jamais un script suspect « pour voir ».</p>
+</div>
+<div lang="en">
+<h3>How does it work?</h3>
+<p>A malicious script is often stacked in layers: a <code>powershell -enc</code> line holds Base64, which holds a compressed script, which itself holds text split into pieces. The tool applies transformation rules in a loop, removing one layer per pass, until nothing changes. Every step is shown, so you can follow the path.</p>
+<p>Recognised layers: <code>-EncodedCommand</code> (including abbreviations and typographic dashes), Base64 from <code>[Convert]::FromBase64String</code> and <code>atob</code>, Deflate and Gzip compression, <code>[char]</code> and <code>String.fromCharCode</code> codes, concatenations, the <code>-f</code> format operator, <code>.Replace</code> and <code>-replace</code>, reversed strings, joined arrays, backticks (<code>I`E`X</code>) and cmd carets (<code>p^o^w^e^r^s^h^e^l^l</code>), <code>\x41</code> and <code>%u0041</code> escapes, code passed to <code>IEX</code> or <code>eval</code>, constant variables.</p>
+<h3>Limits</h3>
+<p>This is not an emulator: obfuscation computed at run time (XOR, loops, <code>_0x4f2a[…]</code>-style arrays) is not resolved. To go further, use <a href="https://gchq.github.io/CyberChef/">CyberChef</a>, or tools that run the script in a controlled way, such as box-js, <strong>only inside an isolated virtual machine</strong>. The SOC rule stays the same: never run a suspicious script "just to see".</p>
+</div>
+<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+            </div>
+        </article>
+    </main>
+            </div>
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="https://manthole.github.io/">Manthole</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="https://manthole.github.io/posts/index.xml" target="_blank" rel="noopener" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><span lang="fr">Propulsé par</span><span lang="en">Powered by</span> <a href="https://gohugo.io" rel="noopener">Hugo</a></span><span><span lang="fr">Fait avec &#10084; par</span><span lang="en">Made with &#10084; by</span> <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+    
+</footer>
+        </div>
+<script type="text/javascript" src="https://manthole.github.io/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+    </body>
+</html>
