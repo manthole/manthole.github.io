@@ -27,4 +27,23 @@
     apply(next);
     try { localStorage.setItem("lang", next); } catch (err) {}
   });
+
+  /* Anti-clickjacking. La protection normale (en-tête CSP frame-ancestors ou X-Frame-Options) est
+     impossible sur GitHub Pages, et frame-ancestors est ignoré dans une balise <meta>. Si la page est
+     chargée dans un cadre d'un autre site, on masque son contenu et on propose de l'ouvrir directement. */
+  var framed = true;
+  try { framed = window.top !== window.self; } catch (e) {}
+  if (framed) {
+    root.style.visibility = "hidden";
+    document.addEventListener("DOMContentLoaded", function () {
+      var a = document.createElement("a");
+      a.href = location.href;
+      a.target = "_top";
+      a.rel = "noopener";
+      a.textContent = "Ouvrir manthole.github.io / Open manthole.github.io";
+      document.body.textContent = "";
+      document.body.appendChild(a);
+      root.style.visibility = "visible";
+    });
+  }
 })();

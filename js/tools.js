@@ -639,20 +639,65 @@
   var FILE_EXT = ("exe dll sys bat cmd ps1 psm1 vbs js jse wsf hta lnk msi scr cpl jar py sh pl rb php asp aspx jsp " +
     "txt log csv json xml yml yaml ini cfg conf dat tmp bak html htm css md doc docx xls xlsx xlsm ppt pptx pdf rtf " +
     "png jpg jpeg gif bmp svg ico zip rar 7z gz tar tgz iso img vhd bin elf so dylib apk ipa dmg pkg mov mp4 mp3 avi wav").split(" ");
+  /* Sécurité (ReDoS) : aucune expression ci-dessous ne contient de groupe répété suivi d'une condition
+     qui peut échouer. Les domaines et les emails ne sont plus détectés par regex mais en deux temps :
+     découpage linéaire en morceaux de caractères autorisés, puis validation en JavaScript. Avant ce
+     correctif, un texte de 2 Mo comme « aaaa….aaaa…. » bloquait l'onglet plusieurs minutes. */
   var RE = {
     url: /\b(?:https?|ftp):\/\/[^\s"'<>()\[\]{}]+/gi,
-    email: /\b[a-z0-9._%+-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,24}\b/gi,
     ipv4: /\b(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\b/g,
-    domain: /\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{1,23}\b/gi,
     sha256: /\b[a-f0-9]{64}\b/gi,
     sha1: /\b[a-f0-9]{40}\b/gi,
     md5: /\b[a-f0-9]{32}\b/gi,
     cve: /\bCVE-\d{4}-\d{4,7}\b/gi
   };
-  function trimUrl(u) { return u.replace(/[.,;:!?'"]+$/, ""); }
-  function isDomain(d) {
-    var tld = d.split(".").pop().toLowerCase();
-    return FILE_EXT.indexOf(tld) === -1 && /[a-z]/i.test(tld) && !/^\d+$/.test(tld);
+  var HOST_PIECE = /[a-z0-9.-]+/gi;                   // morceaux candidats : classe simple, sans retour arrière
+  var LABEL = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;   // appliqué seulement à des libellés de 63 caractères max
+  var TLD = /^[a-z][a-z0-9-]{1,23}$/i;
+  var LOCAL_CHARS = /[a-z0-9._%+-]/i, HOST_CHARS = /[a-z0-9.-]/i;
+
+  function trimUrl(u) {
+    var n = u.length;
+    while (n > 0 && ".,;:!?'\"".indexOf(u[n - 1]) !== -1) n--;
+    return u.slice(0, n);
+  }
+  // Bornes [début, fin[ du morceau sans ses points et tirets de bord (boucles : une regex ancrée serait quadratique).
+  function trimEdges(s) {
+    var a = 0, b = s.length;
+    while (a < b && (s[a] === "." || s[a] === "-")) a++;
+    while (b > a && (s[b - 1] === "." || s[b - 1] === "-")) b--;
+    return [a, b];
+  }
+  function validHost(h) {
+    if (h.length < 4 || h.length > 253) return false;
+    var labels = h.split(".");
+    if (labels.length < 2) return false;
+    for (var i = 0; i < labels.length; i++) {
+      if (labels[i].length > 63 || !LABEL.test(labels[i])) return false;
+    }
+    var tld = labels[labels.length - 1].toLowerCase();
+    return TLD.test(tld) && FILE_EXT.indexOf(tld) === -1;
+  }
+  // Positions des emails : pour chaque @, on remonte la partie locale et on avance sur le domaine.
+  // Chaque caractère est parcouru au plus deux fois : temps linéaire.
+  function findEmails(s) {
+    var out = [];
+    for (var at = s.indexOf("@"); at !== -1; at = s.indexOf("@", at + 1)) {
+      var a = at;
+      while (a > 0 && at - a < 64 && LOCAL_CHARS.test(s[a - 1])) a--;
+      var b = at + 1;
+      while (b < s.length && b - at <= 254 && HOST_CHARS.test(s[b])) b++;
+      while (a < at && s[a] === ".") a++;
+      var host = s.slice(at + 1, b), e = trimEdges(host);
+      if (a < at && e[0] === 0 && validHost(host.slice(0, e[1]))) out.push([a, at + 1 + e[1]]);
+    }
+    return out;
+  }
+  function eachHost(s, fn) {
+    return s.replace(HOST_PIECE, function (piece) {
+      var e = trimEdges(piece), inner = piece.slice(e[0], e[1]);
+      return validHost(inner) ? piece.slice(0, e[0]) + fn(inner) + piece.slice(e[1]) : piece;
+    });
   }
   function isPrivate(ip) {
     var o = ip.split(".").map(Number);
@@ -664,8 +709,9 @@
       .replace(/h(?:xx|\*\*|XX)p(s?)/gi, "http$1")
       .replace(/f(?:xx|XX)p/gi, "ftp")
       .replace(/\[:\/\/\]|\[:\]\/\//g, "://")
-      .replace(/\s*[\[\(\{]\s*(?:\.|dot)\s*[\]\)\}]\s*/gi, ".")
-      .replace(/\s*[\[\(\{]\s*(?:@|at)\s*[\]\)\}]\s*/gi, "@")
+      // espaces bornés ({0,2}) : avec \s* une longue suite d'espaces rendait la recherche quadratique
+      .replace(/[ \t]{0,2}[\[\(\{][ \t]{0,2}(?:\.|dot)[ \t]{0,2}[\]\)\}][ \t]{0,2}/gi, ".")
+      .replace(/[ \t]{0,2}[\[\(\{][ \t]{0,2}(?:@|at)[ \t]{0,2}[\]\)\}][ \t]{0,2}/gi, "@")
       .replace(/\[:\]/g, ":");
   }
   function defangHost(h) { return h.replace(/\./g, "[.]"); }
@@ -675,12 +721,16 @@
     var scheme = m[1].replace(/^http/i, "hxxp").replace(/^ftp/i, "fxp");
     return scheme + "://" + defangHost(m[2]) + m[3];
   }
+  function defangEmail(e) { return e.replace("@", "[@]").replace(/\./g, "[.]"); }
   function defang(s) {
-    return s
-      .replace(RE.url, function (u) { var t = trimUrl(u); return defangUrl(t) + u.slice(t.length); })
-      .replace(RE.email, function (e) { return e.replace("@", "[@]").replace(/\./g, "[.]"); })
-      .replace(RE.ipv4, defangHost)
-      .replace(RE.domain, function (d) { return isDomain(d) ? defangHost(d) : d; });
+    s = s.replace(RE.url, function (u) { var t = trimUrl(u); return defangUrl(t) + u.slice(t.length); });
+    var parts = [], last = 0;
+    findEmails(s).forEach(function (p) {
+      parts.push(s.slice(last, p[0]), defangEmail(s.slice(p[0], p[1])));
+      last = p[1];
+    });
+    parts.push(s.slice(last));
+    return eachHost(parts.join("").replace(RE.ipv4, defangHost), defangHost);
   }
   function uniq(arr) {
     var seen = {}, out = [];
@@ -690,9 +740,11 @@
   function extract(s) {
     var t = refang(s);
     var urls = uniq((t.match(RE.url) || []).map(trimUrl));
-    var emails = uniq(t.match(RE.email) || []);
+    var emails = uniq(findEmails(t).map(function (p) { return t.slice(p[0], p[1]); }));
     var ips = uniq(t.match(RE.ipv4) || []);
-    var domains = uniq((t.match(RE.domain) || []).filter(isDomain).map(function (d) { return d.toLowerCase(); }));
+    var hosts = [];
+    eachHost(t, function (h) { hosts.push(h.toLowerCase()); return h; });
+    var domains = uniq(hosts);
     var sha256 = uniq(t.match(RE.sha256) || []);
     var noSha256 = t.replace(RE.sha256, " ");
     var sha1 = uniq(noSha256.match(RE.sha1) || []);
