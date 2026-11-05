@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Manthole ">
+<meta name="description" content="Test a password&#x27;s strength and check whether it has leaked, without ever sending it." />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0d1117" />
+<meta name="referrer" content="no-referrer" />
+<link rel="canonical" href="https://manthole.github.io/tools/password-checker/" />
+    <title data-fr="Vérificateur de mot de passe :: Manthole — Blog">Password checker :: Manthole — Blog</title>
+<link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
+<link rel="stylesheet" href="/css/cyber.css">
+<script src="/js/lang.js"></script>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manthole.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
+<link rel="stylesheet" href="/css/tools.css">
+<script src="/js/tools.js" defer></script>
+<meta property="og:title" content="Password checker" />
+<meta property="og:description" content="Test a password&#x27;s strength and check whether it has leaked, without ever sending it." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://manthole.github.io/tools/password-checker/" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Password checker"/>
+<meta name="twitter:description" content="Test a password&#x27;s strength and check whether it has leaked, without ever sending it."/>
+    </head>
+        <body>
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://manthole.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                 $ Manthole/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://manthole.github.io/about/"><span lang="fr">À propos</span><span lang="en">About</span></a></li><li><a href="https://manthole.github.io/posts/"><span lang="fr">Articles</span><span lang="en">Posts</span></a></li><li><a href="https://manthole.github.io/tools/"><span lang="fr">Outils</span><span lang="en">Tools</span></a></li><li><a href="https://manthole.github.io/resume/"><span lang="fr">CV</span><span lang="en">Resume</span></a></li>
+    </ul>
+</nav>
+
+                <button class="lang-switch" type="button" title="Français / English" aria-label="Français / English"><span data-l="fr">FR</span><span>/</span><span data-l="en">EN</span></button>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+    <main class="post" data-tool="checker">
+        <article>
+            <h2 class="post-title"><a href="https://manthole.github.io/tools/password-checker/"><span lang="fr">Vérificateur de mot de passe</span><span lang="en">Password checker</span></a></h2>
+            <div class="post-content">
+<p class="tool-privacy"><span lang="fr">L'analyse se fait dans ton navigateur. La vérification des fuites, sur clic uniquement, n'envoie que les 5 premiers caractères de l'empreinte SHA-1 : jamais le mot de passe.</span><span lang="en">The analysis runs in your browser. The breach check, only when you click, sends just the first 5 characters of the SHA-1 hash: never the password.</span></p>
+<div class="tool">
+  <label for="pc-input"><span lang="fr">mot de passe à tester</span><span lang="en">password to test</span></label>
+  <div class="tool-field">
+    <input type="password" id="pc-input" autocomplete="off" autocapitalize="off" spellcheck="false" data-ph-fr="Tape un mot de passe…" data-ph-en="Type a password…">
+  </div>
+  <div class="tool-row">
+    <label class="tool-check"><input type="checkbox" id="pc-show"> <span lang="fr">afficher</span><span lang="en">show</span></label>
+  </div>
+  <div class="meter"><div class="meter__bar" id="pc-bar"></div></div>
+  <p id="pc-verdict" style="margin:0 0 14px"></p>
+  <div class="tool-stats" id="pc-stats"></div>
+  <div class="tool-msg" id="pc-notes"></div>
+  <div class="tool-row">
+    <button class="btn" type="button" id="pc-hibp" disabled><span lang="fr">Vérifier dans les fuites de données</span><span lang="en">Check data breaches</span></button>
+  </div>
+  <div class="tool-msg" id="pc-leak" aria-live="polite"></div>
+  <p style="margin:0;font-size:.78rem;color:var(--muted)"><span lang="fr">* Temps moyen pour une attaque hors ligne à 10 milliards d'essais par seconde (hash rapide, GPU). C'est une estimation simplifiée, pas une garantie.</span><span lang="en">* Average time for an offline attack at 10 billion guesses per second (fast hash, GPU). This is a simplified estimate, not a guarantee.</span></p>
+</div>
+<div lang="fr">
+<h3>Comment ça marche ?</h3>
+<p>L'estimation part de la longueur et des types de caractères, puis retire des points pour ce que les outils de cassage testent en premier : mots de passe courants, suites (<code>1234</code>, <code>azerty</code>), répétitions, années, et le modèle « Majuscule + mot + chiffres ».</p>
+<p>La vérification des fuites utilise l'API <a href="https://haveibeenpwned.com/Passwords">Pwned Passwords</a> de Have I Been Pwned selon le principe du k-anonymat : le navigateur calcule l'empreinte SHA-1, n'envoie que ses 5 premiers caractères, reçoit toutes les empreintes qui commencent pareil, et fait la comparaison localement.</p>
+</div>
+<div lang="en">
+<h3>How does it work?</h3>
+<p>The estimate starts from length and character types, then subtracts points for what cracking tools try first: common passwords, sequences (<code>1234</code>, <code>qwerty</code>), repetitions, years, and the "Capital + word + digits" pattern.</p>
+<p>The breach check uses Have I Been Pwned's <a href="https://haveibeenpwned.com/Passwords">Pwned Passwords</a> API with k-anonymity: your browser computes the SHA-1 hash, sends only its first 5 characters, receives every hash sharing that prefix, and compares them locally.</p>
+</div>
+
+<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+            </div>
+        </article>
+    </main>
+            </div>
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="https://manthole.github.io/">Manthole</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="https://manthole.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><span lang="fr">Propulsé par</span><span lang="en">Powered by</span> <a href="http://gohugo.io">Hugo</a></span><span><span lang="fr">Fait avec &#10084; par</span><span lang="en">Made with &#10084; by</span> <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+    
+</footer>
+        </div>
+<script type="text/javascript" src="https://manthole.github.io/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+    </body>
+</html>

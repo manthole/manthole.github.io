@@ -1,0 +1,319 @@
+/* Section Outils — chargée après css/cyber.css, réutilise sa palette (--bg, --surface, --accent…).
+   Les règles sont préfixées par :root pour passer devant celles du thème hello-friend-ng. */
+
+/* ---------- Page d'accueil des outils ---------- */
+:root .tools-intro {
+  margin: 0 0 28px;
+  color: var(--muted);
+}
+:root .tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+:root .tools-grid li { margin: 0; }
+:root .post-content ul.tools-grid > li::marker { content: none; }
+:root .post-content .tools-grid a.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+:root .post-content .tools-grid a.tool-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+  color: var(--text);
+}
+:root .tool-card__name {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+:root .tool-card__name::before {
+  content: "$ ";
+  color: var(--accent);
+}
+:root .tool-card__desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+:root .tool-card__tag {
+  margin-top: auto;
+  padding-top: 6px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ok);
+}
+
+/* ---------- Bandeau confidentialité ---------- */
+:root .tool-privacy {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0 0 24px;
+  padding: 10px 14px;
+  border: 1px solid rgba(63, 185, 80, 0.35);
+  border-radius: 8px;
+  background: rgba(63, 185, 80, 0.07);
+  font-size: 0.88rem;
+  color: var(--text);
+}
+:root .tool-privacy::before {
+  content: "●";
+  color: var(--ok);
+  line-height: 1.5;
+}
+
+/* ---------- Panneau d'outil ---------- */
+:root .tool {
+  margin: 0 0 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+:root .tool > :first-child { margin-top: 0; }
+:root .tool > :last-child { margin-bottom: 0; }
+
+:root .tool label,
+:root .tool .tool-label {
+  display: block;
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+:root .tool .tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin: 0 0 16px;
+}
+:root .tool .tool-field { margin: 0 0 16px; }
+
+:root .tool input[type="text"],
+:root .tool input[type="password"],
+:root .tool input[type="number"],
+:root .tool select,
+:root .tool textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: var(--text-strong);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+:root .tool textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+:root .tool input[type="number"] { width: 6.5em; }
+:root .tool select { width: auto; cursor: pointer; }
+:root .tool :is(input, select, textarea):focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+:root .tool input[type="range"] {
+  flex: 1 1 160px;
+  accent-color: var(--accent);
+}
+:root .tool .tool-check {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+}
+:root .tool .tool-check input { accent-color: var(--accent); }
+
+/* ---------- Boutons ---------- */
+:root .tool .btn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--accent-soft);
+  border-radius: 6px;
+  background: var(--accent-dim);
+  color: var(--text-strong);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+:root .tool .btn:hover {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.2);
+}
+:root .tool .btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+:root .tool .btn--ghost {
+  border-color: var(--border-strong);
+  background: transparent;
+  color: var(--muted);
+}
+:root .tool .btn--ghost:hover { color: var(--text-strong); }
+:root .tool .btn:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- Sorties ---------- */
+:root .tool-output {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: var(--text-strong);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+:root .tool-output:empty::before {
+  content: "—";
+  color: var(--muted);
+}
+:root .tool-output--big {
+  padding: 16px;
+  font-size: 1.15rem;
+  text-align: center;
+}
+:root pre.tool-output { overflow-x: auto; }
+
+:root .hash-list {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+}
+:root .hash-list .hash-name {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+:root .hash-list .tool-output { margin: 0; }
+:root .hash-list .hash-ok { border-color: var(--ok); }
+
+/* ---------- Jauge de robustesse ---------- */
+:root .meter {
+  height: 8px;
+  margin: 0 0 10px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+:root .meter__bar {
+  width: 0;
+  height: 100%;
+  border-radius: 4px;
+  background: #f85149;
+  transition: width 0.25s, background 0.25s;
+}
+:root .meter__bar[data-score="1"] { background: #f0883e; }
+:root .meter__bar[data-score="2"] { background: #d29922; }
+:root .meter__bar[data-score="3"] { background: #3fb950; }
+:root .meter__bar[data-score="4"] { background: var(--accent); }
+
+:root .tool-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 0 0 16px;
+}
+:root .tool-stat {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--code-bg);
+}
+:root .tool-stat__k {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+:root .tool-stat__v {
+  font-family: var(--mono);
+  color: var(--text-strong);
+  word-break: break-word;
+}
+
+/* ---------- Messages ---------- */
+:root .tool-msg {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: var(--accent-dim);
+  font-size: 0.9rem;
+}
+:root .tool-msg:empty { display: none; }
+:root .tool-msg--ok { border-left-color: var(--ok); background: rgba(63, 185, 80, 0.08); }
+:root .tool-msg--warn { border-left-color: #d29922; background: rgba(210, 153, 34, 0.1); }
+:root .tool-msg--bad { border-left-color: #f85149; background: rgba(248, 81, 73, 0.1); }
+:root .tool-msg ul { margin: 6px 0 0; padding-left: 1.2em; }
+
+/* ---------- Liste d'IOC ---------- */
+:root .ioc-group { margin: 0 0 14px; }
+:root .ioc-group__head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+
+/* ---------- Bouton copier (ajouté par js/tools.js) ---------- */
+:root .copy-btn {
+  padding: 3px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+:root .copy-btn:hover { border-color: var(--accent); color: var(--text-strong); }
+:root .copy-btn.is-done { border-color: var(--ok); color: var(--ok); }
+
+/* ---------- Pied d'outil : retour à la liste ---------- */
+:root .tool-back {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 684px) {
+  :root .tool { padding: 14px; }
+  :root .hash-list { grid-template-columns: 1fr auto; }
+  :root .hash-list .hash-name { grid-column: 1 / -1; }
+}

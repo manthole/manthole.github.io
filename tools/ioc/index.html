@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Manthole ">
+<meta name="description" content="Extract and defang indicators of compromise (IOCs) from text, in your browser." />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0d1117" />
+<meta name="referrer" content="no-referrer" />
+<link rel="canonical" href="https://manthole.github.io/tools/ioc/" />
+    <title data-fr="Extracteur d&#x27;IOC :: Manthole — Blog">IOC extractor :: Manthole — Blog</title>
+<link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
+<link rel="stylesheet" href="/css/cyber.css">
+<script src="/js/lang.js"></script>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manthole.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
+<link rel="stylesheet" href="/css/tools.css">
+<script src="/js/tools.js" defer></script>
+<meta property="og:title" content="IOC extractor" />
+<meta property="og:description" content="Extract and defang indicators of compromise (IOCs) from text, in your browser." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://manthole.github.io/tools/ioc/" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="IOC extractor"/>
+<meta name="twitter:description" content="Extract and defang indicators of compromise (IOCs) from text, in your browser."/>
+    </head>
+        <body>
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://manthole.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                 $ Manthole/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://manthole.github.io/about/"><span lang="fr">À propos</span><span lang="en">About</span></a></li><li><a href="https://manthole.github.io/posts/"><span lang="fr">Articles</span><span lang="en">Posts</span></a></li><li><a href="https://manthole.github.io/tools/"><span lang="fr">Outils</span><span lang="en">Tools</span></a></li><li><a href="https://manthole.github.io/resume/"><span lang="fr">CV</span><span lang="en">Resume</span></a></li>
+    </ul>
+</nav>
+
+                <button class="lang-switch" type="button" title="Français / English" aria-label="Français / English"><span data-l="fr">FR</span><span>/</span><span data-l="en">EN</span></button>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+    <main class="post" data-tool="ioc">
+        <article>
+            <h2 class="post-title"><a href="https://manthole.github.io/tools/ioc/"><span lang="fr">Extracteur d&#x27;IOC</span><span lang="en">IOC extractor</span></a></h2>
+            <div class="post-content">
+<p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
+<div class="tool">
+  <label for="io-input"><span lang="fr">texte à analyser (logs, email, rapport…)</span><span lang="en">text to analyse (logs, email, report…)</span></label>
+  <div class="tool-field">
+    <textarea id="io-input" spellcheck="false" style="min-height:160px" data-ph-fr="Colle des logs, les en-têtes d'un email, un rapport de menace…" data-ph-en="Paste logs, email headers, a threat report…"></textarea>
+  </div>
+  <div class="tool-row">
+    <button class="btn" type="button" id="io-extract"><span lang="fr">Extraire les IOC</span><span lang="en">Extract IOCs</span></button>
+    <button class="btn btn--ghost" type="button" id="io-defang">Defang</button>
+    <button class="btn btn--ghost" type="button" id="io-refang">Refang</button>
+    <label class="tool-check"><input type="checkbox" id="io-defang-out" checked> <span lang="fr">résultats défangés</span><span lang="en">defanged results</span></label>
+  </div>
+  <div class="tool-msg" id="io-status" aria-live="polite"></div>
+  <div id="io-results"></div>
+  <div hidden>
+    <div class="ioc-group__head"><span><span lang="fr">texte transformé</span><span lang="en">transformed text</span></span><span id="io-text-copy"></span></div>
+    <pre class="tool-output" id="io-text"></pre>
+  </div>
+</div>
+<div lang="fr">
+<h3>Defang, refang ?</h3>
+<p>« Défanger » un indicateur, c'est le rendre non cliquable (<code>hxxps://exemple[.]com</code>) pour pouvoir le partager dans un ticket, un email ou un chat sans risque qu'un collègue l'ouvre par erreur. « Refang » fait l'inverse. L'extraction accepte aussi un texte déjà défangé.</p>
+<p>Les extensions de fichiers courantes (<code>.exe</code>, <code>.zip</code>, <code>.js</code>…) sont écartées des domaines pour limiter les faux positifs, même si certaines sont aussi de vrais domaines de premier niveau.</p>
+</div>
+<div lang="en">
+<h3>Defang, refang?</h3>
+<p>Defanging an indicator makes it unclickable (<code>hxxps://example[.]com</code>) so you can share it in a ticket, email or chat without a colleague opening it by mistake. Refang does the reverse. Extraction also accepts already-defanged text.</p>
+<p>Common file extensions (<code>.exe</code>, <code>.zip</code>, <code>.js</code>…) are excluded from domains to limit false positives, even though some are also real top-level domains.</p>
+</div>
+
+<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+            </div>
+        </article>
+    </main>
+            </div>
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="https://manthole.github.io/">Manthole</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="https://manthole.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><span lang="fr">Propulsé par</span><span lang="en">Powered by</span> <a href="http://gohugo.io">Hugo</a></span><span><span lang="fr">Fait avec &#10084; par</span><span lang="en">Made with &#10084; by</span> <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+    
+</footer>
+        </div>
+<script type="text/javascript" src="https://manthole.github.io/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+    </body>
+</html>

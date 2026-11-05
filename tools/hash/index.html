@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Manthole ">
+<meta name="description" content="Compute MD5, SHA-1 and SHA-256 hashes of text or a file in your browser." />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0d1117" />
+<meta name="referrer" content="no-referrer" />
+<link rel="canonical" href="https://manthole.github.io/tools/hash/" />
+    <title data-fr="Calculateur de hash :: Manthole — Blog">Hash calculator :: Manthole — Blog</title>
+<link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
+<link rel="stylesheet" href="/css/cyber.css">
+<script src="/js/lang.js"></script>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manthole.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manthole.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manthole.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://manthole.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://manthole.github.io/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://manthole.github.io/favicon.ico">
+<link rel="stylesheet" href="/css/tools.css">
+<script src="/js/tools.js" defer></script>
+<meta property="og:title" content="Hash calculator" />
+<meta property="og:description" content="Compute MD5, SHA-1 and SHA-256 hashes of text or a file in your browser." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://manthole.github.io/tools/hash/" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hash calculator"/>
+<meta name="twitter:description" content="Compute MD5, SHA-1 and SHA-256 hashes of text or a file in your browser."/>
+    </head>
+        <body>
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://manthole.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                 $ Manthole/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://manthole.github.io/about/"><span lang="fr">À propos</span><span lang="en">About</span></a></li><li><a href="https://manthole.github.io/posts/"><span lang="fr">Articles</span><span lang="en">Posts</span></a></li><li><a href="https://manthole.github.io/tools/"><span lang="fr">Outils</span><span lang="en">Tools</span></a></li><li><a href="https://manthole.github.io/resume/"><span lang="fr">CV</span><span lang="en">Resume</span></a></li>
+    </ul>
+</nav>
+
+                <button class="lang-switch" type="button" title="Français / English" aria-label="Français / English"><span data-l="fr">FR</span><span>/</span><span data-l="en">EN</span></button>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+    <main class="post" data-tool="hash">
+        <article>
+            <h2 class="post-title"><a href="https://manthole.github.io/tools/hash/"><span lang="fr">Calculateur de hash</span><span lang="en">Hash calculator</span></a></h2>
+            <div class="post-content">
+<p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
+<div class="tool">
+  <label for="hh-text"><span lang="fr">texte</span><span lang="en">text</span></label>
+  <div class="tool-field">
+    <textarea id="hh-text" spellcheck="false" data-ph-fr="Colle un texte…" data-ph-en="Paste some text…"></textarea>
+  </div>
+  <label for="hh-file"><span lang="fr">ou un fichier (512 Mo max)</span><span lang="en">or a file (512 MB max)</span></label>
+  <div class="tool-row">
+    <input type="file" id="hh-file">
+    <span id="hh-fileinfo" style="font-family:var(--mono);font-size:.8rem;color:var(--muted)"></span>
+  </div>
+  <div class="tool-row">
+    <label class="tool-check"><input type="checkbox" id="hh-upper"> <span lang="fr">majuscules</span><span lang="en">uppercase</span></label>
+  </div>
+  <div class="hash-list tool-field" id="hh-list"></div>
+  <label for="hh-compare"><span lang="fr">comparer avec une empreinte</span><span lang="en">compare with a hash</span></label>
+  <div class="tool-field">
+    <input type="text" id="hh-compare" spellcheck="false" autocomplete="off" data-ph-fr="Colle l'empreinte attendue…" data-ph-en="Paste the expected hash…">
+  </div>
+  <div class="tool-msg" id="hh-status" aria-live="polite"></div>
+</div>
+<div lang="fr">
+<h3>À quoi ça sert ?</h3>
+<p>Vérifier qu'un fichier téléchargé n'a pas été modifié (en comparant avec l'empreinte publiée par l'éditeur), ou calculer l'empreinte d'un fichier suspect pour la rechercher dans une base comme VirusTotal sans avoir à l'envoyer.</p>
+<p>MD5 et SHA-1 sont cassés pour la sécurité (on sait fabriquer des collisions), mais restent utilisés pour identifier des fichiers et des IOC. Pour vérifier l'intégrité, préfère SHA-256.</p>
+</div>
+<div lang="en">
+<h3>What is it for?</h3>
+<p>Checking that a download hasn't been tampered with (by comparing with the vendor's published hash), or hashing a suspicious file to look it up in a database like VirusTotal without uploading it.</p>
+<p>MD5 and SHA-1 are broken for security (collisions can be crafted), but they are still used to identify files and IOCs. For integrity checks, prefer SHA-256.</p>
+</div>
+
+<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+            </div>
+        </article>
+    </main>
+            </div>
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="https://manthole.github.io/">Manthole</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="https://manthole.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><span lang="fr">Propulsé par</span><span lang="en">Powered by</span> <a href="http://gohugo.io">Hugo</a></span><span><span lang="fr">Fait avec &#10084; par</span><span lang="en">Made with &#10084; by</span> <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+    
+</footer>
+        </div>
+<script type="text/javascript" src="https://manthole.github.io/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+    </body>
+</html>
