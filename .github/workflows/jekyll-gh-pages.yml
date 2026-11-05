@@ -11,6 +11,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  # Page Actus : nouvelle construction toutes les 6 heures (minute 17 pour éviter l'heure pile,
+  # où GitHub retarde les tâches planifiées). Attention : GitHub suspend les tâches planifiées
+  # d'un dépôt public sans activité depuis 60 jours.
+  schedule:
+    - cron: "17 */6 * * *"
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -34,6 +40,16 @@ jobs:
           persist-credentials: false   # le jeton GitHub n'est pas laissé dans .git pendant le build
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Python (page Actus)
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Tests du générateur d'actualités
+        run: python3 -m unittest scripts/news/test_build_news.py
+      # Bibliothèque standard uniquement, aucune dépendance installée. Si l'archive publiée est
+      # inaccessible, le script s'arrête : la version en ligne reste alors intacte.
+      - name: Page Actus (sources d'actualités et catalogue CISA)
+        run: python3 scripts/news/build_news.py
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
         with:

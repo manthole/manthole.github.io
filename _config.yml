@@ -3,3 +3,6 @@
 # Jekyll ignore par défaut les dossiers commençant par un point : on inclut .well-known (security.txt).
 include:
   - .well-known
+# Le générateur d'actualités (scripts/) sert à la construction, pas à la publication.
+exclude:
+  - scripts
