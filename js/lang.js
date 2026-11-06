@@ -1,4 +1,6 @@
-/* Sélecteur de langue : français, anglais, espagnol, portugais, allemand.
+/* Préférences d'affichage : langue (français, anglais, espagnol, portugais, allemand) et mode
+   sombre / clair (sombre par défaut, choix mémorisé sous la clé « mode » ; la clé « theme » est
+   effacée à chaque chargement par le script du thème Hugo, d'où ce nom distinct).
    Chargé dans le <head> pour fixer <html lang> avant l'affichage de la page (pas de clignotement) ;
    css/cyber.css masque ensuite tous les éléments [lang] qui ne sont pas dans la langue choisie.
    Chaque texte existe dans les 5 langues (l'anglais sert de texte de repli si une traduction manque).
@@ -31,6 +33,41 @@
   }
   apply(detect());
 
+  /* ---------- Mode sombre / clair ---------- */
+  var META = { dark: "#0d1117", light: "#f5f7fa" };
+  function applyMode(mode) {
+    root.setAttribute("data-theme", mode);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", META[mode]);
+    var btns = document.querySelectorAll(".mode-toggle");
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute("aria-pressed", mode === "light" ? "true" : "false");
+  }
+  var savedMode = null;
+  try { savedMode = localStorage.getItem("mode"); } catch (e) {}
+  applyMode(savedMode === "light" ? "light" : "dark");
+
+  function switchMode(btn) {
+    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    try { localStorage.setItem("mode", next); } catch (e) {}
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { applyMode(next); return; }
+    if (document.startViewTransition) {
+      // cercle qui s'étend depuis le bouton jusqu'au coin le plus éloigné
+      var r = btn.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      var radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      var t = document.startViewTransition(function () { applyMode(next); });
+      t.ready.then(function () {
+        root.animate({ clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + radius + "px at " + x + "px " + y + "px)"] },
+          { duration: 600, easing: "cubic-bezier(0.4, 0, 0.2, 1)", pseudoElement: "::view-transition-new(root)" });
+      }).catch(function () {});
+    } else {
+      root.classList.add("mode-anim");
+      applyMode(next);
+      setTimeout(function () { root.classList.remove("mode-anim"); }, 400);
+    }
+  }
+
   /* ---------- Liste déroulante (menu accessible au clavier) ---------- */
   function menu() { return document.querySelector(".lang-menu"); }
   function items() { var m = menu(); return m ? Array.prototype.slice.call(m.querySelectorAll("[data-set-lang]")) : []; }
@@ -55,6 +92,8 @@
   }
 
   document.addEventListener("click", function (e) {
+    var modeBtn = e.target.closest(".mode-toggle");
+    if (modeBtn) { switchMode(modeBtn); return; }
     var choice = e.target.closest("[data-set-lang]");
     if (choice) {
       var lang = choice.getAttribute("data-set-lang");
@@ -98,7 +137,7 @@
     }
   });
 
-  document.addEventListener("DOMContentLoaded", function () { apply(root.lang); });
+  document.addEventListener("DOMContentLoaded", function () { apply(root.lang); applyMode(root.getAttribute("data-theme")); });
 
   /* Anti-clickjacking. La protection normale (en-tête CSP frame-ancestors ou X-Frame-Options) est
      impossible sur GitHub Pages, et frame-ancestors est ignoré dans une balise <meta>. Si la page est

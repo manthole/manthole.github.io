@@ -38,6 +38,19 @@
   --title-3: #60a5fa;
   --title-4: #93c5fd;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* couleurs d'accent (types d'attaque, thèmes d'outils) : variantes plus foncées en mode clair */
+  --c-grey: #8b949e;
+  --c-orange: #f0883e;
+  --c-red: #f85149;
+  --c-pink: #f778ba;
+  --c-violet: #a371f7;
+  --c-gold: #e3b341;
+  --c-sky: #79c0ff;
+  --c-green: #56d364;
+  --c-teal: #2dd4bf;
+  --c-yellow: #ffdf5d;
+  --c-salmon: #ff9492;
+  --c-amber: #d29922;
   color-scheme: dark;
   scrollbar-color: var(--border-strong) var(--bg);
   scrollbar-width: thin;
@@ -800,24 +813,24 @@
   font-size: 0.7rem;
   vertical-align: 1px;
 }
-:root .news-badge--zero { border: 1px solid #f85149; color: #f85149; }
-:root .news-badge--ransom { border: 1px solid #d29922; color: #d29922; margin-left: 4px; }
+:root .news-badge--zero { border: 1px solid var(--c-red); color: var(--c-red); }
+:root .news-badge--ransom { border: 1px solid var(--c-amber); color: var(--c-amber); margin-left: 4px; }
 :root .news-empty { color: var(--muted); font-style: italic; }
 :root .post-content ul.news-sources-list { margin: 0 0 12px; }
 
 /* ---------- Page Actus : lignes cliquables et fiches détaillées ---------- */
 /* Couleur par type d'attaque (--k), partagée par la ligne et sa fiche */
-:root :is(.news-row, .fiche) { --k: #8b949e; }
-:root :is(.news-row--ransomware, .fiche--ransomware) { --k: #f0883e; }
-:root :is(.news-row--exploit, .fiche--exploit) { --k: #f85149; }
-:root :is(.news-row--espionage, .fiche--espionage) { --k: #f778ba; }
-:root :is(.news-row--supply_chain, .fiche--supply_chain) { --k: #a371f7; }
-:root :is(.news-row--breach, .fiche--breach) { --k: #e3b341; }
-:root :is(.news-row--phishing, .fiche--phishing) { --k: #79c0ff; }
-:root :is(.news-row--ddos, .fiche--ddos) { --k: #56d364; }
-:root :is(.news-row--ot, .fiche--ot) { --k: #2dd4bf; }
-:root :is(.news-row--crypto, .fiche--crypto) { --k: #ffdf5d; }
-:root :is(.news-row--malware, .fiche--malware) { --k: #ff9492; }
+:root :is(.news-row, .fiche) { --k: var(--c-grey); }
+:root :is(.news-row--ransomware, .fiche--ransomware) { --k: var(--c-orange); }
+:root :is(.news-row--exploit, .fiche--exploit) { --k: var(--c-red); }
+:root :is(.news-row--espionage, .fiche--espionage) { --k: var(--c-pink); }
+:root :is(.news-row--supply_chain, .fiche--supply_chain) { --k: var(--c-violet); }
+:root :is(.news-row--breach, .fiche--breach) { --k: var(--c-gold); }
+:root :is(.news-row--phishing, .fiche--phishing) { --k: var(--c-sky); }
+:root :is(.news-row--ddos, .fiche--ddos) { --k: var(--c-green); }
+:root :is(.news-row--ot, .fiche--ot) { --k: var(--c-teal); }
+:root :is(.news-row--crypto, .fiche--crypto) { --k: var(--c-yellow); }
+:root :is(.news-row--malware, .fiche--malware) { --k: var(--c-salmon); }
 
 :root .post-content ol.news-list > li.news-row {
   position: relative;
@@ -1230,13 +1243,13 @@
    terminal, frise, cartes et lignes, apparition en cascade (js/fx.js).
    Couleur d'accent locale : --k (par défaut l'accent du site).
    ===================================================================== */
-:root .k-tools-pw, :root .k-violet { --k: #a371f7; }
-:root .k-tools-enc, :root .k-teal { --k: #2dd4bf; }
-:root .k-tools-soc, :root .k-orange { --k: #f0883e; }
-:root .k-news, :root .k-red { --k: #f85149; }
-:root .k-posts, :root .k-gold { --k: #e3b341; }
-:root .k-cv, :root .k-sky { --k: #79c0ff; }
-:root .k-green { --k: #56d364; }
+:root .k-tools-pw, :root .k-violet { --k: var(--c-violet); }
+:root .k-tools-enc, :root .k-teal { --k: var(--c-teal); }
+:root .k-tools-soc, :root .k-orange { --k: var(--c-orange); }
+:root .k-news, :root .k-red { --k: var(--c-red); }
+:root .k-posts, :root .k-gold { --k: var(--c-gold); }
+:root .k-cv, :root .k-sky { --k: var(--c-sky); }
+:root .k-green { --k: var(--c-green); }
 :root { --k: var(--accent); } /* hérité : chaque bloc peut le redéfinir (classes k-…) */
 
 /* Pastille (comme le type d'attaque d'une fiche) */
@@ -1584,7 +1597,7 @@
 @media (max-width: 640px) { :root .cv-kv { grid-template-columns: 1fr; gap: 4px; } }
 
 /* ---------- Pages : articles (liste) ---------- */
-:root .posts { --k: #e3b341; }
+:root .posts { --k: var(--c-gold); }
 :root .posts .post-year {
   display: inline-block;
   height: fit-content;
@@ -1648,4 +1661,157 @@
   :root .menu__inner li { margin: 0 4px; }
   :root .menu__inner { font-size: 0.82rem; }
   :root .logo__text { font-size: 0.95em; }
+}
+
+/* =====================================================================
+   Mode clair (html[data-theme="light"], posé par js/lang.js).
+   Le mode sombre reste le mode par défaut. Les terminaux et blocs de code
+   restent sombres dans les deux modes (« îlots » plus bas).
+   ===================================================================== */
+:root[data-theme="light"] {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-2: #eef2f6;
+  --code-bg: #eef2f6;
+  --border: #d9e0e7;
+  --border-strong: #c2ccd6;
+  --text: #2d333b;
+  --text-strong: #0f1419;
+  --muted: #5b6672;
+  --accent: #0969da;
+  --accent-soft: rgba(9, 105, 218, 0.5);
+  --accent-dim: rgba(9, 105, 218, 0.08);
+  --glow: 0 0 12px rgba(9, 105, 218, 0.18);
+  --ok: #1a7f37;
+  --title-1: #0a3069;
+  --title-2: #0550ae;
+  --title-3: #0969da;
+  --title-4: #1f6feb;
+  --c-grey: #57606a;
+  --c-orange: #bc4c00;
+  --c-red: #cf222e;
+  --c-pink: #bf3989;
+  --c-violet: #8250df;
+  --c-gold: #9a6700;
+  --c-sky: #0969da;
+  --c-green: #1a7f37;
+  --c-teal: #0e7490;
+  --c-yellow: #7d4e00;
+  --c-salmon: #a40e26;
+  --c-amber: #9a6700;
+  color-scheme: light;
+}
+/* îlots sombres : terminaux, blocs de code, schéma ASCII */
+:root[data-theme="light"] :is(.x-term, .fiche__term, .post-content .highlight, pre.project__diagram) {
+  --bg: #0d1117;
+  --surface: #111826;
+  --surface-2: #161f2e;
+  --code-bg: #0a0f16;
+  --border: #1f2a37;
+  --border-strong: #2b3a4d;
+  --text: #c9d1d9;
+  --text-strong: #e6edf3;
+  --muted: #8b949e;
+  --accent: #38bdf8;
+  --ok: #3fb950;
+  --c-grey: #8b949e;
+  --c-orange: #f0883e;
+  --c-red: #f85149;
+  --c-pink: #f778ba;
+  --c-violet: #a371f7;
+  --c-gold: #e3b341;
+  --c-sky: #79c0ff;
+  --c-green: #56d364;
+  --c-teal: #2dd4bf;
+  --c-yellow: #ffdf5d;
+  --c-salmon: #ff9492;
+  --c-amber: #d29922;
+  color: var(--text);
+  color-scheme: dark;
+}
+:root[data-theme="light"] pre.project__diagram { background: var(--code-bg); color: var(--text); border-color: var(--border-strong); }
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 70% 100% at 50% 0%, rgba(9, 105, 218, 0.08), transparent 70%),
+    linear-gradient(rgba(9, 105, 218, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9, 105, 218, 0.045) 1px, transparent 1px);
+}
+:root[data-theme="light"] body::after { background: repeating-linear-gradient(to bottom, rgba(15, 23, 42, 0.018) 0 1px, transparent 1px 3px); }
+:root[data-theme="light"] ::selection { background: rgba(9, 105, 218, 0.2); }
+:root[data-theme="light"] .header { background: rgba(245, 247, 250, 0.86); }
+:root[data-theme="light"] .footer { background: rgba(255, 255, 255, 0.6); }
+:root[data-theme="light"] main[aria-role="main"] > div { background-color: rgba(255, 255, 255, 0.92); box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1); }
+:root[data-theme="light"] main[aria-role="main"] > div > div a { background: var(--surface-2); }
+:root[data-theme="light"] .lang-list {
+  background: radial-gradient(ellipse 120% 80px at 100% 0%, rgba(9, 105, 218, 0.08), transparent 70%), var(--surface);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+}
+:root[data-theme="light"] .lang-list button:is(:hover, :focus-visible) { background: linear-gradient(90deg, rgba(9, 105, 218, 0.1), transparent 80%); }
+:root[data-theme="light"] .lang-list button[aria-checked="true"] .lang-list__code { background: rgba(9, 105, 218, 0.1); }
+:root[data-theme="light"] :is(.lang-switch:hover, .lang-menu.is-open .lang-switch) { box-shadow: 0 0 12px rgba(9, 105, 218, 0.18); }
+@media (max-width: 684px) { :root[data-theme="light"] .menu { box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14); } }
+:root[data-theme="light"] .x-panel { box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08); }
+:root[data-theme="light"] .fiche__backdrop { background: rgba(15, 23, 42, 0.35); }
+:root[data-theme="light"] .fiche__panel { box-shadow: -24px 0 60px rgba(15, 23, 42, 0.18), -1px 0 18px color-mix(in srgb, var(--k) 14%, transparent); }
+:root[data-theme="light"] a.chain__ttp { background: var(--surface-2); }
+:root[data-theme="light"] .post-content .highlight { box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12); }
+:root[data-theme="light"] .x-term { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12); }
+
+/* ---------- Bouton mode clair / sombre ---------- */
+:root .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+:root .mode-toggle {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 30px;
+  margin: 0 0 0 8px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+:root .mode-toggle:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow); }
+:root .mode-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:root .mode-toggle svg {
+  grid-area: 1 / 1;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+}
+/* mode sombre : on montre le soleil (passer au clair) ; mode clair : la lune */
+:root .mode-toggle__moon { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+:root[data-theme="light"] .mode-toggle__sun { opacity: 0; transform: rotate(90deg) scale(0.4); }
+:root[data-theme="light"] .mode-toggle__moon { opacity: 1; transform: none; }
+@media (max-width: 684px) { :root .mode-toggle { order: 2; margin: 0 8px 0 0; } }
+@media (min-width: 685px) and (max-width: 1000px) { :root .mode-toggle { margin-left: 6px; } }
+
+/* bascule animée : cercle qui s'étend depuis le bouton (View Transitions, si disponible) */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+:root.mode-anim, :root.mode-anim * { transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important; }
+@media (prefers-reduced-motion: reduce) {
+  :root .mode-toggle svg { transition: none; }
+}
+/* téléphone : en-tête logo + mode + langue + ☰ sur une ligne (le globe est retiré pour gagner la place) */
+@media (max-width: 684px) {
+  :root .lang-switch__globe { display: none; }
+  :root .lang-switch { padding: 4px 7px; gap: 5px; }
+}
+@media (max-width: 360px) {
+  :root .logo__text { font-size: 0.9em; }
 }
