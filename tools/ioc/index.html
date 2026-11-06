@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/ioc/"><span lang="fr">Extracteur d&#x27;IOC</span><span lang="en">IOC extractor</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-orange"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Analyse SOC</span><span lang="en">SOC analysis</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">100 % navigateur</span><span lang="en">100% in-browser</span></span></p>
 <p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
 <div class="tool">
   <label for="io-input"><span lang="fr">texte à analyser (logs, email, rapport…)</span><span lang="en">text to analyse (logs, email, report…)</span></label>
@@ -101,6 +103,7 @@
     <pre class="tool-output" id="io-text"></pre>
   </div>
 </div>
+<section class="tool-flow k-orange"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Collage</span><span lang="en">Paste</span></h4><p><span lang="fr">Un e-mail, un journal, un rapport : du texte brut, même déjà « défangé ».</span><span lang="en">An email, a log, a report: plain text, even already defanged.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Refang puis extraction</span><span lang="en">Refang, then extract</span></h4><p><span lang="fr">Les <code>hxxp</code> et <code>[.]</code> sont remis en clair, puis URL, domaines, IP, e-mails, hashes et CVE sont extraits.</span><span lang="en"><code>hxxp</code> and <code>[.]</code> are restored, then URLs, domains, IPs, emails, hashes and CVEs are extracted.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Dédoublonnage</span><span lang="en">Deduplication</span></h4><p><span lang="fr">Chaque indicateur n'apparaît qu'une fois, rangé par type.</span><span lang="en">Each indicator appears once, grouped by type.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Defang</span><span lang="en">Defang</span></h4><p><span lang="fr">Pour partager sans lien cliquable : <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>.</span><span lang="en">To share without clickable links: <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Defang, refang ?</h3>
 <p>« Défanger » un indicateur, c'est le rendre non cliquable (<code>hxxps://exemple[.]com</code>) pour pouvoir le partager dans un ticket, un email ou un chat sans risque qu'un collègue l'ouvre par erreur. « Refang » fait l'inverse. L'extraction accepte aussi un texte déjà défangé.</p>
@@ -112,7 +115,7 @@
 <p>Common file extensions (<code>.exe</code>, <code>.zip</code>, <code>.js</code>…) are excluded from domains to limit false positives, even though some are also real top-level domains.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-orange"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

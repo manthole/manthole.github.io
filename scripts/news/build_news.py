@@ -720,6 +720,35 @@ def render_kev_fiche(fid, v, archive):
     return fiche_shell(fid, "ransomware" if known else "exploit", kicker, f"{e(cve)} — {e(vp)}", body)
 
 
+def render_home(clusters):
+    """Encart « en ce moment » de l'accueil : les 3 sujets de la semaine, liés à leur fiche."""
+    rows = []
+    for c in clusters[:3]:
+        lead = c["lead"]
+        kind = c.get("kinds", ["intrusion"])[0]
+        fid = "f-" + re.sub(r"[^0-9a-f]", "", lead["id"])[:16]
+        n = len(c["sources"])
+        count = L(f"{n} source{'s' if n > 1 else ''}", f"{n} source{'s' if n > 1 else ''}")
+        rows.append(f'<li><a class="home-now__item news-row--{kind}" href="{SITE}/news/#{fid}">'
+                    f'<span class="news-kind">{kind_label(kind)}</span> <span class="home-now__title">{e(lead["title"])}</span> '
+                    f'<span class="home-now__n">{count}</span></a></li>')
+    return '<ol class="home-now__list">' + "".join(rows) + "</ol>" if rows else ""
+
+
+HOME_BLOCK = re.compile(r"(<!-- news:home -->).*?(<!-- /news:home -->)", re.S)
+
+
+def update_home(path, html):
+    """Remplace le contenu entre les balises de l'accueil (rien à faire si l'encart est vide ou absent)."""
+    if not html or not path.exists():
+        return False
+    s = path.read_text(encoding="utf-8")
+    if not HOME_BLOCK.search(s):
+        return False
+    path.write_text(HOME_BLOCK.sub(lambda m: m.group(1) + html + m.group(2), s, count=1), encoding="utf-8")
+    return True
+
+
 def render_fiches(fiches, kev, archive):
     kevs = kev_index(kev)
     out = []
@@ -746,7 +775,7 @@ def render_selection(selection):
             + "".join(rows) + "</ol>")
 
 
-def build_body(archive, kev, selection, status, now, fiches=None):
+def build_body(archive, kev, selection, status, now, fiches=None, top=None):
     def window(days=None, since=None):
         out = []
         for x in archive:
@@ -761,6 +790,8 @@ def build_body(archive, kev, selection, status, now, fiches=None):
     year_start = dt.datetime(now.astimezone(PARIS).year, 1, 1, tzinfo=PARIS).astimezone(dt.timezone.utc)
     zero_news = cluster([x for x in window(days=30) if x["zero_day"]])
     week = cluster([x for x in window(days=7) if x["attack"]])
+    if top is not None:
+        top.extend(week[:3])
     month = cluster([x for x in window(days=30) if x["attack"]], max_gap_days=10)
     year = cluster([x for x in window(since=year_start) if x["attack"]], max_gap_days=14)
     oldest = min((x["date"] for x in archive), default=None)
@@ -896,8 +927,8 @@ def main(argv=None):
             print(f"news-selection.json illisible : {exc}")
 
     template = (root / "about" / "index.html").read_text(encoding="utf-8")
-    fiches = {}
-    body = build_body(items, kev, selection, status, now, fiches)
+    fiches, top = {}, []
+    body = build_body(items, kev, selection, status, now, fiches, top)
     page = retarget(template, body, render_fiches(fiches, kev, items))
     out = root / "news" / "index.html"
     out.parent.mkdir(exist_ok=True)
@@ -906,6 +937,8 @@ def main(argv=None):
     (root / "data" / "news-archive.json").write_text(
         json.dumps({"updated": now.isoformat(timespec="seconds"), "items": items}, ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8")
+    if update_home(root / "index.html", render_home(top)):
+        print("accueil : encart « en ce moment » mis à jour")
     print(f"page écrite : {out} ({len(items)} articles en archive)")
     return 0
 

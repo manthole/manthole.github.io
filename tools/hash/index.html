@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/hash/"><span lang="fr">Calculateur de hash</span><span lang="en">Hash calculator</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-teal"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Intégrité</span><span lang="en">Integrity</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">100 % navigateur</span><span lang="en">100% in-browser</span></span></p>
 <p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
 <div class="tool">
   <label for="hh-text"><span lang="fr">texte</span><span lang="en">text</span></label>
@@ -103,6 +105,7 @@
   </div>
   <div class="tool-msg" id="hh-status" aria-live="polite"></div>
 </div>
+<section class="tool-flow k-teal"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Lecture</span><span lang="en">Input</span></h4><p><span lang="fr">Le texte est encodé en UTF-8, ou le fichier est lu localement (512 Mo maximum).</span><span lang="en">Text is encoded as UTF-8, or the file is read locally (512 MB max).</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Calcul</span><span lang="en">Hashing</span></h4><p><span lang="fr">SHA-1, SHA-256, SHA-384 et SHA-512 par Web Crypto ; MD5, absent de Web Crypto, par une implémentation intégrée.</span><span lang="en">SHA-1, SHA-256, SHA-384 and SHA-512 via Web Crypto; MD5, missing from Web Crypto, via a built-in implementation.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Comparaison</span><span lang="en">Comparison</span></h4><p><span lang="fr">L'empreinte attendue que tu colles est comparée à chaque résultat.</span><span lang="en">The expected hash you paste is compared with each result.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>À quoi ça sert ?</h3>
 <p>Vérifier qu'un fichier téléchargé n'a pas été modifié (en comparant avec l'empreinte publiée par l'éditeur), ou calculer l'empreinte d'un fichier suspect pour la rechercher dans une base comme VirusTotal sans avoir à l'envoyer.</p>
@@ -114,7 +117,7 @@
 <p>MD5 and SHA-1 are broken for security (collisions can be crafted), but they are still used to identify files and IOCs. For integrity checks, prefer SHA-256.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-teal"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

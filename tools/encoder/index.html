@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/encoder/"><span lang="fr">Encodeur / décodeur</span><span lang="en">Encoder / decoder</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-teal"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Encodage</span><span lang="en">Encoding</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">100 % navigateur</span><span lang="en">100% in-browser</span></span></p>
 <p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
 <div class="tool">
   <label for="ed-input"><span lang="fr">entrée</span><span lang="en">input</span></label>
@@ -107,6 +109,7 @@
   </div>
   <textarea id="ed-output" readonly spellcheck="false"></textarea>
 </div>
+<section class="tool-flow k-teal"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Choix du format</span><span lang="en">Pick a format</span></h4><p><span lang="fr">Base64, Base64URL, URL, hexadécimal ou entités HTML.</span><span lang="en">Base64, Base64URL, URL, hex or HTML entities.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Octets UTF-8</span><span lang="en">UTF-8 bytes</span></h4><p><span lang="fr">Le texte est converti en octets UTF-8 : les accents et emojis passent sans casse.</span><span lang="en">Text is converted to UTF-8 bytes: accents and emoji survive.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Dans les deux sens</span><span lang="en">Both ways</span></h4><p><span lang="fr">Encoder ou décoder ; une entrée invalide est signalée au lieu de produire un résultat faux.</span><span lang="en">Encode or decode; invalid input is flagged instead of producing a wrong result.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Bon à savoir</h3>
 <p>Un encodage n'est pas un chiffrement : n'importe qui peut décoder du Base64. C'est pourtant un réflexe utile en analyse, car les scripts malveillants (PowerShell <code>-EncodedCommand</code>, macros, pages de phishing) cachent souvent leur charge en Base64 ou en hexadécimal.</p>
@@ -116,7 +119,7 @@
 <p>Encoding is not encryption: anyone can decode Base64. It is still a useful reflex in analysis, because malicious scripts (PowerShell <code>-EncodedCommand</code>, macros, phishing pages) often hide their payload in Base64 or hex.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-teal"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

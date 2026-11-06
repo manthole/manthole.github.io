@@ -278,5 +278,28 @@ class Fiches(unittest.TestCase):
         self.assertNotIn("style=", page)
 
 
+class Home(unittest.TestCase):
+    def test_home_block(self):
+        items = [bn.normalise(item('Zyxel <b>fixes</b> zero-day exploited to hack switches', "bleeping", 4, zero=True)),
+                 bn.normalise(item("Qilin ransomware hits hospital", "zataz", 4))]
+        fiches, top = {}, []
+        bn.build_body(items, None, [], {}, NOW, fiches, top)
+        html = bn.render_home(top)
+        self.assertNotIn("<b>", html)
+        for c in top:
+            fid = "f-" + c["lead"]["id"]
+            self.assertIn(f"/news/#{fid}", html)
+            self.assertIn(fid, fiches, "le lien de l'accueil ouvre une fiche qui existe")
+        with tempfile.TemporaryDirectory() as tmp:
+            home = Path(tmp) / "index.html"
+            home.write_text("<p>a</p><!-- news:home --><p>ancien</p><!-- /news:home --><p>b</p>", encoding="utf-8")
+            self.assertTrue(bn.update_home(home, html))
+            out = home.read_text(encoding="utf-8")
+            self.assertNotIn("ancien", out)
+            self.assertTrue(out.startswith("<p>a</p><!-- news:home --><ol") and out.endswith("<!-- /news:home --><p>b</p>"))
+            self.assertFalse(bn.update_home(home, ""), "encart vide : l'accueil garde son texte")
+        self.assertIn("<!-- news:home -->", (ROOT / "index.html").read_text(encoding="utf-8"), "balises présentes sur l'accueil")
+
+
 if __name__ == "__main__":
     unittest.main()

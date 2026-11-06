@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/password-checker/"><span lang="fr">Vérificateur de mot de passe</span><span lang="en">Password checker</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-violet"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Mots de passe</span><span lang="en">Passwords</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">navigateur + k-anonymat</span><span lang="en">in-browser + k-anonymity</span></span></p>
 <p class="tool-privacy"><span lang="fr">L'analyse se fait dans ton navigateur. La vérification des fuites, sur clic uniquement, n'envoie que les 5 premiers caractères de l'empreinte SHA-1 : jamais le mot de passe.</span><span lang="en">The analysis runs in your browser. The breach check, only when you click, sends just the first 5 characters of the SHA-1 hash: never the password.</span></p>
 <div class="tool">
   <label for="pc-input"><span lang="fr">mot de passe à tester</span><span lang="en">password to test</span></label>
@@ -101,6 +103,7 @@
   <div class="tool-msg" id="pc-leak" aria-live="polite"></div>
   <p class="tool-footnote"><span lang="fr">* Temps moyen pour une attaque hors ligne à 10 milliards d'essais par seconde (hash rapide, GPU). C'est une estimation simplifiée, pas une garantie.</span><span lang="en">* Average time for an offline attack at 10 billion guesses per second (fast hash, GPU). This is a simplified estimate, not a guarantee.</span></p>
 </div>
+<section class="tool-flow k-violet"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Analyse locale</span><span lang="en">Local analysis</span></h4><p><span lang="fr">Longueur, types de caractères et motifs que les outils de cassage testent en premier.</span><span lang="en">Length, character types and the patterns cracking tools try first.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Empreinte SHA-1</span><span lang="en">SHA-1 hash</span></h4><p><span lang="fr">Le navigateur calcule l'empreinte du mot de passe avec Web Crypto.</span><span lang="en">The browser hashes the password with Web Crypto.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">k-anonymat</span><span lang="en">k-anonymity</span></h4><p><span lang="fr">Sur clic seulement, les 5 premiers caractères de l'empreinte partent vers Pwned Passwords.</span><span lang="en">Only on click, the first 5 characters of the hash go to Pwned Passwords.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Comparaison locale</span><span lang="en">Local match</span></h4><p><span lang="fr">La réponse contient toutes les empreintes qui commencent pareil ; la correspondance est cherchée dans la page.</span><span lang="en">The reply lists every hash with that prefix; the match is looked up in the page.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Comment ça marche ?</h3>
 <p>L'estimation part de la longueur et des types de caractères, puis retire des points pour ce que les outils de cassage testent en premier : mots de passe courants, suites (<code>1234</code>, <code>azerty</code>), répétitions, années, et le modèle « Majuscule + mot + chiffres ».</p>
@@ -112,7 +115,7 @@
 <p>The breach check uses Have I Been Pwned's <a href="https://haveibeenpwned.com/Passwords">Pwned Passwords</a> API with k-anonymity: your browser computes the SHA-1 hash, sends only its first 5 characters, receives every hash sharing that prefix, and compares them locally.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-violet"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

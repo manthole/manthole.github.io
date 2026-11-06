@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -124,14 +125,12 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/projects/"><span lang="fr">Projets</span><span lang="en">Projects</span></a></h2>
             <div class="post-content">
-<p class="tools-intro"><span lang="fr">Des projets construits pour comprendre la sécurité de l'intérieur : comment un tunnel chiffré fonctionne, et comment on défend un site exposé.</span><span lang="en">Projects built to understand security from the inside: how an encrypted tunnel works, and how to defend an exposed website.</span></p>
+<p class="tools-intro"><span lang="fr">Des projets construits pour comprendre la sécurité de l'intérieur : comment un tunnel chiffré fonctionne, comment on analyse un malware, et comment on défend un site exposé.</span><span lang="en">Projects built to understand security from the inside: how an encrypted tunnel works, how malware is analysed, and how to defend an exposed website.</span></p>
 
-<section class="project">
-  <div class="project__head">
-    <h3 class="project__title">minivpn</h3>
-    <span class="project__status"><span lang="fr">projet pédagogique</span><span lang="en">learning project</span></span>
-  </div>
-  <p class="project__tagline"><span lang="fr">Un VPN écrit de zéro en Go, sur le modèle de WireGuard.</span><span lang="en">A VPN written from scratch in Go, modelled on WireGuard.</span></p>
+<section class="x-panel k-violet" data-reveal>
+  <p class="x-kicker"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">projet pédagogique</span><span lang="en">learning project</span></span> <span class="x-chip x-chip--muted x-chip--plain">Go</span> <span class="x-chip x-chip--muted x-chip--plain">open source</span></p>
+  <h3 class="x-panel__title">minivpn</h3>
+  <p class="x-lead"><span lang="fr">Un VPN écrit de zéro en Go, sur le modèle de WireGuard.</span><span lang="en">A VPN written from scratch in Go, modelled on WireGuard.</span></p>
   <pre class="project__diagram" aria-label="schéma du tunnel / tunnel diagram"> client (Mac)                          server
  ┌───────────────────┐                ┌───────────────────┐
  │ ping 10.8.0.1     │                │ web page          │
@@ -142,43 +141,40 @@
  ┌─────────▼─────────┐  UDP, chiffré  ┌─────────┴─────────┐
  │ minivpn client    ├───────────────►│ minivpn server    │
  └───────────────────┘   encrypted    └───────────────────┘</pre>
-  <div lang="fr">
-    <p>Le client et le serveur se mettent d'accord sur des clés de session en deux messages, puis chaque paquet IP voyage chiffré en UDP entre deux interfaces réseau virtuelles.</p>
-    <ul>
-      <li><strong>Poignée de main Noise IK</strong> (X25519, ChaCha20-Poly1305, BLAKE2s) : confidentialité persistante, identité du client chiffrée, serveur muet face aux clés inconnues.</li>
-      <li><strong>Anti-rejeu</strong> : horodatage chiffré dans la poignée de main, fenêtre glissante de 2048 paquets (RFC 6479) pour les données.</li>
-      <li><strong>Routage par clé</strong> : un client authentifié ne peut pas usurper l'adresse d'un autre.</li>
-      <li><strong>Renouvellement des clés</strong> toutes les 2 minutes, sans couper le trafic.</li>
-      <li>Interface virtuelle native : <code>utun</code> sur macOS, <code>/dev/net/tun</code> sur Linux.</li>
-    </ul>
-    <p><strong>Testé comme on attaque</strong> : 13 tests automatiques, dont des attaques (poignée de main rejouée, paquet modifié d'un seul bit, client inconnu, usurpation d'adresse), et un test réel où une capture réseau vérifie qu'aucun contenu ne circule en clair. Ces tests ont révélé deux vrais bugs, corrigés avant publication.</p>
+  <h4 class="x-h"><span lang="fr">Comment ça marche</span><span lang="en">How it works</span></h4>
+  <ol class="x-steps k-violet" data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Poignée de main Noise IK</span><span lang="en">Noise IK handshake</span></h4><p><span lang="fr">Client et serveur se mettent d'accord sur des clés de session en deux messages (X25519, ChaCha20-Poly1305, BLAKE2s) : identité du client chiffrée, serveur muet face aux clés inconnues.</span><span lang="en">Client and server agree on session keys in two messages (X25519, ChaCha20-Poly1305, BLAKE2s): encrypted client identity, a server that stays silent to unknown keys.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Tunnel chiffré</span><span lang="en">Encrypted tunnel</span></h4><p><span lang="fr">Chaque paquet IP voyage chiffré en UDP entre deux interfaces virtuelles natives : <code>utun</code> sur macOS, <code>/dev/net/tun</code> sur Linux.</span><span lang="en">Every IP packet travels encrypted over UDP between two native virtual interfaces: <code>utun</code> on macOS, <code>/dev/net/tun</code> on Linux.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Anti-rejeu et routage par clé</span><span lang="en">Anti-replay and cryptokey routing</span></h4><p><span lang="fr">Horodatage chiffré dans la poignée de main, fenêtre glissante de 2048 paquets (RFC 6479) pour les données ; un client authentifié ne peut pas usurper l'adresse d'un autre.</span><span lang="en">Encrypted timestamp in the handshake, 2048-packet sliding window (RFC 6479) for data; an authenticated client cannot spoof another client's address.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Renouvellement des clés</span><span lang="en">Key rotation</span></h4><p><span lang="fr">Toutes les 2 minutes, sans couper le trafic : c'est la confidentialité persistante.</span><span lang="en">Every 2 minutes, without dropping traffic: that's forward secrecy.</span></p></div></li></ol>
+  <div class="x-term" data-reveal>
+    <div class="x-term__bar"><span>$ go test ./...</span></div>
+    <p class="x-term__body"><span lang="fr"><strong>Testé comme on attaque</strong> : 13 tests automatiques, dont des attaques (poignée de main rejouée, paquet modifié d'un seul bit, client inconnu, usurpation d'adresse), et un test réel où une capture réseau vérifie qu'aucun contenu ne circule en clair. Ces tests ont révélé deux vrais bugs, corrigés avant publication.</span><span lang="en"><strong>Tested the way it would be attacked</strong>: 13 automated tests, including attacks (replayed handshake, single-bit tampering, unknown client, address spoofing), plus a real-interface test where a packet capture checks that nothing travels in clear text. These tests caught two real bugs, fixed before release.</span></p>
   </div>
-  <div lang="en">
-    <p>Client and server agree on session keys in two messages, then every IP packet travels encrypted over UDP between two virtual network interfaces.</p>
-    <ul>
-      <li><strong>Noise IK handshake</strong> (X25519, ChaCha20-Poly1305, BLAKE2s): forward secrecy, encrypted client identity, a server that stays silent to unknown keys.</li>
-      <li><strong>Anti-replay</strong>: encrypted timestamp in the handshake, 2048-packet sliding window (RFC 6479) for data.</li>
-      <li><strong>Cryptokey routing</strong>: an authenticated client cannot spoof another client's address.</li>
-      <li><strong>Key rotation</strong> every 2 minutes, without dropping traffic.</li>
-      <li>Native virtual interface: <code>utun</code> on macOS, <code>/dev/net/tun</code> on Linux.</li>
-    </ul>
-    <p><strong>Tested the way it would be attacked</strong>: 13 automated tests, including attacks (replayed handshake, single-bit tampering, unknown client, address spoofing), plus a real-interface test where a packet capture checks that nothing travels in clear text. These tests caught two real bugs, fixed before release.</p>
-  </div>
-  <ul class="project__tags">
-    <li>Go</li><li>Noise</li><li>ChaCha20-Poly1305</li><li>UDP</li><li>TUN</li><li>macOS</li><li>Linux</li>
-  </ul>
-  <p class="project__links"><a href="https://github.com/manthole/minivpn"><span lang="fr">Code source et documentation</span><span lang="en">Source code and docs</span> →</a></p>
+  <ul class="x-chips"><li><span class="x-chip x-chip--muted x-chip--plain">Go</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Noise</span></li><li><span class="x-chip x-chip--muted x-chip--plain">ChaCha20-Poly1305</span></li><li><span class="x-chip x-chip--muted x-chip--plain">UDP</span></li><li><span class="x-chip x-chip--muted x-chip--plain">TUN</span></li><li><span class="x-chip x-chip--muted x-chip--plain">macOS</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Linux</span></li></ul>
+  <p class="x-links"><a class="x-btn" href="https://github.com/manthole/minivpn"><span lang="fr">Code source et documentation</span><span lang="en">Source code and docs</span> ›</a></p>
 </section>
 
-<section class="project">
-  <div class="project__head">
-    <h3 class="project__title"><span lang="fr">Ce site</span><span lang="en">This website</span></h3>
-    <span class="project__status"><span lang="fr">en ligne</span><span lang="en">live</span></span>
+<section class="x-panel k-orange" data-reveal>
+  <p class="x-kicker"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">labo personnel</span><span lang="en">personal lab</span></span> <span class="x-chip x-chip--muted x-chip--plain">macOS Apple Silicon</span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">intégration continue</span><span lang="en">continuous integration</span></span></p>
+  <h3 class="x-panel__title">reverse-lab</h3>
+  <p class="x-lead"><span lang="fr">Mon carnet de rétro-ingénierie : un labo d'analyse de malware sur Mac Apple Silicon, une progression de crackmes, et les règles de détection que j'en tire.</span><span lang="en">My reverse engineering notebook: a malware analysis lab on Apple Silicon, a crackme progression, and the detection rules I derive from them.</span></p>
+  <h4 class="x-h"><span lang="fr">La démarche</span><span lang="en">The method</span></h4>
+  <ol class="x-steps k-orange" data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Analyser</span><span lang="en">Analyse</span></h4><p><span lang="fr">Dans un labo isolé sur Mac Apple Silicon : VM Windows 11 ARM avec FLARE-VM, VM Linux avec un faux Internet (INetSim).</span><span lang="en">In an isolated lab on Apple Silicon: a Windows 11 ARM VM with FLARE-VM, a Linux VM with a fake internet (INetSim).</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Rédiger</span><span lang="en">Write up</span></h4><p><span lang="fr">Le rapport d'analyse, à partir d'un modèle.</span><span lang="en">The analysis report, from a template.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Détecter</span><span lang="en">Detect</span></h4><p><span lang="fr">Une règle YARA et une règle Sigma, chacune avec son fichier de test.</span><span lang="en">A YARA rule and a Sigma rule, each with its own test file.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Publier</span><span lang="en">Publish</span></h4><p><span lang="fr">Les IOC défangés, jamais l'échantillon.</span><span lang="en">Defanged IOCs, never the sample.</span></p></div></li></ol>
+  <div class="x-term" data-reveal>
+    <div class="x-term__bar"><span>$ python3 scripts/verifier_regles.py</span></div>
+    <p class="x-term__body"><span lang="fr">À chaque publication, l'intégration continue compile les règles YARA, vérifie qu'elles détectent les fichiers de test prévus et ignorent les autres (ni faux négatif, ni faux positif), puis passe les règles Sigma au validateur officiel.</span><span lang="en">On every push, continuous integration compiles the YARA rules, checks that they catch the intended test files and ignore the others (no false negative, no false positive), then runs the Sigma rules through the official validator.</span></p>
   </div>
-  <p class="project__tagline"><span lang="fr">Des outils cyber dans le navigateur, et un site durci puis audité.</span><span lang="en">In-browser cyber tools, on a hardened and audited website.</span></p>
+  <p><span lang="fr"><strong>Règle d'or</strong> : les échantillons ne sont jamais ouverts sur la machine hôte ni déposés dans le dépôt.</span><span lang="en"><strong>Golden rule</strong>: samples are never opened on the host machine nor stored in the repository.</span></p>
+  <ul class="x-chips"><li><span class="x-chip x-chip--muted x-chip--plain">YARA</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Sigma</span></li><li><span class="x-chip x-chip--muted x-chip--plain">FLARE-VM</span></li><li><span class="x-chip x-chip--muted x-chip--plain">UTM</span></li><li><span class="x-chip x-chip--muted x-chip--plain">INetSim</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Python</span></li><li><span class="x-chip x-chip--muted x-chip--plain">crackmes</span></li></ul>
+  <p class="x-links"><a class="x-btn" href="https://github.com/manthole/reverse-lab"><span lang="fr">Le dépôt</span><span lang="en">Repository</span> ›</a> <a class="x-btn" href="https://manthole.github.io/tools/deobfuscator/"><span lang="fr">Désobfuscateur</span><span lang="en">Deobfuscator</span> ›</a> <a class="x-btn" href="https://manthole.github.io/tools/ioc/"><span lang="fr">Extracteur d'IOC</span><span lang="en">IOC extractor</span> ›</a></p>
+</section>
+
+<section class="x-panel k-teal" data-reveal>
+  <p class="x-kicker"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">en ligne</span><span lang="en">live</span></span> <span class="x-chip x-chip--muted x-chip--plain">GitHub Pages</span></p>
+  <h3 class="x-panel__title"><span lang="fr">Ce site</span><span lang="en">This website</span></h3>
+  <p class="x-lead"><span lang="fr">Des outils cyber dans le navigateur, une veille automatique, et un site durci puis audité.</span><span lang="en">In-browser cyber tools, an automated news watch, on a hardened and audited website.</span></p>
+  <h4 class="x-h"><span lang="fr">Ce qu'il contient</span><span lang="en">What's inside</span></h4>
   <div lang="fr">
     <ul>
       <li><strong>Sept outils</strong> regroupés par thème, qui tournent entièrement dans le navigateur : mots de passe (fuites vérifiées en k-anonymat), hash, encodeur, décodeur JWT, extracteur d'IOC, et un <strong>désobfuscateur</strong> qui épluche les scripts PowerShell et JavaScript malveillants couche par couche, sans jamais les exécuter.</li>
+      <li><strong>Veille Actus</strong> : zero-days et grosses attaques mis à jour toutes les 6 heures depuis des sources reconnues et le catalogue de la CISA, classés par nombre de sources ; chaque sujet a sa fiche avec le déroulé type de l'attaque relié à MITRE ATT&amp;CK.</li>
       <li><strong>Durcissement</strong> : politique de sécurité du contenu (CSP) stricte sans aucun script ni style intégré, <code>security.txt</code>, protection contre le clickjacking, chaîne de déploiement épinglée.</li>
       <li><strong>Pentest du site</strong> : XSS testées sur chaque champ (CSP désactivée pour trouver les failles latentes), un déni de service par expression régulière (ReDoS) trouvé et corrigé, fuites d'informations retirées jusque dans l'historique Git.</li>
     </ul>
@@ -186,15 +182,15 @@
   <div lang="en">
     <ul>
       <li><strong>Seven tools</strong> grouped by theme, running entirely in the browser: passwords (k-anonymity breach check), hash, encoder, JWT decoder, IOC extractor, and a <strong>deobfuscator</strong> that peels malicious PowerShell and JavaScript scripts layer by layer, without ever running them.</li>
+      <li><strong>News watch</strong>: zero-days and major attacks updated every 6 hours from recognised sources and the CISA catalogue, ranked by number of sources; each story has a sheet with the attack's typical sequence mapped to MITRE ATT&amp;CK.</li>
       <li><strong>Hardening</strong>: strict Content Security Policy with no inline script or style, <code>security.txt</code>, clickjacking protection, pinned deployment pipeline.</li>
       <li><strong>Site pentest</strong>: XSS tested on every field (CSP disabled to find latent flaws), a regex denial of service (ReDoS) found and fixed, information leaks removed down to the Git history.</li>
     </ul>
   </div>
-  <ul class="project__tags">
-    <li>JavaScript</li><li>Web Crypto</li><li>CSP</li><li>Pentest</li>
-  </ul>
-  <p class="project__links"><a href="https://manthole.github.io/tools/"><span lang="fr">Essayer les outils</span><span lang="en">Try the tools</span> →</a></p>
+  <ul class="x-chips"><li><span class="x-chip x-chip--muted x-chip--plain">JavaScript</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Web Crypto</span></li><li><span class="x-chip x-chip--muted x-chip--plain">CSP</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Pentest</span></li><li><span class="x-chip x-chip--muted x-chip--plain">Python</span></li><li><span class="x-chip x-chip--muted x-chip--plain">GitHub Actions</span></li><li><span class="x-chip x-chip--muted x-chip--plain">MITRE ATT&amp;CK</span></li></ul>
+  <p class="x-links"><a class="x-btn" href="https://manthole.github.io/tools/"><span lang="fr">Essayer les outils</span><span lang="en">Try the tools</span> ›</a> <a class="x-btn" href="https://manthole.github.io/news/"><span lang="fr">Voir les actus</span><span lang="en">See the news</span> ›</a></p>
 </section>
+
             </div>
         </article>
     </main>

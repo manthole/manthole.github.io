@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/password-generator/"><span lang="fr">Générateur de mots de passe</span><span lang="en">Password generator</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-violet"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Mots de passe</span><span lang="en">Passwords</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">100 % navigateur</span><span lang="en">100% in-browser</span></span></p>
 <p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
 <div class="tool">
   <span class="tool-label"><span lang="fr">mot de passe</span><span lang="en">password</span></span>
@@ -109,6 +111,7 @@
   </div>
   <pre class="tool-output" id="pg-list" hidden></pre>
 </div>
+<section class="tool-flow k-violet"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Tes règles</span><span lang="en">Your rules</span></h4><p><span lang="fr">Longueur et familles de caractères : minuscules, majuscules, chiffres, symboles.</span><span lang="en">Length and character sets: lowercase, uppercase, digits, symbols.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Aléa cryptographique</span><span lang="en">Cryptographic randomness</span></h4><p><span lang="fr">Chaque caractère vient de <code>crypto.getRandomValues</code>, le générateur sûr du navigateur, jamais de <code>Math.random</code>.</span><span lang="en">Each character comes from <code>crypto.getRandomValues</code>, the browser's secure generator, never <code>Math.random</code>.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Tirage sans biais</span><span lang="en">Unbiased draw</span></h4><p><span lang="fr">Les valeurs qui fausseraient la répartition sont rejetées et retirées : chaque caractère a exactement la même probabilité.</span><span lang="en">Values that would skew the distribution are rejected and redrawn: every character has exactly the same probability.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Rien ne sort</span><span lang="en">Nothing leaves</span></h4><p><span lang="fr">Le mot de passe n'existe que dans la page : ni envoyé, ni enregistré.</span><span lang="en">The password only exists in the page: never sent, never stored.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Comment ça marche ?</h3>
 <p>Chaque caractère est tiré avec <code>crypto.getRandomValues</code>, le générateur cryptographique du navigateur, en évitant le biais du modulo. Au moins un caractère de chaque famille cochée est garanti, puis l'ensemble est mélangé.</p>
@@ -120,7 +123,7 @@
 <p>Entropy tells you how hard the password is to guess: above 80 bits, brute force is out of reach. For most accounts, 16 mixed characters are plenty, as long as each site gets its own password, stored in a password manager.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-violet"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

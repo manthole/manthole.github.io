@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/deobfuscator/"><span lang="fr">Désobfuscateur de scripts</span><span lang="en">Script deobfuscator</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-orange"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Analyse SOC</span><span lang="en">SOC analysis</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">navigateur, sans exécution</span><span lang="en">in-browser, never executed</span></span></p>
 <p class="tool-privacy"><span lang="fr">Le script n'est <strong>jamais exécuté</strong> : l'outil ne fait que des transformations de texte, dans ton navigateur. Rien n'est envoyé.</span><span lang="en">The script is <strong>never executed</strong>: the tool only transforms text, in your browser. Nothing is sent.</span></p>
 <div class="tool">
   <label for="do-input"><span lang="fr">script ou ligne de commande suspecte</span><span lang="en">suspicious script or command line</span></label>
@@ -108,6 +110,7 @@
     <div id="do-iocs"></div>
   </div>
 </div>
+<section class="tool-flow k-orange"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Détection du langage</span><span lang="en">Language detection</span></h4><p><span lang="fr">PowerShell ou JavaScript, reconnu à partir du script collé.</span><span lang="en">PowerShell or JavaScript, recognised from the pasted script.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Couche par couche</span><span lang="en">Layer by layer</span></h4><p><span lang="fr">Des règles de transformation (Base64, codes de caractères, concaténations, <code>-f</code>, inversions…) tournent en boucle jusqu'à ce que plus rien ne change.</span><span lang="en">Transformation rules (Base64, character codes, concatenation, <code>-f</code>, reversal…) loop until nothing changes.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Jamais d'exécution</span><span lang="en">Never executed</span></h4><p><span lang="fr">Uniquement du texte transformé : aucun <code>eval</code>, et la CSP du site l'interdirait de toute façon.</span><span lang="en">Only text transformations: no <code>eval</code>, and the site's CSP would forbid it anyway.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Rapport</span><span lang="en">Report</span></h4><p><span lang="fr">Comportements reliés à MITRE ATT&amp;CK et IOC de toutes les couches.</span><span lang="en">Behaviours mapped to MITRE ATT&amp;CK and IOCs from every layer.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Comment ça marche ?</h3>
 <p>Un script malveillant est souvent empilé de couches : une ligne <code>powershell -enc</code> contient du Base64, qui contient un script compressé, qui contient lui-même du texte découpé en morceaux. L'outil applique des règles de transformation en boucle, en retirant une couche à chaque passage, jusqu'à ce que plus rien ne change. Chaque étape est affichée, pour comprendre le chemin.</p>
@@ -122,7 +125,7 @@
 <h3>Limits</h3>
 <p>This is not an emulator: obfuscation computed at run time (XOR, loops, <code>_0x4f2a[…]</code>-style arrays) is not resolved. To go further, use <a href="https://gchq.github.io/CyberChef/">CyberChef</a>, or tools that run the script in a controlled way, such as box-js, <strong>only inside an isolated virtual machine</strong>. The SOC rule stays the same: never run a suspicious script "just to see".</p>
 </div>
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-orange"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

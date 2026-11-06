@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -82,6 +83,7 @@
         <article>
             <h2 class="post-title"><a href="https://manthole.github.io/tools/jwt-decoder/"><span lang="fr">Décodeur JWT</span><span lang="en">JWT decoder</span></a></h2>
             <div class="post-content">
+<p class="x-kicker k-violet"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Authentification</span><span lang="en">Authentication</span></span> <span class="x-chip x-chip--muted x-chip--plain"><span lang="fr">100 % navigateur</span><span lang="en">100% in-browser</span></span></p>
 <p class="tool-privacy"><span lang="fr">Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.</span><span lang="en">Everything runs in your browser: nothing is sent or stored.</span></p>
 <div class="tool">
   <label for="jw-input"><span lang="fr">jeton (JWT)</span><span lang="en">token (JWT)</span></label>
@@ -96,6 +98,7 @@
   <pre class="tool-output" id="jw-payload"></pre>
   <div class="tool-msg" id="jw-warn"></div>
 </div>
+<section class="tool-flow k-violet"><h3 class="x-h"><span lang="fr">Sous le capot</span><span lang="en">Under the hood</span></h3><ol class="x-steps " data-reveal><li data-reveal><span class="x-step__node" aria-hidden="true">1</span><div class="x-step__body"><h4><span lang="fr">Découpage</span><span lang="en">Split</span></h4><p><span lang="fr">Un JWT, c'est trois parties séparées par des points : en-tête, contenu, signature.</span><span lang="en">A JWT is three dot-separated parts: header, payload, signature.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">2</span><div class="x-step__body"><h4><span lang="fr">Décodage Base64URL</span><span lang="en">Base64URL decoding</span></h4><p><span lang="fr">En-tête et contenu sont du JSON encodé, lisible sans aucune clé.</span><span lang="en">Header and payload are encoded JSON, readable without any key.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">3</span><div class="x-step__body"><h4><span lang="fr">Lecture des dates</span><span lang="en">Reading the dates</span></h4><p><span lang="fr"><code>iat</code>, <code>nbf</code> et <code>exp</code> deviennent des dates ; un jeton expiré ou pas encore valide est signalé.</span><span lang="en"><code>iat</code>, <code>nbf</code> and <code>exp</code> become dates; an expired or not-yet-valid token is flagged.</span></p></div></li><li data-reveal><span class="x-step__node" aria-hidden="true">4</span><div class="x-step__body"><h4><span lang="fr">Contrôles de risque</span><span lang="en">Risk checks</span></h4><p><span lang="fr"><code>alg: none</code>, clé distante (<code>jku</code>/<code>x5u</code>), <code>kid</code> suspect, donnée sensible en clair. La signature, elle, n'est pas vérifiée.</span><span lang="en"><code>alg: none</code>, remote key (<code>jku</code>/<code>x5u</code>), suspicious <code>kid</code>, sensitive data in clear. The signature itself is not verified.</span></p></div></li></ol></section>
 <div lang="fr">
 <h3>Pourquoi le décoder ici ?</h3>
 <p>Un JWT donne souvent accès à un compte ou à une API. Le coller dans un site qui l'envoie à un serveur revient à confier cet accès. Ici, le décodage se fait entièrement dans ton navigateur.</p>
@@ -105,7 +108,7 @@
 <p>A JWT often grants access to an account or an API. Pasting it into a site that sends it to a server means handing over that access. Here, decoding happens entirely in your browser.</p>
 </div>
 
-<p class="tool-back"><a href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
+<p class="tool-back k-violet"><a class="x-btn" href="https://manthole.github.io/tools/">← <span lang="fr">Tous les outils</span><span lang="en">All tools</span></a></p>
             </div>
         </article>
     </main>

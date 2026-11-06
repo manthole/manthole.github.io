@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="https://manthole.github.io/main.b51a6633b0aaee2f4750c30f46a01a86401020fd7ecf0a71b56d1365e4164bf4.css" integrity="sha256-tRpmM7Cq7i9HUMMPRqAahkAQIP1&#43;zwpxtW0TZeQWS/Q=">
 <link rel="stylesheet" href="/css/cyber.css">
 <script src="/js/lang.js"></script>
+<script src="/js/fx.js"></script>
 
 
 
@@ -117,20 +118,16 @@
 
             <div class="content">
                 
-    <div id="spotlight" class="error-404 animated fadeIn">
-        <p class="img-404">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cloud-drizzle"><line x1="8" y1="19" x2="8" y2="21"></line><line x1="8" y1="13" x2="8" y2="15"></line><line x1="16" y1="19" x2="16" y2="21"></line><line x1="16" y1="13" x2="16" y2="15"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="12" y1="15" x2="12" y2="17"></line><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path></svg>
-        </p>
-        <div class="banner-404">
-            <h1>404</h1>
-            <p><span lang="fr">Oups, page introuvable…</span><span lang="en">Oops, page not found…</span></p>
-            <p class="btn-404">
-                <a href="https://manthole.github.io/">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span lang="fr">Accueil</span><span lang="en">Home</span></a>
-                <a href="https://manthole.github.io/posts">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Archives</a>
-            </p>
+    <div id="spotlight" class="error-404 x404">
+        <div class="x-term k-red x404__term" data-reveal>
+            <div class="x-term__bar"><span>$ cd <span data-path>/…</span></span><a class="home-now__all" href="https://manthole.github.io/">cd ~ ›</a></div>
+            <p class="x404__code" aria-hidden="true">404</p>
+            <p class="x-term__out">bash: cd: No such file or directory</p>
+            <p class="x-term__body"><span lang="fr">Cette page n'existe pas, ou plus. Reprends par l'une de ces portes :</span><span lang="en">This page doesn't exist, or no longer does. Pick one of these doors:</span><span class="x-caret" aria-hidden="true"></span></p>
         </div>
+        <ul class="x-cards site-cards x404__cards">
+            <li data-reveal><a class="x-card k-teal" href="https://manthole.github.io/tools/"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Outils</span><span lang="en">Tools</span></span><span class="x-card__title"><span lang="fr">7 outils dans ton navigateur</span><span lang="en">7 in-browser tools</span></span><span class="x-card__desc"><span lang="fr">Mots de passe, hash, JWT, IOC, désobfuscateur : rien ne quitte ta machine.</span><span lang="en">Passwords, hashes, JWT, IOCs, deobfuscator: nothing leaves your machine.</span></span><span class="x-card__foot"><span></span><span class="x-cta"><span lang="fr">ouvrir ›</span><span lang="en">open ›</span></span></span></a></li><li data-reveal><a class="x-card k-red" href="https://manthole.github.io/news/"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Actus</span><span lang="en">News</span></span><span class="x-card__title"><span lang="fr">La veille cyber</span><span lang="en">Cyber news watch</span></span><span class="x-card__desc"><span lang="fr">Zero-days et grosses attaques, mis à jour toutes les 6 heures, avec une fiche par sujet.</span><span lang="en">Zero-days and major attacks, updated every 6 hours, with a sheet for each story.</span></span><span class="x-card__foot"><span></span><span class="x-cta"><span lang="fr">ouvrir ›</span><span lang="en">open ›</span></span></span></a></li><li data-reveal><a class="x-card k-violet" href="https://manthole.github.io/projects/"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Projets</span><span lang="en">Projects</span></span><span class="x-card__title"><span lang="fr">Projets</span><span lang="en">Projects</span></span><span class="x-card__desc"><span lang="fr">minivpn, un VPN écrit de zéro en Go, et reverse-lab, mon labo de rétro-ingénierie.</span><span lang="en">minivpn, a VPN written from scratch in Go, and reverse-lab, my reverse engineering lab.</span></span><span class="x-card__foot"><span></span><span class="x-cta"><span lang="fr">ouvrir ›</span><span lang="en">open ›</span></span></span></a></li><li data-reveal><a class="x-card k-gold" href="https://manthole.github.io/posts/"><span class="x-chip "><span class="x-dot" aria-hidden="true"></span><span lang="fr">Articles</span><span lang="en">Posts</span></span><span class="x-card__title"><span lang="fr">Articles</span><span lang="en">Posts</span></span><span class="x-card__desc"><span lang="fr">Write-ups et exercices, comme mes exercices de cryptographie.</span><span lang="en">Write-ups and exercises, such as my cryptography exercises.</span></span><span class="x-card__foot"><span></span><span class="x-cta"><span lang="fr">ouvrir ›</span><span lang="en">open ›</span></span></span></a></li>
+        </ul>
     </div>
 
             </div>
