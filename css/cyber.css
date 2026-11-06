@@ -1815,3 +1815,54 @@
 @media (max-width: 360px) {
   :root .logo__text { font-size: 0.9em; }
 }
+
+/* ---------- Page Red Team ---------- */
+:root .rt-warning {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--c-red) 45%, transparent);
+  border-left: 3px solid var(--c-red);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--c-red) 8%, transparent);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+:root .x-step-note { margin: -6px 0 18px; font-size: 0.82rem; color: var(--muted); }
+:root .x-step__body .x-chips { margin-top: 8px; }
+:root .x-step__meta a { color: var(--k); border-bottom: 1px solid color-mix(in srgb, var(--k) 40%, transparent); text-decoration: none; }
+:root .rt-res .x-row__title { flex: 0 0 auto; font-family: var(--mono); font-weight: 700; }
+:root .rt-res__desc { flex: 1 1 260px; font-size: 0.88rem; color: var(--muted); }
+
+/* ---------- En-tête : 7 onglets ----------
+   Grand écran : en-tête plus large que le contenu pour que tout tienne sur une ligne.
+   Jusqu'à 1039 px : menu ☰ déroulant, comme sur téléphone. Le script du thème lit --phoneWidth
+   sur <body> pour savoir quand masquer le menu et afficher le bouton ☰. */
+:root .header__inner { width: 1000px; }
+:root body { --phoneWidth: (max-width: 1039px); }
+@media (min-width: 685px) and (max-width: 1039px) {
+  :root .header__right { flex-direction: row-reverse; }
+  :root .menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 16px;
+    z-index: 9999;
+    min-width: 180px;
+    margin: 0;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  }
+  :root .menu__inner { flex-direction: column; align-items: stretch; padding: 0; font-size: 1rem; }
+  :root .menu__inner li { margin: 0; padding: 0; }
+  :root .menu a { display: block; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; }
+  :root .menu a::after { display: none; }
+  :root .menu a:hover { background: var(--accent-dim); }
+  :root .menu-trigger { display: block; }
+  :root .lang-menu { order: 1; margin-left: 0; }
+  :root .mode-toggle { order: 2; margin: 0 8px 0 0; }
+  :root .lang-switch__globe { display: inline; }
+  :root .logo__text { font-size: 1em; }
+  :root[data-theme="light"] .menu { box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14); }
+}
