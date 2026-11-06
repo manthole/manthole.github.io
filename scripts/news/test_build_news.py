@@ -301,5 +301,39 @@ class Home(unittest.TestCase):
         self.assertIn("<!-- news:home -->", (ROOT / "index.html").read_text(encoding="utf-8"), "balises présentes sur l'accueil")
 
 
+class Langues(unittest.TestCase):
+    def test_catalogue_couvre_les_fiches(self):
+        cat = bn.catalog()
+        for kind in bn.fx.KINDS:
+            pb = bn.fx.PLAYBOOKS[kind]
+            textes = [pb["def"][0]] + [p[0] for p in pb["phases"]] + [p[2] for p in pb["phases"]] + [x[0] for x in pb["protect"]]
+            for fr in textes:
+                self.assertIn(fr, cat, f"{kind} : traduction manquante pour « {fr[:50]} »")
+                self.assertTrue(all(cat[fr].get(x) for x in bn.XL), fr)
+            for x in bn.XL:
+                self.assertTrue(bn.fx.kind_text(kind, x, 0) and bn.fx.kind_text(kind, x, 1))
+
+    def test_cinq_langues_partout(self):
+        import re
+        items = [bn.normalise(item("Qilin ransomware hits hospital", "zataz", 4)),
+                 bn.normalise(item("Qilin ransomware gang claims hospital attack", "bleeping", 4))]
+        fiches, top = {}, []
+        body = bn.build_body(items, None, [], {}, NOW, fiches, top)
+        html = body + bn.render_fiches(fiches, None, items) + bn.render_home(top)
+        counts = {x: len(re.findall(f'lang="{x}"', html)) for x in bn.LANGS}
+        self.assertEqual(len(set(counts.values())), 1, counts)
+        self.assertIn("Am 4. November 2026 berichten 2 Medien", html)
+        self.assertIn("El 4 de noviembre de 2026, 2 medios", html)
+        self.assertIn("Em 4 de novembro de 2026, 2 meios de comunicação", html)
+        self.assertIn('<span lang="de">2 Quellen</span>', html)
+        self.assertIn("Typischer Ablauf: Erstzugriff → ", html)
+
+    def test_traduction_echappee(self):
+        out = bn.L(bn.e("Choix du maillon faible"), "Weak link")
+        self.assertIn('<span lang="es">Elección del eslabón débil</span>', out)
+        self.assertIn('<span lang="de">Präparierter Code</span>', bn.L(bn.e("Code piégé"), "Poisoned code"))
+        self.assertIn('<span lang="pt">inconnu</span>', bn.L("inconnu", "inconnu"), "repli sur l'anglais")
+
+
 if __name__ == "__main__":
     unittest.main()

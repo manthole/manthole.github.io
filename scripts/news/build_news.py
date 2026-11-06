@@ -392,9 +392,56 @@ def cluster(items, max_gap_days=7):
     return out
 
 
-# --------------------------------------------------------------------------- page
+# --------------------------------------------------------------------------- langues
+# Chaque texte est produit en 5 langues : un <span lang> par langue, masqués par css/cyber.css.
+# Les traductions es/pt/de viennent de i18n.json (clé = texte français) ; à défaut, l'anglais.
+LANGS = ("fr", "en", "es", "pt", "de")
+XL = ("es", "pt", "de")
+_CATALOG = None
+
+
+def catalog():
+    global _CATALOG
+    if _CATALOG is None:
+        try:
+            _CATALOG = json.loads((Path(__file__).resolve().parent / "i18n.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _CATALOG = {}
+    return _CATALOG
+
+
+def L5(fr, en, es, pt, de):
+    return (f'<span lang="fr">{fr}</span><span lang="en">{en}</span><span lang="es">{es}</span>'
+            f'<span lang="pt">{pt}</span><span lang="de">{de}</span>')
+
+
+def LD(d):
+    """Textes déjà prêts par langue : {"fr": …, "en": …, "es": …, "pt": …, "de": …}."""
+    return L5(*(d[x] for x in LANGS))
+
+
 def L(fr, en):
-    return f'<span lang="fr">{fr}</span><span lang="en">{en}</span>'
+    t, conv = catalog().get(fr), (lambda x: x)
+    if t is None:
+        raw = html.unescape(fr)
+        if raw != fr and raw in catalog():
+            t, conv = catalog()[raw], e
+    return L5(fr, en, *((conv(t[x]) if t and t.get(x) else en) for x in XL))
+
+
+def tr(fr, en):
+    """Texte brut (non échappé) dans chaque langue."""
+    t = catalog().get(fr) or {}
+    return {"fr": fr, "en": en, **{x: t.get(x) or en for x in XL}}
+
+
+def n_sources(n):
+    s = "s" if n > 1 else ""
+    return LD({"fr": f"{n} source{s}", "en": f"{n} source{s}", "es": f"{n} fuente{s}", "pt": f"{n} fonte{s}",
+               "de": f"{n} Quelle{'n' if n > 1 else ''}"})
+
+
+# --------------------------------------------------------------------------- page
 
 
 def e(s):
@@ -413,28 +460,39 @@ def link(url, text):
     return f'<a href="{e(url)}" rel="noopener nofollow" target="_blank">{e(text)}</a>'
 
 
-MONTHS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
-MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+MONTHS = {
+    "fr": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+    "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+    "pt": ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"],
+    "de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+}
 
 
 def long_day(iso):
+    """Date en toutes lettres dans chaque langue."""
     d = parse_date(iso)
     if not d:
-        return "", ""
+        return {x: "" for x in LANGS}
     d = d.astimezone(PARIS)
-    return f"{d.day} {MONTHS_FR[d.month - 1]} {d.year}", f"{MONTHS_EN[d.month - 1]} {d.day}, {d.year}"
+    m = {x: MONTHS[x][d.month - 1] for x in LANGS}
+    return {"fr": f"{d.day} {m['fr']} {d.year}", "en": f"{m['en']} {d.day}, {d.year}",
+            "es": f"{d.day} de {m['es']} de {d.year}", "pt": f"{d.day} de {m['pt']} de {d.year}",
+            "de": f"{d.day}. {m['de']} {d.year}"}
 
 
 def kind_label(kind):
-    fr, en = fx.PLAYBOOKS[kind]["label"]
-    return L(e(fr), e(en))
+    return LD({x: e(fx.kind_text(kind, x, 0)) for x in LANGS})
 
 
-def join_list(words, last_fr="et", last_en="and"):
+AND = {"fr": "et", "en": "and", "es": "y", "pt": "e", "de": "und"}
+
+
+def join_list(words, lang):
     words = list(words)
     if len(words) <= 1:
-        return "".join(words), "".join(words)
-    return (", ".join(words[:-1]) + f" {last_fr} " + words[-1], ", ".join(words[:-1]) + f" {last_en} " + words[-1])
+        return "".join(words)
+    return ", ".join(words[:-1]) + f" {AND[lang]} " + words[-1]
 
 
 def render_clusters(clusters, limit, empty_fr, empty_en, fiches=None):
@@ -450,7 +508,7 @@ def render_clusters(clusters, limit, empty_fr, empty_en, fiches=None):
             fiches[fid] = c
         badge = '<span class="news-badge news-badge--zero">zero-day</span> ' if c["zero_day"] else ""
         srcs = " · ".join(link(s["url"], SOURCE_NAMES[s["source"]]) for s in c["sources"])
-        count = L(f"{n} source{'s' if n > 1 else ''}", f"{n} source{'s' if n > 1 else ''}")
+        count = n_sources(n)
         # pas d'attribut lang sur les titres : la feuille de style masque les éléments [lang]
         rows.append(f'<li class="news-row news-row--{kind}">'
                     f'<a class="news-open" href="#{fid}" aria-haspopup="dialog">'
@@ -500,13 +558,22 @@ def render_kev(kev, now, fiches=None):
                     f'<span class="news-title">{e(cve)} — {e(v.get("vendorProject", ""))} {e(v.get("product", ""))}</span>{badge}'
                     f'<span class="news-cta" aria-hidden="true">{L("fiche", "details")} ›</span></a>'
                     f'<span class="news-meta">{e(v.get("vulnerabilityName", ""))}</span></li>')
-    stats = L(f"<strong>{len(recent)}</strong> failles ajoutées ces 30 derniers jours (dont {ransom} utilisées par des rançongiciels), <strong>{this_year}</strong> depuis le 1er janvier.",
-              f"<strong>{len(recent)}</strong> flaws added in the last 30 days ({ransom} used by ransomware), <strong>{this_year}</strong> since January 1.")
+    r, y = len(recent), this_year
+    stats = LD({
+        "fr": f"<strong>{r}</strong> failles ajoutées ces 30 derniers jours (dont {ransom} utilisées par des rançongiciels), <strong>{y}</strong> depuis le 1er janvier.",
+        "en": f"<strong>{r}</strong> flaws added in the last 30 days ({ransom} used by ransomware), <strong>{y}</strong> since January 1.",
+        "es": f"<strong>{r}</strong> fallos añadidos en los últimos 30 días ({ransom} usados por ransomware), <strong>{y}</strong> desde el 1 de enero.",
+        "pt": f"<strong>{r}</strong> falhas adicionadas nos últimos 30 dias ({ransom} usadas por ransomware), <strong>{y}</strong> desde 1 de janeiro.",
+        "de": f"<strong>{r}</strong> Schwachstellen in den letzten 30 Tagen hinzugefügt (davon {ransom} von Ransomware genutzt), <strong>{y}</strong> seit dem 1. Januar."})
     body = '<ol class="news-list">' + "".join(rows) + "</ol>" if rows else f'<p class="news-empty">{L("Aucune faille ajoutée ces 30 derniers jours.", "No flaw added in the last 30 days.")}</p>'
     more = ""
     if len(recent) > 12:
         more = (f'<p class="news-more">{link("https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "→")} '
-                f'{L(f"Les 12 plus récentes sur {len(recent)} : voir le catalogue complet de la CISA.", f"The 12 most recent of {len(recent)}: see the full CISA catalogue.")}</p>')
+                + LD({"fr": f"Les 12 plus récentes sur {r} : voir le catalogue complet de la CISA.",
+                      "en": f"The 12 most recent of {r}: see the full CISA catalogue.",
+                      "es": f"Los 12 más recientes de {r}: ver el catálogo completo de la CISA.",
+                      "pt": f"As 12 mais recentes de {r}: ver o catálogo completo da CISA.",
+                      "de": f"Die 12 neuesten von {r}: zum vollständigen CISA-Katalog."}) + "</p>")
     return f'<p class="news-stats">{stats}</p>{body}{more}'
 
 
@@ -529,11 +596,14 @@ def render_protect(kind):
     return '<ul class="fiche__protect">' + "".join(f"<li>{L(e(fr), e(en))}</li>" for fr, en in fx.PLAYBOOKS[kind]["protect"]) + "</ul>"
 
 
+SCHEMA = {"fr": "Schéma classique : ", "en": "Typical pattern: ", "es": "Esquema clásico: ", "pt": "Esquema clássico: ",
+          "de": "Typischer Ablauf: "}
+
+
 def schema_sentence(kind):
-    phases = fx.PLAYBOOKS[kind]["phases"]
-    fr = " → ".join(p[0].lower() for p in phases)
-    en = " → ".join(p[1].lower() for p in phases)
-    return f"Schéma classique : {fr}.", f"Typical pattern: {en}."
+    """« Schéma classique : a → b → c. » dans chaque langue (noms allemands gardés avec leur majuscule)."""
+    titles = [tr(p[0], p[1]) for p in fx.PLAYBOOKS[kind]["phases"]]
+    return {x: SCHEMA[x] + " → ".join(e(t[x] if x == "de" else t[x].lower()) for t in titles) + "." for x in LANGS}
 
 
 def fiche_shell(fid, kind, kicker, title, body):
@@ -567,8 +637,10 @@ def kev_line(v):
     cve = v["cveID"]
     known = v.get("knownRansomwareCampaignUse") == "Known"
     extra = L(" — utilisée par des rançongiciels", " — used by ransomware") if known else ""
+    d = e(kev_date(v))
     return (f'{link("https://nvd.nist.gov/vuln/detail/" + cve, cve)} '
-            f'{L(f"(catalogue CISA depuis le {e(kev_date(v))})", f"(CISA catalogue since {e(kev_date(v))})")}{extra}')
+            + LD({"fr": f"(catalogue CISA depuis le {d})", "en": f"(CISA catalogue since {d})", "es": f"(catálogo CISA desde el {d})",
+                  "pt": f"(catálogo CISA desde {d})", "de": f"(im CISA-Katalog seit {d})"}) + extra)
 
 
 # mots fréquents en tête de titre qui ne désignent pas une entreprise ou un produit
@@ -630,32 +702,49 @@ def render_fiche(fid, c, kevs):
                           f'{link(a["url"], a["name"])} <span class="fiche__id">{e(a["id"])}</span>'
                           f'<span class="fiche__quote">{e(a["desc"])}</span>'))
 
-    # résumé à réexpliquer
-    dfr, den = long_day(c["first"])
-    pfr, pen = fx.PLAYBOOKS[kind]["phrase"]
-    nfr, nen = join_list([e(x) for x in src_names])
-    who_fr = f"{n} média{'s' if n > 1 else ''} ({nfr}) rapporte{'nt' if n > 1 else ''}"
-    who_en = f"{n} outlet{'s' if n > 1 else ''} ({nen}) report{'' if n > 1 else 's'}"
-    ent_fr, ent_en = join_list([e(x) for x in names[:3]])
-    fr = f"Le {dfr}, {who_fr} {pfr}" + (f" impliquant {ent_fr}" if names else "") + "."
-    en = f"On {den}, {who_en} {pen}" + (f" involving {ent_en}" if names else "") + "."
+    # résumé à réexpliquer, rédigé dans chaque langue
+    dates = long_day(c["first"])
     kev_hit = [kevs[x] for x in c["cves"] if x in kevs]
-    if kev_hit:
-        v = kev_hit[0]
-        vp = e(f'{v.get("vendorProject", "")} {v.get("product", "")}'.strip())
-        known = v.get("knownRansomwareCampaignUse") == "Known"
-        fr += f" La faille {e(v['cveID'])} ({vp}) est confirmée exploitée par la CISA" + (", y compris par des rançongiciels." if known else ".")
-        en += f" Flaw {e(v['cveID'])} ({vp}) is confirmed exploited by CISA" + (", including by ransomware." if known else ".")
-    elif c["zero_day"] and kind != "exploit":
-        fr += " Une faille zero-day est en jeu."
-        en += " A zero-day flaw is involved."
-    if actors:
-        a = actors[0][1]
-        fr += f" Les articles citent {e(a['name'])}, référencé par MITRE ATT&amp;CK ({e(a['id'])})."
-        en += f" The articles mention {e(a['name'])}, tracked by MITRE ATT&amp;CK ({e(a['id'])})."
-    sfr, sen = schema_sentence(kind)
+    texts = {}
+    for x in LANGS:
+        srcs = join_list([e(y) for y in src_names], x)
+        ents = join_list([e(y) for y in names[:3]], x)
+        phrase = e(fx.kind_text(kind, x, 1))
+        pl = n > 1
+        t = {
+            "fr": f"Le {dates['fr']}, {n} média{'s' if pl else ''} ({srcs}) rapporte{'nt' if pl else ''} {phrase}" + (f" impliquant {ents}" if names else ""),
+            "en": f"On {dates['en']}, {n} outlet{'s' if pl else ''} ({srcs}) report{'' if pl else 's'} {phrase}" + (f" involving {ents}" if names else ""),
+            "es": f"El {dates['es']}, {n} medio{'s' if pl else ''} ({srcs}) informa{'n' if pl else ''} de {phrase}" + (f" que implica a {ents}" if names else ""),
+            "pt": f"Em {dates['pt']}, {n} {'meios' if pl else 'meio'} de comunicação ({srcs}) relata{'m' if pl else ''} {phrase}" + (f" envolvendo {ents}" if names else ""),
+            "de": f"Am {dates['de']} berichte{'n' if pl else 't'} {n} {'Medien' if pl else 'Medium'} ({srcs}) über {phrase}" + (f" mit Bezug zu {ents}" if names else ""),
+        }[x] + "."
+        if kev_hit:
+            v = kev_hit[0]
+            vp = e(f'{v.get("vendorProject", "")} {v.get("product", "")}'.strip())
+            cv = e(v["cveID"])
+            known = v.get("knownRansomwareCampaignUse") == "Known"
+            t += {
+                "fr": f" La faille {cv} ({vp}) est confirmée exploitée par la CISA" + (", y compris par des rançongiciels." if known else "."),
+                "en": f" Flaw {cv} ({vp}) is confirmed exploited by CISA" + (", including by ransomware." if known else "."),
+                "es": f" La CISA confirma que el fallo {cv} ({vp}) se está explotando" + (", también por ransomware." if known else "."),
+                "pt": f" A CISA confirma que a falha {cv} ({vp}) está a ser explorada" + (", incluindo por ransomware." if known else "."),
+                "de": f" Laut CISA wird die Schwachstelle {cv} ({vp}) nachweislich ausgenutzt" + (", auch von Ransomware." if known else "."),
+            }[x]
+        elif c["zero_day"] and kind != "exploit":
+            t += {"fr": " Une faille zero-day est en jeu.", "en": " A zero-day flaw is involved.",
+                  "es": " Hay un fallo zero-day en juego.", "pt": " Está em causa uma falha zero-day.",
+                  "de": " Eine Zero-Day-Lücke ist im Spiel."}[x]
+        if actors:
+            a = actors[0][1]
+            an, ai = e(a["name"]), e(a["id"])
+            t += {"fr": f" Les articles citent {an}, référencé par MITRE ATT&amp;CK ({ai}).",
+                  "en": f" The articles mention {an}, tracked by MITRE ATT&amp;CK ({ai}).",
+                  "es": f" Los artículos citan a {an}, catalogado por MITRE ATT&amp;CK ({ai}).",
+                  "pt": f" Os artigos citam {an}, referenciado pelo MITRE ATT&amp;CK ({ai}).",
+                  "de": f" Die Artikel nennen {an}, erfasst von MITRE ATT&amp;CK ({ai})."}[x]
+        texts[x] = t + " " + schema_sentence(kind)[x]
     pitch = (f'<div class="fiche__term"><div class="fiche__termbar"><span class="fiche__prompt" aria-hidden="true">$ explain --30s</span><button class="fiche__copy" type="button">{L("copier", "copy")}</button></div>'
-             f'<p class="fiche__pitch">{L(fr + " " + sfr, en + " " + sen)}<span class="fiche__caret" aria-hidden="true"></span></p></div>')
+             f'<p class="fiche__pitch">{LD(texts)}<span class="fiche__caret" aria-hidden="true"></span></p></div>')
 
     articles = "".join(
         f'<li><span class="news-date">{day(m["date"])}</span> {link(m["url"], m["title"])} '
@@ -668,7 +757,7 @@ def render_fiche(fid, c, kevs):
             + block("Se protéger", "How to defend", render_protect(kind))
             + block("Lire les articles", "Read the articles", f'<ul class="fiche__articles">{articles}</ul>'))
     zero = ' <span class="news-badge news-badge--zero">zero-day</span>' if c["zero_day"] else ""
-    kicker = f'<span class="fiche__meta">{day(c["first"])} · {L(f"{n} source" + ("s" if n > 1 else ""), f"{n} source" + ("s" if n > 1 else ""))}</span>{zero}'
+    kicker = f'<span class="fiche__meta">{day(c["first"])} · {n_sources(n)}</span>{zero}'
     return fiche_shell(fid, kind, kicker, e(c["lead"]["title"]), body)
 
 
@@ -700,14 +789,23 @@ def render_kev_fiche(fid, v, archive):
     related = [x for x in archive if cve in (x.get("cves") or [])][:8]
     articles = "".join(f'<li><span class="news-date">{day(m["date"])}</span> {link(m["url"], m["title"])} '
                        f'<span class="fiche__src">{e(SOURCE_NAMES[m["source"]])}</span></li>' for m in related)
-    dfr, den = long_day(str(v.get("dateAdded", "")) + "T12:00:00+00:00")
-    fr = (f"Le {dfr}, la CISA a ajouté {e(cve)}, une faille de {e(vp)} ({e(v.get('vulnerabilityName', ''))}), à son catalogue des failles "
-          f"exploitées : des attaques réelles sont confirmées" + (", y compris par des rançongiciels." if known else ".") + " Il faut corriger en priorité.")
-    en = (f"On {den}, CISA added {e(cve)}, a flaw in {e(vp)} ({e(v.get('vulnerabilityName', ''))}), to its catalogue of exploited "
-          f"vulnerabilities: real-world attacks are confirmed" + (", including by ransomware." if known else ".") + " It must be patched first.")
-    sfr, sen = schema_sentence("exploit")
+    dates = long_day(str(v.get("dateAdded", "")) + "T12:00:00+00:00")
+    c_, p_, n_ = e(cve), e(vp), e(v.get("vulnerabilityName", ""))
+    texts = {
+        "fr": f"Le {dates['fr']}, la CISA a ajouté {c_}, une faille de {p_} ({n_}), à son catalogue des failles exploitées : des attaques réelles sont confirmées"
+              + (", y compris par des rançongiciels." if known else ".") + " Il faut corriger en priorité.",
+        "en": f"On {dates['en']}, CISA added {c_}, a flaw in {p_} ({n_}), to its catalogue of exploited vulnerabilities: real-world attacks are confirmed"
+              + (", including by ransomware." if known else ".") + " It must be patched first.",
+        "es": f"El {dates['es']}, la CISA añadió {c_}, un fallo de {p_} ({n_}), a su catálogo de fallos explotados: hay ataques reales confirmados"
+              + (", también por ransomware." if known else ".") + " Hay que corregirlo con prioridad.",
+        "pt": f"Em {dates['pt']}, a CISA adicionou {c_}, uma falha de {p_} ({n_}), ao seu catálogo de falhas exploradas: há ataques reais confirmados"
+              + (", incluindo por ransomware." if known else ".") + " É preciso corrigi-la com prioridade.",
+        "de": f"Am {dates['de']} hat die CISA {c_}, eine Schwachstelle in {p_} ({n_}), in ihren Katalog ausgenutzter Schwachstellen aufgenommen: Echte Angriffe sind bestätigt"
+              + (", auch durch Ransomware." if known else ".") + " Sie muss vorrangig gepatcht werden.",
+    }
+    texts = {x: texts[x] + " " + schema_sentence("exploit")[x] for x in LANGS}
     pitch = (f'<div class="fiche__term"><div class="fiche__termbar"><span class="fiche__prompt" aria-hidden="true">$ explain --30s</span><button class="fiche__copy" type="button">{L("copier", "copy")}</button></div>'
-             f'<p class="fiche__pitch">{L(fr + " " + sfr, en + " " + sen)}<span class="fiche__caret" aria-hidden="true"></span></p></div>')
+             f'<p class="fiche__pitch">{LD(texts)}<span class="fiche__caret" aria-hidden="true"></span></p></div>')
     body = (block("Les faits", "The facts", f'<dl class="fiche__facts">{"".join(facts)}</dl>{official}')
             + block("Comment s'organise ce type d'attaque", "How this type of attack unfolds",
                     f'<p class="fiche__note">{L("Schéma type de l’exploitation d’une faille, avec les techniques MITRE ATT&amp;CK correspondantes.", "Typical pattern of flaw exploitation, with the matching MITRE ATT&amp;CK techniques.")}</p>'
@@ -728,7 +826,7 @@ def render_home(clusters):
         kind = c.get("kinds", ["intrusion"])[0]
         fid = "f-" + re.sub(r"[^0-9a-f]", "", lead["id"])[:16]
         n = len(c["sources"])
-        count = L(f"{n} source{'s' if n > 1 else ''}", f"{n} source{'s' if n > 1 else ''}")
+        count = n_sources(n)
         rows.append(f'<li><a class="home-now__item news-row--{kind}" href="{SITE}/news/#{fid}">'
                     f'<span class="news-kind">{kind_label(kind)}</span> <span class="home-now__title">{e(lead["title"])}</span> '
                     f'<span class="home-now__n">{count}</span></a></li>')
@@ -801,8 +899,12 @@ def build_body(archive, kev, selection, status, now, fiches=None, top=None):
         f'<li>{link(s["home"], s["name"])} — {"✓" if status.get(s["id"]) == "ok" else L("indisponible lors de la dernière mise à jour", "unavailable at last update")}</li>'
         for s in SOURCES if s["id"] != "certfr-cti")
     src_list += f'<li>{link("https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "CISA — Known Exploited Vulnerabilities")} — {"✓" if status.get("kev") == "ok" else L("indisponible", "unavailable")}</li>'
-    history = (L(f"Historique depuis le {day(oldest)} : le classement de l'année s'enrichit au fil des semaines.",
-                 f"History since {day(oldest)}: the yearly ranking grows week after week.") if oldest else "")
+    d0 = day(oldest) if oldest else ""
+    history = (LD({"fr": f"Historique depuis le {d0} : le classement de l'année s'enrichit au fil des semaines.",
+                   "en": f"History since {d0}: the yearly ranking grows week after week.",
+                   "es": f"Historial desde el {d0}: la clasificación del año se enriquece semana tras semana.",
+                   "pt": f"Histórico desde {d0}: a classificação do ano enriquece-se semana após semana.",
+                   "de": f"Verlauf seit dem {d0}: Die Jahresrangliste wächst Woche für Woche."}) if oldest else "")
 
     return f"""<p class="tools-intro">{L(
         "La veille cyber du moment, mise à jour automatiquement toutes les 6 heures à partir de sources reconnues. Clique sur un sujet pour ouvrir sa fiche : type d'attaque, déroulé phase par phase, résumé à réexpliquer et liens vers les articles.",

@@ -541,3 +541,43 @@ def actor_kind_bonus(actor_ids):
         elif a["kind"] == "group" and STATE_ACTOR.search(a["desc"]):
             bonus["espionage"] = 3
     return bonus
+
+
+# Libellés et tournures en espagnol, portugais, allemand. La tournure (« phrase ») s'insère dans le
+# résumé : « informan de … » (es), « relatam … » (pt), « berichten über … » (de, donc à l'accusatif).
+KIND_I18N = {
+    "ransomware": {"es": ("Ransomware", "un ataque de ransomware"), "pt": ("Ransomware", "um ataque de ransomware"),
+                   "de": ("Ransomware", "einen Ransomware-Angriff")},
+    "supply_chain": {"es": ("Cadena de suministro", "un ataque a la cadena de suministro"),
+                     "pt": ("Cadeia de abastecimento", "um ataque à cadeia de abastecimento"),
+                     "de": ("Lieferkette", "einen Angriff auf die Lieferkette")},
+    "ot": {"es": ("Sistemas industriales", "un ataque contra sistemas industriales"),
+           "pt": ("Sistemas industriais", "um ataque contra sistemas industriais"),
+           "de": ("Industriesysteme", "einen Angriff auf Industriesysteme")},
+    "crypto": {"es": ("Robo financiero", "un robo financiero"), "pt": ("Roubo financeiro", "um roubo financeiro"),
+               "de": ("Finanzdiebstahl", "einen Finanzdiebstahl")},
+    "espionage": {"es": ("Espionaje (APT)", "una operación de espionaje"), "pt": ("Espionagem (APT)", "uma operação de espionagem"),
+                  "de": ("Spionage (APT)", "eine Spionageoperation")},
+    "ddos": {"es": ("Denegación de servicio", "un ataque de denegación de servicio (DDoS)"),
+             "pt": ("Negação de serviço", "um ataque de negação de serviço (DDoS)"),
+             "de": ("Denial of Service", "einen Denial-of-Service-Angriff (DDoS)")},
+    "phishing": {"es": ("Phishing", "una campaña de phishing"), "pt": ("Phishing", "uma campanha de phishing"),
+                 "de": ("Phishing", "eine Phishing-Kampagne")},
+    "breach": {"es": ("Filtración de datos", "una filtración de datos"), "pt": ("Fuga de dados", "uma fuga de dados"),
+               "de": ("Datenleck", "ein Datenleck")},
+    "malware": {"es": ("Malware", "una campaña de malware"), "pt": ("Malware", "uma campanha de malware"),
+                "de": ("Malware", "eine Malware-Kampagne")},
+    "exploit": {"es": ("Fallo explotado", "la explotación activa de un fallo"), "pt": ("Falha explorada", "a exploração ativa de uma falha"),
+                "de": ("Ausgenutzte Schwachstelle", "die aktive Ausnutzung einer Schwachstelle")},
+    "intrusion": {"es": ("Intrusión", "una intrusión informática"), "pt": ("Intrusão", "uma intrusão informática"),
+                  "de": ("Einbruch", "einen Cyber-Einbruch")},
+}
+
+
+def kind_text(kind, lang, what):
+    """Libellé (what=0) ou tournure (what=1) d'un type d'attaque dans une langue."""
+    if lang == "fr":
+        return PLAYBOOKS[kind]["label" if what == 0 else "phrase"][0]
+    if lang == "en":
+        return PLAYBOOKS[kind]["label" if what == 0 else "phrase"][1]
+    return KIND_I18N[kind][lang][what]

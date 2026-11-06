@@ -1,0 +1,1972 @@
+{
+" — utilisée par des rançongiciels": {
+"de": " — von Ransomware genutzt",
+"es": " — usado por ransomware",
+"pt": " — usada por ransomware"
+},
+"* Temps moyen pour une attaque hors ligne à 10 milliards d'essais par seconde (hash rapide, GPU). C'est une estimation simplifiée, pas une garantie.": {
+"de": "* Durchschnittliche Zeit für einen Offline-Angriff mit 10 Milliarden Versuchen pro Sekunde (schneller Hash, GPU). Eine vereinfachte Schätzung, keine Garantie.",
+"es": "* Tiempo medio para un ataque sin conexión a 10 000 millones de intentos por segundo (hash rápido, GPU). Es una estimación simplificada, no una garantía.",
+"pt": "* Tempo médio para um ataque offline a 10 mil milhões de tentativas por segundo (hash rápido, GPU). É uma estimativa simplificada, não uma garantia."
+},
+"100 % navigateur": {
+"de": "100 % im Browser",
+"es": "100 % navegador",
+"pt": "100 % no navegador"
+},
+"100 % navigateur, sans exécution": {
+"de": "100 % im Browser, ohne Ausführung",
+"es": "100 % navegador, sin ejecución",
+"pt": "100 % no navegador, sem execução"
+},
+"29 juin": {
+"de": "29. Juni",
+"es": "29 jun",
+"pt": "29 jun"
+},
+"7 outils dans ton navigateur": {
+"de": "7 Tools in deinem Browser",
+"es": "7 herramientas en tu navegador",
+"pt": "7 ferramentas no teu navegador"
+},
+"<code>alg: none</code>, clé distante (<code>jku</code>/<code>x5u</code>), <code>kid</code> suspect, donnée sensible en clair. La signature, elle, n'est pas vérifiée.": {
+"de": "<code>alg: none</code>, entfernter Schlüssel (<code>jku</code>/<code>x5u</code>), verdächtige <code>kid</code>, sensible Daten im Klartext. Die Signatur selbst wird nicht geprüft.",
+"es": "<code>alg: none</code>, clave remota (<code>jku</code>/<code>x5u</code>), <code>kid</code> sospechoso, dato sensible en claro. La firma, en cambio, no se verifica.",
+"pt": "<code>alg: none</code>, chave remota (<code>jku</code>/<code>x5u</code>), <code>kid</code> suspeito, dado sensível em claro. A assinatura, essa, não é verificada."
+},
+"<code>iat</code>, <code>nbf</code> et <code>exp</code> deviennent des dates ; un jeton expiré ou pas encore valide est signalé.": {
+"de": "<code>iat</code>, <code>nbf</code> und <code>exp</code> werden zu Datumsangaben; ein abgelaufenes oder noch nicht gültiges Token wird gemeldet.",
+"es": "<code>iat</code>, <code>nbf</code> y <code>exp</code> se convierten en fechas; se señala un token caducado o todavía no válido.",
+"pt": "<code>iat</code>, <code>nbf</code> e <code>exp</code> tornam-se datas; um token expirado ou ainda não válido é assinalado."
+},
+"<strong>Règle d'or</strong> : les échantillons ne sont jamais ouverts sur la machine hôte ni déposés dans le dépôt.": {
+"de": "<strong>Goldene Regel</strong>: Proben werden nie auf dem Host-Rechner geöffnet und nie im Repository abgelegt.",
+"es": "<strong>Regla de oro</strong>: las muestras nunca se abren en el equipo anfitrión ni se suben al repositorio.",
+"pt": "<strong>Regra de ouro</strong>: as amostras nunca são abertas na máquina anfitriã nem colocadas no repositório."
+},
+"<strong>Testé comme on attaque</strong> : 13 tests automatiques, dont des attaques (poignée de main rejouée, paquet modifié d'un seul bit, client inconnu, usurpation d'adresse), et un test réel où une capture réseau vérifie qu'aucun contenu ne circule en clair. Ces tests ont révélé deux vrais bugs, corrigés avant publication.": {
+"de": "<strong>Getestet wie ein Angreifer</strong>: 13 automatische Tests, darunter Angriffe (wiederholter Handshake, ein einziges verändertes Bit, unbekannter Client, gefälschte Adresse), sowie ein Praxistest, bei dem ein Netzwerkmitschnitt prüft, dass nichts im Klartext übertragen wird. Diese Tests haben zwei echte Bugs aufgedeckt, die vor der Veröffentlichung behoben wurden.",
+"es": "<strong>Probado como se ataca</strong>: 13 pruebas automáticas, incluidos ataques (handshake repetido, paquete con un solo bit modificado, cliente desconocido, suplantación de dirección), y una prueba real en la que una captura de red verifica que ningún contenido circula en claro. Estas pruebas revelaron dos bugs reales, corregidos antes de publicar.",
+"pt": "<strong>Testado como se ataca</strong>: 13 testes automáticos, incluindo ataques (handshake repetido, pacote com um único bit alterado, cliente desconhecido, usurpação de endereço), e um teste real em que uma captura de rede verifica que nenhum conteúdo circula em claro. Estes testes revelaram dois bugs reais, corrigidos antes da publicação."
+},
+"Accès": {
+"de": "Zugang",
+"es": "Acceso",
+"pt": "Acesso"
+},
+"Accès initial": {
+"de": "Erstzugriff",
+"es": "Acceso inicial",
+"pt": "Acesso inicial"
+},
+"Action requise": {
+"de": "Erforderliche Maßnahme",
+"es": "Acción requerida",
+"pt": "Ação exigida"
+},
+"Actus": {
+"de": "News",
+"es": "Noticias",
+"pt": "Notícias"
+},
+"Ajoutée au catalogue": {
+"de": "In den Katalog aufgenommen",
+"es": "Añadido al catálogo",
+"pt": "Adicionada ao catálogo"
+},
+"Alerter sur les connexions inhabituelles et les nouvelles règles de messagerie.": {
+"de": "Bei ungewöhnlichen Anmeldungen und neuen Postfachregeln alarmieren.",
+"es": "Alertar sobre conexiones inusuales y nuevas reglas de mensajería.",
+"pt": "Alertar para ligações invulgares e novas regras de correio."
+},
+"Alerter sur les exports volumineux et les accès inhabituels aux bases.": {
+"de": "Bei großen Exporten und ungewöhnlichen Datenbankzugriffen alarmieren.",
+"es": "Alertar sobre exportaciones voluminosas y accesos inusuales a las bases.",
+"pt": "Alertar para exportações volumosas e acessos invulgares às bases."
+},
+"Aléa cryptographique": {
+"de": "Kryptografischer Zufall",
+"es": "Aleatoriedad criptográfica",
+"pt": "Aleatoriedade criptográfica"
+},
+"Analyse SOC": {
+"de": "SOC-Analyse",
+"es": "Análisis SOC",
+"pt": "Análise SOC"
+},
+"Analyse d&#x27;incident (SOC)": {
+"de": "Vorfallsanalyse (SOC)",
+"es": "Análisis de incidentes (SOC)",
+"pt": "Análise de incidentes (SOC)"
+},
+"Analyse locale": {
+"de": "Lokale Analyse",
+"es": "Análisis local",
+"pt": "Análise local"
+},
+"Analyser": {
+"de": "Analysieren",
+"es": "Analizar",
+"pt": "Analisar"
+},
+"Analyste SOC/MDR": {
+"de": "SOC/MDR-Analyst",
+"es": "Analista SOC/MDR",
+"pt": "Analista SOC/MDR"
+},
+"Analyste SOC/MDR // Passionné de cybersécurité": {
+"de": "SOC/MDR-Analyst // Begeistert von Cybersicherheit",
+"es": "Analista SOC/MDR // Apasionado de la ciberseguridad",
+"pt": "Analista SOC/MDR // Apaixonado por cibersegurança"
+},
+"Anti-rejeu et routage par clé": {
+"de": "Replay-Schutz und schlüsselbasiertes Routing",
+"es": "Antirrepetición y enrutamiento por clave",
+"pt": "Anti-repetição e encaminhamento por chave"
+},
+"Appliquer le correctif ou la mesure de contournement dès sa publication ; le catalogue CISA donne les priorités.": {
+"de": "Patch oder Workaround sofort nach Veröffentlichung einspielen; der CISA-Katalog setzt die Prioritäten.",
+"es": "Aplicar el parche o la medida de mitigación en cuanto se publique; el catálogo de la CISA marca las prioridades.",
+"pt": "Aplicar a correção ou a medida de mitigação logo que seja publicada; o catálogo da CISA define as prioridades."
+},
+"Apprendre": {
+"de": "Lernen",
+"es": "Aprender",
+"pt": "Aprender"
+},
+"Armée de machines": {
+"de": "Bot-Armee",
+"es": "Ejército de máquinas",
+"pt": "Exército de máquinas"
+},
+"Arrêt de production, perte de produits, risque pour la sécurité des personnes.": {
+"de": "Produktionsstopp, Warenverlust, Gefahr für die Sicherheit von Menschen.",
+"es": "Parada de producción, pérdida de productos, riesgo para la seguridad de las personas.",
+"pt": "Paragem da produção, perda de produtos, risco para a segurança das pessoas."
+},
+"Articles": {
+"de": "Artikel",
+"es": "Artículos",
+"pt": "Artigos"
+},
+"Au lieu de viser la victime directement, l'attaquant compromet un fournisseur, un logiciel ou une bibliothèque qu'elle utilise. Une seule compromission atteint tous les clients, par un canal auquel ils font confiance.": {
+"de": "Statt das Opfer direkt anzugreifen, kompromittiert der Angreifer einen Lieferanten, eine Software oder eine Bibliothek, die es nutzt. Eine einzige Kompromittierung erreicht alle Kunden – über einen Kanal, dem sie vertrauen.",
+"es": "En lugar de atacar directamente a la víctima, el atacante compromete a un proveedor, un software o una biblioteca que esta utiliza. Una sola intrusión alcanza a todos los clientes, por un canal en el que confían.",
+"pt": "Em vez de visar diretamente a vítima, o atacante compromete um fornecedor, um software ou uma biblioteca que esta utiliza. Uma única intrusão atinge todos os clientes, por um canal em que confiam."
+},
+"Aucun article sur une faille zero-day ces 30 derniers jours.": {
+"de": "Kein Artikel über eine Zero-Day-Lücke in den letzten 30 Tagen.",
+"es": "Ningún artículo sobre un fallo zero-day en los últimos 30 días.",
+"pt": "Nenhum artigo sobre uma falha zero-day nos últimos 30 dias."
+},
+"Aucune faille ajoutée ces 30 derniers jours.": {
+"de": "Keine Schwachstelle in den letzten 30 Tagen hinzugefügt.",
+"es": "Ningún fallo añadido en los últimos 30 días.",
+"pt": "Nenhuma falha adicionada nos últimos 30 dias."
+},
+"Authentification": {
+"de": "Authentifizierung",
+"es": "Autenticación",
+"pt": "Autenticação"
+},
+"Avant de chiffrer, les données sensibles sont compressées et envoyées vers un stockage en ligne : c'est le moyen de pression.": {
+"de": "Vor der Verschlüsselung werden sensible Daten komprimiert und an einen Online-Speicher geschickt: das ist das Druckmittel.",
+"es": "Antes de cifrar, los datos sensibles se comprimen y se envían a un almacenamiento en línea: es el medio de presión.",
+"pt": "Antes de cifrar, os dados sensíveis são comprimidos e enviados para um armazenamento online: é o meio de pressão."
+},
+"Balayage massif d'Internet pour trouver les équipements vulnérables exposés.": {
+"de": "Massenhafter Internet-Scan nach exponierten, verwundbaren Geräten.",
+"es": "Escaneo masivo de Internet para encontrar los equipos vulnerables expuestos.",
+"pt": "Varrimento maciço da Internet para encontrar os equipamentos vulneráveis expostos."
+},
+"Base64, Base64URL, URL, hexadécimal et entités HTML, dans les deux sens.": {
+"de": "Base64, Base64URL, URL, Hexadezimal und HTML-Entities, in beide Richtungen.",
+"es": "Base64, Base64URL, URL, hexadecimal y entidades HTML, en ambos sentidos.",
+"pt": "Base64, Base64URL, URL, hexadecimal e entidades HTML, nos dois sentidos."
+},
+"Base64, Base64URL, URL, hexadécimal ou entités HTML.": {
+"de": "Base64, Base64URL, URL, Hexadezimal oder HTML-Entities.",
+"es": "Base64, Base64URL, URL, hexadecimal o entidades HTML.",
+"pt": "Base64, Base64URL, URL, hexadecimal ou entidades HTML."
+},
+"Bienvenue sur mon site, où je présente mes différents travaux et projets en cybersécurité. Je suis analyste SOC/MDR et passionné de sécurité informatique.": {
+"de": "Willkommen auf meiner Seite, auf der ich meine Arbeiten und Projekte in der Cybersicherheit vorstelle. Ich bin SOC/MDR-Analyst und begeistere mich für IT-Sicherheit.",
+"es": "Bienvenido a mi sitio, donde presento mis trabajos y proyectos de ciberseguridad. Soy analista SOC/MDR y me apasiona la seguridad informática.",
+"pt": "Bem-vindo ao meu site, onde apresento os meus trabalhos e projetos de cibersegurança. Sou analista SOC/MDR e apaixonado por segurança informática."
+},
+"Blanchiment": {
+"de": "Geldwäsche",
+"es": "Blanqueo",
+"pt": "Branqueamento"
+},
+"CV": {
+"de": "Lebenslauf",
+"es": "CV",
+"pt": "CV"
+},
+"Calcul": {
+"de": "Berechnung",
+"es": "Cálculo",
+"pt": "Cálculo"
+},
+"Calculateur de hash": {
+"de": "Hash-Rechner",
+"es": "Calculadora de hash",
+"pt": "Calculadora de hash"
+},
+"Calculer une empreinte, encoder et décoder des données.": {
+"de": "Hashes berechnen, Daten kodieren und dekodieren.",
+"es": "Calcular una huella, codificar y decodificar datos.",
+"pt": "Calcular uma impressão digital, codificar e descodificar dados."
+},
+"Camouflage et persistance": {
+"de": "Tarnung und Persistenz",
+"es": "Camuflaje y persistencia",
+"pt": "Camuflagem e persistência"
+},
+"Cartographie de l'annuaire (Active Directory) puis déplacement de machine en machine avec des comptes légitimes.": {
+"de": "Das Verzeichnis (Active Directory) wird kartiert, dann bewegen sich die Angreifer mit legitimen Konten von Rechner zu Rechner.",
+"es": "Mapeo del directorio (Active Directory) y luego desplazamiento de máquina en máquina con cuentas legítimas.",
+"pt": "Mapeamento do diretório (Active Directory) e depois deslocação de máquina em máquina com contas legítimas."
+},
+"Cartographie du réseau et déplacement vers les systèmes intéressants.": {
+"de": "Das Netz wird kartiert, der Angreifer bewegt sich zu lohnenden Systemen.",
+"es": "Mapeo de la red y desplazamiento hacia los sistemas interesantes.",
+"pt": "Mapeamento da rede e deslocação para os sistemas interessantes."
+},
+"Catalogue de la CISA momentanément indisponible.": {
+"de": "CISA-Katalog vorübergehend nicht verfügbar.",
+"es": "Catálogo de la CISA temporalmente no disponible.",
+"pt": "Catálogo da CISA temporariamente indisponível."
+},
+"Catégorie (CWE)": {
+"de": "Kategorie (CWE)",
+"es": "Categoría (CWE)",
+"pt": "Categoria (CWE)"
+},
+"Catégories": {
+"de": "Kategorien",
+"es": "Categorías",
+"pt": "Categorias"
+},
+"Ce qu'il contient": {
+"de": "Was drin ist",
+"es": "Qué contiene",
+"pt": "O que contém"
+},
+"Ce site": {
+"de": "Diese Website",
+"es": "Este sitio",
+"pt": "Este site"
+},
+"Cette page n'existe pas, ou plus. Reprends par l'une de ces portes :": {
+"de": "Diese Seite gibt es nicht (mehr). Nimm eine dieser Türen:",
+"es": "Esta página no existe, o ya no existe. Vuelve por una de estas puertas:",
+"pt": "Esta página não existe, ou já não existe. Volta por uma destas portas:"
+},
+"Changer les mots de passe par défaut et tenir l'inventaire des équipements connectés.": {
+"de": "Standardpasswörter ändern und ein Inventar der vernetzten Geräte führen.",
+"es": "Cambiar las contraseñas por defecto y mantener el inventario de los equipos conectados.",
+"pt": "Alterar as palavras-passe predefinidas e manter o inventário dos equipamentos ligados."
+},
+"Chaque caractère vient de <code>crypto.getRandomValues</code>, le générateur sûr du navigateur, jamais de <code>Math.random</code>.": {
+"de": "Jedes Zeichen stammt aus <code>crypto.getRandomValues</code>, dem sicheren Generator des Browsers, nie aus <code>Math.random</code>.",
+"es": "Cada carácter proviene de <code>crypto.getRandomValues</code>, el generador seguro del navegador, nunca de <code>Math.random</code>.",
+"pt": "Cada carácter vem de <code>crypto.getRandomValues</code>, o gerador seguro do navegador, nunca de <code>Math.random</code>."
+},
+"Chaque indicateur n'apparaît qu'une fois, rangé par type.": {
+"de": "Jeder Indikator erscheint nur einmal, nach Typ sortiert.",
+"es": "Cada indicador aparece una sola vez, ordenado por tipo.",
+"pt": "Cada indicador aparece uma única vez, arrumado por tipo."
+},
+"Chaque paquet IP voyage chiffré en UDP entre deux interfaces virtuelles natives : <code>utun</code> sur macOS, <code>/dev/net/tun</code> sur Linux.": {
+"de": "Jedes IP-Paket reist verschlüsselt per UDP zwischen zwei nativen virtuellen Schnittstellen: <code>utun</code> unter macOS, <code>/dev/net/tun</code> unter Linux.",
+"es": "Cada paquete IP viaja cifrado por UDP entre dos interfaces virtuales nativas: <code>utun</code> en macOS, <code>/dev/net/tun</code> en Linux.",
+"pt": "Cada pacote IP viaja cifrado em UDP entre duas interfaces virtuais nativas: <code>utun</code> no macOS, <code>/dev/net/tun</code> no Linux."
+},
+"Charger un exemple": {
+"de": "Beispiel laden",
+"es": "Cargar un ejemplo",
+"pt": "Carregar um exemplo"
+},
+"Chasser": {
+"de": "Jagen",
+"es": "Cazar",
+"pt": "Caçar"
+},
+"Chiffrement": {
+"de": "Verschlüsselung",
+"es": "Cifrado",
+"pt": "Cifragem"
+},
+"Choix de la cible": {
+"de": "Zielauswahl",
+"es": "Elección del objetivo",
+"pt": "Escolha do alvo"
+},
+"Choix du format": {
+"de": "Format wählen",
+"es": "Elección del formato",
+"pt": "Escolha do formato"
+},
+"Choix du maillon faible": {
+"de": "Das schwache Glied",
+"es": "Elección del eslabón débil",
+"pt": "Escolha do elo fraco"
+},
+"Ciblage des employés": {
+"de": "Mitarbeitende im Visier",
+"es": "Ataque a los empleados",
+"pt": "Visar os funcionários"
+},
+"Client et serveur se mettent d'accord sur des clés de session en deux messages (X25519, ChaCha20-Poly1305, BLAKE2s) : identité du client chiffrée, serveur muet face aux clés inconnues.": {
+"de": "Client und Server einigen sich in zwei Nachrichten auf Sitzungsschlüssel (X25519, ChaCha20-Poly1305, BLAKE2s): verschlüsselte Client-Identität, ein Server, der auf unbekannte Schlüssel nicht antwortet.",
+"es": "Cliente y servidor acuerdan claves de sesión en dos mensajes (X25519, ChaCha20-Poly1305, BLAKE2s): identidad del cliente cifrada y un servidor que no responde a claves desconocidas.",
+"pt": "Cliente e servidor acordam chaves de sessão em duas mensagens (X25519, ChaCha20-Poly1305, BLAKE2s): identidade do cliente cifrada e um servidor que não responde a chaves desconhecidas."
+},
+"Code obfusqué pour échapper aux antivirus, lancement automatique au démarrage.": {
+"de": "Verschleierter Code, um Virenscanner zu umgehen, automatischer Start beim Hochfahren.",
+"es": "Código ofuscado para escapar de los antivirus, arranque automático al iniciar.",
+"pt": "Código ofuscado para escapar aos antivírus, arranque automático no início."
+},
+"Code piégé": {
+"de": "Präparierter Code",
+"es": "Código trampa",
+"pt": "Código armadilhado"
+},
+"Code source et documentation": {
+"de": "Quellcode und Dokumentation",
+"es": "Código fuente y documentación",
+"pt": "Código-fonte e documentação"
+},
+"Collage": {
+"de": "Einfügen",
+"es": "Pegado",
+"pt": "Colagem"
+},
+"Collecte": {
+"de": "Sammlung",
+"es": "Recopilación",
+"pt": "Recolha"
+},
+"Collecte et exfiltration": {
+"de": "Sammlung und Exfiltration",
+"es": "Recopilación y exfiltración",
+"pt": "Recolha e exfiltração"
+},
+"Collecter moins, chiffrer et cloisonner les données sensibles.": {
+"de": "Weniger sammeln, sensible Daten verschlüsseln und abschotten.",
+"es": "Recopilar menos, cifrar y compartimentar los datos sensibles.",
+"pt": "Recolher menos, cifrar e compartimentar os dados sensíveis."
+},
+"Commande et contrôle": {
+"de": "Command and Control",
+"es": "Mando y control",
+"pt": "Comando e controlo"
+},
+"Comment s'organise ce type d'attaque": {
+"de": "So läuft diese Angriffsart ab",
+"es": "Cómo se organiza este tipo de ataque",
+"pt": "Como se organiza este tipo de ataque"
+},
+"Comment ça marche": {
+"de": "So funktioniert es",
+"es": "Cómo funciona",
+"pt": "Como funciona"
+},
+"Communications camouflées dans du trafic ordinaire : HTTPS, services cloud connus.": {
+"de": "Kommunikation getarnt im normalen Verkehr: HTTPS, bekannte Cloud-Dienste.",
+"es": "Comunicaciones camufladas en tráfico ordinario: HTTPS, servicios en la nube conocidos.",
+"pt": "Comunicações camufladas em tráfego comum: HTTPS, serviços cloud conhecidos."
+},
+"Comparaison": {
+"de": "Vergleich",
+"es": "Comparación",
+"pt": "Comparação"
+},
+"Comparaison locale": {
+"de": "Lokaler Abgleich",
+"es": "Comparación local",
+"pt": "Comparação local"
+},
+"Comportements reliés à MITRE ATT&amp;CK et IOC de toutes les couches.": {
+"de": "Verhaltensweisen mit MITRE-ATT&amp;CK-Zuordnung und IOCs aus allen Schichten.",
+"es": "Comportamientos vinculados a MITRE ATT&amp;CK e IOC de todas las capas.",
+"pt": "Comportamentos ligados ao MITRE ATT&amp;CK e IOC de todas as camadas."
+},
+"Compromission d'un poste": {
+"de": "Kompromittierung eines Rechners",
+"es": "Compromiso de un puesto",
+"pt": "Comprometimento de um posto"
+},
+"Compromission du fournisseur": {
+"de": "Kompromittierung des Lieferanten",
+"es": "Compromiso del proveedor",
+"pt": "Comprometimento do fornecedor"
+},
+"Connexion au compte, ajout d'un appareil ou de règles de messagerie pour garder l'accès.": {
+"de": "Anmeldung am Konto, ein neues Gerät oder Postfachregeln werden hinzugefügt, um den Zugriff zu behalten.",
+"es": "Conexión a la cuenta, adición de un dispositivo o de reglas de mensajería para conservar el acceso.",
+"pt": "Ligação à conta, adição de um dispositivo ou de regras de correio para manter o acesso."
+},
+"Conserver et analyser les journaux : la détection repose sur la chasse aux anomalies.": {
+"de": "Logs aufbewahren und auswerten: Die Erkennung beruht auf der Jagd nach Anomalien.",
+"es": "Conservar y analizar los registros: la detección se basa en la caza de anomalías.",
+"pt": "Conservar e analisar os registos: a deteção assenta na caça às anomalias."
+},
+"Constitution ou location d'un botnet : objets connectés, serveurs piratés.": {
+"de": "Ein Botnetz wird aufgebaut oder gemietet: vernetzte Geräte, gehackte Server.",
+"es": "Creación o alquiler de una botnet: objetos conectados, servidores pirateados.",
+"pt": "Criação ou aluguer de uma botnet: objetos ligados, servidores pirateados."
+},
+"Contact": {
+"de": "Kontakt",
+"es": "Contacto",
+"pt": "Contacto"
+},
+"Contrôles de risque": {
+"de": "Risikoprüfungen",
+"es": "Controles de riesgo",
+"pt": "Controlos de risco"
+},
+"Copie vers un serveur de l'attaquant ou un service de stockage en ligne.": {
+"de": "Kopie auf einen Server des Angreifers oder einen Online-Speicherdienst.",
+"es": "Copia hacia un servidor del atacante o un servicio de almacenamiento en línea.",
+"pt": "Cópia para um servidor do atacante ou um serviço de armazenamento online."
+},
+"Corriger en priorité les équipements exposés à Internet et imposer la double authentification sur les accès distants.": {
+"de": "Zuerst die aus dem Internet erreichbaren Geräte patchen und für Fernzugänge Mehr-Faktor-Authentifizierung erzwingen.",
+"es": "Parchear primero los equipos expuestos a Internet e imponer la doble autenticación en los accesos remotos.",
+"pt": "Corrigir primeiro os equipamentos expostos à Internet e impor a autenticação de dois fatores nos acessos remotos."
+},
+"Corriger en urgence les équipements de bordure (VPN, pare-feu, passerelles).": {
+"de": "Perimeter-Geräte dringend patchen (VPN, Firewalls, Gateways).",
+"es": "Parchear con urgencia los equipos perimetrales (VPN, cortafuegos, pasarelas).",
+"pt": "Corrigir com urgência os equipamentos de perímetro (VPN, firewalls, gateways)."
+},
+"Couche par couche": {
+"de": "Schicht für Schicht",
+"es": "Capa por capa",
+"pt": "Camada a camada"
+},
+"Courriels, documents, contacts, messages ; les données sortent progressivement pour ne pas se faire remarquer.": {
+"de": "E-Mails, Dokumente, Kontakte, Nachrichten; die Daten fließen nach und nach ab, um nicht aufzufallen.",
+"es": "Correos, documentos, contactos, mensajes; los datos salen poco a poco para no llamar la atención.",
+"pt": "Emails, documentos, contactos, mensagens; os dados saem aos poucos para não chamar a atenção."
+},
+"Créer des mots de passe solides, vérifier s&#x27;ils ont fuité, lire un jeton.": {
+"de": "Starke Passwörter erstellen, prüfen, ob sie geleakt wurden, ein Token lesen.",
+"es": "Crear contraseñas sólidas, comprobar si se han filtrado, leer un token.",
+"pt": "Criar palavras-passe robustas, verificar se foram divulgadas, ler um token."
+},
+"Dans l'actualité": {
+"de": "In den Nachrichten",
+"es": "En las noticias",
+"pt": "Nas notícias"
+},
+"Dans l'actualité (30 derniers jours)": {
+"de": "In den Nachrichten (letzte 30 Tage)",
+"es": "En las noticias (últimos 30 días)",
+"pt": "Nas notícias (últimos 30 dias)"
+},
+"Dans les deux sens": {
+"de": "In beide Richtungen",
+"es": "En ambos sentidos",
+"pt": "Nos dois sentidos"
+},
+"Dans un labo isolé sur Mac Apple Silicon : VM Windows 11 ARM avec FLARE-VM, VM Linux avec un faux Internet (INetSim).": {
+"de": "In einem isolierten Labor auf einem Mac mit Apple Silicon: Windows-11-ARM-VM mit FLARE-VM, Linux-VM mit einem simulierten Internet (INetSim).",
+"es": "En un laboratorio aislado en un Mac Apple Silicon: VM Windows 11 ARM con FLARE-VM, VM Linux con un Internet falso (INetSim).",
+"pt": "Num laboratório isolado num Mac Apple Silicon: VM Windows 11 ARM com FLARE-VM, VM Linux com uma Internet falsa (INetSim)."
+},
+"Defang": {
+"de": "Defang",
+"es": "Defang",
+"pt": "Defang"
+},
+"Depuis le 1er janvier.": {
+"de": "Seit dem 1. Januar.",
+"es": "Desde el 1 de enero.",
+"pt": "Desde 1 de janeiro."
+},
+"Dernière mise à jour": {
+"de": "Letzte Aktualisierung",
+"es": "Última actualización",
+"pt": "Última atualização"
+},
+"Des données (clients, salariés, documents) sont copiées par un tiers non autorisé, puis revendues, publiées ou réutilisées pour d'autres attaques.": {
+"de": "Daten (Kunden, Mitarbeitende, Dokumente) werden von Unbefugten kopiert und dann verkauft, veröffentlicht oder für weitere Angriffe genutzt.",
+"es": "Datos (clientes, empleados, documentos) son copiados por un tercero no autorizado y luego revendidos, publicados o reutilizados para otros ataques.",
+"pt": "Dados (clientes, funcionários, documentos) são copiados por um terceiro não autorizado e depois revendidos, publicados ou reutilizados para outros ataques."
+},
+"Des mots de passe aléatoires et robustes, générés avec l'aléa cryptographique du navigateur.": {
+"de": "Zufällige, starke Passwörter, erzeugt mit dem kryptografischen Zufall des Browsers.",
+"es": "Contraseñas aleatorias y robustas, generadas con la aleatoriedad criptográfica del navegador.",
+"pt": "Palavras-passe aleatórias e robustas, geradas com a aleatoriedade criptográfica do navegador."
+},
+"Des outils cyber dans le navigateur, une veille automatique, et un site durci puis audité.": {
+"de": "Cyber-Tools im Browser, ein automatisches Lagebild und eine gehärtete, auditierte Website.",
+"es": "Herramientas ciber en el navegador, una vigilancia automática y un sitio reforzado y auditado.",
+"pt": "Ferramentas ciber no navegador, uma vigilância automática e um site reforçado e auditado."
+},
+"Des outils de cybersécurité gratuits, sans inscription et sans pistage. Ils tournent dans ton navigateur : tes données ne quittent pas ta machine.": {
+"de": "Kostenlose Cybersicherheits-Tools, ohne Anmeldung und ohne Tracking. Sie laufen in deinem Browser: Deine Daten verlassen deinen Rechner nicht.",
+"es": "Herramientas de ciberseguridad gratuitas, sin registro y sin rastreo. Funcionan en tu navegador: tus datos no salen de tu equipo.",
+"pt": "Ferramentas de cibersegurança gratuitas, sem registo e sem rastreio. Funcionam no teu navegador: os teus dados não saem do teu computador."
+},
+"Des projets construits pour comprendre la sécurité de l'intérieur : comment un tunnel chiffré fonctionne, comment on analyse un malware, et comment on défend un site exposé.": {
+"de": "Projekte, um Sicherheit von innen zu verstehen: wie ein verschlüsselter Tunnel funktioniert, wie man Malware analysiert und wie man eine exponierte Website verteidigt.",
+"es": "Proyectos construidos para entender la seguridad desde dentro: cómo funciona un túnel cifrado, cómo se analiza un malware y cómo se defiende un sitio expuesto.",
+"pt": "Projetos construídos para compreender a segurança por dentro: como funciona um túnel cifrado, como se analisa um malware e como se defende um site exposto."
+},
+"Des règles de transformation (Base64, codes de caractères, concaténations, <code>-f</code>, inversions…) tournent en boucle jusqu'à ce que plus rien ne change.": {
+"de": "Transformationsregeln (Base64, Zeichencodes, Verkettungen, <code>-f</code>, Umkehrungen …) laufen in einer Schleife, bis sich nichts mehr ändert.",
+"es": "Reglas de transformación (Base64, códigos de caracteres, concatenaciones, <code>-f</code>, inversiones…) se aplican en bucle hasta que nada cambia.",
+"pt": "Regras de transformação (Base64, códigos de caracteres, concatenações, <code>-f</code>, inversões…) são aplicadas em ciclo até nada mudar."
+},
+"Diffusion": {
+"de": "Verbreitung",
+"es": "Difusión",
+"pt": "Difusão"
+},
+"Documenter": {
+"de": "Dokumentieren",
+"es": "Documentar",
+"pt": "Documentar"
+},
+"Double authentification et correctifs à jour sur tout ce qui est exposé.": {
+"de": "MFA und aktuelle Patches auf allem, was erreichbar ist.",
+"es": "Doble autenticación y parches al día en todo lo que esté expuesto.",
+"pt": "Autenticação de dois fatores e correções em dia em tudo o que está exposto."
+},
+"Double authentification partout et renouvellement des identifiants exposés.": {
+"de": "MFA überall und Austausch offengelegter Zugangsdaten.",
+"es": "Doble autenticación en todas partes y renovación de las credenciales expuestas.",
+"pt": "Autenticação de dois fatores em todo o lado e renovação das credenciais expostas."
+},
+"Décodage Base64URL": {
+"de": "Base64URL-Dekodierung",
+"es": "Decodificación Base64URL",
+"pt": "Descodificação Base64URL"
+},
+"Décoder": {
+"de": "Dekodieren",
+"es": "Decodificar",
+"pt": "Descodificar"
+},
+"Décodeur JWT": {
+"de": "JWT-Decoder",
+"es": "Decodificador JWT",
+"pt": "Descodificador JWT"
+},
+"Découpage": {
+"de": "Aufteilung",
+"es": "División",
+"pt": "Divisão"
+},
+"Découverte": {
+"de": "Erkundung",
+"es": "Descubrimiento",
+"pt": "Descoberta"
+},
+"Dédoublonnage": {
+"de": "Deduplizierung",
+"es": "Deduplicación",
+"pt": "Eliminação de duplicados"
+},
+"Dépôt d'outils de prise de main à distance, obtention des droits administrateur et récupération de mots de passe en mémoire.": {
+"de": "Fernwartungstools werden abgelegt, Administratorrechte erlangt und Passwörter aus dem Speicher ausgelesen.",
+"es": "Instalación de herramientas de control remoto, obtención de derechos de administrador y recuperación de contraseñas en memoria.",
+"pt": "Instalação de ferramentas de controlo remoto, obtenção de direitos de administrador e recolha de palavras-passe em memória."
+},
+"Dépôt d'outils et mise en place d'un accès durable.": {
+"de": "Werkzeuge werden abgelegt und ein dauerhafter Zugang eingerichtet.",
+"es": "Instalación de herramientas y establecimiento de un acceso duradero.",
+"pt": "Instalação de ferramentas e criação de um acesso duradouro."
+},
+"Dépôt d'un web shell ou d'une porte dérobée, souvent avant même la publication du correctif.": {
+"de": "Eine Web-Shell oder Hintertür wird abgelegt – oft noch bevor der Patch erscheint.",
+"es": "Instalación de una web shell o de una puerta trasera, a menudo incluso antes de la publicación del parche.",
+"pt": "Instalação de uma web shell ou de uma porta das traseiras, muitas vezes antes mesmo da publicação da correção."
+},
+"Désobfuscateur": {
+"de": "Deobfuscator",
+"es": "Desofuscador",
+"pt": "Desofuscador"
+},
+"Désobfuscateur de scripts": {
+"de": "Skript-Deobfuscator",
+"es": "Desofuscador de scripts",
+"pt": "Desofuscador de scripts"
+},
+"Désobfusquer": {
+"de": "Deobfuskieren",
+"es": "Desofuscar",
+"pt": "Desofuscar"
+},
+"Détecter": {
+"de": "Erkennen",
+"es": "Detectar",
+"pt": "Detetar"
+},
+"Détection du langage": {
+"de": "Spracherkennung",
+"es": "Detección del lenguaje",
+"pt": "Deteção da linguagem"
+},
+"Détection, threat hunting et réponse aux incidents.": {
+"de": "Erkennung, Threat Hunting und Incident Response.",
+"es": "Detección, threat hunting y respuesta a incidentes.",
+"pt": "Deteção, threat hunting e resposta a incidentes."
+},
+"Détournement": {
+"de": "Umleitung",
+"es": "Desvío",
+"pt": "Desvio"
+},
+"E-mail, SMS, message ou appel urgent : facture, colis, alerte de sécurité.": {
+"de": "Dringende E-Mail, SMS, Nachricht oder Anruf: Rechnung, Paket, Sicherheitswarnung.",
+"es": "Correo, SMS, mensaje o llamada urgente: factura, paquete, alerta de seguridad.",
+"pt": "Email, SMS, mensagem ou chamada urgente: fatura, encomenda, alerta de segurança."
+},
+"Empreinte SHA-1": {
+"de": "SHA-1-Hash",
+"es": "Huella SHA-1",
+"pt": "Impressão SHA-1"
+},
+"En-tête et contenu sont du JSON encodé, lisible sans aucune clé.": {
+"de": "Header und Payload sind kodiertes JSON, ohne Schlüssel lesbar.",
+"es": "Cabecera y contenido son JSON codificado, legible sin ninguna clave.",
+"pt": "Cabeçalho e conteúdo são JSON codificado, legível sem qualquer chave."
+},
+"Encodage": {
+"de": "Kodierung",
+"es": "Codificación",
+"pt": "Codificação"
+},
+"Encodage et intégrité": {
+"de": "Kodierung und Integrität",
+"es": "Codificación e integridad",
+"pt": "Codificação e integridade"
+},
+"Encoder": {
+"de": "Kodieren",
+"es": "Codificar",
+"pt": "Codificar"
+},
+"Encoder ou décoder ; une entrée invalide est signalée au lieu de produire un résultat faux.": {
+"de": "Kodieren oder dekodieren; eine ungültige Eingabe wird gemeldet, statt ein falsches Ergebnis zu liefern.",
+"es": "Codificar o decodificar; una entrada no válida se señala en lugar de producir un resultado falso.",
+"pt": "Codificar ou descodificar; uma entrada inválida é assinalada em vez de produzir um resultado errado."
+},
+"Encodeur / décodeur": {
+"de": "Encoder / Decoder",
+"es": "Codificador / decodificador",
+"pt": "Codificador / descodificador"
+},
+"Envoi massif de paquets réseau ou de requêtes applicatives coûteuses.": {
+"de": "Massenhaft Netzwerkpakete oder aufwendige Anwendungsanfragen.",
+"es": "Envío masivo de paquetes de red o de peticiones de aplicación costosas.",
+"pt": "Envio maciço de pacotes de rede ou de pedidos aplicacionais dispendiosos."
+},
+"Essayer les outils": {
+"de": "Tools ausprobieren",
+"es": "Probar las herramientas",
+"pt": "Experimentar as ferramentas"
+},
+"Estime la robustesse d'un mot de passe et vérifie s'il apparaît dans des fuites de données.": {
+"de": "Schätzt die Stärke eines Passworts und prüft, ob es in Datenlecks vorkommt.",
+"es": "Estima la robustez de una contraseña y comprueba si aparece en filtraciones de datos.",
+"pt": "Estima a robustez de uma palavra-passe e verifica se aparece em fugas de dados."
+},
+"Exercice 1 :": {
+"de": "Übung 1:",
+"es": "Ejercicio 1:",
+"pt": "Exercício 1:"
+},
+"Exercice 2 :": {
+"de": "Übung 2:",
+"es": "Ejercicio 2:",
+"pt": "Exercício 2:"
+},
+"Exercices de cryptographie": {
+"de": "Kryptografie-Übungen",
+"es": "Ejercicios de criptografía",
+"pt": "Exercícios de criptografia"
+},
+"Exfiltration": {
+"de": "Exfiltration",
+"es": "Exfiltración",
+"pt": "Exfiltração"
+},
+"Exiger plusieurs signatures et une vérification hors ligne pour les transactions importantes.": {
+"de": "Für große Transaktionen mehrere Signaturen und eine Offline-Prüfung verlangen.",
+"es": "Exigir varias firmas y una verificación sin conexión para las transacciones importantes.",
+"pt": "Exigir várias assinaturas e uma verificação offline para as transações importantes."
+},
+"Exploitation": {
+"de": "Ausnutzung",
+"es": "Explotación",
+"pt": "Exploração"
+},
+"Exploration": {
+"de": "Erkundung",
+"es": "Exploración",
+"pt": "Exploração"
+},
+"Exploration et propagation": {
+"de": "Erkundung und Ausbreitung",
+"es": "Exploración y propagación",
+"pt": "Exploração e propagação"
+},
+"Extorsion": {
+"de": "Erpressung",
+"es": "Extorsión",
+"pt": "Extorsão"
+},
+"Extracteur d&#x27;IOC": {
+"de": "IOC-Extraktor",
+"es": "Extractor de IOC",
+"pt": "Extrator de IOC"
+},
+"Extracteur d'IOC": {
+"de": "IOC-Extraktor",
+"es": "Extractor de IOC",
+"pt": "Extrator de IOC"
+},
+"Extraction de bases, d'exports et de documents, regroupés en archives.": {
+"de": "Datenbanken, Exporte und Dokumente werden extrahiert und in Archive gepackt.",
+"es": "Extracción de bases, exportaciones y documentos, agrupados en archivos comprimidos.",
+"pt": "Extração de bases, exportações e documentos, agrupados em arquivos."
+},
+"Extraire les IOC": {
+"de": "IOCs extrahieren",
+"es": "Extraer los IOC",
+"pt": "Extrair os IOC"
+},
+"Extrait URL, domaines, IP, emails, hashes et CVE d'un texte, et les « defang » pour les partager.": {
+"de": "Zieht URLs, Domains, IPs, E-Mails, Hashes und CVEs aus einem Text und entschärft sie („defang“) zum Teilen.",
+"es": "Extrae URL, dominios, IP, correos, hashes y CVE de un texto, y los desactiva («defang») para compartirlos.",
+"pt": "Extrai URL, domínios, IP, emails, hashes e CVE de um texto e neutraliza-os («defang») para os partilhar."
+},
+"Exécution": {
+"de": "Ausführung",
+"es": "Ejecución",
+"pt": "Execução"
+},
+"Exécution chez les clients": {
+"de": "Ausführung bei den Kunden",
+"es": "Ejecución en los clientes",
+"pt": "Execução nos clientes"
+},
+"Faille": {
+"de": "Schwachstelle",
+"es": "Fallo",
+"pt": "Falha"
+},
+"Faille sur un service exposé, identifiants volés ou hameçonnage.": {
+"de": "Lücke in einem exponierten Dienst, gestohlene Zugangsdaten oder Phishing.",
+"es": "Fallo en un servicio expuesto, credenciales robadas o phishing.",
+"pt": "Falha num serviço exposto, credenciais roubadas ou phishing."
+},
+"Failles (CVE)": {
+"de": "Schwachstellen (CVE)",
+"es": "Fallos (CVE)",
+"pt": "Falhas (CVE)"
+},
+"Failles zero-day et exploitées activement": {
+"de": "Zero-Day- und aktiv ausgenutzte Schwachstellen",
+"es": "Fallos zero-day y explotados activamente",
+"pt": "Falhas zero-day e ativamente exploradas"
+},
+"Fait avec &#10084; par": {
+"de": "Mit &#10084; gemacht von",
+"es": "Hecho con &#10084; por",
+"pt": "Feito com &#10084; por"
+},
+"Faux recruteurs, faux projets ou messages ciblés envoyés aux développeurs et aux personnes qui valident les transactions.": {
+"de": "Falsche Recruiter, falsche Projekte oder gezielte Nachrichten an Entwickler und an die Personen, die Transaktionen freigeben.",
+"es": "Falsos reclutadores, falsos proyectos o mensajes dirigidos enviados a los desarrolladores y a las personas que validan las transacciones.",
+"pt": "Falsos recrutadores, falsos projetos ou mensagens direcionadas enviadas aos programadores e às pessoas que validam as transações."
+},
+"Faux site de téléchargement, publicité piégée, logiciel ou jeu piraté, pièce jointe.": {
+"de": "Gefälschte Download-Seite, präparierte Werbung, geknackte Software oder Spiele, Anhang.",
+"es": "Falso sitio de descarga, anuncio trampa, programa o juego pirateado, adjunto.",
+"pt": "Falso site de transferências, anúncio armadilhado, programa ou jogo pirateado, anexo."
+},
+"Fermer": {
+"de": "Schließen",
+"es": "Cerrar",
+"pt": "Fechar"
+},
+"Fiche générée automatiquement à partir des titres et des faits publiés par les sources ; le déroulé est le schéma type de cette catégorie d'attaque, pas la reconstitution exacte de cet incident. Techniques et groupes : MITRE ATT&amp;CK® (© The MITRE Corporation, reproduit avec autorisation). Failles : catalogue KEV de la CISA (domaine public).": {
+"de": "Automatisch erstellt aus den Schlagzeilen und Fakten der Quellen; der Ablauf ist das typische Muster dieser Angriffskategorie, keine exakte Rekonstruktion dieses Vorfalls. Techniken und Gruppen: MITRE ATT&amp;CK® (© The MITRE Corporation, mit Genehmigung wiedergegeben). Schwachstellen: KEV-Katalog der CISA (gemeinfrei).",
+"es": "Ficha generada automáticamente a partir de los titulares y de los hechos publicados por las fuentes; el desarrollo es el esquema típico de esta categoría de ataque, no la reconstrucción exacta de este incidente. Técnicas y grupos: MITRE ATT&amp;CK® (© The MITRE Corporation, reproducido con autorización). Fallos: catálogo KEV de la CISA (dominio público).",
+"pt": "Ficha gerada automaticamente a partir dos títulos e dos factos publicados pelas fontes; o desenrolar é o esquema típico desta categoria de ataque, não a reconstituição exata deste incidente. Técnicas e grupos: MITRE ATT&amp;CK® (© The MITRE Corporation, reproduzido com autorização). Falhas: catálogo KEV da CISA (domínio público)."
+},
+"Fiches de référence": {
+"de": "Referenzen",
+"es": "Fichas de referencia",
+"pt": "Fichas de referência"
+},
+"Former et faciliter le signalement des messages suspects.": {
+"de": "Schulen und das Melden verdächtiger Nachrichten einfach machen.",
+"es": "Formar y facilitar la notificación de los mensajes sospechosos.",
+"pt": "Formar e facilitar a denúncia de mensagens suspeitas."
+},
+"Fraude au virement, vol de données, nouvel hameçonnage lancé depuis le compte compromis.": {
+"de": "Überweisungsbetrug, Datendiebstahl, neues Phishing vom kompromittierten Konto aus.",
+"es": "Fraude en transferencias, robo de datos, nuevo phishing lanzado desde la cuenta comprometida.",
+"pt": "Fraude em transferências, roubo de dados, novo phishing lançado a partir da conta comprometida."
+},
+"Garder des sauvegardes hors ligne et tester régulièrement leur restauration.": {
+"de": "Offline-Backups vorhalten und die Wiederherstellung regelmäßig testen.",
+"es": "Mantener copias de seguridad sin conexión y probar regularmente su restauración.",
+"pt": "Manter cópias de segurança offline e testar regularmente o seu restauro."
+},
+"Garder un antivirus ou un EDR à jour sur tous les postes.": {
+"de": "Virenschutz oder EDR auf allen Rechnern aktuell halten.",
+"es": "Mantener un antivirus o un EDR actualizado en todos los puestos.",
+"pt": "Manter um antivírus ou um EDR atualizado em todos os postos."
+},
+"Grosses attaques de l'année": {
+"de": "Große Angriffe des Jahres",
+"es": "Grandes ataques del año",
+"pt": "Grandes ataques do ano"
+},
+"Grosses attaques de la semaine": {
+"de": "Große Angriffe der Woche",
+"es": "Grandes ataques de la semana",
+"pt": "Grandes ataques da semana"
+},
+"Grosses attaques du mois": {
+"de": "Große Angriffe des Monats",
+"es": "Grandes ataques del mes",
+"pt": "Grandes ataques do mês"
+},
+"Groupe cité": {
+"de": "Genannte Gruppe",
+"es": "Grupo citado",
+"pt": "Grupo citado"
+},
+"Générateur de mots de passe": {
+"de": "Passwort-Generator",
+"es": "Generador de contraseñas",
+"pt": "Gerador de palavras-passe"
+},
+"Générer": {
+"de": "Erzeugen",
+"es": "Generar",
+"pt": "Gerar"
+},
+"Hameçonnage ciblé, faille sur un équipement de bordure, ou exploit « zéro clic » qui infecte un téléphone sans action de la victime.": {
+"de": "Spear-Phishing, eine Lücke in einem Perimeter-Gerät oder ein „Zero-Click“-Exploit, der ein Telefon ohne Zutun des Opfers infiziert.",
+"es": "Phishing dirigido, fallo en un equipo perimetral o exploit «cero clic» que infecta un teléfono sin acción de la víctima.",
+"pt": "Phishing direcionado, falha num equipamento de perímetro ou exploit «zero clique» que infeta um telemóvel sem ação da vítima."
+},
+"Horodatage chiffré dans la poignée de main, fenêtre glissante de 2048 paquets (RFC 6479) pour les données ; un client authentifié ne peut pas usurper l'adresse d'un autre.": {
+"de": "Verschlüsselter Zeitstempel im Handshake, gleitendes Fenster von 2048 Paketen (RFC 6479) für die Daten; ein authentifizierter Client kann die Adresse eines anderen nicht fälschen.",
+"es": "Marca de tiempo cifrada en el handshake, ventana deslizante de 2048 paquetes (RFC 6479) para los datos; un cliente autenticado no puede suplantar la dirección de otro.",
+"pt": "Carimbo temporal cifrado no handshake, janela deslizante de 2048 pacotes (RFC 6479) para os dados; um cliente autenticado não pode usurpar o endereço de outro."
+},
+"IOC défangés": {
+"de": "entschärfte IOCs",
+"es": "IOC desactivados",
+"pt": "IOC neutralizados"
+},
+"Identifiants volés (souvent par un infostealer), faille, ou stockage cloud mal configuré.": {
+"de": "Gestohlene Zugangsdaten (oft von einem Infostealer), eine Lücke oder falsch konfigurierter Cloud-Speicher.",
+"es": "Credenciales robadas (a menudo por un infostealer), fallo o almacenamiento en la nube mal configurado.",
+"pt": "Credenciais roubadas (muitas vezes por um infostealer), falha ou armazenamento cloud mal configurado."
+},
+"Identification des automates et de leurs paramètres de fonctionnement.": {
+"de": "Steuerungen und ihre Betriebsparameter werden identifiziert.",
+"es": "Identificación de los autómatas y de sus parámetros de funcionamiento.",
+"pt": "Identificação dos autómatos e dos seus parâmetros de funcionamento."
+},
+"Impact physique": {
+"de": "Physische Auswirkungen",
+"es": "Impacto físico",
+"pt": "Impacto físico"
+},
+"Indisponibilité": {
+"de": "Ausfall",
+"es": "Indisponibilidad",
+"pt": "Indisponibilidade"
+},
+"Infrastructure dédiée, développement ou achat d'exploits, repérage des cibles.": {
+"de": "Eigene Infrastruktur, Entwicklung oder Kauf von Exploits, Ausspähen der Ziele.",
+"es": "Infraestructura dedicada, desarrollo o compra de exploits, localización de los objetivos.",
+"pt": "Infraestrutura dedicada, desenvolvimento ou compra de exploits, identificação dos alvos."
+},
+"Inondation": {
+"de": "Flutung",
+"es": "Inundación",
+"pt": "Inundação"
+},
+"Installation": {
+"de": "Einnistung",
+"es": "Instalación",
+"pt": "Instalação"
+},
+"Installation et privilèges": {
+"de": "Fußfassen und Rechte",
+"es": "Instalación y privilegios",
+"pt": "Instalação e privilégios"
+},
+"Installer les logiciels uniquement depuis les sources officielles.": {
+"de": "Software nur aus offiziellen Quellen installieren.",
+"es": "Instalar programas solo desde las fuentes oficiales.",
+"pt": "Instalar programas apenas a partir das fontes oficiais."
+},
+"Intégrité": {
+"de": "Integrität",
+"es": "Integridad",
+"pt": "Integridade"
+},
+"J'écris les playbooks qui guident les analystes face à chaque nouvelle règle.": {
+"de": "Ich schreibe die Playbooks, die Analysten bei jeder neuen Regel anleiten.",
+"es": "Escribo los playbooks que guían a los analistas ante cada nueva regla.",
+"pt": "Escrevo os playbooks que orientam os analistas perante cada nova regra."
+},
+"Jamais d'exécution": {
+"de": "Nie ausgeführt",
+"es": "Nunca se ejecuta",
+"pt": "Nunca é executado"
+},
+"Je conçois et j'ajuste des règles de détection dans le SIEM, à partir des cas d'usage MITRE ATT&amp;CK.": {
+"de": "Ich entwerfe und optimiere Erkennungsregeln im SIEM, ausgehend von MITRE-ATT&amp;CK-Anwendungsfällen.",
+"es": "Diseño y ajusto reglas de detección en el SIEM, a partir de los casos de uso de MITRE ATT&amp;CK.",
+"pt": "Concebo e ajusto regras de deteção no SIEM, a partir dos casos de uso do MITRE ATT&amp;CK."
+},
+"Je traque les menaces passées sous les radars avec des requêtes KQL, SPL et AQL.": {
+"de": "Ich spüre Bedrohungen auf, die unter dem Radar geblieben sind – mit KQL-, SPL- und AQL-Abfragen.",
+"es": "Rastreo las amenazas que pasan bajo el radar con consultas KQL, SPL y AQL.",
+"pt": "Persigo as ameaças que passam despercebidas com consultas KQL, SPL e AQL."
+},
+"Journaux centralisés et alertes sur les comportements inhabituels.": {
+"de": "Zentrale Logs und Alarme bei ungewöhnlichem Verhalten.",
+"es": "Registros centralizados y alertas sobre comportamientos inusuales.",
+"pt": "Registos centralizados e alertas para comportamentos invulgares."
+},
+"L'analyse se fait dans ton navigateur. La vérification des fuites, sur clic uniquement, n'envoie que les 5 premiers caractères de l'empreinte SHA-1 : jamais le mot de passe.": {
+"de": "Die Analyse läuft in deinem Browser. Die Leak-Prüfung sendet nur auf Klick die ersten 5 Zeichen des SHA-1-Hashes: niemals das Passwort.",
+"es": "El análisis se hace en tu navegador. La comprobación de filtraciones, solo al hacer clic, envía únicamente los 5 primeros caracteres de la huella SHA-1: nunca la contraseña.",
+"pt": "A análise é feita no teu navegador. A verificação de fugas, só ao clicar, envia apenas os 5 primeiros caracteres da impressão SHA-1: nunca a palavra-passe."
+},
+"L'attaquant choisit ensuite ses cibles : vol de secrets et de jetons, accès aux réseaux, déploiement d'autres charges.": {
+"de": "Anschließend wählt der Angreifer seine Ziele: Diebstahl von Geheimnissen und Tokens, Netzzugang, weitere Nutzlasten.",
+"es": "El atacante elige después sus objetivos: robo de secretos y tokens, acceso a las redes, despliegue de otras cargas.",
+"pt": "O atacante escolhe depois os seus alvos: roubo de segredos e tokens, acesso às redes, implementação de outras cargas."
+},
+"L'attaque vise des équipements qui pilotent le monde physique : automates, régulation, capteurs, télémaintenance. L'impact peut être matériel (arrêt de production, produits perdus) et pas seulement informatique.": {
+"de": "Der Angriff zielt auf Anlagen, die die physische Welt steuern: Steuerungen, Regelung, Sensoren, Fernwartung. Die Folgen können materiell sein (Produktionsstopp, verdorbene Waren), nicht nur IT.",
+"es": "El ataque apunta a equipos que controlan el mundo físico: autómatas, regulación, sensores, telemantenimiento. El impacto puede ser material (parada de producción, productos perdidos) y no solo informático.",
+"pt": "O ataque visa equipamentos que controlam o mundo físico: autómatos, regulação, sensores, telemanutenção. O impacto pode ser material (paragem da produção, produtos perdidos) e não apenas informático."
+},
+"L'empreinte attendue que tu colles est comparée à chaque résultat.": {
+"de": "Der erwartete Hash, den du einfügst, wird mit jedem Ergebnis verglichen.",
+"es": "La huella esperada que pegas se compara con cada resultado.",
+"pt": "A impressão digital esperada que colas é comparada com cada resultado."
+},
+"L'objectif est l'argent, directement : plateformes de cryptomonnaies, portefeuilles ou virements frauduleux. Ces vols sont souvent préparés pendant des semaines en ciblant les employés.": {
+"de": "Das Ziel ist direkt Geld: Kryptoplattformen, Wallets oder betrügerische Überweisungen. Solche Diebstähle werden oft wochenlang vorbereitet, indem Mitarbeitende ins Visier genommen werden.",
+"es": "El objetivo es el dinero, directamente: plataformas de criptomonedas, monederos o transferencias fraudulentas. Estos robos se preparan a menudo durante semanas apuntando a los empleados.",
+"pt": "O objetivo é o dinheiro, diretamente: plataformas de criptomoedas, carteiras ou transferências fraudulentas. Estes roubos são muitas vezes preparados durante semanas visando os funcionários."
+},
+"L'utilisateur lance le fichier ; un « chargeur » télécharge ensuite la charge finale.": {
+"de": "Der Nutzer startet die Datei; ein „Loader“ lädt danach die eigentliche Nutzlast nach.",
+"es": "El usuario abre el archivo; un «cargador» descarga después la carga final.",
+"pt": "O utilizador abre o ficheiro; um «carregador» descarrega depois a carga final."
+},
+"L'équipement sert de tête de pont : propagation, vol de données, revente de l'accès ou rançongiciel.": {
+"de": "Das Gerät dient als Brückenkopf: Ausbreitung, Datendiebstahl, Weiterverkauf des Zugangs oder Ransomware.",
+"es": "El equipo sirve de cabeza de puente: propagación, robo de datos, reventa del acceso o ransomware.",
+"pt": "O equipamento serve de testa de ponte: propagação, roubo de dados, revenda do acesso ou ransomware."
+},
+"La démarche": {
+"de": "Die Methode",
+"es": "El método",
+"pt": "O método"
+},
+"La réponse contient toutes les empreintes qui commencent pareil ; la correspondance est cherchée dans la page.": {
+"de": "Die Antwort enthält alle Hashes mit demselben Anfang; der Treffer wird in der Seite gesucht.",
+"es": "La respuesta contiene todas las huellas que empiezan igual; la coincidencia se busca en la página.",
+"pt": "A resposta contém todas as impressões que começam da mesma forma; a correspondência é procurada na página."
+},
+"La veille cyber": {
+"de": "Cyber-Lagebild",
+"es": "La vigilancia ciber",
+"pt": "A vigilância ciber"
+},
+"La veille cyber du moment, mise à jour automatiquement toutes les 6 heures à partir de sources reconnues. Clique sur un sujet pour ouvrir sa fiche : type d'attaque, déroulé phase par phase, résumé à réexpliquer et liens vers les articles.": {
+"de": "Das aktuelle Cyber-Lagebild, automatisch alle 6 Stunden aus anerkannten Quellen aktualisiert. Klicke auf ein Thema, um seinen Steckbrief zu öffnen: Angriffsart, Ablauf Phase für Phase, eine Zusammenfassung zum Erklären und Links zu den Artikeln.",
+"es": "La vigilancia ciber del momento, actualizada automáticamente cada 6 horas a partir de fuentes reconocidas. Haz clic en un tema para abrir su ficha: tipo de ataque, desarrollo fase por fase, resumen para explicarlo y enlaces a los artículos.",
+"pt": "A vigilância ciber do momento, atualizada automaticamente a cada 6 horas a partir de fontes reconhecidas. Clica num tema para abrir a sua ficha: tipo de ataque, desenrolar fase a fase, resumo para o explicar e ligações para os artigos."
+},
+"La victime saisit mot de passe et code ; l'attaquant récupère aussi le cookie de session.": {
+"de": "Das Opfer gibt Passwort und Code ein; der Angreifer erbeutet auch das Sitzungscookie.",
+"es": "La víctima introduce contraseña y código; el atacante recupera también la cookie de sesión.",
+"pt": "A vítima introduz a palavra-passe e o código; o atacante recolhe também o cookie de sessão."
+},
+"Le catalogue officiel de la CISA (agence américaine de cybersécurité) recense les failles dont l'exploitation par des attaquants est confirmée. C'est la liste à patcher en priorité.": {
+"de": "Der offizielle Katalog der CISA (US-Behörde für Cybersicherheit) listet Schwachstellen, deren Ausnutzung durch Angreifer bestätigt ist. Das ist die Liste, die zuerst gepatcht werden muss.",
+"es": "El catálogo oficial de la CISA (agencia estadounidense de ciberseguridad) recoge los fallos cuya explotación por atacantes está confirmada. Es la lista que hay que parchear primero.",
+"pt": "O catálogo oficial da CISA (agência norte-americana de cibersegurança) lista as falhas cuja exploração por atacantes está confirmada. É a lista a corrigir primeiro."
+},
+"Le dépôt": {
+"de": "Das Repository",
+"es": "El repositorio",
+"pt": "O repositório"
+},
+"Le mot de passe n'existe que dans la page : ni envoyé, ni enregistré.": {
+"de": "Das Passwort existiert nur in der Seite: weder gesendet noch gespeichert.",
+"es": "La contraseña solo existe en la página: ni se envía ni se guarda.",
+"pt": "A palavra-passe só existe na página: nem enviada, nem guardada."
+},
+"Le navigateur calcule l'empreinte du mot de passe avec Web Crypto.": {
+"de": "Der Browser berechnet den Hash des Passworts mit Web Crypto.",
+"es": "El navegador calcula la huella de la contraseña con Web Crypto.",
+"pt": "O navegador calcula a impressão da palavra-passe com Web Crypto."
+},
+"Le rapport d'analyse, à partir d'un modèle.": {
+"de": "Der Analysebericht, nach einer Vorlage.",
+"es": "El informe de análisis, a partir de una plantilla.",
+"pt": "O relatório de análise, a partir de um modelo."
+},
+"Le script n'est <strong>jamais exécuté</strong> : l'outil ne fait que des transformations de texte, dans ton navigateur. Rien n'est envoyé.": {
+"de": "Das Skript wird <strong>nie ausgeführt</strong>: Das Tool transformiert nur Text, in deinem Browser. Nichts wird gesendet.",
+"es": "El script <strong>nunca se ejecuta</strong>: la herramienta solo transforma texto, en tu navegador. No se envía nada.",
+"pt": "O script <strong>nunca é executado</strong>: a ferramenta só transforma texto, no teu navegador. Nada é enviado."
+},
+"Le service ralentit ou tombe ; l'attaque cesse généralement en quelques heures.": {
+"de": "Der Dienst wird langsam oder fällt aus; der Angriff endet meist nach wenigen Stunden.",
+"es": "El servicio se ralentiza o cae; el ataque suele cesar en pocas horas.",
+"pt": "O serviço fica lento ou cai; o ataque termina geralmente em poucas horas."
+},
+"Le texte est converti en octets UTF-8 : les accents et emojis passent sans casse.": {
+"de": "Der Text wird in UTF-8-Bytes umgewandelt: Umlaute, Akzente und Emojis bleiben heil.",
+"es": "El texto se convierte en bytes UTF-8: los acentos y los emojis pasan sin romperse.",
+"pt": "O texto é convertido em bytes UTF-8: acentos e emojis passam sem se estragar."
+},
+"Le texte est encodé en UTF-8, ou le fichier est lu localement (512 Mo maximum).": {
+"de": "Der Text wird als UTF-8 kodiert oder die Datei lokal gelesen (maximal 512 MB).",
+"es": "El texto se codifica en UTF-8, o el archivo se lee localmente (512 MB como máximo).",
+"pt": "O texto é codificado em UTF-8, ou o ficheiro é lido localmente (512 MB no máximo)."
+},
+"Lecture": {
+"de": "Einlesen",
+"es": "Lectura",
+"pt": "Leitura"
+},
+"Lecture des dates": {
+"de": "Daten auslesen",
+"es": "Lectura de las fechas",
+"pt": "Leitura das datas"
+},
+"Les 30 derniers jours.": {
+"de": "Die letzten 30 Tage.",
+"es": "Los últimos 30 días.",
+"pt": "Os últimos 30 dias."
+},
+"Les 7 derniers jours, classées par nombre de sources qui en parlent.": {
+"de": "Die letzten 7 Tage, sortiert nach der Zahl der Quellen, die darüber berichten.",
+"es": "Los últimos 7 días, ordenados por el número de fuentes que hablan de ellos.",
+"pt": "Os últimos 7 dias, ordenados pelo número de fontes que falam deles."
+},
+"Les <code>hxxp</code> et <code>[.]</code> sont remis en clair, puis URL, domaines, IP, e-mails, hashes et CVE sont extraits.": {
+"de": "<code>hxxp</code> und <code>[.]</code> werden zurückgesetzt, dann werden URLs, Domains, IPs, E-Mails, Hashes und CVEs extrahiert.",
+"es": "Los <code>hxxp</code> y <code>[.]</code> se restablecen y luego se extraen URL, dominios, IP, correos, hashes y CVE.",
+"pt": "Os <code>hxxp</code> e <code>[.]</code> são repostos e depois extraem-se URL, domínios, IP, emails, hashes e CVE."
+},
+"Les IOC défangés, jamais l'échantillon.": {
+"de": "Die entschärften IOCs, niemals die Probe.",
+"es": "Los IOC desactivados (defang), nunca la muestra.",
+"pt": "Os IOC neutralizados (defang), nunca a amostra."
+},
+"Les attaquants utilisent une faille d'un logiciel ou d'un équipement. On parle de zero-day quand l'éditeur ne la connaissait pas encore : aucun correctif n'existait au début des attaques.": {
+"de": "Angreifer nutzen eine Lücke in einer Software oder einem Gerät. Von einem Zero-Day spricht man, wenn der Hersteller sie noch nicht kannte: Zu Beginn der Angriffe gab es keinen Patch.",
+"es": "Los atacantes utilizan un fallo de un software o de un equipo. Se habla de zero-day cuando el editor todavía no lo conocía: no existía ningún parche al inicio de los ataques.",
+"pt": "Os atacantes utilizam uma falha de um software ou de um equipamento. Fala-se de zero-day quando o editor ainda não a conhecia: não existia nenhuma correção no início dos ataques."
+},
+"Les clients installent la mise à jour en confiance ; le code malveillant s'exécute avec les droits du logiciel.": {
+"de": "Die Kunden installieren das Update im Vertrauen; der Schadcode läuft mit den Rechten der Software.",
+"es": "Los clientes instalan la actualización con confianza; el código malicioso se ejecuta con los derechos del software.",
+"pt": "Os clientes instalam a atualização com confiança; o código malicioso é executado com os direitos do software."
+},
+"Les données partent vers le serveur de commande, puis sont revendues ou servent à d'autres intrusions.": {
+"de": "Die Daten gehen an den Command-Server und werden dann verkauft oder für weitere Einbrüche genutzt.",
+"es": "Los datos se envían al servidor de mando y luego se revenden o sirven para otras intrusiones.",
+"pt": "Os dados seguem para o servidor de comando e depois são revendidos ou servem para outras intrusões."
+},
+"Les faits": {
+"de": "Die Fakten",
+"es": "Los hechos",
+"pt": "Os factos"
+},
+"Les fonds sont dispersés sur de nombreux portefeuilles, mélangeurs et ponts entre blockchains.": {
+"de": "Die Gelder werden auf viele Wallets, Mixer und Cross-Chain-Bridges verteilt.",
+"es": "Los fondos se dispersan en numerosos monederos, mezcladores y puentes entre blockchains.",
+"pt": "Os fundos são dispersos por inúmeras carteiras, misturadores e pontes entre blockchains."
+},
+"Les outils du quotidien face à un email, un journal ou un script suspect.": {
+"de": "Die Alltags-Tools für eine verdächtige E-Mail, ein Log oder ein Skript.",
+"es": "Las herramientas del día a día ante un correo, un registro o un script sospechoso.",
+"pt": "As ferramentas do dia a dia perante um email, um registo ou um script suspeito."
+},
+"Les sujets de la semaine s'affichent ici à chaque mise à jour de la veille.": {
+"de": "Die Themen der Woche erscheinen hier bei jeder Aktualisierung.",
+"es": "Los temas de la semana aparecen aquí en cada actualización de la vigilancia.",
+"pt": "Os temas da semana aparecem aqui a cada atualização da vigilância."
+},
+"Les valeurs qui fausseraient la répartition sont rejetées et retirées : chaque caractère a exactement la même probabilité.": {
+"de": "Werte, die die Verteilung verzerren würden, werden verworfen und neu gezogen: Jedes Zeichen hat genau dieselbe Wahrscheinlichkeit.",
+"es": "Los valores que falsearían la distribución se rechazan y se vuelven a sortear: cada carácter tiene exactamente la misma probabilidad.",
+"pt": "Os valores que distorceriam a distribuição são rejeitados e sorteados de novo: cada carácter tem exatamente a mesma probabilidade."
+},
+"Leurre": {
+"de": "Köder",
+"es": "Señuelo",
+"pt": "Isco"
+},
+"Limiter les droits des logiciels tiers et des prestataires au strict nécessaire.": {
+"de": "Drittsoftware und Dienstleistern nur die unbedingt nötigen Rechte geben.",
+"es": "Limitar los derechos del software de terceros y de los proveedores a lo estrictamente necesario.",
+"pt": "Limitar os direitos do software de terceiros e dos prestadores ao estritamente necessário."
+},
+"Lire les articles": {
+"de": "Artikel lesen",
+"es": "Leer los artículos",
+"pt": "Ler os artigos"
+},
+"Lit l'en-tête et le contenu d'un JWT, affiche ses dates et signale les configurations à risque.": {
+"de": "Liest Header und Payload eines JWT, zeigt seine Daten an und markiert riskante Einstellungen.",
+"es": "Lee la cabecera y el contenido de un JWT, muestra sus fechas y señala las configuraciones de riesgo.",
+"pt": "Lê o cabeçalho e o conteúdo de um JWT, mostra as suas datas e assinala as configurações de risco."
+},
+"Logiciel cité": {
+"de": "Genannte Malware",
+"es": "Malware citado",
+"pt": "Malware citado"
+},
+"Longueur et familles de caractères : minuscules, majuscules, chiffres, symboles.": {
+"de": "Länge und Zeichenklassen: Klein- und Großbuchstaben, Ziffern, Symbole.",
+"es": "Longitud y familias de caracteres: minúsculas, mayúsculas, cifras, símbolos.",
+"pt": "Comprimento e famílias de caracteres: minúsculas, maiúsculas, algarismos, símbolos."
+},
+"Longueur, types de caractères et motifs que les outils de cassage testent en premier.": {
+"de": "Länge, Zeichenarten und Muster, die Cracking-Tools zuerst ausprobieren.",
+"es": "Longitud, tipos de caracteres y patrones que las herramientas de cracking prueban primero.",
+"pt": "Comprimento, tipos de caracteres e padrões que as ferramentas de cracking testam primeiro."
+},
+"MD5, SHA-1, SHA-256, SHA-384 et SHA-512 d'un texte ou d'un fichier, avec comparaison.": {
+"de": "MD5, SHA-1, SHA-256, SHA-384 und SHA-512 eines Textes oder einer Datei, mit Vergleich.",
+"es": "MD5, SHA-1, SHA-256, SHA-384 y SHA-512 de un texto o un archivo, con comparación.",
+"pt": "MD5, SHA-1, SHA-256, SHA-384 e SHA-512 de um texto ou de um ficheiro, com comparação."
+},
+"Manipulation": {
+"de": "Manipulation",
+"es": "Manipulación",
+"pt": "Manipulação"
+},
+"Mettre en cache et limiter le débit des requêtes coûteuses.": {
+"de": "Inhalte cachen und aufwendige Anfragen drosseln.",
+"es": "Usar caché y limitar el caudal de las peticiones costosas.",
+"pt": "Usar cache e limitar o débito dos pedidos dispendiosos."
+},
+"Mettre à jour les téléphones rapidement ; activer le mode isolement (Lockdown) pour les profils exposés.": {
+"de": "Telefone schnell aktualisieren; für gefährdete Personen den Blockierungsmodus (Lockdown) aktivieren.",
+"es": "Actualizar los teléfonos rápidamente; activar el modo de aislamiento (Lockdown) para los perfiles expuestos.",
+"pt": "Atualizar os telemóveis rapidamente; ativar o modo de isolamento (Lockdown) para os perfis expostos."
+},
+"Modification de consignes (température, pression, débit), arrêt ou blocage du contrôle par les opérateurs.": {
+"de": "Sollwerte werden verändert (Temperatur, Druck, Durchfluss), die Steuerung gestoppt oder die Bediener ausgesperrt.",
+"es": "Modificación de consignas (temperatura, presión, caudal), parada o bloqueo del control por parte de los operadores.",
+"pt": "Modificação de valores de referência (temperatura, pressão, caudal), paragem ou bloqueio do controlo pelos operadores."
+},
+"Mon CV ›": {
+"de": "Mein Lebenslauf ›",
+"es": "Mi CV ›",
+"pt": "O meu CV ›"
+},
+"Mon carnet de rétro-ingénierie : un labo d'analyse de malware sur Mac Apple Silicon, une progression de crackmes, et les règles de détection que j'en tire.": {
+"de": "Mein Reverse-Engineering-Notizbuch: ein Malware-Analyselabor auf einem Mac mit Apple Silicon, eine Crackme-Progression und die Erkennungsregeln, die ich daraus ableite.",
+"es": "Mi cuaderno de ingeniería inversa: un laboratorio de análisis de malware en un Mac Apple Silicon, una progresión de crackmes y las reglas de detección que saco de ellos.",
+"pt": "O meu caderno de engenharia reversa: um laboratório de análise de malware num Mac Apple Silicon, uma progressão de crackmes e as regras de deteção que deles retiro."
+},
+"Mon quotidien": {
+"de": "Mein Alltag",
+"es": "Mi día a día",
+"pt": "O meu dia a dia"
+},
+"Monétisation": {
+"de": "Monetarisierung",
+"es": "Monetización",
+"pt": "Monetização"
+},
+"Mot de passe par défaut, faille non corrigée ou accès distant d'un prestataire.": {
+"de": "Standardpasswort, ungepatchte Lücke oder Fernzugang eines Dienstleisters.",
+"es": "Contraseña por defecto, fallo sin parchear o acceso remoto de un proveedor.",
+"pt": "Palavra-passe predefinida, falha não corrigida ou acesso remoto de um prestador."
+},
+"Mots de passe": {
+"de": "Passwörter",
+"es": "Contraseñas",
+"pt": "Palavras-passe"
+},
+"Mots de passe enregistrés dans les navigateurs, cookies de session, portefeuilles de cryptomonnaies.": {
+"de": "Im Browser gespeicherte Passwörter, Sitzungscookies, Krypto-Wallets.",
+"es": "Contraseñas guardadas en los navegadores, cookies de sesión, monederos de criptomonedas.",
+"pt": "Palavras-passe guardadas nos navegadores, cookies de sessão, carteiras de criptomoedas."
+},
+"Mots de passe et authentification": {
+"de": "Passwörter und Authentifizierung",
+"es": "Contraseñas y autenticación",
+"pt": "Palavras-passe e autenticação"
+},
+"Mots de passe, hash, JWT, IOC, désobfuscateur : rien ne quitte ta machine.": {
+"de": "Passwörter, Hashes, JWT, IOCs, Deobfuscator: nichts verlässt deinen Rechner.",
+"es": "Contraseñas, hash, JWT, IOC, desofuscador: nada sale de tu equipo.",
+"pt": "Palavras-passe, hash, JWT, IOC, desofuscador: nada sai do teu computador."
+},
+"Ne jamais exposer d'interface industrielle sur Internet : passer par un VPN avec double authentification.": {
+"de": "Industrielle Oberflächen nie ins Internet stellen: Zugriff über ein VPN mit MFA.",
+"es": "No exponer nunca una interfaz industrial en Internet: pasar por una VPN con doble autenticación.",
+"pt": "Nunca expor uma interface industrial na Internet: passar por uma VPN com autenticação de dois fatores."
+},
+"Ne pas exposer les interfaces d'administration sur Internet.": {
+"de": "Admin-Oberflächen nicht im Internet exponieren.",
+"es": "No exponer las interfaces de administración en Internet.",
+"pt": "Não expor as interfaces de administração na Internet."
+},
+"Nom de domaine ressemblant, page de connexion copiée ou proxy qui relaie la vraie page.": {
+"de": "Ähnlich aussehende Domain, kopierte Anmeldeseite oder ein Proxy, der die echte Seite weiterleitet.",
+"es": "Nombre de dominio parecido, página de inicio de sesión copiada o proxy que retransmite la verdadera página.",
+"pt": "Nome de domínio parecido, página de autenticação copiada ou proxy que retransmite a verdadeira página."
+},
+"Noms cités": {
+"de": "Genannte Namen",
+"es": "Nombres citados",
+"pt": "Nomes citados"
+},
+"Note de rançon, négociation, puis menace de publication sur le site vitrine du groupe si la victime ne paie pas.": {
+"de": "Erpresserschreiben, Verhandlung, dann die Drohung, auf der Leak-Seite der Gruppe zu veröffentlichen, wenn das Opfer nicht zahlt.",
+"es": "Nota de rescate, negociación y luego amenaza de publicación en el sitio del grupo si la víctima no paga.",
+"pt": "Nota de resgate, negociação e depois ameaça de publicação no site do grupo se a vítima não pagar."
+},
+"N’hésitez pas à me contacter sur LinkedIn ! Bonne visite !": {
+"de": "Schreib mir gern auf LinkedIn! Viel Spaß beim Stöbern!",
+"es": "¡No dudes en contactarme en LinkedIn! ¡Buena visita!",
+"pt": "Não hesites em contactar-me no LinkedIn! Boa visita!"
+},
+"Objectif": {
+"de": "Ziel",
+"es": "Objetivo",
+"pt": "Objetivo"
+},
+"Obtention de la faille": {
+"de": "Beschaffung der Lücke",
+"es": "Obtención del fallo",
+"pt": "Obtenção da falha"
+},
+"Octets UTF-8": {
+"de": "UTF-8-Bytes",
+"es": "Bytes UTF-8",
+"pt": "Bytes UTF-8"
+},
+"Outils": {
+"de": "Tools",
+"es": "Herramientas",
+"pt": "Ferramentas"
+},
+"Par un équipement exposé non corrigé (VPN, pare-feu), des identifiants volés ou achetés à un courtier d'accès, ou un e-mail piégé.": {
+"de": "Über ein ungepatchtes, exponiertes Gerät (VPN, Firewall), gestohlene oder bei einem Access Broker gekaufte Zugangsdaten oder eine präparierte E-Mail.",
+"es": "A través de un equipo expuesto sin parchear (VPN, cortafuegos), credenciales robadas o compradas a un intermediario de accesos, o un correo trampa.",
+"pt": "Através de um equipamento exposto não corrigido (VPN, firewall), credenciais roubadas ou compradas a um intermediário de acessos, ou um email armadilhado."
+},
+"Pas encore assez d'historique.": {
+"de": "Noch nicht genug Verlauf.",
+"es": "Todavía no hay suficiente historial.",
+"pt": "Ainda não há histórico suficiente."
+},
+"Passer à une authentification résistante à l'hameçonnage (clés de sécurité, passkeys).": {
+"de": "Auf phishing-resistente Authentifizierung umsteigen (Sicherheitsschlüssel, Passkeys).",
+"es": "Pasar a una autenticación resistente al phishing (llaves de seguridad, passkeys).",
+"pt": "Passar para uma autenticação resistente ao phishing (chaves de segurança, passkeys)."
+},
+"Persistance discrète": {
+"de": "Unauffällige Persistenz",
+"es": "Persistencia discreta",
+"pt": "Persistência discreta"
+},
+"Plan de réponse à incident prêt et testé.": {
+"de": "Ein vorbereiteter und getesteter Incident-Response-Plan.",
+"es": "Plan de respuesta a incidentes preparado y probado.",
+"pt": "Plano de resposta a incidentes pronto e testado."
+},
+"Poignée de main Noise IK": {
+"de": "Noise-IK-Handshake",
+"es": "Handshake Noise IK",
+"pt": "Handshake Noise IK"
+},
+"Portes dérobées sur mesure, comptes légitimes, implants dans des équipements peu surveillés.": {
+"de": "Maßgeschneiderte Hintertüren, legitime Konten, Implantate auf kaum überwachten Geräten.",
+"es": "Puertas traseras a medida, cuentas legítimas, implantes en equipos poco vigilados.",
+"pt": "Portas das traseiras feitas à medida, contas legítimas, implantes em equipamentos pouco vigiados."
+},
+"Pour le réexpliquer en 30 secondes": {
+"de": "In 30 Sekunden erklärt",
+"es": "Para explicarlo en 30 segundos",
+"pt": "Para o explicar em 30 segundos"
+},
+"Pour partager sans lien cliquable : <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>.": {
+"de": "Zum Teilen ohne klickbare Links: <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>.",
+"es": "Para compartir sin enlaces clicables: <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>.",
+"pt": "Para partilhar sem ligações clicáveis: <code>hxxp</code>, <code>[.]</code>, <code>[@]</code>."
+},
+"PowerShell ou JavaScript, reconnu à partir du script collé.": {
+"de": "PowerShell oder JavaScript, erkannt am eingefügten Skript.",
+"es": "PowerShell o JavaScript, reconocido a partir del script pegado.",
+"pt": "PowerShell ou JavaScript, reconhecido a partir do script colado."
+},
+"Prise de compte": {
+"de": "Kontoübernahme",
+"es": "Toma de control de la cuenta",
+"pt": "Tomada da conta"
+},
+"Produit": {
+"de": "Produkt",
+"es": "Producto",
+"pt": "Produto"
+},
+"Projets": {
+"de": "Projekte",
+"es": "Proyectos",
+"pt": "Projetos"
+},
+"Propagation": {
+"de": "Ausbreitung",
+"es": "Propagación",
+"pt": "Propagação"
+},
+"Propulsé par": {
+"de": "Erstellt mit",
+"es": "Desarrollado con",
+"pt": "Feito com"
+},
+"Protéger les comptes de publication par une double authentification résistante (clé de sécurité).": {
+"de": "Veröffentlichungskonten mit phishing-resistenter MFA schützen (Sicherheitsschlüssel).",
+"es": "Proteger las cuentas de publicación con una doble autenticación resistente (llave de seguridad).",
+"pt": "Proteger as contas de publicação com uma autenticação de dois fatores resistente (chave de segurança)."
+},
+"Préférer un gestionnaire de mots de passe à l'enregistrement dans le navigateur.": {
+"de": "Lieber einen Passwort-Manager nutzen, statt Passwörter im Browser zu speichern.",
+"es": "Preferir un gestor de contraseñas a guardarlas en el navegador.",
+"pt": "Preferir um gestor de palavras-passe a guardá-las no navegador."
+},
+"Préparation": {
+"de": "Vorbereitung",
+"es": "Preparación",
+"pt": "Preparação"
+},
+"Prévoir un plan de continuité et une page de secours.": {
+"de": "Einen Notfallplan und eine Ausweichseite bereithalten.",
+"es": "Prever un plan de continuidad y una página de emergencia.",
+"pt": "Prever um plano de continuidade e uma página de recurso."
+},
+"Publier": {
+"de": "Veröffentlichen",
+"es": "Publicar",
+"pt": "Publicar"
+},
+"Période": {
+"de": "Zeitraum",
+"es": "Periodo",
+"pt": "Período"
+},
+"Rançongiciels": {
+"de": "Ransomware",
+"es": "Ransomware",
+"pt": "Ransomware"
+},
+"Rapport": {
+"de": "Bericht",
+"es": "Informe",
+"pt": "Relatório"
+},
+"Recherche d'équipements industriels joignables depuis Internet : interfaces web, accès de télémaintenance.": {
+"de": "Suche nach Industrieanlagen, die aus dem Internet erreichbar sind: Weboberflächen, Fernwartungszugänge.",
+"es": "Búsqueda de equipos industriales accesibles desde Internet: interfaces web, accesos de telemantenimiento.",
+"pt": "Procura de equipamentos industriais acessíveis a partir da Internet: interfaces web, acessos de telemanutenção."
+},
+"Recherche des cibles": {
+"de": "Zielsuche",
+"es": "Búsqueda de objetivos",
+"pt": "Procura de alvos"
+},
+"Recherche, analyse d'un correctif publié (pour retrouver la faille corrigée) ou achat à un courtier.": {
+"de": "Eigene Forschung, Analyse eines veröffentlichten Patches (um die behobene Lücke zu finden) oder Kauf bei einem Broker.",
+"es": "Investigación, análisis de un parche publicado (para encontrar el fallo corregido) o compra a un intermediario.",
+"pt": "Investigação, análise de uma correção publicada (para encontrar a falha corrigida) ou compra a um intermediário."
+},
+"Rechercher des traces de compromission : corriger ne chasse pas un intrus déjà installé.": {
+"de": "Nach Spuren einer Kompromittierung suchen: Ein Patch vertreibt keinen Eindringling, der schon drin ist.",
+"es": "Buscar rastros de compromiso: parchear no expulsa a un intruso ya instalado.",
+"pt": "Procurar vestígios de comprometimento: corrigir não expulsa um intruso já instalado."
+},
+"Refang puis extraction": {
+"de": "Refang, dann Extraktion",
+"es": "Refang y luego extracción",
+"pt": "Refang e depois extração"
+},
+"Renouvellement des clés": {
+"de": "Schlüsselwechsel",
+"es": "Renovación de claves",
+"pt": "Renovação de chaves"
+},
+"Repérage": {
+"de": "Aufklärung",
+"es": "Reconocimiento",
+"pt": "Reconhecimento"
+},
+"Repérage d'un éditeur, d'un prestataire ou d'un paquet open source très utilisé, souvent moins protégé que ses clients.": {
+"de": "Ein Hersteller, ein Dienstleister oder ein viel genutztes Open-Source-Paket wird ausgewählt – oft schlechter geschützt als seine Kunden.",
+"es": "Localización de un editor, un proveedor de servicios o un paquete open source muy usado, a menudo menos protegido que sus clientes.",
+"pt": "Identificação de um editor, de um prestador ou de um pacote open source muito usado, muitas vezes menos protegido do que os seus clientes."
+},
+"Repérage des bases de données, des stockages et des applications métiers.": {
+"de": "Datenbanken, Speicher und Fachanwendungen werden aufgespürt.",
+"es": "Localización de las bases de datos, de los almacenamientos y de las aplicaciones de negocio.",
+"pt": "Identificação das bases de dados, dos armazenamentos e das aplicações de negócio."
+},
+"Revente sur des forums, chantage, ou réutilisation pour de l'hameçonnage ciblé.": {
+"de": "Verkauf in Foren, Erpressung oder Weiterverwendung für gezieltes Phishing.",
+"es": "Reventa en foros, chantaje o reutilización para phishing dirigido.",
+"pt": "Revenda em fóruns, chantagem ou reutilização para phishing direcionado."
+},
+"Rien de notable cette semaine pour l'instant.": {
+"de": "Bisher nichts Bemerkenswertes in dieser Woche.",
+"es": "Nada destacable esta semana por ahora.",
+"pt": "Nada de relevante esta semana, por enquanto."
+},
+"Rien ne sort": {
+"de": "Nichts verlässt die Seite",
+"es": "Nada sale",
+"pt": "Nada sai"
+},
+"Rédiger": {
+"de": "Dokumentieren",
+"es": "Redactar",
+"pt": "Redigir"
+},
+"Réserver des postes dédiés et isolés à la signature.": {
+"de": "Eigene, isolierte Rechner fürs Signieren verwenden.",
+"es": "Reservar puestos dedicados y aislados para la firma.",
+"pt": "Reservar postos dedicados e isolados para a assinatura."
+},
+"Réutiliser le résultat": {
+"de": "Ergebnis weiterverwenden",
+"es": "Reutilizar el resultado",
+"pt": "Reutilizar o resultado"
+},
+"SHA-1, SHA-256, SHA-384 et SHA-512 par Web Crypto ; MD5, absent de Web Crypto, par une implémentation intégrée.": {
+"de": "SHA-1, SHA-256, SHA-384 und SHA-512 über Web Crypto; MD5, das in Web Crypto fehlt, über eine eingebaute Implementierung.",
+"es": "SHA-1, SHA-256, SHA-384 y SHA-512 con Web Crypto; MD5, ausente de Web Crypto, con una implementación integrada.",
+"pt": "SHA-1, SHA-256, SHA-384 e SHA-512 com Web Crypto; MD5, ausente do Web Crypto, com uma implementação integrada."
+},
+"Saturer un service en ligne de trafic pour le rendre inaccessible. Souvent revendiqué par des groupes hacktivistes ; spectaculaire mais en général sans vol de données.": {
+"de": "Einen Online-Dienst mit Datenverkehr überfluten, bis er nicht mehr erreichbar ist. Oft von Hacktivisten beansprucht; spektakulär, aber meist ohne Datendiebstahl.",
+"es": "Saturar un servicio en línea de tráfico para dejarlo inaccesible. A menudo reivindicado por grupos hacktivistas; espectacular, pero en general sin robo de datos.",
+"pt": "Saturar um serviço online com tráfego para o tornar inacessível. Muitas vezes reivindicado por grupos hacktivistas; espetacular, mas em geral sem roubo de dados."
+},
+"Schéma type de l’exploitation d’une faille, avec les techniques MITRE ATT&amp;CK correspondantes.": {
+"de": "Typisches Muster der Ausnutzung einer Schwachstelle, mit den passenden MITRE-ATT&amp;CK-Techniken.",
+"es": "Esquema típico de la explotación de un fallo, con las técnicas MITRE ATT&amp;CK correspondientes.",
+"pt": "Esquema típico da exploração de uma falha, com as técnicas MITRE ATT&amp;CK correspondentes."
+},
+"Schéma type, phase par phase, avec les techniques MITRE ATT&amp;CK correspondantes.": {
+"de": "Typisches Muster, Phase für Phase, mit den passenden MITRE-ATT&amp;CK-Techniken.",
+"es": "Esquema típico, fase por fase, con las técnicas MITRE ATT&amp;CK correspondientes.",
+"pt": "Esquema típico, fase a fase, com as técnicas MITRE ATT&amp;CK correspondentes."
+},
+"Se protéger": {
+"de": "Schutzmaßnahmen",
+"es": "Protegerse",
+"pt": "Proteger-se"
+},
+"Site symbolique (administration, transports, banques), souvent annoncé sur les réseaux sociaux ou Telegram.": {
+"de": "Eine symbolträchtige Seite (Behörden, Verkehr, Banken), oft vorab in sozialen Netzwerken oder auf Telegram angekündigt.",
+"es": "Sitio simbólico (administración, transportes, bancos), a menudo anunciado en las redes sociales o en Telegram.",
+"pt": "Site simbólico (administração, transportes, bancos), muitas vezes anunciado nas redes sociais ou no Telegram."
+},
+"Sources": {
+"de": "Quellen",
+"es": "Fuentes",
+"pt": "Fontes"
+},
+"Sources et méthode": {
+"de": "Quellen und Methode",
+"es": "Fuentes y método",
+"pt": "Fontes e método"
+},
+"Sous le capot": {
+"de": "Unter der Haube",
+"es": "Bajo el capó",
+"pt": "Por dentro"
+},
+"Suite de l'attaque": {
+"de": "Weiterer Verlauf",
+"es": "Continuación del ataque",
+"pt": "Continuação do ataque"
+},
+"Suppression des sauvegardes et des clichés, puis chiffrement des serveurs, souvent la nuit ou le week-end.": {
+"de": "Backups und Snapshots werden gelöscht, dann werden die Server verschlüsselt – oft nachts oder am Wochenende.",
+"es": "Borrado de las copias de seguridad y de las instantáneas, y luego cifrado de los servidores, a menudo de noche o el fin de semana.",
+"pt": "Eliminação das cópias de segurança e dos instantâneos e depois cifragem dos servidores, muitas vezes à noite ou ao fim de semana."
+},
+"Sur ce site": {
+"de": "Auf dieser Seite",
+"es": "En este sitio",
+"pt": "Neste site"
+},
+"Sur clic seulement, les 5 premiers caractères de l'empreinte partent vers Pwned Passwords.": {
+"de": "Nur auf Klick gehen die ersten 5 Zeichen des Hashes an Pwned Passwords.",
+"es": "Solo al hacer clic, los 5 primeros caracteres de la huella se envían a Pwned Passwords.",
+"pt": "Só ao clicar, os 5 primeiros caracteres da impressão seguem para o Pwned Passwords."
+},
+"Sur mon temps libre, je relève des challenges et je construis les outils et les projets de ce site.": {
+"de": "In meiner Freizeit löse ich Challenges und baue die Tools und Projekte dieser Seite.",
+"es": "En mi tiempo libre, resuelvo retos y construyo las herramientas y los proyectos de este sitio.",
+"pt": "No meu tempo livre, resolvo desafios e construo as ferramentas e os projetos deste site."
+},
+"Surveiller l'annuaire et les mouvements latéraux (EDR, journaux) et segmenter le réseau.": {
+"de": "Verzeichnis und Lateral Movement überwachen (EDR, Logs) und das Netz segmentieren.",
+"es": "Vigilar el directorio y los movimientos laterales (EDR, registros) y segmentar la red.",
+"pt": "Vigiar o diretório e os movimentos laterais (EDR, registos) e segmentar a rede."
+},
+"Sélection": {
+"de": "Auswahl",
+"es": "Selección",
+"pt": "Seleção"
+},
+"Séparer le réseau industriel du réseau bureautique et surveiller les changements de consignes.": {
+"de": "Industrie- und Büronetz trennen und Sollwertänderungen überwachen.",
+"es": "Separar la red industrial de la red ofimática y vigilar los cambios de consignas.",
+"pt": "Separar a rede industrial da rede de escritório e vigiar as alterações de valores de referência."
+},
+"Séries": {
+"de": "Serien",
+"es": "Series",
+"pt": "Séries"
+},
+"Tenir l'inventaire des dépendances (SBOM) et figer les versions installées.": {
+"de": "Ein Abhängigkeitsinventar (SBOM) führen und installierte Versionen festschreiben.",
+"es": "Mantener el inventario de dependencias (SBOM) y fijar las versiones instaladas.",
+"pt": "Manter o inventário de dependências (SBOM) e fixar as versões instaladas."
+},
+"Tes règles": {
+"de": "Deine Regeln",
+"es": "Tus reglas",
+"pt": "As tuas regras"
+},
+"Texte officiel de la CISA (en anglais) :": {
+"de": "Offizieller CISA-Text (auf Englisch):",
+"es": "Texto oficial de la CISA (en inglés):",
+"pt": "Texto oficial da CISA (em inglês):"
+},
+"Tirage sans biais": {
+"de": "Ziehung ohne Verzerrung",
+"es": "Sorteo sin sesgo",
+"pt": "Sorteio sem enviesamento"
+},
+"Tous les outils": {
+"de": "Alle Tools",
+"es": "Todas las herramientas",
+"pt": "Todas as ferramentas"
+},
+"Tout est calculé dans ton navigateur : rien n'est envoyé ni enregistré.": {
+"de": "Alles wird in deinem Browser berechnet: Nichts wird gesendet oder gespeichert.",
+"es": "Todo se calcula en tu navegador: no se envía ni se guarda nada.",
+"pt": "Tudo é calculado no teu navegador: nada é enviado nem guardado."
+},
+"Toutes les 2 minutes, sans couper le trafic : c'est la confidentialité persistante.": {
+"de": "Alle 2 Minuten, ohne den Datenverkehr zu unterbrechen: das ist Perfect Forward Secrecy.",
+"es": "Cada 2 minutos, sin cortar el tráfico: es el secreto perfecto hacia adelante.",
+"pt": "A cada 2 minutos, sem interromper o tráfego: é o sigilo futuro perfeito."
+},
+"Tromper des personnes pour voler leurs identifiants ou leur faire lancer un fichier. Les kits modernes relaient la vraie page de connexion et contournent même les codes de double authentification.": {
+"de": "Menschen täuschen, um ihre Zugangsdaten zu stehlen oder sie eine Datei öffnen zu lassen. Moderne Kits leiten die echte Anmeldeseite weiter und umgehen sogar Einmalcodes.",
+"es": "Engañar a las personas para robar sus credenciales o hacerles abrir un archivo. Los kits modernos retransmiten la verdadera página de inicio de sesión y eluden incluso los códigos de doble autenticación.",
+"pt": "Enganar pessoas para roubar as suas credenciais ou fazê-las abrir um ficheiro. Os kits modernos retransmitem a verdadeira página de autenticação e contornam até os códigos de autenticação de dois fatores."
+},
+"Tunnel chiffré": {
+"de": "Verschlüsselter Tunnel",
+"es": "Túnel cifrado",
+"pt": "Túnel cifrado"
+},
+"Type": {
+"de": "Art",
+"es": "Tipo",
+"pt": "Tipo"
+},
+"Un JWT, c'est trois parties séparées par des points : en-tête, contenu, signature.": {
+"de": "Ein JWT besteht aus drei durch Punkte getrennten Teilen: Header, Payload, Signatur.",
+"es": "Un JWT son tres partes separadas por puntos: cabecera, contenido, firma.",
+"pt": "Um JWT são três partes separadas por pontos: cabeçalho, conteúdo, assinatura."
+},
+"Un VPN écrit de zéro en Go, sur le modèle de WireGuard.": {
+"de": "Ein von Grund auf in Go geschriebenes VPN nach dem Vorbild von WireGuard.",
+"es": "Una VPN escrita desde cero en Go, inspirada en WireGuard.",
+"pt": "Uma VPN escrita do zero em Go, segundo o modelo do WireGuard."
+},
+"Un article est retenu s'il parle d'une faille exploitée ou d'une attaque. Les articles qui traitent du même sujet sont regroupés (même CVE, même nom d'entreprise ou de produit) ; un sujet repris par plusieurs sources est classé plus haut. Ce classement est automatique : il peut regrouper ou séparer des sujets à tort. Vérifie toujours auprès des sources.": {
+"de": "Ein Artikel wird aufgenommen, wenn er eine ausgenutzte Schwachstelle oder einen Angriff behandelt. Artikel zum selben Thema werden gruppiert (gleiche CVE, gleicher Firmen- oder Produktname); ein Thema, über das mehrere Quellen berichten, steht weiter oben. Diese Rangfolge ist automatisch: Sie kann Themen fälschlich zusammenlegen oder trennen. Prüfe immer die Quellen.",
+"es": "Se conserva un artículo si trata de un fallo explotado o de un ataque. Los artículos sobre el mismo tema se agrupan (mismo CVE, mismo nombre de empresa o de producto); un tema recogido por varias fuentes sube en la clasificación. Esta clasificación es automática: puede agrupar o separar temas por error. Comprueba siempre las fuentes.",
+"pt": "Um artigo é mantido se falar de uma falha explorada ou de um ataque. Os artigos sobre o mesmo tema são agrupados (mesmo CVE, mesmo nome de empresa ou de produto); um tema retomado por várias fontes fica mais acima. Esta classificação é automática: pode agrupar ou separar temas por engano. Confirma sempre nas fontes."
+},
+"Un attaquant a obtenu un accès non autorisé à un système d'information. Le déroulé précis n'est pas encore public ou se trouve dans les articles ; voici le schéma général d'une intrusion.": {
+"de": "Ein Angreifer hat sich unbefugt Zugang zu einem IT-System verschafft. Der genaue Ablauf ist noch nicht öffentlich oder steht in den Artikeln; hier das allgemeine Muster eines Einbruchs.",
+"es": "Un atacante ha obtenido un acceso no autorizado a un sistema de información. El desarrollo preciso todavía no es público o está en los artículos; este es el esquema general de una intrusión.",
+"pt": "Um atacante obteve um acesso não autorizado a um sistema de informação. O desenrolar preciso ainda não é público ou está nos artigos; eis o esquema geral de uma intrusão."
+},
+"Un e-mail, un journal, un rapport : du texte brut, même déjà « défangé ».": {
+"de": "Eine E-Mail, ein Log, ein Bericht: reiner Text, auch bereits entschärft („defang“).",
+"es": "Un correo, un registro, un informe: texto plano, aunque ya esté desactivado («defang»).",
+"pt": "Um email, um registo, um relatório: texto simples, mesmo já neutralizado («defang»)."
+},
+"Un fichier piégé est ouvert ; l'attaquant obtient l'accès au poste et aux comptes de l'employé.": {
+"de": "Eine präparierte Datei wird geöffnet; der Angreifer erhält Zugriff auf Rechner und Konten der Person.",
+"es": "Se abre un archivo trampa; el atacante obtiene acceso al puesto y a las cuentas del empleado.",
+"pt": "Um ficheiro armadilhado é aberto; o atacante obtém acesso ao posto e às contas do funcionário."
+},
+"Un groupe criminel pénètre le réseau, vole des données puis chiffre les systèmes et exige une rançon. Le vol avant chiffrement permet une « double extorsion » : payer pour déchiffrer, et payer pour que les données ne soient pas publiées.": {
+"de": "Eine kriminelle Gruppe dringt ins Netz ein, stiehlt Daten, verschlüsselt dann die Systeme und fordert Lösegeld. Der Diebstahl vor der Verschlüsselung ermöglicht eine „doppelte Erpressung“: zahlen fürs Entschlüsseln und zahlen, damit die Daten nicht veröffentlicht werden.",
+"es": "Un grupo criminal entra en la red, roba datos, cifra los sistemas y exige un rescate. Robar antes de cifrar permite una «doble extorsión»: pagar para descifrar y pagar para que los datos no se publiquen.",
+"pt": "Um grupo criminoso entra na rede, rouba dados, cifra os sistemas e exige um resgate. Roubar antes de cifrar permite uma «dupla extorsão»: pagar para decifrar e pagar para que os dados não sejam publicados."
+},
+"Un groupe lié à un État cherche à rester invisible le plus longtemps possible pour collecter du renseignement. APT signifie « menace persistante avancée » : des moyens importants et de la patience.": {
+"de": "Eine staatsnahe Gruppe versucht, möglichst lange unsichtbar zu bleiben, um Informationen zu sammeln. APT steht für „Advanced Persistent Threat“: große Mittel und viel Geduld.",
+"es": "Un grupo vinculado a un Estado busca permanecer invisible el mayor tiempo posible para recopilar inteligencia. APT significa «amenaza persistente avanzada»: medios importantes y paciencia.",
+"pt": "Um grupo ligado a um Estado procura ficar invisível o máximo de tempo possível para recolher informações. APT significa «ameaça persistente avançada»: meios importantes e paciência."
+},
+"Un programme malveillant est diffusé largement (faux logiciels, publicités piégées, pièces jointes) pour voler des informations ou prendre le contrôle des machines.": {
+"de": "Ein Schadprogramm wird breit gestreut (gefälschte Software, präparierte Werbung, Anhänge), um Informationen zu stehlen oder Rechner zu übernehmen.",
+"es": "Un programa malicioso se difunde ampliamente (falsos programas, anuncios trampa, adjuntos) para robar información o tomar el control de las máquinas.",
+"pt": "Um programa malicioso é amplamente difundido (falsos programas, anúncios armadilhados, anexos) para roubar informações ou assumir o controlo das máquinas."
+},
+"Une mise à jour ou un paquet légitime embarque une porte dérobée, distribuée par les canaux officiels.": {
+"de": "Ein legitimes Update oder Paket enthält eine Hintertür und wird über die offiziellen Kanäle verteilt.",
+"es": "Una actualización o un paquete legítimo incluye una puerta trasera, distribuida por los canales oficiales.",
+"pt": "Uma atualização ou um pacote legítimo inclui uma porta das traseiras, distribuída pelos canais oficiais."
+},
+"Une requête piégée provoque l'exécution de code ou contourne l'authentification.": {
+"de": "Eine präparierte Anfrage löst Codeausführung aus oder umgeht die Authentifizierung.",
+"es": "Una petición trampa provoca la ejecución de código o elude la autenticación.",
+"pt": "Um pedido armadilhado provoca a execução de código ou contorna a autenticação."
+},
+"Une règle YARA et une règle Sigma, chacune avec son fichier de test.": {
+"de": "Eine YARA-Regel und eine Sigma-Regel, jede mit eigener Testdatei.",
+"es": "Una regla YARA y una regla Sigma, cada una con su archivo de prueba.",
+"pt": "Uma regra YARA e uma regra Sigma, cada uma com o seu ficheiro de teste."
+},
+"Uniquement du texte transformé : aucun <code>eval</code>, et la CSP du site l'interdirait de toute façon.": {
+"de": "Nur transformierter Text: kein <code>eval</code> – und die CSP der Website würde es ohnehin verbieten.",
+"es": "Solo texto transformado: ningún <code>eval</code>, y la CSP del sitio lo prohibiría de todos modos.",
+"pt": "Apenas texto transformado: nenhum <code>eval</code>, e a CSP do site proibi-lo-ia de qualquer forma."
+},
+"Utiliser la protection anti-DDoS de l'hébergeur ou d'un CDN.": {
+"de": "Den DDoS-Schutz des Hosters oder eines CDN nutzen.",
+"es": "Usar la protección anti-DDoS del proveedor de alojamiento o de una CDN.",
+"pt": "Usar a proteção anti-DDoS do alojamento ou de uma CDN."
+},
+"Voir les actus": {
+"de": "News ansehen",
+"es": "Ver las noticias",
+"pt": "Ver as notícias"
+},
+"Vol": {
+"de": "Diebstahl",
+"es": "Robo",
+"pt": "Roubo"
+},
+"Vol d'un compte de développeur ou de publication, intrusion dans la chaîne de compilation, ou abus de l'accès d'un prestataire.": {
+"de": "Ein Entwickler- oder Veröffentlichungskonto wird gestohlen, die Build-Pipeline kompromittiert oder der Zugang eines Dienstleisters missbraucht.",
+"es": "Robo de una cuenta de desarrollador o de publicación, intrusión en la cadena de compilación o abuso del acceso de un proveedor.",
+"pt": "Roubo de uma conta de programador ou de publicação, intrusão na cadeia de compilação ou abuso do acesso de um prestador."
+},
+"Vol de clés privées ou modification d'une transaction au moment de sa signature.": {
+"de": "Private Schlüssel werden gestohlen oder eine Transaktion beim Signieren verändert.",
+"es": "Robo de claves privadas o modificación de una transacción en el momento de su firma.",
+"pt": "Roubo de chaves privadas ou modificação de uma transação no momento da sua assinatura."
+},
+"Vol de données": {
+"de": "Datendiebstahl",
+"es": "Robo de datos",
+"pt": "Roubo de dados"
+},
+"Vol de données, sabotage, ou revente de l'accès à d'autres groupes.": {
+"de": "Datendiebstahl, Sabotage oder Weiterverkauf des Zugangs an andere Gruppen.",
+"es": "Robo de datos, sabotaje o reventa del acceso a otros grupos.",
+"pt": "Roubo de dados, sabotagem ou revenda do acesso a outros grupos."
+},
+"Vol des accès": {
+"de": "Diebstahl der Zugangsdaten",
+"es": "Robo de los accesos",
+"pt": "Roubo dos acessos"
+},
+"Vérificateur de mot de passe": {
+"de": "Passwort-Prüfer",
+"es": "Verificador de contraseñas",
+"pt": "Verificador de palavras-passe"
+},
+"Vérifier dans les fuites de données": {
+"de": "In Datenlecks prüfen",
+"es": "Comprobar en las filtraciones de datos",
+"pt": "Verificar nas fugas de dados"
+},
+"Vérifier les offres d'emploi et ne jamais exécuter un « test technique » reçu d'un inconnu.": {
+"de": "Stellenangebote prüfen und nie einen „technischen Test“ eines Unbekannten ausführen.",
+"es": "Verificar las ofertas de empleo y no ejecutar nunca una «prueba técnica» recibida de un desconocido.",
+"pt": "Verificar as ofertas de emprego e nunca executar um «teste técnico» recebido de um desconhecido."
+},
+"Write-ups et exercices, comme mes exercices de cryptographie.": {
+"de": "Write-ups und Übungen, etwa meine Kryptografie-Übungen.",
+"es": "Write-ups y ejercicios, como mis ejercicios de criptografía.",
+"pt": "Write-ups e exercícios, como os meus exercícios de criptografia."
+},
+"Zero-days et grosses attaques, mis à jour toutes les 6 heures, avec une fiche par sujet.": {
+"de": "Zero-Days und große Angriffe, alle 6 Stunden aktualisiert, mit einem Steckbrief pro Thema.",
+"es": "Zero-days y grandes ataques, actualizados cada 6 horas, con una ficha por tema.",
+"pt": "Zero-days e grandes ataques, atualizados a cada 6 horas, com uma ficha por tema."
+},
+"afficher": {
+"de": "anzeigen",
+"es": "mostrar",
+"pt": "mostrar"
+},
+"aussi : ": {
+"de": "außerdem: ",
+"es": "también: ",
+"pt": "também: "
+},
+"comparer avec une empreinte": {
+"de": "mit einem Hash vergleichen",
+"es": "comparar con una huella",
+"pt": "comparar com uma impressão digital"
+},
+"comportements repérés (MITRE ATT&amp;CK)": {
+"de": "erkannte Verhaltensweisen (MITRE ATT&amp;CK)",
+"es": "comportamientos detectados (MITRE ATT&amp;CK)",
+"pt": "comportamentos detetados (MITRE ATT&amp;CK)"
+},
+"contenu (payload)": {
+"de": "Inhalt (Payload)",
+"es": "contenido (payload)",
+"pt": "conteúdo (payload)"
+},
+"copier": {
+"de": "kopieren",
+"es": "copiar",
+"pt": "copiar"
+},
+"couches retirées": {
+"de": "entfernte Schichten",
+"es": "capas eliminadas",
+"pt": "camadas removidas"
+},
+"cybersécurité": {
+"de": "Cybersicherheit",
+"es": "ciberseguridad",
+"pt": "cibersegurança"
+},
+"en ligne": {
+"de": "online",
+"es": "en línea",
+"pt": "online"
+},
+"en-tête": {
+"de": "Header",
+"es": "cabecera",
+"pt": "cabeçalho"
+},
+"entrée": {
+"de": "Eingabe",
+"es": "entrada",
+"pt": "entrada"
+},
+"fiche": {
+"de": "Steckbrief",
+"es": "ficha",
+"pt": "ficha"
+},
+"heure de Paris": {
+"de": "Pariser Zeit",
+"es": "hora de París",
+"pt": "hora de Paris"
+},
+"indicateurs de compromission (toutes couches)": {
+"de": "Kompromittierungsindikatoren (alle Schichten)",
+"es": "indicadores de compromiso (todas las capas)",
+"pt": "indicadores de comprometimento (todas as camadas)"
+},
+"indisponible": {
+"de": "nicht verfügbar",
+"es": "no disponible",
+"pt": "indisponível"
+},
+"indisponible lors de la dernière mise à jour": {
+"de": "bei der letzten Aktualisierung nicht verfügbar",
+"es": "no disponible en la última actualización",
+"pt": "indisponível na última atualização"
+},
+"intégration continue": {
+"de": "Continuous Integration",
+"es": "integración continua",
+"pt": "integração contínua"
+},
+"jeton (JWT)": {
+"de": "Token (JWT)",
+"es": "token (JWT)",
+"pt": "token (JWT)"
+},
+"k-anonymat": {
+"de": "k-Anonymität",
+"es": "k-anonimato",
+"pt": "k-anonimato"
+},
+"labo personnel": {
+"de": "persönliches Labor",
+"es": "laboratorio personal",
+"pt": "laboratório pessoal"
+},
+"longueur": {
+"de": "Länge",
+"es": "longitud",
+"pt": "comprimento"
+},
+"majuscules": {
+"de": "Großbuchstaben",
+"es": "mayúsculas",
+"pt": "maiúsculas"
+},
+"minivpn, un VPN écrit de zéro en Go, et reverse-lab, mon labo de rétro-ingénierie.": {
+"de": "minivpn, ein von Grund auf in Go geschriebenes VPN, und reverse-lab, mein Reverse-Engineering-Labor.",
+"es": "minivpn, una VPN escrita desde cero en Go, y reverse-lab, mi laboratorio de ingeniería inversa.",
+"pt": "minivpn, uma VPN escrita do zero em Go, e reverse-lab, o meu laboratório de engenharia reversa."
+},
+"mot de passe": {
+"de": "Passwort",
+"es": "contraseña",
+"pt": "palavra-passe"
+},
+"mot de passe à tester": {
+"de": "zu prüfendes Passwort",
+"es": "contraseña a comprobar",
+"pt": "palavra-passe a testar"
+},
+"navigateur + k-anonymat": {
+"de": "Browser + k-Anonymität",
+"es": "navegador + k-anonimato",
+"pt": "navegador + k-anonimato"
+},
+"navigateur, sans exécution": {
+"de": "im Browser, ohne Ausführung",
+"es": "navegador, sin ejecución",
+"pt": "navegador, sem execução"
+},
+"nombre de mots de passe": {
+"de": "Anzahl der Passwörter",
+"es": "número de contraseñas",
+"pt": "número de palavras-passe"
+},
+"ou un fichier (512 Mo max)": {
+"de": "oder eine Datei (max. 512 MB)",
+"es": "o un archivo (512 MB máx.)",
+"pt": "ou um ficheiro (512 MB máx.)"
+},
+"ouvrir ›": {
+"de": "öffnen ›",
+"es": "abrir ›",
+"pt": "abrir ›"
+},
+"pas d'utilisation connue": {
+"de": "keine bekannte Nutzung",
+"es": "sin uso conocido",
+"pt": "sem utilização conhecida"
+},
+"projet pédagogique": {
+"de": "Lernprojekt",
+"es": "proyecto didáctico",
+"pt": "projeto pedagógico"
+},
+"rançongiciel": {
+"de": "Ransomware",
+"es": "ransomware",
+"pt": "ransomware"
+},
+"résultat": {
+"de": "Ausgabe",
+"es": "resultado",
+"pt": "resultado"
+},
+"résultats défangés": {
+"de": "entschärfte Ergebnisse",
+"es": "resultados desactivados",
+"pt": "resultados neutralizados"
+},
+"sans caractères ambigus (l, 1, O, 0)": {
+"de": "ohne verwechselbare Zeichen (l, 1, O, 0)",
+"es": "sin caracteres ambiguos (l, 1, O, 0)",
+"pt": "sem caracteres ambíguos (l, 1, O, 0)"
+},
+"script ou ligne de commande suspecte": {
+"de": "verdächtiges Skript oder verdächtige Befehlszeile",
+"es": "script o línea de comandos sospechosa",
+"pt": "script ou linha de comandos suspeita"
+},
+"texte": {
+"de": "Text",
+"es": "texto",
+"pt": "texto"
+},
+"texte transformé": {
+"de": "umgewandelter Text",
+"es": "texto transformado",
+"pt": "texto transformado"
+},
+"texte à analyser (logs, email, rapport…)": {
+"de": "zu analysierender Text (Logs, E-Mail, Bericht …)",
+"es": "texto a analizar (logs, correo, informe…)",
+"pt": "texto a analisar (logs, email, relatório…)"
+},
+"toutes les actus ›": {
+"de": "alle News ›",
+"es": "todas las noticias ›",
+"pt": "todas as notícias ›"
+},
+"utilisation connue": {
+"de": "bekannte Nutzung",
+"es": "uso conocido",
+"pt": "utilização conhecida"
+},
+"À chaque publication, l'intégration continue compile les règles YARA, vérifie qu'elles détectent les fichiers de test prévus et ignorent les autres (ni faux négatif, ni faux positif), puis passe les règles Sigma au validateur officiel.": {
+"de": "Bei jeder Veröffentlichung kompiliert die CI die YARA-Regeln, prüft, dass sie die vorgesehenen Testdateien erkennen und die anderen ignorieren (weder falsch negativ noch falsch positiv), und schickt die Sigma-Regeln durch den offiziellen Validator.",
+"es": "En cada publicación, la integración continua compila las reglas YARA, comprueba que detectan los archivos de prueba previstos e ignoran los demás (ni falso negativo ni falso positivo), y luego pasa las reglas Sigma por el validador oficial.",
+"pt": "A cada publicação, a integração contínua compila as regras YARA, verifica que detetam os ficheiros de teste previstos e ignoram os outros (nem falso negativo, nem falso positivo) e depois passa as regras Sigma pelo validador oficial."
+},
+"À propos": {
+"de": "Über mich",
+"es": "Acerca de",
+"pt": "Sobre mim"
+},
+"Échéance (agences fédérales américaines)": {
+"de": "Frist (US-Bundesbehörden)",
+"es": "Plazo (agencias federales estadounidenses)",
+"pt": "Prazo (agências federais norte-americanas)"
+},
+"Épluche les couches d’un script PowerShell ou JavaScript malveillant, sans jamais l’exécuter, et relève comportements et IOC.": {
+"de": "Schält die Schichten eines bösartigen PowerShell- oder JavaScript-Skripts ab, ohne es je auszuführen, und listet Verhaltensweisen und IOCs.",
+"es": "Pela las capas de un script PowerShell o JavaScript malicioso, sin ejecutarlo nunca, y señala comportamientos e IOC.",
+"pt": "Descasca as camadas de um script PowerShell ou JavaScript malicioso, sem nunca o executar, e regista comportamentos e IOC."
+}
+}

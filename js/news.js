@@ -83,7 +83,7 @@
 document.addEventListener("click", function (e) {
   var btn = e.target.closest(".fiche__copy");
   if (!btn || !navigator.clipboard) return;
-  var lang = document.documentElement.lang === "en" ? "en" : "fr";
+  var lang = ["fr", "en", "es", "pt", "de"].indexOf(document.documentElement.lang) >= 0 ? document.documentElement.lang : "en";
   var span = btn.closest(".fiche__term").querySelector('.fiche__pitch [lang="' + lang + '"]');
   if (!span) return;
   navigator.clipboard.writeText(span.textContent.trim()).then(function () {

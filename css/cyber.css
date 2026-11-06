@@ -138,17 +138,24 @@
 :root .menu-trigger { color: var(--muted); }
 :root .menu-trigger:hover { color: var(--accent); }
 
-/* ---------- Langue FR / EN (voir js/lang.js) ---------- */
-:root[lang="fr"] [lang="en"],
-:root[lang="en"] [lang="fr"] {
+/* ---------- Langues (voir js/lang.js) ---------- */
+/* Chaque texte existe en fr, en, es, pt et de : seuls ceux de la langue choisie restent visibles. */
+:root[lang="fr"] [lang]:not([lang="fr"]),
+:root[lang="en"] [lang]:not([lang="en"]),
+:root[lang="es"] [lang]:not([lang="es"]),
+:root[lang="pt"] [lang]:not([lang="pt"]),
+:root[lang="de"] [lang]:not([lang="de"]) {
   display: none !important;
 }
+
+/* Liste déroulante des langues */
+:root .lang-menu { position: relative; margin: 0 0 0 20px; }
 :root .lang-switch {
   display: inline-flex;
   align-items: center;
-  gap: 0.5ch;
-  margin: 0 0 0 20px;
-  padding: 4px 10px;
+  gap: 7px;
+  margin: 0;
+  padding: 4px 9px 4px 8px;
   border: 1px solid var(--border-strong);
   border-radius: 6px;
   background: transparent;
@@ -158,19 +165,114 @@
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.4;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-:root .lang-switch:hover {
+:root .lang-switch:hover,
+:root .lang-menu.is-open .lang-switch {
   border-color: var(--accent);
   color: var(--text-strong);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
 }
-:root .lang-switch:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+:root .lang-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:root .lang-switch svg { width: 15px; height: 15px; flex: none; }
+:root .lang-switch__chev { transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+:root .lang-menu.is-open .lang-switch__chev { transform: rotate(180deg); }
+:root .lang-switch__cur { min-width: 2ch; color: var(--accent); font-weight: 700; }
+:root .lang-switch__cur::before { content: "EN"; }
+:root[lang="fr"] .lang-switch__cur::before { content: "FR"; }
+:root[lang="es"] .lang-switch__cur::before { content: "ES"; }
+:root[lang="pt"] .lang-switch__cur::before { content: "PT"; }
+:root[lang="de"] .lang-switch__cur::before { content: "DE"; }
+
+:root .lang-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 950;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse 120% 80px at 100% 0%, rgba(56, 189, 248, 0.12), transparent 70%),
+    var(--surface);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.25s;
 }
-:root[lang="fr"] .lang-switch [data-l="fr"],
-:root[lang="en"] .lang-switch [data-l="en"] {
-  color: var(--accent);
-  font-weight: 700;
+:root .lang-menu.is-open .lang-list {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+:root .lang-list li { margin: 0; padding: 0; }
+:root .lang-list li::before, :root .lang-list li::marker { content: none; }
+:root .lang-list button {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px 8px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+:root .lang-list button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transform: scaleY(0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root .lang-list button:is(:hover, :focus-visible) {
+  outline: none;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.12), transparent 80%);
+  color: var(--text-strong);
+}
+:root .lang-list button:is(:hover, :focus-visible)::before { transform: scaleY(1); }
+:root .lang-list__code {
+  min-width: 3ch;
+  padding: 1px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-align: center;
+  color: var(--muted);
+}
+:root .lang-list__check { width: 8px; height: 8px; border-radius: 50%; }
+:root .lang-list button[aria-checked="true"] { color: var(--text-strong); }
+:root .lang-list button[aria-checked="true"] .lang-list__code { border-color: var(--accent); background: rgba(56, 189, 248, 0.12); color: var(--accent); }
+:root .lang-list button[aria-checked="true"] .lang-list__check { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+:root .lang-menu.is-open .lang-list li { animation: fiche-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+:root .lang-menu.is-open .lang-list li:nth-child(2) { animation-delay: 0.03s; }
+:root .lang-menu.is-open .lang-list li:nth-child(3) { animation-delay: 0.06s; }
+:root .lang-menu.is-open .lang-list li:nth-child(4) { animation-delay: 0.09s; }
+:root .lang-menu.is-open .lang-list li:nth-child(5) { animation-delay: 0.12s; }
+@media (prefers-reduced-motion: reduce) {
+  :root .lang-list, :root .lang-list li, :root .lang-list button, :root .lang-switch__chev { transition: none !important; animation: none !important; }
 }
 
 @media (max-width: 684px) {
@@ -193,7 +295,7 @@
   :root .menu a::after { display: none; }
   :root .menu a:hover { background: var(--accent-dim); }
   /* .header__right passe en row-reverse : order 1 place le bouton à gauche du ☰ */
-  :root .lang-switch { order: 1; margin-left: 0; }
+  :root .lang-menu { order: 1; margin-left: 0; }
 }
 
 /* ---------- Accueil (seule page avec main[aria-role="main"]) ---------- */
@@ -1532,4 +1634,18 @@
   :root .x-step__node { width: 28px; height: 28px; font-size: 0.75rem; }
   :root ol.x-steps::before { left: 13px; top: 14px; }
   :root .cv-steps .x-step__body ul { padding-left: 14px; }
+}
+/* libellés de menu plus longs selon la langue (« Über mich », « Lebenslauf ») : jamais sur deux lignes */
+:root .menu__inner a { white-space: nowrap; }
+/* entre la vue mobile (≤ 684 px) et 1000 px : menu plus serré pour les langues aux libellés longs */
+@media (min-width: 685px) and (max-width: 1000px) {
+  :root .menu__inner { padding: 0 4px; font-size: 0.88rem; }
+  :root .menu__inner li { margin: 0 6px; }
+  :root .lang-menu { margin-left: 8px; }
+  :root .lang-switch__globe { display: none; }
+}
+@media (min-width: 685px) and (max-width: 800px) {
+  :root .menu__inner li { margin: 0 4px; }
+  :root .menu__inner { font-size: 0.82rem; }
+  :root .logo__text { font-size: 0.95em; }
 }

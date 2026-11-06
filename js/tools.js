@@ -3,7 +3,9 @@
    avec les 5 premiers caractères du hash SHA-1 (k-anonymat), et uniquement sur clic.
 
    Chaque page d'outil a un <main data-tool="…"> ; le script initialise l'outil correspondant.
-   Textes bilingues : L(fr, en) produit deux <span lang>, masqués par css/cyber.css selon la langue. */
+   Textes multilingues : L(fr, en) produit un <span lang> par langue (fr, en, es, pt, de), masqués par
+   css/cyber.css selon la langue choisie. Les traductions es/pt/de viennent de la table I18N (clé = texte
+   français) ; un texte absent de la table est affiché en anglais. L5() sert aux textes avec des valeurs. */
 (function () {
   "use strict";
 
@@ -16,10 +18,548 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function L(fr, en) {
-    return '<span lang="fr">' + fr + '</span><span lang="en">' + en + "</span>";
+  /* Traductions espagnol, portugais, allemand (clé : texte français). */
+  var I18N = {
+"copié ✓": [
+"copiado ✓",
+"copiado ✓",
+"kopiert ✓"
+],
+"copier": [
+"copiar",
+"copiar",
+"kopieren"
+],
+"des milliards d'années": [
+"miles de millones de años",
+"milhares de milhões de anos",
+"Milliarden Jahre"
+],
+"instantané": [
+"instantáneo",
+"instantâneo",
+"sofort"
+],
+"siècles": [
+"siglos",
+"séculos",
+"Jahrhunderte"
+],
+"ans": [
+"años",
+"anos",
+"Jahre"
+],
+"jours": [
+"días",
+"dias",
+"Tage"
+],
+"heures": [
+"horas",
+"horas",
+"Stunden"
+],
+"secondes": [
+"segundos",
+"segundos",
+"Sekunden"
+],
+"Coche au moins une famille de caractères.": [
+"Marca al menos una familia de caracteres.",
+"Marca pelo menos uma família de caracteres.",
+"Wähle mindestens eine Zeichenklasse."
+],
+"Entropie : ": [
+"Entropía: ",
+"Entropia: ",
+"Entropie: "
+],
+"Fait partie des mots de passe les plus utilisés au monde.": [
+"Es una de las contraseñas más utilizadas del mundo.",
+"É uma das palavras-passe mais usadas no mundo.",
+"Gehört zu den meistgenutzten Passwörtern der Welt."
+],
+"Repose sur un mot de passe très courant, avec quelques caractères ajoutés.": [
+"Se basa en una contraseña muy común, con algunos caracteres añadidos.",
+"Baseia-se numa palavra-passe muito comum, com alguns caracteres acrescentados.",
+"Beruht auf einem sehr verbreiteten Passwort mit ein paar zusätzlichen Zeichen."
+],
+"Contient une suite de touches ou de caractères (abcd, 1234, azerty…).": [
+"Contiene una secuencia de teclas o de caracteres (abcd, 1234, qwerty…).",
+"Contém uma sequência de teclas ou de caracteres (abcd, 1234, qwerty…).",
+"Enthält eine Tasten- oder Zeichenfolge (abcd, 1234, qwertz …)."
+],
+"Contient des répétitions (aaa, ababab…).": [
+"Contiene repeticiones (aaa, ababab…).",
+"Contém repetições (aaa, ababab…).",
+"Enthält Wiederholungen (aaa, ababab …)."
+],
+"Contient une année : c'est souvent une date de naissance, facile à deviner.": [
+"Contiene un año: suele ser una fecha de nacimiento, fácil de adivinar.",
+"Contém um ano: muitas vezes uma data de nascimento, fácil de adivinhar.",
+"Enthält eine Jahreszahl: oft ein Geburtsdatum, leicht zu erraten."
+],
+"Suit le modèle le plus prévisible : majuscule au début, chiffres à la fin.": [
+"Sigue el patrón más previsible: mayúscula al principio, cifras al final.",
+"Segue o padrão mais previsível: maiúscula no início, algarismos no fim.",
+"Folgt dem vorhersehbarsten Muster: Großbuchstabe am Anfang, Ziffern am Ende."
+],
+"Moins de 12 caractères : la longueur est le critère qui compte le plus.": [
+"Menos de 12 caracteres: la longitud es el criterio que más cuenta.",
+"Menos de 12 caracteres: o comprimento é o critério que mais conta.",
+"Weniger als 12 Zeichen: Die Länge ist das wichtigste Kriterium."
+],
+"Mélange davantage de types de caractères, ou allonge-le (une phrase de passe de 4-5 mots marche très bien).": [
+"Mezcla más tipos de caracteres o alárgala (una frase de paso de 4-5 palabras funciona muy bien).",
+"Mistura mais tipos de caracteres ou torna-a mais longa (uma frase-passe de 4-5 palavras funciona muito bem).",
+"Mische mehr Zeichenarten oder mach es länger (eine Passphrase aus 4–5 Wörtern funktioniert sehr gut)."
+],
+"Très faible": [
+"Muy débil",
+"Muito fraca",
+"Sehr schwach"
+],
+"Faible": [
+"Débil",
+"Fraca",
+"Schwach"
+],
+"Moyen": [
+"Media",
+"Média",
+"Mittel"
+],
+"Fort": [
+"Fuerte",
+"Forte",
+"Stark"
+],
+"Très fort": [
+"Muy fuerte",
+"Muito forte",
+"Sehr stark"
+],
+"longueur": [
+"longitud",
+"comprimento",
+"Länge"
+],
+"types de caractères": [
+"tipos de caracteres",
+"tipos de caracteres",
+"Zeichenarten"
+],
+"entropie estimée": [
+"entropía estimada",
+"entropia estimada",
+"geschätzte Entropie"
+],
+"cassage hors ligne*": [
+"cracking sin conexión*",
+"cracking offline*",
+"Offline-Cracking*"
+],
+"Points d'attention :": [
+"Puntos de atención:",
+"Pontos de atenção:",
+"Worauf du achten solltest:"
+],
+"Aucun schéma prévisible détecté.": [
+"No se ha detectado ningún patrón previsible.",
+"Nenhum padrão previsível detetado.",
+"Kein vorhersehbares Muster erkannt."
+],
+"Vérification en cours…": [
+"Comprobando…",
+"A verificar…",
+"Wird geprüft …"
+],
+"Absent des fuites connues de Have I Been Pwned. Ça ne garantit pas qu'il soit robuste : regarde aussi l'analyse ci-dessus.": [
+"No aparece en las filtraciones conocidas de Have I Been Pwned. Eso no garantiza que sea robusta: mira también el análisis de arriba.",
+"Ausente das fugas conhecidas do Have I Been Pwned. Isso não garante que seja robusta: vê também a análise acima.",
+"Nicht in den bekannten Leaks von Have I Been Pwned. Das heißt nicht, dass es stark ist: Sieh dir auch die Analyse oben an."
+],
+"Impossible de joindre le service de vérification. Réessaie plus tard.": [
+"No se puede contactar con el servicio de comprobación. Vuelve a intentarlo más tarde.",
+"Não foi possível contactar o serviço de verificação. Tenta mais tarde.",
+"Der Prüfdienst ist nicht erreichbar. Versuch es später noch einmal."
+],
+"Aucune correspondance avec les empreintes ci-dessus.": [
+"Ninguna coincidencia con las huellas de arriba.",
+"Nenhuma correspondência com as impressões acima.",
+"Kein Treffer bei den Hashes oben."
+],
+"Fichier trop volumineux (512 Mo maximum dans le navigateur).": [
+"Archivo demasiado grande (512 MB como máximo en el navegador).",
+"Ficheiro demasiado grande (512 MB no máximo no navegador).",
+"Datei zu groß (maximal 512 MB im Browser)."
+],
+"Calcul en cours…": [
+"Calculando…",
+"A calcular…",
+"Wird berechnet …"
+],
+"Le résultat n'est pas du texte : il est affiché en hexadécimal.": [
+"El resultado no es texto: se muestra en hexadecimal.",
+"O resultado não é texto: é mostrado em hexadecimal.",
+"Das Ergebnis ist kein Text: Es wird hexadezimal angezeigt."
+],
+"Entrée invalide pour ce format.": [
+"Entrada no válida para este formato.",
+"Entrada inválida para este formato.",
+"Ungültige Eingabe für dieses Format."
+],
+"émetteur": [
+"emisor",
+"emissor",
+"Aussteller"
+],
+"émis le": [
+"emitido el",
+"emitido em",
+"ausgestellt am"
+],
+"valide à partir du": [
+"válido a partir del",
+"válido a partir de",
+"gültig ab"
+],
+"expire le": [
+"caduca el",
+"expira em",
+"läuft ab am"
+],
+"C'est un JWE (jeton chiffré) : son contenu ne peut pas être lu sans la clé.": [
+"Es un JWE (token cifrado): su contenido no se puede leer sin la clave.",
+"É um JWE (token cifrado): o seu conteúdo não pode ser lido sem a chave.",
+"Das ist ein JWE (verschlüsseltes Token): Sein Inhalt ist ohne Schlüssel nicht lesbar."
+],
+"Format invalide : un JWT contient trois parties séparées par des points.": [
+"Formato no válido: un JWT contiene tres partes separadas por puntos.",
+"Formato inválido: um JWT contém três partes separadas por pontos.",
+"Ungültiges Format: Ein JWT besteht aus drei durch Punkte getrennten Teilen."
+],
+"Impossible de décoder l'en-tête ou le contenu (Base64URL ou JSON invalide).": [
+"No se puede decodificar la cabecera o el contenido (Base64URL o JSON no válido).",
+"Não foi possível descodificar o cabeçalho ou o conteúdo (Base64URL ou JSON inválido).",
+"Header oder Payload lassen sich nicht dekodieren (ungültiges Base64URL oder JSON)."
+],
+"algorithme": [
+"algoritmo",
+"algoritmo",
+"Algorithmus"
+],
+"Jeton <strong>expiré</strong>.": [
+"Token <strong>caducado</strong>.",
+"Token <strong>expirado</strong>.",
+"Token <strong>abgelaufen</strong>."
+],
+"Jeton <strong>pas encore valide</strong> (nbf dans le futur).": [
+"Token <strong>todavía no válido</strong> (nbf en el futuro).",
+"Token <strong>ainda não válido</strong> (nbf no futuro).",
+"Token <strong>noch nicht gültig</strong> (nbf in der Zukunft)."
+],
+"Jeton dans sa période de validité.": [
+"Token dentro de su periodo de validez.",
+"Token dentro do seu período de validade.",
+"Token innerhalb seiner Gültigkeitsdauer."
+],
+"Aucune date d'expiration (exp) : ce jeton reste valable indéfiniment.": [
+"Sin fecha de caducidad (exp): este token sigue siendo válido indefinidamente.",
+"Sem data de expiração (exp): este token continua válido indefinidamente.",
+"Kein Ablaufdatum (exp): Dieses Token bleibt unbegrenzt gültig."
+],
+"<strong>alg: none</strong> : jeton non signé. Un serveur qui l'accepte peut être contourné.": [
+"<strong>alg: none</strong>: token sin firmar. Un servidor que lo acepte puede ser eludido.",
+"<strong>alg: none</strong>: token não assinado. Um servidor que o aceite pode ser contornado.",
+"<strong>alg: none</strong>: unsigniertes Token. Ein Server, der es akzeptiert, lässt sich umgehen."
+],
+"Signature HMAC à secret partagé : sa robustesse dépend entièrement de la longueur du secret.": [
+"Firma HMAC con secreto compartido: su robustez depende por completo de la longitud del secreto.",
+"Assinatura HMAC com segredo partilhado: a sua robustez depende inteiramente do comprimento do segredo.",
+"HMAC-Signatur mit gemeinsamem Geheimnis: Ihre Stärke hängt vollständig von der Länge des Geheimnisses ab."
+],
+"L'en-tête pointe vers une clé distante (jku/x5u) : le serveur doit restreindre les URL acceptées.": [
+"La cabecera apunta a una clave remota (jku/x5u): el servidor debe restringir las URL aceptadas.",
+"O cabeçalho aponta para uma chave remota (jku/x5u): o servidor deve restringir os URL aceites.",
+"Der Header verweist auf einen entfernten Schlüssel (jku/x5u): Der Server muss die zulässigen URLs einschränken."
+],
+"Le kid contient des caractères inhabituels : vérifie qu'il n'est pas utilisé tel quel dans un chemin ou une requête.": [
+"El kid contiene caracteres inusuales: comprueba que no se use tal cual en una ruta o una consulta.",
+"O kid contém caracteres invulgares: verifica que não é usado tal como está num caminho ou numa consulta.",
+"Die kid enthält ungewöhnliche Zeichen: Prüfe, dass sie nicht unverändert in einem Pfad oder einer Abfrage landet."
+],
+"Le contenu semble contenir une donnée sensible : un JWT signé n'est pas chiffré, tout le monde peut le lire.": [
+"El contenido parece incluir un dato sensible: un JWT firmado no está cifrado, cualquiera puede leerlo.",
+"O conteúdo parece incluir um dado sensível: um JWT assinado não é cifrado, qualquer pessoa o pode ler.",
+"Der Inhalt scheint sensible Daten zu enthalten: Ein signiertes JWT ist nicht verschlüsselt, jeder kann es lesen."
+],
+"La signature n'est pas vérifiée ici : décoder un jeton ne prouve pas qu'il est authentique.": [
+"La firma no se verifica aquí: decodificar un token no demuestra que sea auténtico.",
+"A assinatura não é verificada aqui: descodificar um token não prova que seja autêntico.",
+"Die Signatur wird hier nicht geprüft: Ein Token zu dekodieren beweist nicht, dass es echt ist."
+],
+"Domaines": [
+"Dominios",
+"Domínios",
+"Domains"
+],
+"(privée/réservée)": [
+"(privada/reservada)",
+"(privado/reservado)",
+"(privat/reserviert)"
+],
+"Aucun indicateur trouvé.": [
+"No se ha encontrado ningún indicador.",
+"Nenhum indicador encontrado.",
+"Keine Indikatoren gefunden."
+],
+"Entrée entièrement en Base64 décodée": [
+"Entrada íntegramente en Base64 decodificada",
+"Entrada inteiramente em Base64 descodificada",
+"Reine Base64-Eingabe dekodiert"
+],
+"Commande PowerShell -EncodedCommand décodée (Base64, UTF-16LE)": [
+"Comando PowerShell -EncodedCommand decodificado (Base64, UTF-16LE)",
+"Comando PowerShell -EncodedCommand descodificado (Base64, UTF-16LE)",
+"PowerShell-Befehl -EncodedCommand dekodiert (Base64, UTF-16LE)"
+],
+"Accents graves (`) retirés des mots-clés": [
+"Acentos graves (`) eliminados de las palabras clave",
+"Acentos graves (`) removidos das palavras-chave",
+"Backticks (`) aus Schlüsselwörtern entfernt"
+],
+"Accents circonflexes (^) de cmd.exe retirés": [
+"Circunflejos (^) de cmd.exe eliminados",
+"Acentos circunflexos (^) do cmd.exe removidos",
+"Zirkumflexe (^) von cmd.exe entfernt"
+],
+"Codes de caractères [char] convertis": [
+"Códigos de caracteres [char] convertidos",
+"Códigos de caracteres [char] convertidos",
+"[char]-Zeichencodes umgewandelt"
+],
+"String.fromCharCode converti": [
+"String.fromCharCode convertido",
+"String.fromCharCode convertido",
+"String.fromCharCode umgewandelt"
+],
+"Séquences d'échappement (\\x41, \\u0041…) décodées": [
+"Secuencias de escape (\\x41, \\u0041…) decodificadas",
+"Sequências de escape (\\x41, \\u0041…) descodificadas",
+"Escape-Sequenzen (\\x41, \\u0041 …) dekodiert"
+],
+"Chaînes concaténées réunies": [
+"Cadenas concatenadas unidas",
+"Cadeias concatenadas unidas",
+"Verkettete Zeichenketten zusammengeführt"
+],
+"Parenthèses superflues autour d'une chaîne retirées": [
+"Paréntesis superfluos alrededor de una cadena eliminados",
+"Parênteses supérfluos à volta de uma cadeia removidos",
+"Überflüssige Klammern um Zeichenketten entfernt"
+],
+"Opérateur de format -f appliqué": [
+"Operador de formato -f aplicado",
+"Operador de formato -f aplicado",
+"Formatoperator -f angewendet"
+],
+"Remplacements de texte (.Replace, -replace) appliqués": [
+"Sustituciones de texto (.Replace, -replace) aplicadas",
+"Substituições de texto (.Replace, -replace) aplicadas",
+"Textersetzungen (.Replace, -replace) angewendet"
+],
+"Chaînes inversées remises à l'endroit": [
+"Cadenas invertidas puestas del derecho",
+"Cadeias invertidas repostas na ordem certa",
+"Umgekehrte Zeichenketten zurückgedreht"
+],
+"Tableaux de chaînes joints": [
+"Arrays de cadenas unidos",
+"Arrays de cadeias unidos",
+"Zeichenketten-Arrays zusammengefügt"
+],
+"unescape / decodeURIComponent décodés": [
+"unescape / decodeURIComponent decodificados",
+"unescape / decodeURIComponent descodificados",
+"unescape / decodeURIComponent dekodiert"
+],
+"Base64 décodé ([Convert]::FromBase64String)": [
+"Base64 decodificado ([Convert]::FromBase64String)",
+"Base64 descodificado ([Convert]::FromBase64String)",
+"Base64 dekodiert ([Convert]::FromBase64String)"
+],
+"Base64 décodé (atob)": [
+"Base64 decodificado (atob)",
+"Base64 descodificado (atob)",
+"Base64 dekodiert (atob)"
+],
+"Code passé à eval / IEX mis à plat (sans l'exécuter)": [
+"Código pasado a eval / IEX desplegado (sin ejecutarlo)",
+"Código passado a eval / IEX desdobrado (sem o executar)",
+"An eval / IEX übergebener Code entpackt (ohne Ausführung)"
+],
+"Variables constantes remplacées par leur valeur": [
+"Variables constantes sustituidas por su valor",
+"Variáveis constantes substituídas pelo seu valor",
+"Konstante Variablen durch ihren Wert ersetzt"
+],
+"Exécution de code généré à la volée": [
+"Ejecución de código generado sobre la marcha",
+"Execução de código gerado dinamicamente",
+"Ausführung dynamisch erzeugten Codes"
+],
+"Téléchargement depuis Internet": [
+"Descarga desde Internet",
+"Transferência a partir da Internet",
+"Download aus dem Internet"
+],
+"PowerShell lancé discrètement (fenêtre cachée, politique contournée, commande encodée)": [
+"PowerShell lanzado discretamente (ventana oculta, política eludida, comando codificado)",
+"PowerShell lançado discretamente (janela oculta, política contornada, comando codificado)",
+"Unauffällig gestartete PowerShell (verstecktes Fenster, umgangene Richtlinie, kodierter Befehl)"
+],
+"Contournement de l'AMSI (analyse antivirus des scripts)": [
+"Elusión de AMSI (análisis antivirus de scripts)",
+"Contorno do AMSI (análise antivírus de scripts)",
+"AMSI-Umgehung (Virenscan von Skripten)"
+],
+"Désactivation ou exclusion de Microsoft Defender": [
+"Desactivación o exclusión de Microsoft Defender",
+"Desativação ou exclusão do Microsoft Defender",
+"Microsoft Defender deaktiviert oder Ausnahme gesetzt"
+],
+"Tâche planifiée (persistance)": [
+"Tarea programada (persistencia)",
+"Tarefa agendada (persistência)",
+"Geplante Aufgabe (Persistenz)"
+],
+"Clé Run ou dossier Démarrage (persistance)": [
+"Clave Run o carpeta Inicio (persistencia)",
+"Chave Run ou pasta Arranque (persistência)",
+"Run-Schlüssel oder Autostart-Ordner (Persistenz)"
+],
+"Injection ou exécution de code en mémoire": [
+"Inyección o ejecución de código en memoria",
+"Injeção ou execução de código em memória",
+"Prozessinjektion / Ausführung im Speicher"
+],
+"Chargement réflexif d'un programme .NET": [
+"Carga reflexiva de un programa .NET",
+"Carregamento reflexivo de um programa .NET",
+"Reflektives Laden einer .NET-Assembly"
+],
+"Exécution via Windows Script Host (JScript/VBScript)": [
+"Ejecución mediante Windows Script Host (JScript/VBScript)",
+"Execução via Windows Script Host (JScript/VBScript)",
+"Ausführung über Windows Script Host (JScript/VBScript)"
+],
+"Utilisation de WMI": [
+"Uso de WMI",
+"Utilização de WMI",
+"Nutzung von WMI"
+],
+"Reconnaissance du système": [
+"Reconocimiento del sistema",
+"Reconhecimento do sistema",
+"Systemerkundung"
+],
+"Binaire système détourné (LOLBin)": [
+"Binario del sistema desviado (LOLBin)",
+"Binário do sistema desviado (LOLBin)",
+"Missbrauchte System-Binärdatei (LOLBin)"
+],
+"Obfuscation (encodage, codes de caractères…)": [
+"Ofuscación (codificación, códigos de caracteres…)",
+"Ofuscação (codificação, códigos de caracteres…)",
+"Verschleierung (Kodierung, Zeichencodes …)"
+],
+"Aucune couche d'obfuscation reconnue.": [
+"No se ha reconocido ninguna capa de ofuscación.",
+"Nenhuma camada de ofuscação reconhecida.",
+"Keine bekannte Verschleierungsschicht gefunden."
+],
+"Aucun comportement typique repéré.": [
+"No se ha detectado ningún comportamiento típico.",
+"Nenhum comportamento típico detetado.",
+"Kein typisches Verhalten erkannt."
+],
+"Aucune couche reconnue : le script est peut-être déjà en clair, ou utilise une obfuscation non gérée.": [
+"Ninguna capa reconocida: puede que el script ya esté en claro o que use una ofuscación no soportada.",
+"Nenhuma camada reconhecida: o script talvez já esteja em claro, ou usa uma ofuscação não suportada.",
+"Keine bekannte Schicht: Das Skript ist vielleicht schon im Klartext oder nutzt eine nicht unterstützte Verschleierung."
+],
+"Texte trop long (2 Mo maximum).": [
+"Texto demasiado largo (2 MB como máximo).",
+"Texto demasiado longo (2 MB no máximo).",
+"Text zu lang (maximal 2 MB)."
+],
+"Analyse en cours…": [
+"Analizando…",
+"A analisar…",
+"Wird analysiert …"
+],
+"Arrêt : le contenu décodé dépasse 8 Mo (possible bombe de décompression).": [
+"Parada: el contenido decodificado supera 8 MB (posible bomba de descompresión).",
+"Paragem: o conteúdo descodificado ultrapassa 8 MB (possível bomba de descompressão).",
+"Abbruch: Der dekodierte Inhalt überschreitet 8 MB (mögliche Dekompressionsbombe)."
+],
+"Erreur pendant l'analyse.": [
+"Error durante el análisis.",
+"Erro durante a análise.",
+"Fehler bei der Analyse."
+],
+"mois": [
+"meses",
+"meses",
+"Monate"
+],
+"minutes": [
+"minutos",
+"minutos",
+"Minuten"
+],
+"sujet": [
+"sujeto",
+"sujeito",
+"Subjekt"
+],
+"audience": [
+"audiencia",
+"audiência",
+"Zielgruppe"
+],
+"identifiant": [
+"identificador",
+"identificador",
+"Token-ID"
+]
+};
+  var XL = ["es", "pt", "de"];
+  var LOCALES = { fr: "fr-FR", en: "en-US", es: "es-ES", pt: "pt-PT", de: "de-DE" };
+  function unesc(s) {
+    return String(s).replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
   }
-  function lang() { return document.documentElement.lang === "fr" ? "fr" : "en"; }
+  function L5(fr, en, es, pt, de) {
+    return '<span lang="fr">' + fr + '</span><span lang="en">' + en + '</span><span lang="es">' + es +
+      '</span><span lang="pt">' + pt + '</span><span lang="de">' + de + "</span>";
+  }
+  function L(fr, en) {
+    var t = I18N[fr], escaped = false;
+    if (!t && I18N[unesc(fr)]) { t = I18N[unesc(fr)]; escaped = fr !== unesc(fr); }
+    var x = [en, en, en];
+    if (t) for (var i = 0; i < 3; i++) x[i] = escaped ? esc(t[i]) : t[i];
+    return L5(fr, en, x[0], x[1], x[2]);
+  }
+  /* Même valeur mise en forme selon chaque langue (nombres, dates). */
+  function LF(fmt) {
+    return L5(fmt("fr"), fmt("en"), fmt("es"), fmt("pt"), fmt("de"));
+  }
+  function lang() {
+    var l = document.documentElement.lang;
+    return LOCALES[l] ? l : "en";
+  }
   function debounce(fn, ms) {
     var t;
     return function () {
@@ -38,11 +578,11 @@
     el.innerHTML = html || "";
   }
 
-  /* Placeholders bilingues : data-ph-fr / data-ph-en, mis à jour quand la langue change. */
+  /* Placeholders multilingues : data-ph-fr, data-ph-en… mis à jour quand la langue change. */
   function applyPlaceholders() {
     var l = lang();
     document.querySelectorAll("[data-ph-fr]").forEach(function (el) {
-      el.placeholder = el.getAttribute("data-ph-" + l) || "";
+      el.placeholder = el.getAttribute("data-ph-" + l) || el.getAttribute("data-ph-en") || "";
     });
   }
   new MutationObserver(applyPlaceholders).observe(document.documentElement, {
@@ -154,7 +694,7 @@
     for (var i = 0; i < units.length; i++) {
       if (sec >= units[i][0]) {
         var v = sec / units[i][0];
-        var n = v >= 1e6 ? v.toExponential(1) : Math.round(v).toLocaleString(lang() === "fr" ? "fr-FR" : "en-US");
+        var n = v >= 1e6 ? v.toExponential(1) : LF(function (l) { return Math.round(v).toLocaleString(LOCALES[l]); });
         return n + " " + L(units[i][1], units[i][2]);
       }
     }
@@ -210,7 +750,8 @@
       var bits = Math.floor(len * Math.log2(pool));
       out.textContent = one(len, groups);
       info.innerHTML = L("Entropie : ", "Entropy: ") + "<strong>" + bits + " bits</strong> · " +
-        L(pool + " caractères possibles", pool + " possible characters");
+        L5(pool + " caractères possibles", pool + " possible characters", pool + " caracteres posibles",
+          pool + " caracteres possíveis", pool + " mögliche Zeichen");
       var n = Math.min(20, Math.max(1, parseInt(count.value, 10) || 1));
       var lines = [];
       for (var i = 1; i < n; i++) lines.push(one(len, groups));
@@ -373,10 +914,14 @@
           });
           if (input.value !== pw) return; // le champ a changé pendant la requête
           if (found) {
-            msg(leak, "bad", L("<strong>Ce mot de passe apparaît " + found.toLocaleString("fr-FR") +
+            var nf = function (l) { return found.toLocaleString(LOCALES[l]); };
+            msg(leak, "bad", L5("<strong>Ce mot de passe apparaît " + nf("fr") +
               " fois dans des fuites de données.</strong> Ne l'utilise plus nulle part.",
-              "<strong>This password appears " + found.toLocaleString("en-US") +
-              " times in data breaches.</strong> Stop using it everywhere."));
+              "<strong>This password appears " + nf("en") +
+              " times in data breaches.</strong> Stop using it everywhere.",
+              "<strong>Esta contraseña aparece " + nf("es") + " veces en filtraciones de datos.</strong> No la uses más en ningún sitio.",
+              "<strong>Esta palavra-passe aparece " + nf("pt") + " vezes em fugas de dados.</strong> Não a uses mais em lado nenhum.",
+              "<strong>Dieses Passwort taucht " + nf("de") + "-mal in Datenlecks auf.</strong> Verwende es nirgends mehr."));
           } else {
             msg(leak, "ok", L("Absent des fuites connues de Have I Been Pwned. Ça ne garantit pas qu'il soit robuste : regarde aussi l'analyse ci-dessus.",
               "Not found in Have I Been Pwned's known breaches. That doesn't make it strong: check the analysis above too."));
@@ -426,7 +971,7 @@
         if (ok) hit = a[0];
       });
       if (!want) msg(status, "", "");
-      else if (hit) msg(status, "ok", L("Correspondance : " + hit + ".", "Match: " + hit + "."));
+      else if (hit) msg(status, "ok", L5("Correspondance : " + hit + ".", "Match: " + hit + ".", "Coincidencia: " + hit + ".", "Correspondência: " + hit + ".", "Treffer: " + hit + "."));
       else msg(status, "bad", L("Aucune correspondance avec les empreintes ci-dessus.", "No match with the hashes above."));
     }
     function show(bytes) {
@@ -556,7 +1101,7 @@
     };
     function date(v) {
       var d = new Date(v * 1000);
-      return isNaN(d) ? esc(v) : esc(d.toLocaleString(lang() === "fr" ? "fr-FR" : "en-GB")) + " <small>(" + esc(v) + ")</small>";
+      return isNaN(d) ? esc(v) : LF(function (l) { return esc(d.toLocaleString(l === "en" ? "en-GB" : LOCALES[l])); }) + " <small>(" + esc(v) + ")</small>";
     }
     function json(part) {
       var r = bytesToText(b64decode(part));
@@ -814,7 +1359,9 @@
       outText.parentNode.hidden = true;
       var total = renderIocGroups(outBox, input.value, defOut.checked);
       if (!input.value.trim()) msg(status, "", "");
-      else if (total) msg(status, "ok", L(total + " indicateur(s) trouvé(s), doublons retirés.", total + " indicator(s) found, duplicates removed."));
+      else if (total) msg(status, "ok", L5(total + " indicateur(s) trouvé(s), doublons retirés.", total + " indicator(s) found, duplicates removed.",
+        total + " indicador(es) encontrado(s), duplicados eliminados.", total + " indicador(es) encontrado(s), duplicados removidos.",
+        total + " Indikator(en) gefunden, Duplikate entfernt."));
       else msg(status, "warn", L("Aucun indicateur trouvé.", "No indicators found."));
     }
     function renderText(fn) {
@@ -1372,7 +1919,8 @@
         li.appendChild(head);
         var det = document.createElement("details");
         var sum = document.createElement("summary");
-        sum.innerHTML = L("voir le texte après l'étape " + (i + 1), "show text after step " + (i + 1));
+        sum.innerHTML = L5("voir le texte après l'étape " + (i + 1), "show text after step " + (i + 1), "ver el texto tras la etapa " + (i + 1),
+          "ver o texto após a etapa " + (i + 1), "Text nach Schritt " + (i + 1) + " anzeigen");
         var pre = document.createElement("pre");
         pre.className = "tool-output";
         pre.textContent = s.text.length > 20000 ? s.text.slice(0, 20000) + "\n…" : s.text;
@@ -1413,8 +1961,12 @@
       renderIocs();
 
       var k = res.steps.length;
-      if (res.capped) msg(status, "warn", L("Arrêt après " + k + " étapes (limite de sécurité).", "Stopped after " + k + " steps (safety limit)."));
-      else if (k) msg(status, "ok", L(k + " couche(s) retirée(s). Le script n'a pas été exécuté.", k + " layer(s) removed. The script was not executed."));
+      if (res.capped) msg(status, "warn", L5("Arrêt après " + k + " étapes (limite de sécurité).", "Stopped after " + k + " steps (safety limit).",
+        "Parada tras " + k + " etapas (límite de seguridad).", "Paragem após " + k + " etapas (limite de segurança).",
+        "Abbruch nach " + k + " Schritten (Sicherheitsgrenze)."));
+      else if (k) msg(status, "ok", L5(k + " couche(s) retirée(s). Le script n'a pas été exécuté.", k + " layer(s) removed. The script was not executed.",
+        k + " capa(s) eliminada(s). El script no se ha ejecutado.", k + " camada(s) removida(s). O script não foi executado.",
+        k + " Schicht(en) entfernt. Das Skript wurde nicht ausgeführt."));
       else msg(status, "warn", L("Aucune couche reconnue : le script est peut-être déjà en clair, ou utilise une obfuscation non gérée.", "No known layer: the script may already be in clear, or use unsupported obfuscation."));
     }
 
