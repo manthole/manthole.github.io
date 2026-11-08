@@ -70,4 +70,10 @@
   <url>
     <loc>https://manthole.github.io/explain/sql-injection/</loc>
   </url>
+  <url>
+    <loc>https://manthole.github.io/tools/email-headers/</loc>
+  </url>
+  <url>
+    <loc>https://manthole.github.io/tools/dns-check/</loc>
+  </url>
 </urlset>
