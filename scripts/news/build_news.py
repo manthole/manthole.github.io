@@ -495,6 +495,27 @@ def join_list(words, lang):
     return ", ".join(words[:-1]) + f" {AND[lang]} " + words[-1]
 
 
+def norm_search(s):
+    """Texte de recherche : minuscules, sans accents (même normalisation que js/news.js)."""
+    s = unicodedata.normalize("NFKD", str(s))
+    return re.sub(r"\s+", " ", "".join(ch for ch in s if not unicodedata.combining(ch)).lower()).strip()
+
+
+def search_attr(parts, limit=900):
+    """Attribut data-q d'une ligne : titres, sources, CVE, types (5 langues), groupes cités."""
+    seen, out = set(), []
+    for p in parts:
+        p = norm_search(p)
+        if p and p not in seen:
+            seen.add(p)
+            out.append(p)
+    return e(" | ".join(out)[:limit])
+
+
+def kind_words(kind):
+    return [fx.kind_text(kind, x, 0) for x in LANGS]
+
+
 def render_clusters(clusters, limit, empty_fr, empty_en, fiches=None):
     if not clusters:
         return f'<p class="news-empty">{L(empty_fr, empty_en)}</p>'
@@ -510,7 +531,17 @@ def render_clusters(clusters, limit, empty_fr, empty_en, fiches=None):
         srcs = " · ".join(link(s["url"], SOURCE_NAMES[s["source"]]) for s in c["sources"])
         count = n_sources(n)
         # pas d'attribut lang sur les titres : la feuille de style masque les éléments [lang]
-        rows.append(f'<li class="news-row news-row--{kind}">'
+        parts = [m["title"] for m in c.get("members", [])] + [lead["title"]] + [SOURCE_NAMES[s["source"]] for s in c["sources"]]
+        parts += list(c.get("cves", []))
+        for k in c.get("kinds", [kind]):
+            parts += kind_words(k)
+        for aid in c.get("actors", []):
+            a = fx.actor_by_id(aid)
+            if a:
+                parts.append(a["name"])
+        if c["zero_day"]:
+            parts += ["zero-day", "0-day"]
+        rows.append(f'<li class="news-row news-row--{kind}" data-kind="{e(kind)}" data-q="{search_attr(parts)}">'
                     f'<a class="news-open" href="#{fid}" aria-haspopup="dialog">'
                     f'<span class="news-date">{day(c["first"])}</span> <span class="news-kind">{kind_label(kind)}</span> {badge}'
                     f'<span class="news-title">{e(lead["title"])}</span>'
@@ -552,7 +583,10 @@ def render_kev(kev, now, fiches=None):
             fiches[fid] = v
         known = v.get("knownRansomwareCampaignUse") == "Known"
         badge = f' <span class="news-badge news-badge--ransom">{L("rançongiciel", "ransomware")}</span>' if known else ""
-        rows.append(f'<li class="news-row news-row--{"ransomware" if known else "exploit"}">'
+        parts = [cve, v.get("vendorProject", ""), v.get("product", ""), v.get("vulnerabilityName", ""), "zero-day", "CISA KEV"] + kind_words("exploit")
+        if known:
+            parts += kind_words("ransomware")
+        rows.append(f'<li class="news-row news-row--{"ransomware" if known else "exploit"}" data-kind="{"ransomware" if known else "exploit"}" data-q="{search_attr(parts)}">'
                     f'<a class="news-open" href="#{fid}" aria-haspopup="dialog">'
                     f'<span class="news-date">{e(kev_date(v))}</span> '
                     f'<span class="news-title">{e(cve)} — {e(v.get("vendorProject", ""))} {e(v.get("product", ""))}</span>{badge}'
@@ -873,6 +907,30 @@ def render_selection(selection):
             + "".join(rows) + "</ol>")
 
 
+def render_search(clusters):
+    """Barre de recherche (filtrage dans le navigateur par js/news.js ; masquée sans JavaScript)."""
+    counts = {}
+    for c in clusters:
+        k = c.get("kinds", ["intrusion"])[0]
+        counts[k] = counts.get(k, 0) + 1
+    kinds = [k for k, _ in sorted(counts.items(), key=lambda x: -x[1]) if k != "intrusion"][:6]
+    chips = '<button type="button" class="news-chip" data-chip>zero-day</button>' + "".join(
+        f'<button type="button" class="news-chip news-row--{e(k)}" data-chip>{kind_label(k)}</button>' for k in kinds)
+    ph = {"fr": "Rechercher : entreprise, groupe, CVE, type d'attaque…", "en": "Search: company, group, CVE, attack type…",
+          "es": "Buscar: empresa, grupo, CVE, tipo de ataque…", "pt": "Pesquisar: empresa, grupo, CVE, tipo de ataque…",
+          "de": "Suchen: Firma, Gruppe, CVE, Angriffsart …"}
+    ph_attr = " ".join(f'data-ph-{x}="{e(ph[x])}"' for x in LANGS)
+    return (f'<div class="news-search" role="search">'
+            f'<div class="news-search__box"><span class="news-search__icon" aria-hidden="true"></span>'
+            f'<label class="sr-only" for="news-q">{L5("Rechercher dans les actus", "Search the news", "Buscar en las noticias", "Pesquisar nas notícias", "In den News suchen")}</label>'
+            f'<input type="search" id="news-q" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="news-q-status" placeholder="{e(ph["en"])}" {ph_attr}>'
+            f'<kbd class="news-search__kbd" aria-hidden="true">/</kbd>'
+            f'<button type="button" class="news-search__clear" id="news-q-clear" hidden>'
+            f'<span aria-hidden="true">✕</span><span class="sr-only">{L5("Effacer", "Clear", "Borrar", "Limpar", "Löschen")}</span></button></div>'
+            f'<div class="news-search__chips">{chips}</div>'
+            f'<p class="news-search__status" id="news-q-status" aria-live="polite"></p></div>')
+
+
 def build_body(archive, kev, selection, status, now, fiches=None, top=None):
     def window(days=None, since=None):
         out = []
@@ -910,6 +968,7 @@ def build_body(archive, kev, selection, status, now, fiches=None, top=None):
         "La veille cyber du moment, mise à jour automatiquement toutes les 6 heures à partir de sources reconnues. Clique sur un sujet pour ouvrir sa fiche : type d'attaque, déroulé phase par phase, résumé à réexpliquer et liens vers les articles.",
         "Current cyber news, updated automatically every 6 hours from recognised sources. Click a story to open its sheet: attack type, phase-by-phase sequence, a summary to explain it, and links to the articles.")}</p>
 <p class="news-updated">{L("Dernière mise à jour", "Last update")} : {e(updated)} ({L("heure de Paris", "Paris time")})</p>
+{render_search(zero_news + week + month + year)}
 
 <section class="news-section">
   <h3>{L("Failles zero-day et exploitées activement", "Zero-day and actively exploited flaws")}</h3>
