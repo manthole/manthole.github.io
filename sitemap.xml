@@ -61,4 +61,13 @@
     <loc>https://manthole.github.io/redteam/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://manthole.github.io/explain/tls/</loc>
+  </url>
+  <url>
+    <loc>https://manthole.github.io/explain/kerberoasting/</loc>
+  </url>
+  <url>
+    <loc>https://manthole.github.io/explain/sql-injection/</loc>
+  </url>
 </urlset>
