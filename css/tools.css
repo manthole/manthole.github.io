@@ -52,7 +52,7 @@
   margin-top: auto;
   padding-top: 6px;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--ok);
 }
 
@@ -254,7 +254,7 @@
 :root .tool-stat__k {
   display: block;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 :root .tool-stat__v {
@@ -299,7 +299,7 @@
   background: var(--surface);
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   line-height: 1.4;
   cursor: pointer;
 }
