@@ -23,628 +23,749 @@
 "Exécution via mshta (application HTML)": [
 "Ejecución mediante mshta (aplicación HTML)",
 "Execução via mshta (aplicação HTML)",
-"Ausführung über mshta (HTML-Anwendung)"
+"Ausführung über mshta (HTML-Anwendung)",
+"Выполнение через mshta (HTML-приложение)"
 ],
 "Exécution d'une DLL via rundll32": [
 "Ejecución de una DLL mediante rundll32",
 "Execução de uma DLL via rundll32",
-"DLL-Ausführung über rundll32"
+"DLL-Ausführung über rundll32",
+"Выполнение DLL через rundll32"
 ],
 "Exécution via regsvr32 (technique « Squiblydoo »)": [
 "Ejecución mediante regsvr32 (técnica «Squiblydoo»)",
 "Execução via regsvr32 (técnica «Squiblydoo»)",
-"Ausführung über regsvr32 („Squiblydoo“-Technik)"
+"Ausführung über regsvr32 („Squiblydoo“-Technik)",
+"Выполнение через regsvr32 (техника «Squiblydoo»)"
 ],
 "Installation MSI distante ou silencieuse": [
 "Instalación MSI remota o silenciosa",
 "Instalação MSI remota ou silenciosa",
-"Entfernte oder stille MSI-Installation"
+"Entfernte oder stille MSI-Installation",
+"Удалённая или тихая установка MSI"
 ],
 "Décodage d'un fichier avec certutil": [
 "Decodificación de un archivo con certutil",
 "Descodificação de um ficheiro com certutil",
-"Dateidekodierung mit certutil"
+"Dateidekodierung mit certutil",
+"Декодирование файла с помощью certutil"
 ],
 "Tâche de transfert BITS": [
 "Tarea de transferencia BITS",
 "Tarefa de transferência BITS",
-"BITS-Übertragungsauftrag"
+"BITS-Übertragungsauftrag",
+"Задание передачи BITS"
 ],
 "Suppression des sauvegardes et de la restauration (signe typique de rançongiciel)": [
 "Eliminación de copias de seguridad y de la restauración (señal típica de ransomware)",
 "Eliminação das cópias de segurança e do restauro (sinal típico de ransomware)",
-"Löschen von Sicherungen und Wiederherstellung (typisches Ransomware-Zeichen)"
+"Löschen von Sicherungen und Wiederherstellung (typisches Ransomware-Zeichen)",
+"Удаление резервных копий и средств восстановления (типичный признак шифровальщика)"
 ],
 "Effacement des journaux d'événements Windows": [
 "Borrado de los registros de eventos de Windows",
 "Apagamento dos registos de eventos do Windows",
-"Löschen der Windows-Ereignisprotokolle"
+"Löschen der Windows-Ereignisprotokolle",
+"Очистка журналов событий Windows"
 ],
 "Création d'un compte local": [
 "Creación de una cuenta local",
 "Criação de uma conta local",
-"Erstellung eines lokalen Kontos"
+"Erstellung eines lokalen Kontos",
+"Создание локальной учётной записи"
 ],
 "Ajout d'un compte au groupe Administrateurs": [
 "Cuenta añadida al grupo Administradores",
 "Conta adicionada ao grupo Administradores",
-"Konto zur Administratorengruppe hinzugefügt"
+"Konto zur Administratorengruppe hinzugefügt",
+"Добавление учётной записи в группу «Администраторы»"
 ],
 "Vol d'identifiants dans la mémoire de LSASS": [
 "Robo de credenciales en la memoria de LSASS",
 "Roubo de credenciais na memória do LSASS",
-"Diebstahl von Anmeldedaten aus dem LSASS-Speicher"
+"Diebstahl von Anmeldedaten aus dem LSASS-Speicher",
+"Кража учётных данных из памяти LSASS"
 ],
 "Copie de la base SAM (hachés de mots de passe locaux)": [
 "Copia de la base SAM (hashes de contraseñas locales)",
 "Cópia da base SAM (hashes das palavras-passe locais)",
-"Kopie der SAM-Datenbank (lokale Passwort-Hashes)"
+"Kopie der SAM-Datenbank (lokale Passwort-Hashes)",
+"Копирование базы SAM (хеши локальных паролей)"
 ],
 "Copie de la base Active Directory (NTDS.dit)": [
 "Copia de la base de Active Directory (NTDS.dit)",
 "Cópia da base do Active Directory (NTDS.dit)",
-"Kopie der Active-Directory-Datenbank (NTDS.dit)"
+"Kopie der Active-Directory-Datenbank (NTDS.dit)",
+"Копирование базы Active Directory (NTDS.dit)"
 ],
 "Désactivation du pare-feu Windows": [
 "Desactivación del cortafuegos de Windows",
 "Desativação da firewall do Windows",
-"Windows-Firewall deaktiviert"
+"Windows-Firewall deaktiviert",
+"Отключение брандмауэра Windows"
 ],
 "Création d'un service Windows (persistance)": [
 "Creación de un servicio de Windows (persistencia)",
 "Criação de um serviço do Windows (persistência)",
-"Windows-Dienst erstellt (Persistenz)"
+"Windows-Dienst erstellt (Persistenz)",
+"Создание службы Windows (закрепление)"
 ],
 "Reconnaissance de l'annuaire Active Directory": [
 "Reconocimiento del directorio Active Directory",
 "Reconhecimento do diretório Active Directory",
-"Erkundung des Active Directory"
+"Erkundung des Active Directory",
+"Разведка каталога Active Directory"
 ],
 "Compression de données (préparation d'une exfiltration)": [
 "Compresión de datos (preparación de una exfiltración)",
 "Compressão de dados (preparação de uma exfiltração)",
-"Datenarchivierung (Vorbereitung einer Exfiltration)"
+"Datenarchivierung (Vorbereitung einer Exfiltration)",
+"Архивация данных (подготовка к эксфильтрации)"
 ],
 "Exemple : ligne de commande": [
 "Ejemplo: línea de comandos",
 "Exemplo: linha de comandos",
-"Beispiel: Befehlszeile"
+"Beispiel: Befehlszeile",
+"Пример: командная строка"
 ],
 "copié ✓": [
 "copiado ✓",
 "copiado ✓",
-"kopiert ✓"
+"kopiert ✓",
+"скопировано ✓"
 ],
 "copier": [
 "copiar",
 "copiar",
-"kopieren"
+"kopieren",
+"копировать"
 ],
 "des milliards d'années": [
 "miles de millones de años",
 "milhares de milhões de anos",
-"Milliarden Jahre"
+"Milliarden Jahre",
+"миллиарды лет"
 ],
 "instantané": [
 "instantáneo",
 "instantâneo",
-"sofort"
+"sofort",
+"мгновенно"
 ],
 "siècles": [
 "siglos",
 "séculos",
-"Jahrhunderte"
+"Jahrhunderte",
+"вв."
 ],
 "ans": [
 "años",
 "anos",
-"Jahre"
+"Jahre",
+"г."
 ],
 "jours": [
 "días",
 "dias",
-"Tage"
+"Tage",
+"дн."
 ],
 "heures": [
 "horas",
 "horas",
-"Stunden"
+"Stunden",
+"ч"
 ],
 "secondes": [
 "segundos",
 "segundos",
-"Sekunden"
+"Sekunden",
+"с"
 ],
 "Coche au moins une famille de caractères.": [
 "Marca al menos una familia de caracteres.",
 "Marca pelo menos uma família de caracteres.",
-"Wähle mindestens eine Zeichenklasse."
+"Wähle mindestens eine Zeichenklasse.",
+"Отметь хотя бы один набор символов."
 ],
 "Entropie : ": [
 "Entropía: ",
 "Entropia: ",
-"Entropie: "
+"Entropie: ",
+"Энтропия: "
 ],
 "Fait partie des mots de passe les plus utilisés au monde.": [
 "Es una de las contraseñas más utilizadas del mundo.",
 "É uma das palavras-passe mais usadas no mundo.",
-"Gehört zu den meistgenutzten Passwörtern der Welt."
+"Gehört zu den meistgenutzten Passwörtern der Welt.",
+"Входит в число самых распространённых паролей в мире."
 ],
 "Repose sur un mot de passe très courant, avec quelques caractères ajoutés.": [
 "Se basa en una contraseña muy común, con algunos caracteres añadidos.",
 "Baseia-se numa palavra-passe muito comum, com alguns caracteres acrescentados.",
-"Beruht auf einem sehr verbreiteten Passwort mit ein paar zusätzlichen Zeichen."
+"Beruht auf einem sehr verbreiteten Passwort mit ein paar zusätzlichen Zeichen.",
+"Основан на очень распространённом пароле с несколькими добавленными символами."
 ],
 "Contient une suite de touches ou de caractères (abcd, 1234, azerty…).": [
 "Contiene una secuencia de teclas o de caracteres (abcd, 1234, qwerty…).",
 "Contém uma sequência de teclas ou de caracteres (abcd, 1234, qwerty…).",
-"Enthält eine Tasten- oder Zeichenfolge (abcd, 1234, qwertz …)."
+"Enthält eine Tasten- oder Zeichenfolge (abcd, 1234, qwertz …).",
+"Содержит последовательность клавиш или символов (abcd, 1234, qwerty…)."
 ],
 "Contient des répétitions (aaa, ababab…).": [
 "Contiene repeticiones (aaa, ababab…).",
 "Contém repetições (aaa, ababab…).",
-"Enthält Wiederholungen (aaa, ababab …)."
+"Enthält Wiederholungen (aaa, ababab …).",
+"Содержит повторы (aaa, ababab…)."
 ],
 "Contient une année : c'est souvent une date de naissance, facile à deviner.": [
 "Contiene un año: suele ser una fecha de nacimiento, fácil de adivinar.",
 "Contém um ano: muitas vezes uma data de nascimento, fácil de adivinhar.",
-"Enthält eine Jahreszahl: oft ein Geburtsdatum, leicht zu erraten."
+"Enthält eine Jahreszahl: oft ein Geburtsdatum, leicht zu erraten.",
+"Содержит год: часто это год рождения, который легко угадать."
 ],
 "Suit le modèle le plus prévisible : majuscule au début, chiffres à la fin.": [
 "Sigue el patrón más previsible: mayúscula al principio, cifras al final.",
 "Segue o padrão mais previsível: maiúscula no início, algarismos no fim.",
-"Folgt dem vorhersehbarsten Muster: Großbuchstabe am Anfang, Ziffern am Ende."
+"Folgt dem vorhersehbarsten Muster: Großbuchstabe am Anfang, Ziffern am Ende.",
+"Следует самому предсказуемому шаблону: заглавная буква в начале, цифры в конце."
 ],
 "Moins de 12 caractères : la longueur est le critère qui compte le plus.": [
 "Menos de 12 caracteres: la longitud es el criterio que más cuenta.",
 "Menos de 12 caracteres: o comprimento é o critério que mais conta.",
-"Weniger als 12 Zeichen: Die Länge ist das wichtigste Kriterium."
+"Weniger als 12 Zeichen: Die Länge ist das wichtigste Kriterium.",
+"Меньше 12 символов: длина — самый важный критерий."
 ],
 "Mélange davantage de types de caractères, ou allonge-le (une phrase de passe de 4-5 mots marche très bien).": [
 "Mezcla más tipos de caracteres o alárgala (una frase de paso de 4-5 palabras funciona muy bien).",
 "Mistura mais tipos de caracteres ou torna-a mais longa (uma frase-passe de 4-5 palavras funciona muito bem).",
-"Mische mehr Zeichenarten oder mach es länger (eine Passphrase aus 4–5 Wörtern funktioniert sehr gut)."
+"Mische mehr Zeichenarten oder mach es länger (eine Passphrase aus 4–5 Wörtern funktioniert sehr gut).",
+"Смешай больше типов символов или сделай его длиннее (парольная фраза из 4–5 слов работает отлично)."
 ],
 "Très faible": [
 "Muy débil",
 "Muito fraca",
-"Sehr schwach"
+"Sehr schwach",
+"Очень слабый"
 ],
 "Faible": [
 "Débil",
 "Fraca",
-"Schwach"
+"Schwach",
+"Слабый"
 ],
 "Moyen": [
 "Media",
 "Média",
-"Mittel"
+"Mittel",
+"Средний"
 ],
 "Fort": [
 "Fuerte",
 "Forte",
-"Stark"
+"Stark",
+"Надёжный"
 ],
 "Très fort": [
 "Muy fuerte",
 "Muito forte",
-"Sehr stark"
+"Sehr stark",
+"Очень надёжный"
 ],
 "longueur": [
 "longitud",
 "comprimento",
-"Länge"
+"Länge",
+"длина"
 ],
 "types de caractères": [
 "tipos de caracteres",
 "tipos de caracteres",
-"Zeichenarten"
+"Zeichenarten",
+"типы символов"
 ],
 "entropie estimée": [
 "entropía estimada",
 "entropia estimada",
-"geschätzte Entropie"
+"geschätzte Entropie",
+"оценка энтропии"
 ],
 "cassage hors ligne*": [
 "cracking sin conexión*",
 "cracking offline*",
-"Offline-Cracking*"
+"Offline-Cracking*",
+"офлайн-взлом*"
 ],
 "Points d'attention :": [
 "Puntos de atención:",
 "Pontos de atenção:",
-"Worauf du achten solltest:"
+"Worauf du achten solltest:",
+"На что обратить внимание:"
 ],
 "Aucun schéma prévisible détecté.": [
 "No se ha detectado ningún patrón previsible.",
 "Nenhum padrão previsível detetado.",
-"Kein vorhersehbares Muster erkannt."
+"Kein vorhersehbares Muster erkannt.",
+"Предсказуемых шаблонов не обнаружено."
 ],
 "Vérification en cours…": [
 "Comprobando…",
 "A verificar…",
-"Wird geprüft …"
+"Wird geprüft …",
+"Проверка…"
 ],
 "Absent des fuites connues de Have I Been Pwned. Ça ne garantit pas qu'il soit robuste : regarde aussi l'analyse ci-dessus.": [
 "No aparece en las filtraciones conocidas de Have I Been Pwned. Eso no garantiza que sea robusta: mira también el análisis de arriba.",
 "Ausente das fugas conhecidas do Have I Been Pwned. Isso não garante que seja robusta: vê também a análise acima.",
-"Nicht in den bekannten Leaks von Have I Been Pwned. Das heißt nicht, dass es stark ist: Sieh dir auch die Analyse oben an."
+"Nicht in den bekannten Leaks von Have I Been Pwned. Das heißt nicht, dass es stark ist: Sieh dir auch die Analyse oben an.",
+"В известных утечках Have I Been Pwned не найден. Это не гарантирует его надёжность: посмотри также анализ выше."
 ],
 "Impossible de joindre le service de vérification. Réessaie plus tard.": [
 "No se puede contactar con el servicio de comprobación. Vuelve a intentarlo más tarde.",
 "Não foi possível contactar o serviço de verificação. Tenta mais tarde.",
-"Der Prüfdienst ist nicht erreichbar. Versuch es später noch einmal."
+"Der Prüfdienst ist nicht erreichbar. Versuch es später noch einmal.",
+"Не удалось связаться со службой проверки. Попробуй позже."
 ],
 "Aucune correspondance avec les empreintes ci-dessus.": [
 "Ninguna coincidencia con las huellas de arriba.",
 "Nenhuma correspondência com as impressões acima.",
-"Kein Treffer bei den Hashes oben."
+"Kein Treffer bei den Hashes oben.",
+"Совпадений с хешами выше нет."
 ],
 "Fichier trop volumineux (512 Mo maximum dans le navigateur).": [
 "Archivo demasiado grande (512 MB como máximo en el navegador).",
 "Ficheiro demasiado grande (512 MB no máximo no navegador).",
-"Datei zu groß (maximal 512 MB im Browser)."
+"Datei zu groß (maximal 512 MB im Browser).",
+"Файл слишком большой (в браузере не более 512 МБ)."
 ],
 "Calcul en cours…": [
 "Calculando…",
 "A calcular…",
-"Wird berechnet …"
+"Wird berechnet …",
+"Вычисление…"
 ],
 "Le résultat n'est pas du texte : il est affiché en hexadécimal.": [
 "El resultado no es texto: se muestra en hexadecimal.",
 "O resultado não é texto: é mostrado em hexadecimal.",
-"Das Ergebnis ist kein Text: Es wird hexadezimal angezeigt."
+"Das Ergebnis ist kein Text: Es wird hexadezimal angezeigt.",
+"Результат — не текст: он показан в шестнадцатеричном виде."
 ],
 "Entrée invalide pour ce format.": [
 "Entrada no válida para este formato.",
 "Entrada inválida para este formato.",
-"Ungültige Eingabe für dieses Format."
+"Ungültige Eingabe für dieses Format.",
+"Некорректный ввод для этого формата."
 ],
 "émetteur": [
 "emisor",
 "emissor",
-"Aussteller"
+"Aussteller",
+"издатель"
 ],
 "émis le": [
 "emitido el",
 "emitido em",
-"ausgestellt am"
+"ausgestellt am",
+"выдан"
 ],
 "valide à partir du": [
 "válido a partir del",
 "válido a partir de",
-"gültig ab"
+"gültig ab",
+"действует с"
 ],
 "expire le": [
 "caduca el",
 "expira em",
-"läuft ab am"
+"läuft ab am",
+"истекает"
 ],
 "C'est un JWE (jeton chiffré) : son contenu ne peut pas être lu sans la clé.": [
 "Es un JWE (token cifrado): su contenido no se puede leer sin la clave.",
 "É um JWE (token cifrado): o seu conteúdo não pode ser lido sem a chave.",
-"Das ist ein JWE (verschlüsseltes Token): Sein Inhalt ist ohne Schlüssel nicht lesbar."
+"Das ist ein JWE (verschlüsseltes Token): Sein Inhalt ist ohne Schlüssel nicht lesbar.",
+"Это JWE (зашифрованный токен): его содержимое нельзя прочитать без ключа."
 ],
 "Format invalide : un JWT contient trois parties séparées par des points.": [
 "Formato no válido: un JWT contiene tres partes separadas por puntos.",
 "Formato inválido: um JWT contém três partes separadas por pontos.",
-"Ungültiges Format: Ein JWT besteht aus drei durch Punkte getrennten Teilen."
+"Ungültiges Format: Ein JWT besteht aus drei durch Punkte getrennten Teilen.",
+"Неверный формат: JWT состоит из трёх частей, разделённых точками."
 ],
 "Impossible de décoder l'en-tête ou le contenu (Base64URL ou JSON invalide).": [
 "No se puede decodificar la cabecera o el contenido (Base64URL o JSON no válido).",
 "Não foi possível descodificar o cabeçalho ou o conteúdo (Base64URL ou JSON inválido).",
-"Header oder Payload lassen sich nicht dekodieren (ungültiges Base64URL oder JSON)."
+"Header oder Payload lassen sich nicht dekodieren (ungültiges Base64URL oder JSON).",
+"Не удалось декодировать заголовок или содержимое (некорректный Base64URL или JSON)."
 ],
 "algorithme": [
 "algoritmo",
 "algoritmo",
-"Algorithmus"
+"Algorithmus",
+"алгоритм"
 ],
 "Jeton <strong>expiré</strong>.": [
 "Token <strong>caducado</strong>.",
 "Token <strong>expirado</strong>.",
-"Token <strong>abgelaufen</strong>."
+"Token <strong>abgelaufen</strong>.",
+"Токен <strong>просрочен</strong>."
 ],
 "Jeton <strong>pas encore valide</strong> (nbf dans le futur).": [
 "Token <strong>todavía no válido</strong> (nbf en el futuro).",
 "Token <strong>ainda não válido</strong> (nbf no futuro).",
-"Token <strong>noch nicht gültig</strong> (nbf in der Zukunft)."
+"Token <strong>noch nicht gültig</strong> (nbf in der Zukunft).",
+"Токен <strong>ещё не действует</strong> (nbf в будущем)."
 ],
 "Jeton dans sa période de validité.": [
 "Token dentro de su periodo de validez.",
 "Token dentro do seu período de validade.",
-"Token innerhalb seiner Gültigkeitsdauer."
+"Token innerhalb seiner Gültigkeitsdauer.",
+"Токен в пределах срока действия."
 ],
 "Aucune date d'expiration (exp) : ce jeton reste valable indéfiniment.": [
 "Sin fecha de caducidad (exp): este token sigue siendo válido indefinidamente.",
 "Sem data de expiração (exp): este token continua válido indefinidamente.",
-"Kein Ablaufdatum (exp): Dieses Token bleibt unbegrenzt gültig."
+"Kein Ablaufdatum (exp): Dieses Token bleibt unbegrenzt gültig.",
+"Нет даты истечения (exp): этот токен действует бессрочно."
 ],
 "<strong>alg: none</strong> : jeton non signé. Un serveur qui l'accepte peut être contourné.": [
 "<strong>alg: none</strong>: token sin firmar. Un servidor que lo acepte puede ser eludido.",
 "<strong>alg: none</strong>: token não assinado. Um servidor que o aceite pode ser contornado.",
-"<strong>alg: none</strong>: unsigniertes Token. Ein Server, der es akzeptiert, lässt sich umgehen."
+"<strong>alg: none</strong>: unsigniertes Token. Ein Server, der es akzeptiert, lässt sich umgehen.",
+"<strong>alg: none</strong>: неподписанный токен. Сервер, который его принимает, можно обойти."
 ],
 "Signature HMAC à secret partagé : sa robustesse dépend entièrement de la longueur du secret.": [
 "Firma HMAC con secreto compartido: su robustez depende por completo de la longitud del secreto.",
 "Assinatura HMAC com segredo partilhado: a sua robustez depende inteiramente do comprimento do segredo.",
-"HMAC-Signatur mit gemeinsamem Geheimnis: Ihre Stärke hängt vollständig von der Länge des Geheimnisses ab."
+"HMAC-Signatur mit gemeinsamem Geheimnis: Ihre Stärke hängt vollständig von der Länge des Geheimnisses ab.",
+"Подпись HMAC с общим секретом: её стойкость целиком зависит от длины секрета."
 ],
 "L'en-tête pointe vers une clé distante (jku/x5u) : le serveur doit restreindre les URL acceptées.": [
 "La cabecera apunta a una clave remota (jku/x5u): el servidor debe restringir las URL aceptadas.",
 "O cabeçalho aponta para uma chave remota (jku/x5u): o servidor deve restringir os URL aceites.",
-"Der Header verweist auf einen entfernten Schlüssel (jku/x5u): Der Server muss die zulässigen URLs einschränken."
+"Der Header verweist auf einen entfernten Schlüssel (jku/x5u): Der Server muss die zulässigen URLs einschränken.",
+"Заголовок указывает на удалённый ключ (jku/x5u): сервер должен ограничивать допустимые URL."
 ],
 "Le kid contient des caractères inhabituels : vérifie qu'il n'est pas utilisé tel quel dans un chemin ou une requête.": [
 "El kid contiene caracteres inusuales: comprueba que no se use tal cual en una ruta o una consulta.",
 "O kid contém caracteres invulgares: verifica que não é usado tal como está num caminho ou numa consulta.",
-"Die kid enthält ungewöhnliche Zeichen: Prüfe, dass sie nicht unverändert in einem Pfad oder einer Abfrage landet."
+"Die kid enthält ungewöhnliche Zeichen: Prüfe, dass sie nicht unverändert in einem Pfad oder einer Abfrage landet.",
+"kid содержит необычные символы: проверь, что он не используется как есть в пути или запросе."
 ],
 "Le contenu semble contenir une donnée sensible : un JWT signé n'est pas chiffré, tout le monde peut le lire.": [
 "El contenido parece incluir un dato sensible: un JWT firmado no está cifrado, cualquiera puede leerlo.",
 "O conteúdo parece incluir um dado sensível: um JWT assinado não é cifrado, qualquer pessoa o pode ler.",
-"Der Inhalt scheint sensible Daten zu enthalten: Ein signiertes JWT ist nicht verschlüsselt, jeder kann es lesen."
+"Der Inhalt scheint sensible Daten zu enthalten: Ein signiertes JWT ist nicht verschlüsselt, jeder kann es lesen.",
+"Похоже, в содержимом есть чувствительные данные: подписанный JWT не зашифрован, его может прочитать кто угодно."
 ],
 "La signature n'est pas vérifiée ici : décoder un jeton ne prouve pas qu'il est authentique.": [
 "La firma no se verifica aquí: decodificar un token no demuestra que sea auténtico.",
 "A assinatura não é verificada aqui: descodificar um token não prova que seja autêntico.",
-"Die Signatur wird hier nicht geprüft: Ein Token zu dekodieren beweist nicht, dass es echt ist."
+"Die Signatur wird hier nicht geprüft: Ein Token zu dekodieren beweist nicht, dass es echt ist.",
+"Подпись здесь не проверяется: декодирование токена не доказывает его подлинность."
 ],
 "Domaines": [
 "Dominios",
 "Domínios",
-"Domains"
+"Domains",
+"Домены"
 ],
 "(privée/réservée)": [
 "(privada/reservada)",
 "(privado/reservado)",
-"(privat/reserviert)"
+"(privat/reserviert)",
+"(частный/зарезервированный)"
 ],
 "Aucun indicateur trouvé.": [
 "No se ha encontrado ningún indicador.",
 "Nenhum indicador encontrado.",
-"Keine Indikatoren gefunden."
+"Keine Indikatoren gefunden.",
+"Индикаторы не найдены."
 ],
 "Entrée entièrement en Base64 décodée": [
 "Entrada íntegramente en Base64 decodificada",
 "Entrada inteiramente em Base64 descodificada",
-"Reine Base64-Eingabe dekodiert"
+"Reine Base64-Eingabe dekodiert",
+"Ввод целиком в Base64 декодирован"
 ],
 "Commande PowerShell -EncodedCommand décodée (Base64, UTF-16LE)": [
 "Comando PowerShell -EncodedCommand decodificado (Base64, UTF-16LE)",
 "Comando PowerShell -EncodedCommand descodificado (Base64, UTF-16LE)",
-"PowerShell-Befehl -EncodedCommand dekodiert (Base64, UTF-16LE)"
+"PowerShell-Befehl -EncodedCommand dekodiert (Base64, UTF-16LE)",
+"Команда PowerShell -EncodedCommand декодирована (Base64, UTF-16LE)"
 ],
 "Accents graves (`) retirés des mots-clés": [
 "Acentos graves (`) eliminados de las palabras clave",
 "Acentos graves (`) removidos das palavras-chave",
-"Backticks (`) aus Schlüsselwörtern entfernt"
+"Backticks (`) aus Schlüsselwörtern entfernt",
+"Обратные апострофы (`) удалены из ключевых слов"
 ],
 "Accents circonflexes (^) de cmd.exe retirés": [
 "Circunflejos (^) de cmd.exe eliminados",
 "Acentos circunflexos (^) do cmd.exe removidos",
-"Zirkumflexe (^) von cmd.exe entfernt"
+"Zirkumflexe (^) von cmd.exe entfernt",
+"Символы ^ cmd.exe удалены"
 ],
 "Codes de caractères [char] convertis": [
 "Códigos de caracteres [char] convertidos",
 "Códigos de caracteres [char] convertidos",
-"[char]-Zeichencodes umgewandelt"
+"[char]-Zeichencodes umgewandelt",
+"Коды символов [char] преобразованы"
 ],
 "String.fromCharCode converti": [
 "String.fromCharCode convertido",
 "String.fromCharCode convertido",
-"String.fromCharCode umgewandelt"
+"String.fromCharCode umgewandelt",
+"String.fromCharCode преобразован"
 ],
 "Séquences d'échappement (\\x41, \\u0041…) décodées": [
 "Secuencias de escape (\\x41, \\u0041…) decodificadas",
 "Sequências de escape (\\x41, \\u0041…) descodificadas",
-"Escape-Sequenzen (\\x41, \\u0041 …) dekodiert"
+"Escape-Sequenzen (\\x41, \\u0041 …) dekodiert",
+"Escape-последовательности (\\x41, \\u0041…) декодированы"
 ],
 "Chaînes concaténées réunies": [
 "Cadenas concatenadas unidas",
 "Cadeias concatenadas unidas",
-"Verkettete Zeichenketten zusammengeführt"
+"Verkettete Zeichenketten zusammengeführt",
+"Конкатенированные строки объединены"
 ],
 "Parenthèses superflues autour d'une chaîne retirées": [
 "Paréntesis superfluos alrededor de una cadena eliminados",
 "Parênteses supérfluos à volta de uma cadeia removidos",
-"Überflüssige Klammern um Zeichenketten entfernt"
+"Überflüssige Klammern um Zeichenketten entfernt",
+"Лишние скобки вокруг строки удалены"
 ],
 "Opérateur de format -f appliqué": [
 "Operador de formato -f aplicado",
 "Operador de formato -f aplicado",
-"Formatoperator -f angewendet"
+"Formatoperator -f angewendet",
+"Применён оператор форматирования -f"
 ],
 "Remplacements de texte (.Replace, -replace) appliqués": [
 "Sustituciones de texto (.Replace, -replace) aplicadas",
 "Substituições de texto (.Replace, -replace) aplicadas",
-"Textersetzungen (.Replace, -replace) angewendet"
+"Textersetzungen (.Replace, -replace) angewendet",
+"Применены замены текста (.Replace, -replace)"
 ],
 "Chaînes inversées remises à l'endroit": [
 "Cadenas invertidas puestas del derecho",
 "Cadeias invertidas repostas na ordem certa",
-"Umgekehrte Zeichenketten zurückgedreht"
+"Umgekehrte Zeichenketten zurückgedreht",
+"Перевёрнутые строки возвращены в нормальный вид"
 ],
 "Tableaux de chaînes joints": [
 "Arrays de cadenas unidos",
 "Arrays de cadeias unidos",
-"Zeichenketten-Arrays zusammengefügt"
+"Zeichenketten-Arrays zusammengefügt",
+"Массивы строк объединены"
 ],
 "unescape / decodeURIComponent décodés": [
 "unescape / decodeURIComponent decodificados",
 "unescape / decodeURIComponent descodificados",
-"unescape / decodeURIComponent dekodiert"
+"unescape / decodeURIComponent dekodiert",
+"unescape / decodeURIComponent декодированы"
 ],
 "Base64 décodé ([Convert]::FromBase64String)": [
 "Base64 decodificado ([Convert]::FromBase64String)",
 "Base64 descodificado ([Convert]::FromBase64String)",
-"Base64 dekodiert ([Convert]::FromBase64String)"
+"Base64 dekodiert ([Convert]::FromBase64String)",
+"Base64 декодирован ([Convert]::FromBase64String)"
 ],
 "Base64 décodé (atob)": [
 "Base64 decodificado (atob)",
 "Base64 descodificado (atob)",
-"Base64 dekodiert (atob)"
+"Base64 dekodiert (atob)",
+"Base64 декодирован (atob)"
 ],
 "Code passé à eval / IEX mis à plat (sans l'exécuter)": [
 "Código pasado a eval / IEX desplegado (sin ejecutarlo)",
 "Código passado a eval / IEX desdobrado (sem o executar)",
-"An eval / IEX übergebener Code entpackt (ohne Ausführung)"
+"An eval / IEX übergebener Code entpackt (ohne Ausführung)",
+"Код, передаваемый в eval / IEX, развёрнут (без выполнения)"
 ],
 "Variables constantes remplacées par leur valeur": [
 "Variables constantes sustituidas por su valor",
 "Variáveis constantes substituídas pelo seu valor",
-"Konstante Variablen durch ihren Wert ersetzt"
+"Konstante Variablen durch ihren Wert ersetzt",
+"Переменные-константы заменены их значениями"
 ],
 "Exécution de code généré à la volée": [
 "Ejecución de código generado sobre la marcha",
 "Execução de código gerado dinamicamente",
-"Ausführung dynamisch erzeugten Codes"
+"Ausführung dynamisch erzeugten Codes",
+"Выполнение кода, сгенерированного на лету"
 ],
 "Téléchargement depuis Internet": [
 "Descarga desde Internet",
 "Transferência a partir da Internet",
-"Download aus dem Internet"
+"Download aus dem Internet",
+"Загрузка из интернета"
 ],
 "PowerShell lancé discrètement (fenêtre cachée, politique contournée, commande encodée)": [
 "PowerShell lanzado discretamente (ventana oculta, política eludida, comando codificado)",
 "PowerShell lançado discretamente (janela oculta, política contornada, comando codificado)",
-"Unauffällig gestartete PowerShell (verstecktes Fenster, umgangene Richtlinie, kodierter Befehl)"
+"Unauffällig gestartete PowerShell (verstecktes Fenster, umgangene Richtlinie, kodierter Befehl)",
+"Скрытый запуск PowerShell (скрытое окно, обход политики, закодированная команда)"
 ],
 "Contournement de l'AMSI (analyse antivirus des scripts)": [
 "Elusión de AMSI (análisis antivirus de scripts)",
 "Contorno do AMSI (análise antivírus de scripts)",
-"AMSI-Umgehung (Virenscan von Skripten)"
+"AMSI-Umgehung (Virenscan von Skripten)",
+"Обход AMSI (антивирусной проверки скриптов)"
 ],
 "Désactivation ou exclusion de Microsoft Defender": [
 "Desactivación o exclusión de Microsoft Defender",
 "Desativação ou exclusão do Microsoft Defender",
-"Microsoft Defender deaktiviert oder Ausnahme gesetzt"
+"Microsoft Defender deaktiviert oder Ausnahme gesetzt",
+"Отключение Microsoft Defender или добавление исключений"
 ],
 "Tâche planifiée (persistance)": [
 "Tarea programada (persistencia)",
 "Tarefa agendada (persistência)",
-"Geplante Aufgabe (Persistenz)"
+"Geplante Aufgabe (Persistenz)",
+"Запланированная задача (закрепление)"
 ],
 "Clé Run ou dossier Démarrage (persistance)": [
 "Clave Run o carpeta Inicio (persistencia)",
 "Chave Run ou pasta Arranque (persistência)",
-"Run-Schlüssel oder Autostart-Ordner (Persistenz)"
+"Run-Schlüssel oder Autostart-Ordner (Persistenz)",
+"Ключ Run или папка автозагрузки (закрепление)"
 ],
 "Injection ou exécution de code en mémoire": [
 "Inyección o ejecución de código en memoria",
 "Injeção ou execução de código em memória",
-"Prozessinjektion / Ausführung im Speicher"
+"Prozessinjektion / Ausführung im Speicher",
+"Внедрение или выполнение кода в памяти"
 ],
 "Chargement réflexif d'un programme .NET": [
 "Carga reflexiva de un programa .NET",
 "Carregamento reflexivo de um programa .NET",
-"Reflektives Laden einer .NET-Assembly"
+"Reflektives Laden einer .NET-Assembly",
+"Рефлективная загрузка программы .NET"
 ],
 "Exécution via Windows Script Host (JScript/VBScript)": [
 "Ejecución mediante Windows Script Host (JScript/VBScript)",
 "Execução via Windows Script Host (JScript/VBScript)",
-"Ausführung über Windows Script Host (JScript/VBScript)"
+"Ausführung über Windows Script Host (JScript/VBScript)",
+"Выполнение через Windows Script Host (JScript/VBScript)"
 ],
 "Utilisation de WMI": [
 "Uso de WMI",
 "Utilização de WMI",
-"Nutzung von WMI"
+"Nutzung von WMI",
+"Использование WMI"
 ],
 "Reconnaissance du système": [
 "Reconocimiento del sistema",
 "Reconhecimento do sistema",
-"Systemerkundung"
+"Systemerkundung",
+"Разведка системы"
 ],
 "Binaire système détourné (LOLBin)": [
 "Binario del sistema desviado (LOLBin)",
 "Binário do sistema desviado (LOLBin)",
-"Missbrauchte System-Binärdatei (LOLBin)"
+"Missbrauchte System-Binärdatei (LOLBin)",
+"Злоупотребление системным бинарником (LOLBin)"
 ],
 "Obfuscation (encodage, codes de caractères…)": [
 "Ofuscación (codificación, códigos de caracteres…)",
 "Ofuscação (codificação, códigos de caracteres…)",
-"Verschleierung (Kodierung, Zeichencodes …)"
+"Verschleierung (Kodierung, Zeichencodes …)",
+"Обфускация (кодирование, коды символов…)"
 ],
 "Aucune couche d'obfuscation reconnue.": [
 "No se ha reconocido ninguna capa de ofuscación.",
 "Nenhuma camada de ofuscação reconhecida.",
-"Keine bekannte Verschleierungsschicht gefunden."
+"Keine bekannte Verschleierungsschicht gefunden.",
+"Слоёв обфускации не обнаружено."
 ],
 "Aucun comportement typique repéré.": [
 "No se ha detectado ningún comportamiento típico.",
 "Nenhum comportamento típico detetado.",
-"Kein typisches Verhalten erkannt."
+"Kein typisches Verhalten erkannt.",
+"Типичного поведения не обнаружено."
 ],
 "Aucune couche reconnue : le script est peut-être déjà en clair, ou utilise une obfuscation non gérée.": [
 "Ninguna capa reconocida: puede que el script ya esté en claro o que use una ofuscación no soportada.",
 "Nenhuma camada reconhecida: o script talvez já esteja em claro, ou usa uma ofuscação não suportada.",
-"Keine bekannte Schicht: Das Skript ist vielleicht schon im Klartext oder nutzt eine nicht unterstützte Verschleierung."
+"Keine bekannte Schicht: Das Skript ist vielleicht schon im Klartext oder nutzt eine nicht unterstützte Verschleierung.",
+"Известных слоёв нет: возможно, скрипт уже в открытом виде или использует неподдерживаемую обфускацию."
 ],
 "Texte trop long (2 Mo maximum).": [
 "Texto demasiado largo (2 MB como máximo).",
 "Texto demasiado longo (2 MB no máximo).",
-"Text zu lang (maximal 2 MB)."
+"Text zu lang (maximal 2 MB).",
+"Текст слишком длинный (не более 2 МБ)."
 ],
 "Analyse en cours…": [
 "Analizando…",
 "A analisar…",
-"Wird analysiert …"
+"Wird analysiert …",
+"Анализ…"
 ],
 "Arrêt : le contenu décodé dépasse 8 Mo (possible bombe de décompression).": [
 "Parada: el contenido decodificado supera 8 MB (posible bomba de descompresión).",
 "Paragem: o conteúdo descodificado ultrapassa 8 MB (possível bomba de descompressão).",
-"Abbruch: Der dekodierte Inhalt überschreitet 8 MB (mögliche Dekompressionsbombe)."
+"Abbruch: Der dekodierte Inhalt überschreitet 8 MB (mögliche Dekompressionsbombe).",
+"Остановлено: декодированное содержимое превышает 8 МБ (возможная бомба-архив)."
 ],
 "Erreur pendant l'analyse.": [
 "Error durante el análisis.",
 "Erro durante a análise.",
-"Fehler bei der Analyse."
+"Fehler bei der Analyse.",
+"Ошибка во время анализа."
 ],
 "mois": [
 "meses",
 "meses",
-"Monate"
+"Monate",
+"мес."
 ],
 "minutes": [
 "minutos",
 "minutos",
-"Minuten"
+"Minuten",
+"мин"
 ],
 "sujet": [
 "sujeto",
 "sujeito",
-"Subjekt"
+"Subjekt",
+"субъект"
 ],
 "audience": [
 "audiencia",
 "audiência",
-"Zielgruppe"
+"Zielgruppe",
+"аудитория"
 ],
 "identifiant": [
 "identificador",
 "identificador",
-"Token-ID"
+"Token-ID",
+"идентификатор"
 ]
 };
-  var XL = ["es", "pt", "de"];
-  var LOCALES = { fr: "fr-FR", en: "en-US", es: "es-ES", pt: "pt-PT", de: "de-DE" };
+  var XL = ["es", "pt", "de", "ru"];
+  var LOCALES = { fr: "fr-FR", en: "en-US", es: "es-ES", pt: "pt-PT", de: "de-DE", ru: "ru-RU" };
   function unesc(s) {
     return String(s).replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
   }
-  function L5(fr, en, es, pt, de) {
+  function L5(fr, en, es, pt, de, ru) {
     return '<span lang="fr">' + fr + '</span><span lang="en">' + en + '</span><span lang="es">' + es +
-      '</span><span lang="pt">' + pt + '</span><span lang="de">' + de + "</span>";
+      '</span><span lang="pt">' + pt + '</span><span lang="de">' + de + '</span><span lang="ru">' + (ru === undefined ? en : ru) + "</span>";
   }
   function L(fr, en) {
     var t = I18N[fr], escaped = false;
     if (!t && I18N[unesc(fr)]) { t = I18N[unesc(fr)]; escaped = fr !== unesc(fr); }
-    var x = [en, en, en];
-    if (t) for (var i = 0; i < 3; i++) x[i] = escaped ? esc(t[i]) : t[i];
-    return L5(fr, en, x[0], x[1], x[2]);
+    var x = [en, en, en, en];
+    if (t) for (var i = 0; i < 4; i++) if (t[i] !== undefined) x[i] = escaped ? esc(t[i]) : t[i];
+    return L5(fr, en, x[0], x[1], x[2], x[3]);
   }
   /* Même valeur mise en forme selon chaque langue (nombres, dates). */
   function LF(fmt) {
-    return L5(fmt("fr"), fmt("en"), fmt("es"), fmt("pt"), fmt("de"));
+    return L5(fmt("fr"), fmt("en"), fmt("es"), fmt("pt"), fmt("de"), fmt("ru"));
   }
   function lang() {
     var l = document.documentElement.lang;
@@ -841,7 +962,7 @@
       out.textContent = one(len, groups);
       info.innerHTML = L("Entropie : ", "Entropy: ") + "<strong>" + bits + " bits</strong> · " +
         L5(pool + " caractères possibles", pool + " possible characters", pool + " caracteres posibles",
-          pool + " caracteres possíveis", pool + " mögliche Zeichen");
+          pool + " caracteres possíveis", pool + " mögliche Zeichen", "Возможных символов: " + pool);
       var n = Math.min(20, Math.max(1, parseInt(count.value, 10) || 1));
       var lines = [];
       for (var i = 1; i < n; i++) lines.push(one(len, groups));
@@ -1011,7 +1132,8 @@
               " times in data breaches.</strong> Stop using it everywhere.",
               "<strong>Esta contraseña aparece " + nf("es") + " veces en filtraciones de datos.</strong> No la uses más en ningún sitio.",
               "<strong>Esta palavra-passe aparece " + nf("pt") + " vezes em fugas de dados.</strong> Não a uses mais em lado nenhum.",
-              "<strong>Dieses Passwort taucht " + nf("de") + "-mal in Datenlecks auf.</strong> Verwende es nirgends mehr."));
+              "<strong>Dieses Passwort taucht " + nf("de") + "-mal in Datenlecks auf.</strong> Verwende es nirgends mehr.",
+              "<strong>Этот пароль встречается в утечках данных (раз: " + nf("ru") + ").</strong> Больше нигде его не используй."));
           } else {
             msg(leak, "ok", L("Absent des fuites connues de Have I Been Pwned. Ça ne garantit pas qu'il soit robuste : regarde aussi l'analyse ci-dessus.",
               "Not found in Have I Been Pwned's known breaches. That doesn't make it strong: check the analysis above too."));
@@ -1061,7 +1183,7 @@
         if (ok) hit = a[0];
       });
       if (!want) msg(status, "", "");
-      else if (hit) msg(status, "ok", L5("Correspondance : " + hit + ".", "Match: " + hit + ".", "Coincidencia: " + hit + ".", "Correspondência: " + hit + ".", "Treffer: " + hit + "."));
+      else if (hit) msg(status, "ok", L5("Correspondance : " + hit + ".", "Match: " + hit + ".", "Coincidencia: " + hit + ".", "Correspondência: " + hit + ".", "Treffer: " + hit + ".", "Совпадение: " + hit + "."));
       else msg(status, "bad", L("Aucune correspondance avec les empreintes ci-dessus.", "No match with the hashes above."));
     }
     function show(bytes) {
@@ -1451,7 +1573,7 @@
       if (!input.value.trim()) msg(status, "", "");
       else if (total) msg(status, "ok", L5(total + " indicateur(s) trouvé(s), doublons retirés.", total + " indicator(s) found, duplicates removed.",
         total + " indicador(es) encontrado(s), duplicados eliminados.", total + " indicador(es) encontrado(s), duplicados removidos.",
-        total + " Indikator(en) gefunden, Duplikate entfernt."));
+        total + " Indikator(en) gefunden, Duplikate entfernt.", "Найдено индикаторов: " + total + ", дубликаты удалены."));
       else msg(status, "warn", L("Aucun indicateur trouvé.", "No indicators found."));
     }
     function renderText(fn) {
@@ -2032,7 +2154,7 @@
         var det = document.createElement("details");
         var sum = document.createElement("summary");
         sum.innerHTML = L5("voir le texte après l'étape " + (i + 1), "show text after step " + (i + 1), "ver el texto tras la etapa " + (i + 1),
-          "ver o texto após a etapa " + (i + 1), "Text nach Schritt " + (i + 1) + " anzeigen");
+          "ver o texto após a etapa " + (i + 1), "Text nach Schritt " + (i + 1) + " anzeigen", "показать текст после шага " + (i + 1));
         var pre = document.createElement("pre");
         pre.className = "tool-output";
         pre.textContent = s.text.length > 20000 ? s.text.slice(0, 20000) + "\n…" : s.text;
@@ -2075,10 +2197,10 @@
       var k = res.steps.length;
       if (res.capped) msg(status, "warn", L5("Arrêt après " + k + " étapes (limite de sécurité).", "Stopped after " + k + " steps (safety limit).",
         "Parada tras " + k + " etapas (límite de seguridad).", "Paragem após " + k + " etapas (limite de segurança).",
-        "Abbruch nach " + k + " Schritten (Sicherheitsgrenze)."));
+        "Abbruch nach " + k + " Schritten (Sicherheitsgrenze).", "Остановлено после шагов: " + k + " (защитный предел)."));
       else if (k) msg(status, "ok", L5(k + " couche(s) retirée(s). Le script n'a pas été exécuté.", k + " layer(s) removed. The script was not executed.",
         k + " capa(s) eliminada(s). El script no se ha ejecutado.", k + " camada(s) removida(s). O script não foi executado.",
-        k + " Schicht(en) entfernt. Das Skript wurde nicht ausgeführt."));
+        k + " Schicht(en) entfernt. Das Skript wurde nicht ausgeführt.", "Снято слоёв: " + k + ". Скрипт не выполнялся."));
       else msg(status, "warn", L("Aucune couche reconnue : le script est peut-être déjà en clair, ou utilise une obfuscation non gérée.", "No known layer: the script may already be in clear, or use unsupported obfuscation."));
     }
 

@@ -83,7 +83,7 @@
 document.addEventListener("click", function (e) {
   var btn = e.target.closest(".fiche__copy");
   if (!btn || !navigator.clipboard) return;
-  var lang = ["fr", "en", "es", "pt", "de"].indexOf(document.documentElement.lang) >= 0 ? document.documentElement.lang : "en";
+  var lang = ["fr", "en", "es", "pt", "de", "ru"].indexOf(document.documentElement.lang) >= 0 ? document.documentElement.lang : "en";
   var span = btn.closest(".fiche__term").querySelector('.fiche__pitch [lang="' + lang + '"]');
   if (!span) return;
   navigator.clipboard.writeText(span.textContent.trim()).then(function () {
@@ -103,7 +103,7 @@ document.addEventListener("click", function (e) {
   var root = document.documentElement;
   var status = document.getElementById("news-q-status");
   var clearBtn = document.getElementById("news-q-clear");
-  var LANGS = ["fr", "en", "es", "pt", "de"];
+  var LANGS = ["fr", "en", "es", "pt", "de", "ru"];
   function norm(s) { return String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   var rows = Array.prototype.slice.call(document.querySelectorAll(".news-section .news-row"));
@@ -144,10 +144,10 @@ document.addEventListener("click", function (e) {
           en: "No story matches “{q}”. Try a company name, a group, a CVE or an attack type.",
           es: "Ningún tema coincide con «{q}». Prueba con una empresa, un grupo, una CVE o un tipo de ataque.",
           pt: "Nenhum tema corresponde a «{q}». Experimenta uma empresa, um grupo, uma CVE ou um tipo de ataque.",
-          de: "Keine Meldung passt zu „{q}“. Versuch es mit einer Firma, einer Gruppe, einer CVE oder einer Angriffsart." }
+          de: "Keine Meldung passt zu „{q}“. Versuch es mit einer Firma, einer Gruppe, einer CVE oder einer Angriffsart.", ru: "Ничего не найдено по запросу «{q}». Попробуй название компании, группировки, CVE или тип атаки." }
       : n === 1
-        ? { fr: "1 sujet trouvé", en: "1 story found", es: "1 tema encontrado", pt: "1 tema encontrado", de: "1 Meldung gefunden" }
-        : { fr: "{n} sujets trouvés", en: "{n} stories found", es: "{n} temas encontrados", pt: "{n} temas encontrados", de: "{n} Meldungen gefunden" };
+        ? { fr: "1 sujet trouvé", en: "1 story found", es: "1 tema encontrado", pt: "1 tema encontrado", de: "1 Meldung gefunden", ru: "Найдено тем: 1" }
+        : { fr: "{n} sujets trouvés", en: "{n} stories found", es: "{n} temas encontrados", pt: "{n} temas encontrados", de: "{n} Meldungen gefunden", ru: "Найдено тем: {n}" };
     return LANGS.map(function (l) {
       return '<span lang="' + l + '">' + t[l].replace("{n}", n).replace("{q}", "<strong>" + esc(q) + "</strong>") + "</span>";
     }).join("");

@@ -7,6 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from make_explain import L, set_head  # noqa: E402
+from i18n_ru import ru  # noqa: E402
 
 ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
 SITE = "https://manthole.github.io"
@@ -22,7 +23,7 @@ def label(*t):
 
 
 def ph(attr_id, fr, en, es, pt, de):
-    return f'data-ph-fr="{fr}" data-ph-en="{en}" data-ph-es="{es}" data-ph-pt="{pt}" data-ph-de="{de}"'
+    return f'data-ph-fr="{fr}" data-ph-en="{en}" data-ph-es="{es}" data-ph-pt="{pt}" data-ph-de="{de}" data-ph-ru="{ru(fr, en)}"'
 
 
 def steps(items):

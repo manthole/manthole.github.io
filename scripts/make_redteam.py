@@ -5,6 +5,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from i18n_ru import ru  # noqa: E402
+
 ROOT = Path(sys.argv[1])
 SITE = "https://manthole.github.io"
 ATTACK = "https://attack.mitre.org/tactics/"
@@ -12,7 +15,7 @@ ATTACK = "https://attack.mitre.org/tactics/"
 
 def L(fr, en, es, pt, de):
     return (f'<span lang="fr">{fr}</span><span lang="en">{en}</span><span lang="es">{es}</span>'
-            f'<span lang="pt">{pt}</span><span lang="de">{de}</span>')
+            f'<span lang="pt">{pt}</span><span lang="de">{de}</span><span lang="ru">{ru(fr, en)}</span>')
 
 
 def chips(names):
@@ -213,7 +216,7 @@ def main():
     url = SITE + "/redteam/"
     desc = "Red team methodology cheat-sheet for CTFs and authorised labs: the attack kill chain mapped to MITRE ATT&CK tactics, with the tool families and reference resources of each phase."
     s = re.sub(r"<title[^>]*>.*?</title>",
-               '<title data-fr="Red Team :: Manthole — Blog" data-es="Red Team :: Manthole — Blog" data-pt="Red Team :: Manthole — Blog" data-de="Red Team :: Manthole — Blog">Red Team :: Manthole — Blog</title>',
+               '<title data-fr="Red Team :: Manthole — Blog" data-es="Red Team :: Manthole — Blog" data-pt="Red Team :: Manthole — Blog" data-de="Red Team :: Manthole — Blog" data-ru="Red Team :: Manthole — Blog">Red Team :: Manthole — Blog</title>',
                tpl, count=1, flags=re.S)
     for attr in ['name="description"', 'itemprop="description"', 'name="twitter:description"', 'property="og:description"']:
         s = re.sub(rf'(<meta {attr} content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), s, count=1)

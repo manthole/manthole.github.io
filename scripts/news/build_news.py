@@ -394,9 +394,9 @@ def cluster(items, max_gap_days=7):
 
 # --------------------------------------------------------------------------- langues
 # Chaque texte est produit en 5 langues : un <span lang> par langue, masqués par css/cyber.css.
-# Les traductions es/pt/de viennent de i18n.json (clé = texte français) ; à défaut, l'anglais.
-LANGS = ("fr", "en", "es", "pt", "de")
-XL = ("es", "pt", "de")
+# Les traductions es/pt/de/ru viennent de i18n.json (clé = texte français) ; à défaut, l'anglais.
+LANGS = ("fr", "en", "es", "pt", "de", "ru")
+XL = ("es", "pt", "de", "ru")
 _CATALOG = None
 
 
@@ -410,13 +410,13 @@ def catalog():
     return _CATALOG
 
 
-def L5(fr, en, es, pt, de):
+def L5(fr, en, es, pt, de, ru=None):
     return (f'<span lang="fr">{fr}</span><span lang="en">{en}</span><span lang="es">{es}</span>'
-            f'<span lang="pt">{pt}</span><span lang="de">{de}</span>')
+            f'<span lang="pt">{pt}</span><span lang="de">{de}</span><span lang="ru">{en if ru is None else ru}</span>')
 
 
 def LD(d):
-    """Textes déjà prêts par langue : {"fr": …, "en": …, "es": …, "pt": …, "de": …}."""
+    """Textes déjà prêts par langue : {"fr": …, "en": …, "es": …, "pt": …, "de": …, "ru": …}."""
     return L5(*(d[x] for x in LANGS))
 
 
@@ -435,10 +435,20 @@ def tr(fr, en):
     return {"fr": fr, "en": en, **{x: t.get(x) or en for x in XL}}
 
 
+def ru_plural(n, one, few, many):
+    """Accord russe : 1 источник, 2 источника, 5 источников (11-14 → many)."""
+    n = abs(int(n))
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
 def n_sources(n):
     s = "s" if n > 1 else ""
     return LD({"fr": f"{n} source{s}", "en": f"{n} source{s}", "es": f"{n} fuente{s}", "pt": f"{n} fonte{s}",
-               "de": f"{n} Quelle{'n' if n > 1 else ''}"})
+               "de": f"{n} Quelle{'n' if n > 1 else ''}", "ru": f"{n} {ru_plural(n, 'источник', 'источника', 'источников')}"})
 
 
 # --------------------------------------------------------------------------- page
@@ -466,6 +476,7 @@ MONTHS = {
     "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
     "pt": ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"],
     "de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+    "ru": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
 }
 
 
@@ -478,14 +489,14 @@ def long_day(iso):
     m = {x: MONTHS[x][d.month - 1] for x in LANGS}
     return {"fr": f"{d.day} {m['fr']} {d.year}", "en": f"{m['en']} {d.day}, {d.year}",
             "es": f"{d.day} de {m['es']} de {d.year}", "pt": f"{d.day} de {m['pt']} de {d.year}",
-            "de": f"{d.day}. {m['de']} {d.year}"}
+            "de": f"{d.day}. {m['de']} {d.year}", "ru": f"{d.day} {m['ru']} {d.year} г."}
 
 
 def kind_label(kind):
     return LD({x: e(fx.kind_text(kind, x, 0)) for x in LANGS})
 
 
-AND = {"fr": "et", "en": "and", "es": "y", "pt": "e", "de": "und"}
+AND = {"fr": "et", "en": "and", "es": "y", "pt": "e", "de": "und", "ru": "и"}
 
 
 def join_list(words, lang):
@@ -598,7 +609,8 @@ def render_kev(kev, now, fiches=None):
         "en": f"<strong>{r}</strong> flaws added in the last 30 days ({ransom} used by ransomware), <strong>{y}</strong> since January 1.",
         "es": f"<strong>{r}</strong> fallos añadidos en los últimos 30 días ({ransom} usados por ransomware), <strong>{y}</strong> desde el 1 de enero.",
         "pt": f"<strong>{r}</strong> falhas adicionadas nos últimos 30 dias ({ransom} usadas por ransomware), <strong>{y}</strong> desde 1 de janeiro.",
-        "de": f"<strong>{r}</strong> Schwachstellen in den letzten 30 Tagen hinzugefügt (davon {ransom} von Ransomware genutzt), <strong>{y}</strong> seit dem 1. Januar."})
+        "de": f"<strong>{r}</strong> Schwachstellen in den letzten 30 Tagen hinzugefügt (davon {ransom} von Ransomware genutzt), <strong>{y}</strong> seit dem 1. Januar.",
+        "ru": f"Добавлено за последние 30 дней: <strong>{r}</strong> (из них используются шифровальщиками: {ransom}); с 1 января: <strong>{y}</strong>."})
     body = '<ol class="news-list">' + "".join(rows) + "</ol>" if rows else f'<p class="news-empty">{L("Aucune faille ajoutée ces 30 derniers jours.", "No flaw added in the last 30 days.")}</p>'
     more = ""
     if len(recent) > 12:
@@ -607,7 +619,8 @@ def render_kev(kev, now, fiches=None):
                       "en": f"The 12 most recent of {r}: see the full CISA catalogue.",
                       "es": f"Los 12 más recientes de {r}: ver el catálogo completo de la CISA.",
                       "pt": f"As 12 mais recentes de {r}: ver o catálogo completo da CISA.",
-                      "de": f"Die 12 neuesten von {r}: zum vollständigen CISA-Katalog."}) + "</p>")
+                      "de": f"Die 12 neuesten von {r}: zum vollständigen CISA-Katalog.",
+                      "ru": f"12 самых свежих из {r}: полный каталог CISA."}) + "</p>")
     return f'<p class="news-stats">{stats}</p>{body}{more}'
 
 
@@ -631,7 +644,7 @@ def render_protect(kind):
 
 
 SCHEMA = {"fr": "Schéma classique : ", "en": "Typical pattern: ", "es": "Esquema clásico: ", "pt": "Esquema clássico: ",
-          "de": "Typischer Ablauf: "}
+          "de": "Typischer Ablauf: ", "ru": "Типичная схема: "}
 
 
 def schema_sentence(kind):
@@ -674,7 +687,7 @@ def kev_line(v):
     d = e(kev_date(v))
     return (f'{link("https://nvd.nist.gov/vuln/detail/" + cve, cve)} '
             + LD({"fr": f"(catalogue CISA depuis le {d})", "en": f"(CISA catalogue since {d})", "es": f"(catálogo CISA desde el {d})",
-                  "pt": f"(catálogo CISA desde {d})", "de": f"(im CISA-Katalog seit {d})"}) + extra)
+                  "pt": f"(catálogo CISA desde {d})", "de": f"(im CISA-Katalog seit {d})", "ru": f"(в каталоге CISA с {d})"}) + extra)
 
 
 # mots fréquents en tête de titre qui ne désignent pas une entreprise ou un produit
@@ -751,6 +764,7 @@ def render_fiche(fid, c, kevs):
             "es": f"El {dates['es']}, {n} medio{'s' if pl else ''} ({srcs}) informa{'n' if pl else ''} de {phrase}" + (f" que implica a {ents}" if names else ""),
             "pt": f"Em {dates['pt']}, {n} {'meios' if pl else 'meio'} de comunicação ({srcs}) relata{'m' if pl else ''} {phrase}" + (f" envolvendo {ents}" if names else ""),
             "de": f"Am {dates['de']} berichte{'n' if pl else 't'} {n} {'Medien' if pl else 'Medium'} ({srcs}) über {phrase}" + (f" mit Bezug zu {ents}" if names else ""),
+            "ru": f"{dates['ru']} {n} {ru_plural(n, 'издание', 'издания', 'изданий')} ({srcs}) {'сообщило' if n % 10 == 1 and n % 100 != 11 else 'сообщили'} {phrase}" + (f" с участием {ents}" if names else ""),
         }[x] + "."
         if kev_hit:
             v = kev_hit[0]
@@ -763,11 +777,12 @@ def render_fiche(fid, c, kevs):
                 "es": f" La CISA confirma que el fallo {cv} ({vp}) se está explotando" + (", también por ransomware." if known else "."),
                 "pt": f" A CISA confirma que a falha {cv} ({vp}) está a ser explorada" + (", incluindo por ransomware." if known else "."),
                 "de": f" Laut CISA wird die Schwachstelle {cv} ({vp}) nachweislich ausgenutzt" + (", auch von Ransomware." if known else "."),
+                "ru": f" CISA подтверждает эксплуатацию уязвимости {cv} ({vp})" + (", в том числе шифровальщиками." if known else "."),
             }[x]
         elif c["zero_day"] and kind != "exploit":
             t += {"fr": " Une faille zero-day est en jeu.", "en": " A zero-day flaw is involved.",
                   "es": " Hay un fallo zero-day en juego.", "pt": " Está em causa uma falha zero-day.",
-                  "de": " Eine Zero-Day-Lücke ist im Spiel."}[x]
+                  "de": " Eine Zero-Day-Lücke ist im Spiel.", "ru": " Речь идёт об уязвимости нулевого дня."}[x]
         if actors:
             a = actors[0][1]
             an, ai = e(a["name"]), e(a["id"])
@@ -775,7 +790,8 @@ def render_fiche(fid, c, kevs):
                   "en": f" The articles mention {an}, tracked by MITRE ATT&amp;CK ({ai}).",
                   "es": f" Los artículos citan a {an}, catalogado por MITRE ATT&amp;CK ({ai}).",
                   "pt": f" Os artigos citam {an}, referenciado pelo MITRE ATT&amp;CK ({ai}).",
-                  "de": f" Die Artikel nennen {an}, erfasst von MITRE ATT&amp;CK ({ai})."}[x]
+                  "de": f" Die Artikel nennen {an}, erfasst von MITRE ATT&amp;CK ({ai}).",
+                  "ru": f" В статьях упоминается {an} (MITRE ATT&amp;CK: {ai})."}[x]
         texts[x] = t + " " + schema_sentence(kind)[x]
     pitch = (f'<div class="fiche__term"><div class="fiche__termbar"><span class="fiche__prompt" aria-hidden="true">$ explain --30s</span><button class="fiche__copy" type="button">{L("copier", "copy")}</button></div>'
              f'<p class="fiche__pitch">{LD(texts)}<span class="fiche__caret" aria-hidden="true"></span></p></div>')
@@ -836,6 +852,8 @@ def render_kev_fiche(fid, v, archive):
               + (", incluindo por ransomware." if known else ".") + " É preciso corrigi-la com prioridade.",
         "de": f"Am {dates['de']} hat die CISA {c_}, eine Schwachstelle in {p_} ({n_}), in ihren Katalog ausgenutzter Schwachstellen aufgenommen: Echte Angriffe sind bestätigt"
               + (", auch durch Ransomware." if known else ".") + " Sie muss vorrangig gepatcht werden.",
+        "ru": f"{dates['ru']} агентство CISA добавило {c_} — уязвимость в {p_} ({n_}) — в свой каталог эксплуатируемых уязвимостей: реальные атаки подтверждены"
+              + (", в том числе с участием шифровальщиков." if known else ".") + " Её нужно закрыть в первую очередь.",
     }
     texts = {x: texts[x] + " " + schema_sentence("exploit")[x] for x in LANGS}
     pitch = (f'<div class="fiche__term"><div class="fiche__termbar"><span class="fiche__prompt" aria-hidden="true">$ explain --30s</span><button class="fiche__copy" type="button">{L("copier", "copy")}</button></div>'
@@ -918,15 +936,15 @@ def render_search(clusters):
         f'<button type="button" class="news-chip news-row--{e(k)}" data-chip>{kind_label(k)}</button>' for k in kinds)
     ph = {"fr": "Rechercher : entreprise, groupe, CVE, type d'attaque…", "en": "Search: company, group, CVE, attack type…",
           "es": "Buscar: empresa, grupo, CVE, tipo de ataque…", "pt": "Pesquisar: empresa, grupo, CVE, tipo de ataque…",
-          "de": "Suchen: Firma, Gruppe, CVE, Angriffsart …"}
+          "de": "Suchen: Firma, Gruppe, CVE, Angriffsart …", "ru": "Поиск: компания, группировка, CVE, тип атаки…"}
     ph_attr = " ".join(f'data-ph-{x}="{e(ph[x])}"' for x in LANGS)
     return (f'<div class="news-search" role="search">'
             f'<div class="news-search__box"><span class="news-search__icon" aria-hidden="true"></span>'
-            f'<label class="sr-only" for="news-q">{L5("Rechercher dans les actus", "Search the news", "Buscar en las noticias", "Pesquisar nas notícias", "In den News suchen")}</label>'
+            f'<label class="sr-only" for="news-q">{L5("Rechercher dans les actus", "Search the news", "Buscar en las noticias", "Pesquisar nas notícias", "In den News suchen", "Поиск по новостям")}</label>'
             f'<input type="search" id="news-q" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="news-q-status" placeholder="{e(ph["en"])}" {ph_attr}>'
             f'<kbd class="news-search__kbd" aria-hidden="true">/</kbd>'
             f'<button type="button" class="news-search__clear" id="news-q-clear" hidden>'
-            f'<span aria-hidden="true">✕</span><span class="sr-only">{L5("Effacer", "Clear", "Borrar", "Limpar", "Löschen")}</span></button></div>'
+            f'<span aria-hidden="true">✕</span><span class="sr-only">{L5("Effacer", "Clear", "Borrar", "Limpar", "Löschen", "Очистить")}</span></button></div>'
             f'<div class="news-search__chips">{chips}</div>'
             f'<p class="news-search__status" id="news-q-status" aria-live="polite"></p></div>')
 
@@ -962,7 +980,8 @@ def build_body(archive, kev, selection, status, now, fiches=None, top=None):
                    "en": f"History since {d0}: the yearly ranking grows week after week.",
                    "es": f"Historial desde el {d0}: la clasificación del año se enriquece semana tras semana.",
                    "pt": f"Histórico desde {d0}: a classificação do ano enriquece-se semana após semana.",
-                   "de": f"Verlauf seit dem {d0}: Die Jahresrangliste wächst Woche für Woche."}) if oldest else "")
+                   "de": f"Verlauf seit dem {d0}: Die Jahresrangliste wächst Woche für Woche.",
+                   "ru": f"История с {d0}: годовой рейтинг пополняется с каждой неделей."}) if oldest else "")
 
     return f"""<p class="tools-intro">{L(
         "La veille cyber du moment, mise à jour automatiquement toutes les 6 heures à partir de sources reconnues. Clique sur un sujet pour ouvrir sa fiche : type d'attaque, déroulé phase par phase, résumé à réexpliquer et liens vers les articles.",
@@ -1011,7 +1030,9 @@ def build_body(archive, kev, selection, status, now, fiches=None, top=None):
 def retarget(template, body, extra=""):
     url = SITE + "/news/"
     desc = "Cyber news updated every 6 hours: actively exploited zero-day flaws and major attacks of the week, month and year, from recognised sources."
-    s = re.sub(r"<title[^>]*>.*?</title>", '<title data-fr="Actus :: Manthole — Blog">News :: Manthole — Blog</title>', template, count=1, flags=re.S)
+    title = ('<title data-fr="Actus :: Manthole — Blog" data-es="Noticias :: Manthole — Blog" data-pt="Notícias :: Manthole — Blog" '
+             'data-de="News :: Manthole — Blog" data-ru="Новости :: Manthole — Blog">News :: Manthole — Blog</title>')
+    s = re.sub(r"<title[^>]*>.*?</title>", lambda m: title, template, count=1, flags=re.S)
     for attr in ['name="description"', 'itemprop="description"', 'name="twitter:description"', 'property="og:description"']:
         s = re.sub(rf'(<meta {attr} content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), s, count=1)
     for attr in ['itemprop="name"', 'name="twitter:title"', 'property="og:title"']:

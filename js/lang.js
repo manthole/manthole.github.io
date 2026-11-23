@@ -1,13 +1,13 @@
-/* Préférences d'affichage : langue (français, anglais, espagnol, portugais, allemand) et mode
+/* Préférences d'affichage : langue (français, anglais, espagnol, portugais, allemand, russe) et mode
    sombre / clair (sombre par défaut, choix mémorisé sous la clé « mode » ; la clé « theme » est
    effacée à chaque chargement par le script du thème Hugo, d'où ce nom distinct).
    Chargé dans le <head> pour fixer <html lang> avant l'affichage de la page (pas de clignotement) ;
    css/cyber.css masque ensuite tous les éléments [lang] qui ne sont pas dans la langue choisie.
-   Chaque texte existe dans les 5 langues (l'anglais sert de texte de repli si une traduction manque).
+   Chaque texte existe dans les 6 langues (l'anglais sert de texte de repli si une traduction manque).
    Langue par défaut : le dernier choix du visiteur, sinon celle de son navigateur, sinon l'anglais. */
 (function () {
   var root = document.documentElement;
-  var LANGS = ["fr", "en", "es", "pt", "de"];
+  var LANGS = ["fr", "en", "es", "pt", "de", "ru"];
   var title = document.querySelector("title");
   var titleEn = document.title;
 

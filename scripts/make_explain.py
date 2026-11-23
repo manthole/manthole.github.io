@@ -6,13 +6,16 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from i18n_ru import ru  # noqa: E402
+
 ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
 SITE = "https://manthole.github.io"
 
 
 def L(fr, en, es, pt, de):
     return (f'<span lang="fr">{fr}</span><span lang="en">{en}</span><span lang="es">{es}</span>'
-            f'<span lang="pt">{pt}</span><span lang="de">{de}</span>')
+            f'<span lang="pt">{pt}</span><span lang="de">{de}</span><span lang="ru">{ru(fr, en)}</span>')
 
 
 def t(x):
@@ -486,7 +489,7 @@ def set_head(s, title5, desc, url, name_en):
     fr, en, es, pt, de = title5
     tt = lambda x: f"{x} :: Manthole — Blog"
     s = re.sub(r"<title[^>]*>.*?</title>",
-               f'<title data-fr="{tt(fr)}" data-es="{tt(es)}" data-pt="{tt(pt)}" data-de="{tt(de)}">{tt(en)}</title>',
+               f'<title data-fr="{tt(fr)}" data-es="{tt(es)}" data-pt="{tt(pt)}" data-de="{tt(de)}" data-ru="{tt(ru(fr, en))}">{tt(en)}</title>',
                s, count=1, flags=re.S)
     for attr in ['name="description"', 'itemprop="description"', 'name="twitter:description"', 'property="og:description"']:
         s = re.sub(rf'(<meta {attr} content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), s, count=1)
